@@ -119,7 +119,7 @@ const Expertise = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-800 text-white relative overflow-hidden">
+    <section className="py-20 px-4 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
