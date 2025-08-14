@@ -132,50 +132,85 @@ const Expertise = () => {
         </div>
 
         {/* Interactive Radial Tree - Cleaner Design */}
-        <div className="relative h-[700px] flex items-center justify-center">
+        <div className="relative h-[900px] flex items-center justify-center">
           {/* Background glow effects */}
-          <div className="absolute inset-0 bg-gradient-radial from-blue-500/10 via-transparent to-transparent rounded-full" />
+          <div className="absolute inset-0 bg-gradient-radial from-blue-500/5 via-transparent to-transparent rounded-full" />
           
-          {/* SVG for clean connection lines */}
+          {/* SVG for tree-like connection structure */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+            {/* Central trunk */}
+            <defs>
+              <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#64748b" stopOpacity="0.8"/>
+                <stop offset="100%" stopColor="#475569" stopOpacity="0.4"/>
+              </linearGradient>
+            </defs>
+            
+            {/* Main trunk */}
+            <rect 
+              x="445" 
+              y="550" 
+              width="10" 
+              height="200" 
+              fill="url(#trunkGradient)" 
+              rx="5"
+              className="opacity-60"
+            />
+            
             {expertiseAreas.map((area, index) => {
-              const centerX = 350;
-              const centerY = 350;
+              const centerX = 450;
+              const centerY = 450;
               const angle = (index * 2 * Math.PI) / expertiseAreas.length - Math.PI / 2;
-              const radius = 200; // Reduced from 260 to 200
+              const radius = area.category === "core" ? 280 : 340; // Expanded spacing
               const endX = centerX + Math.cos(angle) * radius;
               const endY = centerY + Math.sin(angle) * radius;
               
               const isHovered = hoveredCard === index;
               
+              // Calculate branch points for tree structure
+              const branchX = centerX + Math.cos(angle) * 120;
+              const branchY = centerY + Math.sin(angle) * 120;
+              
               return (
                 <g key={index}>
-                  {/* Clean connection line */}
+                  {/* Main branch from center */}
                   <line
                     x1={centerX}
                     y1={centerY}
-                    x2={endX}
-                    y2={endY}
+                    x2={branchX}
+                    y2={branchY}
                     stroke={isHovered ? "#60a5fa" : "#475569"}
-                    strokeWidth={isHovered ? "3" : "1"}
-                    strokeOpacity={isHovered ? "0.8" : "0.3"}
+                    strokeWidth={isHovered ? "4" : "3"}
+                    strokeOpacity="0.7"
                     className="transition-all duration-500"
-                    strokeDasharray="2,3"
                   />
                   
-                  {/* Connection dots */}
+                  {/* Secondary branch to card */}
+                  <path
+                    d={`M ${branchX} ${branchY} Q ${branchX + (endX - branchX) * 0.5} ${branchY + (endY - branchY) * 0.3} ${endX} ${endY}`}
+                    stroke={isHovered ? "#60a5fa" : "#64748b"}
+                    strokeWidth={isHovered ? "3" : "2"}
+                    strokeOpacity={isHovered ? "0.8" : "0.5"}
+                    fill="none"
+                    className="transition-all duration-500"
+                    strokeDasharray={area.category === "core" ? "0" : "4,4"}
+                  />
+                  
+                  {/* Branch nodes */}
                   <circle
-                    cx={centerX + Math.cos(angle) * (radius * 0.5)}
-                    cy={centerY + Math.sin(angle) * (radius * 0.5)}
-                    r={isHovered ? "3" : "2"}
+                    cx={branchX}
+                    cy={branchY}
+                    r={isHovered ? "4" : "3"}
                     fill={isHovered ? "#60a5fa" : "#64748b"}
                     className="transition-all duration-300"
                   />
+                  
+                  {/* Connection leaves */}
                   <circle
-                    cx={centerX + Math.cos(angle) * (radius * 0.75)}
-                    cy={centerY + Math.sin(angle) * (radius * 0.75)}
+                    cx={endX - Math.cos(angle) * 20}
+                    cy={endY - Math.sin(angle) * 20}
                     r={isHovered ? "3" : "2"}
-                    fill={isHovered ? "#60a5fa" : "#64748b"}
+                    fill={area.category === "core" ? "#22c55e" : "#3b82f6"}
                     className="transition-all duration-300"
                   />
                 </g>
@@ -183,26 +218,29 @@ const Expertise = () => {
             })}
           </svg>
 
-          {/* Central Hub - Improved */}
+          {/* Central Fruit - SEO Expertise */}
           <div className="absolute z-10 transform -translate-x-1/2 -translate-y-1/2" style={{ left: '50%', top: '50%' }}>
             <div className="relative">
-              <div className="w-20 h-20 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-full shadow-2xl shadow-blue-500/30 border-2 border-blue-400/30">
-                <div className="text-center text-white">
-                  <Target className="w-6 h-6 mx-auto mb-1" />
+              <div className="w-28 h-28 flex items-center justify-center bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 rounded-full shadow-2xl shadow-orange-500/40 border-4 border-yellow-400/30 relative overflow-hidden">
+                {/* Fruit shine effect */}
+                <div className="absolute top-2 left-2 w-6 h-6 bg-white/30 rounded-full blur-sm" />
+                <div className="text-center text-white relative z-10">
+                  <Target className="w-8 h-8 mx-auto mb-1" />
                   <div className="text-xs font-bold">SEO</div>
+                  <div className="text-[10px] opacity-80">Expertise</div>
                 </div>
               </div>
-              {/* Pulsing ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-blue-400/50 animate-ping" />
+              {/* Fruit glow */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400/20 to-red-400/20 animate-pulse scale-125" />
             </div>
           </div>
 
-          {/* Skill Cards - Cleaner Layout */}
+          {/* Ingredient Cards - Expanded Layout */}
           {expertiseAreas.map((area, index) => {
-            const centerX = 350;
-            const centerY = 350;
+            const centerX = 450;
+            const centerY = 450;
             const angle = (index * 2 * Math.PI) / expertiseAreas.length - Math.PI / 2;
-            const radius = 200; // Reduced spacing
+            const radius = area.category === "core" ? 280 : 340; // Much more spacing
             const x = centerX + Math.cos(angle) * radius;
             const y = centerY + Math.sin(angle) * radius;
             
@@ -222,44 +260,62 @@ const Expertise = () => {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 <div className={cn(
-                  "w-64 p-4 cursor-pointer transition-all duration-500 ease-out relative overflow-hidden group",
-                  "bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-xl",
+                  "w-72 p-5 cursor-pointer transition-all duration-500 ease-out relative overflow-hidden group",
+                  "backdrop-blur-xl border rounded-2xl shadow-xl",
+                  area.category === "core" 
+                    ? "bg-green-900/40 border-green-600/40 shadow-green-500/20" 
+                    : "bg-blue-900/40 border-blue-600/40 shadow-blue-500/20",
                   isHovered 
-                    ? "scale-110 -translate-y-2 shadow-2xl shadow-blue-500/20 border-blue-500/50 bg-slate-800/80" 
+                    ? "scale-110 -translate-y-3 shadow-2xl z-20" 
                     : "hover:scale-105"
                 )}>
-                  {/* Status indicator */}
+                  {/* Ingredient type indicator */}
                   <div className={cn(
-                    "absolute top-4 right-4 w-3 h-3 rounded-full",
-                    area.category === "core" ? "bg-green-400" : "bg-blue-400"
-                  )} />
+                    "absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium",
+                    area.category === "core" 
+                      ? "bg-green-500/20 text-green-300 border border-green-400/30" 
+                      : "bg-blue-500/20 text-blue-300 border border-blue-400/30"
+                  )}>
+                    {area.category === "core" ? "Core" : "Advanced"}
+                  </div>
 
-                  {/* Number badge */}
-                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-sm font-bold text-white border-2 border-slate-800 shadow-lg">
+                  {/* Ingredient number */}
+                  <div className={cn(
+                    "absolute -top-3 -left-3 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white border-3 border-slate-800 shadow-lg",
+                    area.category === "core" ? "bg-gradient-to-br from-green-600 to-green-700" : "bg-gradient-to-br from-blue-600 to-blue-700"
+                  )}>
                     {area.id}
                   </div>
 
-                  {/* Glow effect */}
+                  {/* Ingredient glow effect */}
                   <div className={cn(
-                    "absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 rounded-2xl transition-all duration-500",
+                    "absolute inset-0 rounded-2xl transition-all duration-500",
+                    area.category === "core" 
+                      ? "bg-gradient-to-r from-green-600/10 to-emerald-600/10" 
+                      : "bg-gradient-to-r from-blue-600/10 to-indigo-600/10",
                     isHovered ? "opacity-100" : "opacity-0"
                   )} />
 
                   {/* Content */}
                   <div className="relative z-10">
-                    <h3 className="text-xl font-bold text-white mb-3 leading-tight">
+                    <h3 className="text-xl font-bold text-white mb-2 leading-tight">
                       {area.title}
                     </h3>
                     <p className="text-sm text-slate-300 mb-4 leading-relaxed">
                       {area.description}
                     </p>
                     
-                    {/* Skills badges */}
+                    {/* Ingredient components */}
                     <div className="flex flex-wrap gap-2">
                       {area.skills.slice(0, 2).map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
-                          className="text-xs px-3 py-1.5 rounded-full bg-blue-600/20 text-blue-300 border border-blue-500/30 transition-all duration-300 hover:bg-blue-600/30"
+                          className={cn(
+                            "text-xs px-3 py-1.5 rounded-full border transition-all duration-300",
+                            area.category === "core" 
+                              ? "bg-green-600/20 text-green-300 border-green-500/30 hover:bg-green-600/30" 
+                              : "bg-blue-600/20 text-blue-300 border-blue-500/30 hover:bg-blue-600/30"
+                          )}
                         >
                           {skill}
                         </span>
