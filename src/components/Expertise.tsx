@@ -103,14 +103,14 @@ const Expertise = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/10">
+    <section className="py-20 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="text-foreground">What I Bring to the</span>{" "}
-            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Table</span>
+            <span className="text-white">What I Bring to the</span>{" "}
+            <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Table</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
             Comprehensive SEO solutions that drive organic growth, improve search visibility, and deliver measurable results for businesses of all sizes.
           </p>
         </div>
@@ -120,18 +120,18 @@ const Expertise = () => {
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-6 bg-card/30 backdrop-blur-md border border-white/20 rounded-lg hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
+              className="text-center p-6 bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-lg hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20"
             >
-              <stat.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
-              <div className="text-3xl font-bold text-foreground mb-2">
+              <stat.icon className="w-8 h-8 mx-auto mb-3 text-purple-400" />
+              <div className="text-3xl font-bold text-white mb-2">
                 {animatedStats[index]}{stat.suffix}
               </div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
+              <div className="text-sm text-slate-300">{stat.label}</div>
             </div>
           ))}
         </div>
 
-        {/* Mind Map Section */}
+        {/* Interactive Radial Tree Diagram */}
         <div className="relative h-[700px] flex items-center justify-center overflow-hidden">
           {/* SVG for connection lines */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
@@ -147,91 +147,71 @@ const Expertise = () => {
               
               return (
                 <g key={index}>
-                  {/* Main connection line */}
+                  {/* Dotted connection lines */}
                   <line
                     x1={centerX}
                     y1={centerY}
                     x2={endX}
                     y2={endY}
-                    stroke="hsl(var(--primary))"
-                    strokeWidth={isHovered ? "4" : "2"}
-                    strokeOpacity={isHovered ? "0.8" : "0.3"}
+                    stroke="#8b5cf6"
+                    strokeWidth={isHovered ? "3" : "2"}
+                    strokeOpacity={isHovered ? "0.8" : "0.4"}
                     className="transition-all duration-500"
-                    strokeDasharray={isHovered ? "0" : "5,5"}
+                    strokeDasharray="4,4"
                   />
                   
-                  {/* Pulse effect on hover */}
+                  {/* Glow effect on hover */}
                   {isHovered && (
                     <line
                       x1={centerX}
                       y1={centerY}
                       x2={endX}
                       y2={endY}
-                      stroke="hsl(var(--primary))"
-                      strokeWidth="6"
+                      stroke="#8b5cf6"
+                      strokeWidth="5"
                       strokeOpacity="0.3"
                       className="animate-pulse"
+                      strokeDasharray="4,4"
                     />
                   )}
                   
-                  {/* Connection nodes along the line */}
+                  {/* Connection dots */}
                   <circle
                     cx={centerX + Math.cos(angle) * (radius * 0.3)}
                     cy={centerY + Math.sin(angle) * (radius * 0.3)}
-                    r={isHovered ? "4" : "2"}
-                    fill="hsl(var(--primary))"
+                    r={isHovered ? "3" : "2"}
+                    fill="#8b5cf6"
                     className="transition-all duration-300"
                   />
                   <circle
                     cx={centerX + Math.cos(angle) * (radius * 0.6)}
                     cy={centerY + Math.sin(angle) * (radius * 0.6)}
-                    r={isHovered ? "4" : "2"}
-                    fill="hsl(var(--primary))"
+                    r={isHovered ? "3" : "2"}
+                    fill="#8b5cf6"
+                    className="transition-all duration-300"
+                  />
+                  <circle
+                    cx={centerX + Math.cos(angle) * (radius * 0.8)}
+                    cy={centerY + Math.sin(angle) * (radius * 0.8)}
+                    r={isHovered ? "3" : "2"}
+                    fill="#8b5cf6"
                     className="transition-all duration-300"
                   />
                 </g>
               );
             })}
 
-            {/* Inter-node connections for related skills */}
-            {expertiseAreas.slice(0, 4).map((_, index) => {
-              const nextIndex = (index + 1) % 4;
-              const centerX = 350;
-              const centerY = 350;
-              const angle1 = (index * 2 * Math.PI) / 8 - Math.PI / 2;
-              const angle2 = (nextIndex * 2 * Math.PI) / 8 - Math.PI / 2;
-              const radius = 180;
-              
-              const x1 = centerX + Math.cos(angle1) * radius;
-              const y1 = centerY + Math.sin(angle1) * radius;
-              const x2 = centerX + Math.cos(angle2) * radius;
-              const y2 = centerY + Math.sin(angle2) * radius;
-              
-              return (
-                <line
-                  key={`connect-${index}`}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2}
-                  stroke="hsl(var(--primary))"
-                  strokeWidth="1"
-                  strokeOpacity="0.2"
-                  strokeDasharray="3,3"
-                />
-              );
-            })}
+            {/* Remove inter-node connections as they're not in the reference design */}
           </svg>
 
           {/* Central Hub */}
           <div className="absolute z-10 transform -translate-x-1/2 -translate-y-1/2" style={{ left: '50%', top: '50%' }}>
-            <Card className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-primary to-purple-400 border-0 shadow-2xl backdrop-blur-md rounded-full animate-pulse">
+            <div className="w-20 h-20 flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 border-0 shadow-2xl backdrop-blur-md rounded-full">
               <div className="text-center text-white">
-                <Target className="w-8 h-8 mx-auto mb-1" />
-                <div className="text-sm font-bold">SEO</div>
-                <div className="text-xs opacity-90">Expertise</div>
+                <Target className="w-6 h-6 mx-auto mb-1" />
+                <div className="text-xs font-bold">SEO</div>
               </div>
-            </Card>
+            </div>
           </div>
 
           {/* Skill Nodes */}
@@ -259,53 +239,52 @@ const Expertise = () => {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 <Card className={cn(
-                  "w-44 p-3 cursor-pointer transition-all duration-700 ease-out relative overflow-hidden group",
-                  "bg-card/40 backdrop-blur-lg border border-white/30 rounded-xl shadow-lg",
+                  "w-52 p-4 cursor-pointer transition-all duration-700 ease-out relative overflow-hidden group",
+                  "bg-slate-800/80 backdrop-blur-lg border border-slate-700/50 rounded-xl shadow-xl",
                   isHovered 
-                    ? "scale-125 -translate-y-3 shadow-2xl shadow-primary/30 border-primary/50 z-20" 
-                    : "hover:scale-110 hover:-translate-y-1"
+                    ? "scale-110 -translate-y-2 shadow-2xl shadow-purple-500/30 border-purple-500/50 z-20" 
+                    : "hover:scale-105 hover:-translate-y-1"
                 )}>
+                  {/* Status dot */}
+                  <div className={cn(
+                    "absolute top-3 right-3 w-3 h-3 rounded-full",
+                    area.category === "core" ? "bg-green-400" : "bg-blue-400"
+                  )} />
+
                   {/* Number badge */}
                   <div className={cn(
-                    "absolute -top-2 -left-2 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 z-30",
-                    isHovered ? "bg-primary text-white scale-125 rotate-12" : "bg-primary/20 text-primary border border-primary/30"
+                    "absolute -top-2 -left-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 z-30",
+                    "bg-purple-600 text-white border-2 border-slate-800"
                   )}>
                     {area.id}
                   </div>
 
-                  {/* Category indicator */}
+                  {/* Dark glow effect */}
                   <div className={cn(
-                    "absolute top-1 right-1 w-2 h-2 rounded-full",
-                    area.category === "core" ? "bg-green-400" : "bg-blue-400"
-                  )} />
-
-                  {/* Glow effect */}
-                  <div className={cn(
-                    "absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-400/10 rounded-xl transition-all duration-700",
-                    isHovered ? "opacity-100 scale-110" : "opacity-0"
+                    "absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-xl transition-all duration-700",
+                    isHovered ? "opacity-100 scale-105" : "opacity-0"
                   )} />
 
                   {/* Content */}
-                  <div className="relative z-10 pt-2">
+                  <div className="relative z-10">
                     <h3 className={cn(
-                      "text-sm font-semibold mb-1 transition-all duration-500 leading-tight",
-                      isHovered ? "text-primary" : "text-foreground"
+                      "text-lg font-semibold mb-2 transition-all duration-500 leading-tight text-white"
                     )}>
                       {area.title}
                     </h3>
-                    <p className="text-xs text-muted-foreground mb-2 line-clamp-2">
+                    <p className="text-sm text-slate-300 mb-3 line-clamp-2">
                       {area.description}
                     </p>
                     
                     {/* Skills badges */}
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-2">
                       {area.skills.slice(0, 2).map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
                           className={cn(
-                            "text-[10px] px-2 py-0.5 rounded-full transition-all duration-500",
-                            "bg-primary/10 text-primary border border-primary/20",
-                            isHovered ? "scale-105 translate-y-[-1px] bg-primary/20" : ""
+                            "text-xs px-3 py-1 rounded-full transition-all duration-500",
+                            "bg-purple-600/20 text-purple-300 border border-purple-500/30",
+                            isHovered ? "scale-105 bg-purple-600/30" : ""
                           )}
                           style={{
                             transitionDelay: `${skillIndex * 100}ms`
@@ -315,7 +294,7 @@ const Expertise = () => {
                         </span>
                       ))}
                       {area.skills.length > 2 && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted/20 text-muted-foreground">
+                        <span className="text-xs px-3 py-1 rounded-full bg-slate-700/50 text-slate-400 border border-slate-600/50">
                           +{area.skills.length - 2}
                         </span>
                       )}
@@ -326,17 +305,17 @@ const Expertise = () => {
             );
           })}
 
-          {/* Floating particles for ambiance */}
+          {/* Floating particles */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {Array.from({ length: 15 }).map((_, i) => (
+            {Array.from({ length: 20 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute w-1 h-1 bg-primary/20 rounded-full animate-pulse"
+                className="absolute w-1 h-1 bg-purple-400/30 rounded-full animate-pulse"
                 style={{
-                  left: `${20 + Math.random() * 60}%`,
-                  top: `${20 + Math.random() * 60}%`,
+                  left: `${15 + Math.random() * 70}%`,
+                  top: `${15 + Math.random() * 70}%`,
                   animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${3 + Math.random() * 2}s`
+                  animationDuration: `${2 + Math.random() * 3}s`
                 }}
               />
             ))}
@@ -346,12 +325,12 @@ const Expertise = () => {
         {/* Legend */}
         <div className="flex justify-center gap-8 mt-8">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-green-400/30 border border-green-400/50" />
-            <span className="text-sm text-muted-foreground">Core Competencies</span>
+            <div className="w-3 h-3 rounded-full bg-green-400" />
+            <span className="text-sm text-slate-300">Core Competencies</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-blue-400/30 border border-blue-400/50" />
-            <span className="text-sm text-muted-foreground">Advanced Specializations</span>
+            <div className="w-3 h-3 rounded-full bg-blue-400" />
+            <span className="text-sm text-slate-300">Advanced Specializations</span>
           </div>
         </div>
       </div>
