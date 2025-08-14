@@ -160,16 +160,23 @@ const Expertise = () => {
             {expertiseAreas.map((area, index) => {
               const centerX = 450;
               const centerY = 450;
-              const angle = (index * 2 * Math.PI) / expertiseAreas.length - Math.PI / 2;
-              const radius = area.category === "core" ? 280 : 340; // Expanded spacing
-              const endX = centerX + Math.cos(angle) * radius;
-              const endY = centerY + Math.sin(angle) * radius;
+              
+              // Perfect angular distribution: 360° / 8 cards = 45° each
+              const baseAngle = (index * 45) - 90; // Start from top (-90°)
+              const angleInRadians = (baseAngle * Math.PI) / 180;
+              
+              // Differentiate radius based on category for better hierarchy
+              const radius = area.category === "core" ? 300 : 380;
+              
+              // Calculate positions with perfect spacing
+              const endX = centerX + Math.cos(angleInRadians) * radius;
+              const endY = centerY + Math.sin(angleInRadians) * radius;
               
               const isHovered = hoveredCard === index;
               
               // Calculate branch points for tree structure
-              const branchX = centerX + Math.cos(angle) * 120;
-              const branchY = centerY + Math.sin(angle) * 120;
+              const branchX = centerX + Math.cos(angleInRadians) * 140;
+              const branchY = centerY + Math.sin(angleInRadians) * 140;
               
               return (
                 <g key={index}>
@@ -185,7 +192,7 @@ const Expertise = () => {
                     className="transition-all duration-500"
                   />
                   
-                  {/* Secondary branch to card */}
+                  {/* Secondary branch to card - curved for natural tree look */}
                   <path
                     d={`M ${branchX} ${branchY} Q ${branchX + (endX - branchX) * 0.5} ${branchY + (endY - branchY) * 0.3} ${endX} ${endY}`}
                     stroke={isHovered ? "#60a5fa" : "#64748b"}
@@ -207,9 +214,9 @@ const Expertise = () => {
                   
                   {/* Connection leaves */}
                   <circle
-                    cx={endX - Math.cos(angle) * 20}
-                    cy={endY - Math.sin(angle) * 20}
-                    r={isHovered ? "3" : "2"}
+                    cx={endX - Math.cos(angleInRadians) * 25}
+                    cy={endY - Math.sin(angleInRadians) * 25}
+                    r={isHovered ? "4" : "3"}
                     fill={area.category === "core" ? "#22c55e" : "#3b82f6"}
                     className="transition-all duration-300"
                   />
@@ -221,13 +228,13 @@ const Expertise = () => {
           {/* Central Fruit - SEO Expertise */}
           <div className="absolute z-10 transform -translate-x-1/2 -translate-y-1/2" style={{ left: '50%', top: '50%' }}>
             <div className="relative">
-              <div className="w-28 h-28 flex items-center justify-center bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 rounded-full shadow-2xl shadow-orange-500/40 border-4 border-yellow-400/30 relative overflow-hidden">
+              <div className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 rounded-full shadow-2xl shadow-orange-500/40 border-4 border-yellow-400/30 relative overflow-hidden">
                 {/* Fruit shine effect */}
-                <div className="absolute top-2 left-2 w-6 h-6 bg-white/30 rounded-full blur-sm" />
+                <div className="absolute top-3 left-3 w-8 h-8 bg-white/30 rounded-full blur-sm" />
                 <div className="text-center text-white relative z-10">
-                  <Target className="w-8 h-8 mx-auto mb-1" />
-                  <div className="text-xs font-bold">SEO</div>
-                  <div className="text-[10px] opacity-80">Expertise</div>
+                  <Target className="w-10 h-10 mx-auto mb-1" />
+                  <div className="text-sm font-bold">SEO</div>
+                  <div className="text-xs opacity-80">Expertise</div>
                 </div>
               </div>
               {/* Fruit glow */}
@@ -235,14 +242,21 @@ const Expertise = () => {
             </div>
           </div>
 
-          {/* Ingredient Cards - Expanded Layout */}
+          {/* Ingredient Cards - Perfect Angular Distribution */}
           {expertiseAreas.map((area, index) => {
             const centerX = 450;
             const centerY = 450;
-            const angle = (index * 2 * Math.PI) / expertiseAreas.length - Math.PI / 2;
-            const radius = area.category === "core" ? 280 : 340; // Much more spacing
-            const x = centerX + Math.cos(angle) * radius;
-            const y = centerY + Math.sin(angle) * radius;
+            
+            // Perfect 45° spacing for 8 cards
+            const baseAngle = (index * 45) - 90; // Start from top
+            const angleInRadians = (baseAngle * Math.PI) / 180;
+            
+            // Account for card dimensions with proper radius
+            const radius = area.category === "core" ? 300 : 380;
+            
+            // Calculate position ensuring cards don't overlap
+            const x = centerX + Math.cos(angleInRadians) * radius;
+            const y = centerY + Math.sin(angleInRadians) * radius;
             
             const isHovered = hoveredCard === index;
             
