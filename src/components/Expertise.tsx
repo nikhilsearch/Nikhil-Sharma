@@ -1,7 +1,47 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useState, useEffect } from "react";
+import { TrendingUp, Users, Award, Target } from "lucide-react";
 
 const Expertise = () => {
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [visibleStats, setVisibleStats] = useState(false);
+
+  const stats = [
+    { icon: TrendingUp, value: 250, label: "SEO Projects Completed", suffix: "+" },
+    { icon: Users, value: 150, label: "Happy Clients", suffix: "+" },
+    { icon: Award, value: 5, label: "Years Experience", suffix: "" },
+    { icon: Target, value: 98, label: "Success Rate", suffix: "%" }
+  ];
+
+  const [animatedStats, setAnimatedStats] = useState(stats.map(() => 0));
+
+  useEffect(() => {
+    const timer = setTimeout(() => setVisibleStats(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (visibleStats) {
+      stats.forEach((stat, index) => {
+        let start = 0;
+        const increment = stat.value / 50;
+        const timer = setInterval(() => {
+          start += increment;
+          if (start >= stat.value) {
+            start = stat.value;
+            clearInterval(timer);
+          }
+          setAnimatedStats(prev => {
+            const newStats = [...prev];
+            newStats[index] = Math.floor(start);
+            return newStats;
+          });
+        }, 30);
+      });
+    }
+  }, [visibleStats]);
+
   const expertiseAreas = [
     {
       title: "Technical SEO",
@@ -48,24 +88,45 @@ const Expertise = () => {
           </p>
         </div>
         
+        {/* Animated Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          {stats.map((stat, index) => (
+            <div 
+              key={index}
+              className="text-center p-6 bg-card/30 backdrop-blur-md border border-white/20 rounded-lg hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
+            >
+              <stat.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
+              <div className="text-3xl font-bold text-foreground mb-2">
+                {animatedStats[index]}{stat.suffix}
+              </div>
+              <div className="text-sm text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {expertiseAreas.map((area, index) => (
             <Card 
               key={index} 
-              className="bg-card/30 backdrop-blur-md border border-white/20 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-105 animate-fade-in hover:-translate-y-2 relative overflow-hidden group"
+              className="bg-card/30 backdrop-blur-md border border-white/20 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-105 animate-fade-in hover:-translate-y-2 relative overflow-hidden group cursor-pointer"
               style={{
                 animationDelay: `${index * 0.1}s`,
                 animationFillMode: 'both'
               }}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Floating glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className={`absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-400/10 transition-all duration-500 ${hoveredCard === index ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}`} />
+              
+              {/* Animated border */}
+              <div className={`absolute inset-0 border-2 border-primary/30 rounded-lg transition-all duration-300 ${hoveredCard === index ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}`} />
+              
               
               <CardHeader className="relative z-10">
-                <CardTitle className="text-xl font-semibold text-foreground">
+                <CardTitle className="text-xl font-semibold text-foreground transition-colors duration-300">
                   {area.title}
                 </CardTitle>
-                <CardDescription className="text-muted-foreground">
+                <CardDescription className="text-muted-foreground transition-all duration-300">
                   {area.description}
                 </CardDescription>
               </CardHeader>
@@ -75,7 +136,10 @@ const Expertise = () => {
                     <Badge 
                       key={skillIndex} 
                       variant="secondary" 
-                      className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors backdrop-blur-sm"
+                      className={`bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-all duration-300 backdrop-blur-sm transform ${hoveredCard === index ? 'scale-105' : 'scale-100'}`}
+                      style={{
+                        animationDelay: `${skillIndex * 0.1}s`
+                      }}
                     >
                       {skill}
                     </Badge>
