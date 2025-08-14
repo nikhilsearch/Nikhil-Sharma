@@ -122,50 +122,52 @@ const Expertise = () => {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {expertiseAreas.map((area, index) => (
             <Card 
               key={index} 
-              className="bg-card/30 backdrop-blur-md border border-white/20 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-105 hover:-translate-y-2 relative overflow-hidden group cursor-pointer"
+              className="bg-card/30 backdrop-blur-md border border-white/20 shadow-lg hover:shadow-xl hover:shadow-primary/20 transition-all duration-700 ease-out hover:scale-105 hover:-translate-y-1 relative overflow-hidden group cursor-pointer animate-fade-in"
               style={{
-                animationDelay: `${index * 0.1}s`,
-                animationFillMode: 'both'
+                animationDelay: `${index * 0.15}s`,
+                animationFillMode: 'both',
+                animationDuration: '0.8s'
               }}
               onMouseEnter={() => setHoveredCard(index)}
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Number badge */}
               <div className={cn(
-                "absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 z-20",
-                hoveredCard === index ? "bg-primary text-white scale-110" : "bg-card/80 text-primary border border-primary/30"
+                "absolute top-3 left-3 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-500 ease-out z-20",
+                hoveredCard === index ? "bg-primary text-white scale-125 rotate-12" : "bg-card/90 text-primary border border-primary/30"
               )}>
                 {area.id}
               </div>
 
               {/* Floating glow effect */}
-              <div className={`absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-400/10 transition-all duration-500 ${hoveredCard === index ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}`} />
+              <div className={`absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-400/10 transition-all duration-700 ease-out ${hoveredCard === index ? 'opacity-100 scale-110 rotate-1' : 'opacity-0 scale-100'}`} />
               
               {/* Animated border */}
-              <div className={`absolute inset-0 border-2 border-primary/30 rounded-lg transition-all duration-300 ${hoveredCard === index ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}`} />
+              <div className={`absolute inset-0 border-2 border-primary/30 rounded-lg transition-all duration-500 ease-out ${hoveredCard === index ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}`} />
               
               
-              <CardHeader className="relative z-10 pt-16">
-                <CardTitle className="text-xl font-semibold text-foreground transition-colors duration-300">
+              <CardHeader className="relative z-10 pt-12 pb-2 px-4">
+                <CardTitle className="text-lg font-semibold text-foreground transition-all duration-500 ease-out group-hover:text-primary">
                   {area.title}
                 </CardTitle>
-                <CardDescription className="text-muted-foreground transition-all duration-300">
+                <CardDescription className="text-sm text-muted-foreground transition-all duration-500 ease-out line-clamp-2">
                   {area.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="relative z-10">
-                <div className="flex flex-wrap gap-2">
+              <CardContent className="relative z-10 px-4 pb-4">
+                <div className="flex flex-wrap gap-1">
                   {area.skills.map((skill, skillIndex) => (
                     <Badge 
                       key={skillIndex} 
                       variant="secondary" 
-                      className={`bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-all duration-300 backdrop-blur-sm transform ${hoveredCard === index ? 'scale-105' : 'scale-100'}`}
+                      className={`bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-all duration-500 ease-out backdrop-blur-sm transform text-xs px-2 py-1 ${hoveredCard === index ? 'scale-105 translate-y-[-2px]' : 'scale-100'}`}
                       style={{
-                        animationDelay: `${skillIndex * 0.1}s`
+                        animationDelay: `${skillIndex * 0.1}s`,
+                        transitionDelay: `${skillIndex * 50}ms`
                       }}
                     >
                       {skill}
