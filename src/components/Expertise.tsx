@@ -52,7 +52,11 @@ const Expertise = () => {
           {expertiseAreas.map((area, index) => (
             <Card 
               key={index} 
-              className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10"
+              className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 animate-fade-in hover:-translate-y-2"
+              style={{
+                animationDelay: `${index * 0.1}s`,
+                animationFillMode: 'both'
+              }}
             >
               <CardHeader>
                 <CardTitle className="text-xl font-semibold text-foreground">
