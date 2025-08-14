@@ -132,17 +132,17 @@ const Expertise = () => {
         </div>
 
         {/* Interactive Radial Tree - Cleaner Design */}
-        <div className="relative h-[800px] flex items-center justify-center">
+        <div className="relative h-[700px] flex items-center justify-center">
           {/* Background glow effects */}
           <div className="absolute inset-0 bg-gradient-radial from-blue-500/10 via-transparent to-transparent rounded-full" />
           
           {/* SVG for clean connection lines */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
             {expertiseAreas.map((area, index) => {
-              const centerX = 400;
-              const centerY = 400;
+              const centerX = 350;
+              const centerY = 350;
               const angle = (index * 2 * Math.PI) / expertiseAreas.length - Math.PI / 2;
-              const radius = 260;
+              const radius = 200; // Reduced from 260 to 200
               const endX = centerX + Math.cos(angle) * radius;
               const endY = centerY + Math.sin(angle) * radius;
               
@@ -165,15 +165,15 @@ const Expertise = () => {
                   
                   {/* Connection dots */}
                   <circle
-                    cx={centerX + Math.cos(angle) * (radius * 0.4)}
-                    cy={centerY + Math.sin(angle) * (radius * 0.4)}
+                    cx={centerX + Math.cos(angle) * (radius * 0.5)}
+                    cy={centerY + Math.sin(angle) * (radius * 0.5)}
                     r={isHovered ? "3" : "2"}
                     fill={isHovered ? "#60a5fa" : "#64748b"}
                     className="transition-all duration-300"
                   />
                   <circle
-                    cx={centerX + Math.cos(angle) * (radius * 0.7)}
-                    cy={centerY + Math.sin(angle) * (radius * 0.7)}
+                    cx={centerX + Math.cos(angle) * (radius * 0.75)}
+                    cy={centerY + Math.sin(angle) * (radius * 0.75)}
                     r={isHovered ? "3" : "2"}
                     fill={isHovered ? "#60a5fa" : "#64748b"}
                     className="transition-all duration-300"
@@ -186,9 +186,9 @@ const Expertise = () => {
           {/* Central Hub - Improved */}
           <div className="absolute z-10 transform -translate-x-1/2 -translate-y-1/2" style={{ left: '50%', top: '50%' }}>
             <div className="relative">
-              <div className="w-24 h-24 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-full shadow-2xl shadow-blue-500/30 border-2 border-blue-400/30">
+              <div className="w-20 h-20 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-full shadow-2xl shadow-blue-500/30 border-2 border-blue-400/30">
                 <div className="text-center text-white">
-                  <Target className="w-8 h-8 mx-auto mb-1" />
+                  <Target className="w-6 h-6 mx-auto mb-1" />
                   <div className="text-xs font-bold">SEO</div>
                 </div>
               </div>
@@ -199,10 +199,10 @@ const Expertise = () => {
 
           {/* Skill Cards - Cleaner Layout */}
           {expertiseAreas.map((area, index) => {
-            const centerX = 400;
-            const centerY = 400;
+            const centerX = 350;
+            const centerY = 350;
             const angle = (index * 2 * Math.PI) / expertiseAreas.length - Math.PI / 2;
-            const radius = 260;
+            const radius = 200; // Reduced spacing
             const x = centerX + Math.cos(angle) * radius;
             const y = centerY + Math.sin(angle) * radius;
             
@@ -222,7 +222,7 @@ const Expertise = () => {
                 onMouseLeave={() => setHoveredCard(null)}
               >
                 <div className={cn(
-                  "w-72 p-5 cursor-pointer transition-all duration-500 ease-out relative overflow-hidden group",
+                  "w-64 p-4 cursor-pointer transition-all duration-500 ease-out relative overflow-hidden group",
                   "bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-xl",
                   isHovered 
                     ? "scale-110 -translate-y-2 shadow-2xl shadow-blue-500/20 border-blue-500/50 bg-slate-800/80" 
