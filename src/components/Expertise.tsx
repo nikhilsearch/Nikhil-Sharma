@@ -95,14 +95,14 @@ const Expertise = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/10">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="text-white">What I Bring to the</span>{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Table</span>
+            <span className="text-foreground">What I Bring to the</span>{" "}
+            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Table</span>
           </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Comprehensive SEO solutions that drive organic growth, improve search visibility, and deliver measurable results for businesses of all sizes.
           </p>
         </div>
@@ -112,13 +112,13 @@ const Expertise = () => {
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-6 bg-slate-700/50 backdrop-blur-md border border-slate-600/50 rounded-lg hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20 hover:border-blue-400/50"
+              className="text-center p-6 bg-card/30 backdrop-blur-md border border-white/20 rounded-lg hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20"
             >
-              <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-400" />
-              <div className="text-3xl font-bold text-white mb-2">
+              <stat.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
+              <div className="text-3xl font-bold text-foreground mb-2">
                 {animatedStats[index]}{stat.suffix}
               </div>
-              <div className="text-sm text-slate-300">{stat.label}</div>
+              <div className="text-sm text-muted-foreground">{stat.label}</div>
             </div>
           ))}
         </div>
@@ -126,7 +126,7 @@ const Expertise = () => {
           {expertiseAreas.map((area, index) => (
             <Card 
               key={index} 
-              className="bg-slate-800/60 backdrop-blur-md border border-slate-600/50 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 hover:scale-105 hover:-translate-y-2 relative overflow-hidden group cursor-pointer hover:border-blue-400/50"
+              className="bg-card/30 backdrop-blur-md border border-white/20 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-105 hover:-translate-y-2 relative overflow-hidden group cursor-pointer"
               style={{
                 animationDelay: `${index * 0.1}s`,
                 animationFillMode: 'both'
@@ -137,23 +137,23 @@ const Expertise = () => {
               {/* Number badge */}
               <div className={cn(
                 "absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 z-20",
-                hoveredCard === index ? "bg-blue-500 text-white scale-110" : "bg-slate-700/80 text-blue-400"
+                hoveredCard === index ? "bg-primary text-white scale-110" : "bg-card/80 text-primary border border-primary/30"
               )}>
                 {area.id}
               </div>
 
               {/* Floating glow effect */}
-              <div className={`absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 transition-all duration-500 ${hoveredCard === index ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}`} />
+              <div className={`absolute inset-0 bg-gradient-to-r from-primary/10 to-purple-400/10 transition-all duration-500 ${hoveredCard === index ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}`} />
               
               {/* Animated border */}
-              <div className={`absolute inset-0 border-2 border-blue-500/30 rounded-lg transition-all duration-300 ${hoveredCard === index ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}`} />
+              <div className={`absolute inset-0 border-2 border-primary/30 rounded-lg transition-all duration-300 ${hoveredCard === index ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}`} />
               
               
               <CardHeader className="relative z-10 pt-16">
-                <CardTitle className="text-xl font-semibold text-white transition-colors duration-300">
+                <CardTitle className="text-xl font-semibold text-foreground transition-colors duration-300">
                   {area.title}
                 </CardTitle>
-                <CardDescription className="text-slate-300 transition-all duration-300">
+                <CardDescription className="text-muted-foreground transition-all duration-300">
                   {area.description}
                 </CardDescription>
               </CardHeader>
@@ -163,7 +163,7 @@ const Expertise = () => {
                     <Badge 
                       key={skillIndex} 
                       variant="secondary" 
-                      className={`bg-blue-500/20 text-blue-300 border-blue-500/30 hover:bg-blue-500/30 transition-all duration-300 backdrop-blur-sm transform ${hoveredCard === index ? 'scale-105' : 'scale-100'}`}
+                      className={`bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-all duration-300 backdrop-blur-sm transform ${hoveredCard === index ? 'scale-105' : 'scale-100'}`}
                       style={{
                         animationDelay: `${skillIndex * 0.1}s`
                       }}
