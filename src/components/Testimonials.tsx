@@ -10,52 +10,44 @@ const Testimonials = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "Marketing Director", 
-      company: "TechFlow Solutions",
-      text: "Nikhil transformed our organic traffic by 300% in just 6 months. His technical SEO expertise and strategic approach are exceptional.",
-      project: "E-commerce SEO",
-      avatar: "/placeholder.svg"
+      name: "Richa Sharma",
+      role: "B2B Marketing | Marketing Generalist",
+      company: "Marketing in IT Services",
+      text: "Nikhil is a giver! When I first interacted with him, the domain score of their website was 9, a month later it shot up to 20, and that's where Nikhil spells his magic. He is a marketing genius with a deep understanding of organic growth. I've got to learn a lot from him, and I am still learning!",
+      project: "Domain Authority Growth",
+      avatar: "/lovable-uploads/243fc16e-6c8f-4872-9e59-8c64180633cc.png"
     },
     {
-      name: "Michael Chen",
-      role: "CEO",
-      company: "Digital Dynamics", 
-      text: "Working with Nikhil was a game-changer. His comprehensive audit revealed critical issues. Within 4 months, we saw 250% increase in qualified leads.",
-      project: "Technical SEO Audit",
-      avatar: "/placeholder.svg"
+      name: "Nikita Jain",
+      role: "Freelance Digital Marketing Consultant",
+      company: "Social Media & Content Marketing",
+      text: "Working with Nikhil I've always seen him pick up different skill sets and adapt them quickly as per project requirements. He is eager to learn new things and experiment for exponential growth in technical SEO, which is commendable. Being a team player with the ability of bringing researched ideas on the table, makes him stand out in the crowd.",
+      project: "Technical SEO Innovation",
+      avatar: "/lovable-uploads/8dccb528-d5d2-4c33-8f80-15dc3c51f949.png"
     },
     {
-      name: "Amanda Rodriguez",
-      role: "E-commerce Manager",
-      company: "StyleHub Fashion",
-      text: "Nikhil's local SEO strategies helped us dominate our market. 400% increase in store visits and phone calls through GMB optimization.",
-      project: "Local SEO Campaign",
-      avatar: "/placeholder.svg"
+      name: "Vishnu Sudevan",
+      role: "SEO Consultant",
+      company: "Publicis Global Delivery",
+      text: "I have worked with Nikhil on a couple of projects on SEO. What amazed me about him was his expertise in technical SEO and moreover his enthusiasm to learn, experiment and get quality results. He is someone who will always get into the depth of any issue and find out the best possible solution for them.",
+      project: "Technical SEO Projects",
+      avatar: "/lovable-uploads/d75e7506-1bc0-4051-a8eb-c516219917ec.png"
     },
     {
-      name: "David Thompson", 
-      role: "Founder",
-      company: "GreenTech Innovations",
-      text: "The keyword research and content strategy was spot-on. We now rank first page for 15+ high-value keywords. ROI has been incredible.",
-      project: "Content Strategy",
-      avatar: "/placeholder.svg"
+      name: "Divyani Paliwal",
+      role: "Sr. Customer Success",
+      company: "Volopay",
+      text: "Nikhil is a dedicated and proactive SEO expert. He always brings something to the table. He is very dedicated towards his work and a go getter! I have worked with him for a brief period but I strongly appreciate his technical skills and commitment towards SEO.",
+      project: "SEO Strategy & Execution",
+      avatar: "/lovable-uploads/d36fecdb-f8ef-4a23-aacd-99b355b4b622.png"
     },
     {
-      name: "Lisa Park",
-      role: "Digital Marketing Lead",
-      company: "HealthFirst Clinic", 
-      text: "Outstanding technical SEO skills. Fixed critical site speed issues and improved Core Web Vitals significantly. Rankings improved across the board.",
-      project: "Technical Optimization",
-      avatar: "/placeholder.svg"
-    },
-    {
-      name: "Robert Wilson",
-      role: "Operations Manager", 
-      company: "BuildRight Construction",
-      text: "Professional, knowledgeable, and results-driven. Link building campaign helped establish authority in our competitive market.",
-      project: "Link Building Campaign",
-      avatar: "/placeholder.svg"
+      name: "Mariya Pathanwala",
+      role: "Account Management | Brand Solutions",
+      company: "Ex-Dentsu",
+      text: "Nikhil is proactive & dedicated team member. He has good knowledge of SEO and being a great team player, he would push himself and the team to do better work. I recommend Nikhil as he would be a great addition to any company he joins.",
+      project: "Team Leadership & SEO",
+      avatar: "/lovable-uploads/d2660981-df09-44a7-a121-b45a0e93a84b.png"
     }
   ];
 
