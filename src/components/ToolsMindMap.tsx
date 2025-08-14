@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { 
   BarChart3, 
   Search, 
@@ -17,139 +16,215 @@ import {
   Palette, 
   BarChart2, 
   Heart,
-  Tag
+  Tag,
+  ArrowRight
 } from "lucide-react";
 
 const ToolsMindMap = () => {
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
+  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
 
-  const tools = [
-    { name: "Google Analytics", icon: BarChart3, color: "from-orange-500 to-orange-600", description: "Web analytics and performance tracking" },
-    { name: "Google Search Console", icon: Search, color: "from-blue-500 to-blue-600", description: "Search performance monitoring" },
-    { name: "SEMrush", icon: Target, color: "from-orange-600 to-red-600", description: "SEO and competitive analysis" },
-    { name: "Ahrefs", icon: TrendingUp, color: "from-orange-500 to-orange-600", description: "Backlink analysis and keyword research" },
-    { name: "Moz", icon: Link, color: "from-blue-500 to-blue-600", description: "SEO tools and domain authority tracking" },
-    { name: "Screaming Frog", icon: Bug, color: "from-green-500 to-green-600", description: "Website crawling and technical SEO" },
-    { name: "WordPress", icon: FileText, color: "from-blue-500 to-blue-600", description: "Content management system" },
-    { name: "HubSpot", icon: Rocket, color: "from-orange-500 to-orange-600", description: "Marketing automation platform" },
-    { name: "Power BI", icon: PieChart, color: "from-yellow-500 to-yellow-600", description: "Business intelligence and data visualization" },
-    { name: "ChatGPT", icon: Bot, color: "from-green-500 to-green-600", description: "AI-powered content and strategy assistance" },
-    { name: "Gemini", icon: Sparkles, color: "from-blue-500 to-blue-600", description: "Google's AI assistant for marketing" },
-    { name: "Claude", icon: Brain, color: "from-orange-500 to-orange-600", description: "AI assistant for content optimization" },
-    { name: "Canva", icon: Palette, color: "from-blue-400 to-blue-500", description: "Design and visual content creation" },
-    { name: "Looker Studio", icon: BarChart2, color: "from-blue-500 to-blue-600", description: "Data visualization and reporting" },
-    { name: "Google Tag Manager", icon: Tag, color: "from-green-500 to-green-600", description: "Tag management and tracking implementation" },
-    { name: "Lovable", icon: Heart, color: "from-purple-500 to-purple-600", description: "AI-powered web development" }
-  ];
-
-  const centerTool = { name: "SEO Tools", icon: Target, color: "from-primary to-purple-400" };
-
-  const getPosition = (index: number, total: number) => {
-    const angle = (index * 360) / total;
-    const radius = 200;
-    const x = Math.cos((angle * Math.PI) / 180) * radius;
-    const y = Math.sin((angle * Math.PI) / 180) * radius;
-    return { x, y };
+  const centralNode = {
+    name: "SEO Growth Strategy",
+    description: "Comprehensive approach to organic growth"
   };
 
+  const stepNodes = [
+    {
+      id: "step1",
+      name: "Step 1: Technical Foundation",
+      description: "Site optimization and performance",
+      tools: ["Google Search Console", "Screaming Frog", "GTM"]
+    },
+    {
+      id: "step2", 
+      name: "Step 2: Keyword Research",
+      description: "Strategic keyword analysis",
+      tools: ["SEMrush", "Ahrefs", "Google Keyword Planner"]
+    },
+    {
+      id: "step3",
+      name: "Step 3: Content Optimization", 
+      description: "Content creation and optimization",
+      tools: ["WordPress", "Canva", "ChatGPT"]
+    },
+    {
+      id: "action",
+      name: "Action Plan: Analytics & Tracking",
+      description: "Performance monitoring and reporting",
+      tools: ["Google Analytics", "Looker Studio", "Power BI"]
+    }
+  ];
+
+  const strategyNodes = [
+    {
+      id: "targeted",
+      name: "Targeted Approach",
+      description: "Focus on high-impact opportunities"
+    },
+    {
+      id: "helpful", 
+      name: "Be Genuinely Helpful",
+      description: "Create valuable user experiences"
+    },
+    {
+      id: "shareable",
+      name: "Create Shareable Tools", 
+      description: "Build resources that attract links"
+    },
+    {
+      id: "partner",
+      name: "Partner with Others",
+      description: "Collaborate for mutual growth"
+    }
+  ];
+
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-muted/10 to-background">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-20 px-4 bg-gradient-to-b from-slate-900 to-slate-800 text-white overflow-hidden">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Tools</span>{" "}
-            <span className="text-foreground">I Use</span>
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">My SEO</span>{" "}
+            <span className="text-white">Process</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Leveraging the best tools in the industry to deliver exceptional results and insights for every project.
+          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+            A strategic approach to SEO that drives sustainable organic growth through proven methodologies
           </p>
         </div>
 
-        <div className="relative h-[600px] flex items-center justify-center">
-          {/* Central Hub */}
-          <div className="absolute z-10">
-            <Card className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-primary to-purple-400 border-0 shadow-2xl backdrop-blur-md">
+        <div className="relative h-[600px] flex items-center">
+          {/* SVG for curved connections */}
+          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
+            {/* Central to steps connections */}
+            {stepNodes.map((step, index) => {
+              const startX = 280;
+              const startY = 300;
+              const endX = 650;
+              const endY = 120 + (index * 100);
+              
+              const controlX1 = startX + 100;
+              const controlY1 = startY;
+              const controlX2 = endX - 100;
+              const controlY2 = endY;
+
+              return (
+                <path
+                  key={step.id}
+                  d={`M ${startX} ${startY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${endX} ${endY}`}
+                  stroke="rgba(148, 163, 184, 0.4)"
+                  strokeWidth={hoveredNode === step.id ? "3" : "2"}
+                  fill="none"
+                  className="transition-all duration-300"
+                />
+              );
+            })}
+
+            {/* Steps to strategy connections */}
+            {strategyNodes.map((strategy, index) => {
+              const startX = 900;
+              const startY = 120 + (Math.floor(index / 2) * 200);
+              const endX = 1150;
+              const endY = 150 + (index * 80);
+              
+              const controlX1 = startX + 80;
+              const controlY1 = startY;
+              const controlX2 = endX - 80;
+              const controlY2 = endY;
+
+              return (
+                <path
+                  key={strategy.id}
+                  d={`M ${startX} ${startY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${endX} ${endY}`}
+                  stroke="rgba(34, 197, 94, 0.4)"
+                  strokeWidth={hoveredNode === strategy.id ? "3" : "2"}
+                  fill="none"
+                  className="transition-all duration-300"
+                />
+              );
+            })}
+          </svg>
+
+          {/* Central Node */}
+          <div 
+            className="absolute left-[50px] top-1/2 transform -translate-y-1/2 z-10"
+            onMouseEnter={() => setHoveredNode("central")}
+            onMouseLeave={() => setHoveredNode(null)}
+          >
+            <Card className="w-[200px] p-4 bg-slate-700/80 backdrop-blur-md border border-slate-600 hover:border-blue-400 transition-all duration-300 cursor-pointer">
               <div className="text-center">
-                <centerTool.icon className="w-8 h-8 mx-auto mb-2 text-white" />
-                <div className="text-sm font-semibold text-white">{centerTool.name}</div>
+                <Target className="w-8 h-8 mx-auto mb-2 text-blue-400" />
+                <h3 className="font-semibold text-white mb-1">{centralNode.name}</h3>
+                <p className="text-xs text-slate-300">{centralNode.description}</p>
               </div>
             </Card>
           </div>
 
-          {/* Tool Nodes */}
-          {tools.map((tool, index) => {
-            const position = getPosition(index, tools.length);
-            const isSelected = selectedTool === tool.name;
-            
-            return (
-              <div key={tool.name}>
-                {/* Connection Line */}
-                <svg 
-                  className="absolute top-1/2 left-1/2 pointer-events-none"
-                  style={{
-                    transform: `translate(-50%, -50%)`,
-                    width: '100%',
-                    height: '100%'
-                  }}
-                >
-                  <line
-                    x1="0"
-                    y1="0"
-                    x2={position.x}
-                    y2={position.y}
-                    stroke="hsl(263 70% 50%)"
-                    strokeWidth={isSelected ? "3" : "1"}
-                    strokeOpacity={isSelected ? "0.8" : "0.3"}
-                    className="transition-all duration-300"
-                  />
-                </svg>
-
-                {/* Tool Card */}
-                <Card
-                  className={`absolute w-20 h-20 flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 border-2 bg-card/30 backdrop-blur-md shadow-lg ${
-                    isSelected 
-                      ? 'border-primary shadow-lg shadow-primary/25 scale-110' 
-                      : 'border-border/30 hover:border-primary/50'
-                  }`}
-                  style={{
-                    transform: `translate(calc(-50% + ${position.x}px), calc(-50% + ${position.y}px))`,
-                    left: '50%',
-                    top: '50%'
-                  }}
-                  onClick={() => setSelectedTool(selectedTool === tool.name ? null : tool.name)}
-                >
-                  <div className="text-center">
-                    <tool.icon className="w-6 h-6 mx-auto mb-1 text-primary" />
-                    <div className="text-xs font-medium text-center leading-tight">
-                      {tool.name.split(' ').map((word, i) => (
-                        <div key={i}>{word}</div>
+          {/* Step Nodes */}
+          {stepNodes.map((step, index) => (
+            <div
+              key={step.id}
+              className="absolute z-10"
+              style={{
+                left: `${600}px`,
+                top: `${70 + (index * 100)}px`
+              }}
+              onMouseEnter={() => setHoveredNode(step.id)}
+              onMouseLeave={() => setHoveredNode(null)}
+            >
+              <Card className={`w-[250px] p-4 bg-slate-700/80 backdrop-blur-md border border-slate-600 hover:border-blue-400 transition-all duration-300 cursor-pointer ${
+                hoveredNode === step.id ? 'scale-105 border-blue-400' : ''
+              }`}>
+                <div className="flex items-center gap-3">
+                  <ArrowRight className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-white text-sm mb-1">{step.name}</h3>
+                    <p className="text-xs text-slate-300 mb-2">{step.description}</p>
+                    <div className="flex flex-wrap gap-1">
+                      {step.tools.slice(0, 3).map((tool) => (
+                        <span key={tool} className="text-[10px] px-2 py-1 bg-blue-500/20 text-blue-300 rounded-full">
+                          {tool}
+                        </span>
                       ))}
                     </div>
                   </div>
-                </Card>
-              </div>
-            );
-          })}
+                </div>
+              </Card>
+            </div>
+          ))}
+
+          {/* Strategy Nodes */}
+          {strategyNodes.map((strategy, index) => (
+            <div
+              key={strategy.id}
+              className="absolute z-10"
+              style={{
+                left: `${1100}px`,
+                top: `${100 + (index * 80)}px`
+              }}
+              onMouseEnter={() => setHoveredNode(strategy.id)}
+              onMouseLeave={() => setHoveredNode(null)}
+            >
+              <Card className={`w-[200px] p-3 bg-green-900/30 backdrop-blur-md border border-green-600/50 hover:border-green-400 transition-all duration-300 cursor-pointer ${
+                hoveredNode === strategy.id ? 'scale-105 border-green-400' : ''
+              }`}>
+                <div className="flex items-center gap-2">
+                  <ArrowRight className="w-4 h-4 text-green-400 flex-shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-white text-sm mb-1">{strategy.name}</h3>
+                    <p className="text-xs text-green-100">{strategy.description}</p>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          ))}
         </div>
 
-        {/* Tool Description */}
-        {selectedTool && (
-          <div className="mt-8 text-center">
-            <Card className="max-w-md mx-auto p-6 bg-card/30 backdrop-blur-md border border-white/20 shadow-xl border-primary/30">
-              <h3 className="text-xl font-semibold mb-2 text-primary">{selectedTool}</h3>
-              <p className="text-muted-foreground">
-                {tools.find(tool => tool.name === selectedTool)?.description}
-              </p>
-            </Card>
-          </div>
-        )}
-
+        {/* Bottom description */}
         <div className="text-center mt-12">
-          <p className="text-lg text-muted-foreground mb-4">
-            <span className="font-semibold">Always Learning, Always Growing</span>
+          <p className="text-lg text-slate-300 mb-4">
+            <span className="font-semibold text-blue-400">Strategic SEO Implementation</span>
           </p>
-          <p className="text-muted-foreground">
-            I stay up-to-date with the latest tools and technologies to ensure I'm always delivering cutting-edge solutions for my clients.
+          <p className="text-slate-400 max-w-2xl mx-auto">
+            Every project follows this proven framework, ensuring consistent results and sustainable growth through data-driven decision making.
           </p>
         </div>
       </div>
