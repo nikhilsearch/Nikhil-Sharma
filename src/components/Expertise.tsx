@@ -103,15 +103,15 @@ const Expertise = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white overflow-hidden">
+    <section className="py-20 px-4 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
             <span className="text-white">What I Bring to the</span>{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Table</span>
+            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Table</span>
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Comprehensive SEO solutions that drive organic growth, improve search visibility, and deliver measurable results for businesses of all sizes.
+            Interactive expertise map showcasing comprehensive SEO solutions and specializations
           </p>
         </div>
         
@@ -120,9 +120,9 @@ const Expertise = () => {
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-6 bg-slate-800/60 backdrop-blur-md border border-slate-700/50 rounded-lg hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/20"
+              className="text-center p-6 bg-slate-800/40 backdrop-blur-md border border-slate-700/30 rounded-xl hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/20"
             >
-              <stat.icon className="w-8 h-8 mx-auto mb-3 text-purple-400" />
+              <stat.icon className="w-8 h-8 mx-auto mb-3 text-blue-400" />
               <div className="text-3xl font-bold text-white mb-2">
                 {animatedStats[index]}{stat.suffix}
               </div>
@@ -131,15 +131,18 @@ const Expertise = () => {
           ))}
         </div>
 
-        {/* Interactive Radial Tree Diagram */}
-        <div className="relative h-[700px] flex items-center justify-center overflow-hidden">
-          {/* SVG for connection lines */}
+        {/* Interactive Radial Tree - Cleaner Design */}
+        <div className="relative h-[800px] flex items-center justify-center">
+          {/* Background glow effects */}
+          <div className="absolute inset-0 bg-gradient-radial from-blue-500/10 via-transparent to-transparent rounded-full" />
+          
+          {/* SVG for clean connection lines */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
             {expertiseAreas.map((area, index) => {
-              const centerX = 350;
-              const centerY = 350;
+              const centerX = 400;
+              const centerY = 400;
               const angle = (index * 2 * Math.PI) / expertiseAreas.length - Math.PI / 2;
-              const radius = area.category === "core" ? 180 : 240;
+              const radius = 260;
               const endX = centerX + Math.cos(angle) * radius;
               const endY = centerY + Math.sin(angle) * radius;
               
@@ -147,79 +150,59 @@ const Expertise = () => {
               
               return (
                 <g key={index}>
-                  {/* Dotted connection lines */}
+                  {/* Clean connection line */}
                   <line
                     x1={centerX}
                     y1={centerY}
                     x2={endX}
                     y2={endY}
-                    stroke="#8b5cf6"
-                    strokeWidth={isHovered ? "3" : "2"}
-                    strokeOpacity={isHovered ? "0.8" : "0.4"}
+                    stroke={isHovered ? "#60a5fa" : "#475569"}
+                    strokeWidth={isHovered ? "3" : "1"}
+                    strokeOpacity={isHovered ? "0.8" : "0.3"}
                     className="transition-all duration-500"
-                    strokeDasharray="4,4"
+                    strokeDasharray="2,3"
                   />
-                  
-                  {/* Glow effect on hover */}
-                  {isHovered && (
-                    <line
-                      x1={centerX}
-                      y1={centerY}
-                      x2={endX}
-                      y2={endY}
-                      stroke="#8b5cf6"
-                      strokeWidth="5"
-                      strokeOpacity="0.3"
-                      className="animate-pulse"
-                      strokeDasharray="4,4"
-                    />
-                  )}
                   
                   {/* Connection dots */}
                   <circle
-                    cx={centerX + Math.cos(angle) * (radius * 0.3)}
-                    cy={centerY + Math.sin(angle) * (radius * 0.3)}
+                    cx={centerX + Math.cos(angle) * (radius * 0.4)}
+                    cy={centerY + Math.sin(angle) * (radius * 0.4)}
                     r={isHovered ? "3" : "2"}
-                    fill="#8b5cf6"
+                    fill={isHovered ? "#60a5fa" : "#64748b"}
                     className="transition-all duration-300"
                   />
                   <circle
-                    cx={centerX + Math.cos(angle) * (radius * 0.6)}
-                    cy={centerY + Math.sin(angle) * (radius * 0.6)}
+                    cx={centerX + Math.cos(angle) * (radius * 0.7)}
+                    cy={centerY + Math.sin(angle) * (radius * 0.7)}
                     r={isHovered ? "3" : "2"}
-                    fill="#8b5cf6"
-                    className="transition-all duration-300"
-                  />
-                  <circle
-                    cx={centerX + Math.cos(angle) * (radius * 0.8)}
-                    cy={centerY + Math.sin(angle) * (radius * 0.8)}
-                    r={isHovered ? "3" : "2"}
-                    fill="#8b5cf6"
+                    fill={isHovered ? "#60a5fa" : "#64748b"}
                     className="transition-all duration-300"
                   />
                 </g>
               );
             })}
-
-            {/* Remove inter-node connections as they're not in the reference design */}
           </svg>
 
-          {/* Central Hub */}
+          {/* Central Hub - Improved */}
           <div className="absolute z-10 transform -translate-x-1/2 -translate-y-1/2" style={{ left: '50%', top: '50%' }}>
-            <div className="w-20 h-20 flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 border-0 shadow-2xl backdrop-blur-md rounded-full">
-              <div className="text-center text-white">
-                <Target className="w-6 h-6 mx-auto mb-1" />
-                <div className="text-xs font-bold">SEO</div>
+            <div className="relative">
+              <div className="w-24 h-24 flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-full shadow-2xl shadow-blue-500/30 border-2 border-blue-400/30">
+                <div className="text-center text-white">
+                  <Target className="w-8 h-8 mx-auto mb-1" />
+                  <div className="text-xs font-bold">SEO</div>
+                </div>
               </div>
+              {/* Pulsing ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-blue-400/50 animate-ping" />
             </div>
           </div>
 
-          {/* Skill Nodes */}
+          {/* Skill Cards - Cleaner Layout */}
           {expertiseAreas.map((area, index) => {
-            const centerX = 350;
-            const centerY = 350;
+            const centerX = 400;
+            const centerY = 400;
             const angle = (index * 2 * Math.PI) / expertiseAreas.length - Math.PI / 2;
-            const radius = area.category === "core" ? 180 : 240;
+            const radius = 260;
             const x = centerX + Math.cos(angle) * radius;
             const y = centerY + Math.sin(angle) * radius;
             
@@ -232,47 +215,42 @@ const Expertise = () => {
                 style={{ 
                   left: `${x}px`, 
                   top: `${y}px`,
-                  animationDelay: `${index * 0.15}s`,
+                  animationDelay: `${index * 0.1}s`,
                   animationFillMode: 'both'
                 }}
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <Card className={cn(
-                  "w-52 p-4 cursor-pointer transition-all duration-700 ease-out relative overflow-hidden group",
-                  "bg-slate-800/80 backdrop-blur-lg border border-slate-700/50 rounded-xl shadow-xl",
+                <div className={cn(
+                  "w-72 p-5 cursor-pointer transition-all duration-500 ease-out relative overflow-hidden group",
+                  "bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-xl",
                   isHovered 
-                    ? "scale-110 -translate-y-2 shadow-2xl shadow-purple-500/30 border-purple-500/50 z-20" 
-                    : "hover:scale-105 hover:-translate-y-1"
+                    ? "scale-110 -translate-y-2 shadow-2xl shadow-blue-500/20 border-blue-500/50 bg-slate-800/80" 
+                    : "hover:scale-105"
                 )}>
-                  {/* Status dot */}
+                  {/* Status indicator */}
                   <div className={cn(
-                    "absolute top-3 right-3 w-3 h-3 rounded-full",
+                    "absolute top-4 right-4 w-3 h-3 rounded-full",
                     area.category === "core" ? "bg-green-400" : "bg-blue-400"
                   )} />
 
                   {/* Number badge */}
-                  <div className={cn(
-                    "absolute -top-2 -left-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-500 z-30",
-                    "bg-purple-600 text-white border-2 border-slate-800"
-                  )}>
+                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center text-sm font-bold text-white border-2 border-slate-800 shadow-lg">
                     {area.id}
                   </div>
 
-                  {/* Dark glow effect */}
+                  {/* Glow effect */}
                   <div className={cn(
-                    "absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-xl transition-all duration-700",
-                    isHovered ? "opacity-100 scale-105" : "opacity-0"
+                    "absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 rounded-2xl transition-all duration-500",
+                    isHovered ? "opacity-100" : "opacity-0"
                   )} />
 
                   {/* Content */}
                   <div className="relative z-10">
-                    <h3 className={cn(
-                      "text-lg font-semibold mb-2 transition-all duration-500 leading-tight text-white"
-                    )}>
+                    <h3 className="text-xl font-bold text-white mb-3 leading-tight">
                       {area.title}
                     </h3>
-                    <p className="text-sm text-slate-300 mb-3 line-clamp-2">
+                    <p className="text-sm text-slate-300 mb-4 leading-relaxed">
                       {area.description}
                     </p>
                     
@@ -281,39 +259,32 @@ const Expertise = () => {
                       {area.skills.slice(0, 2).map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
-                          className={cn(
-                            "text-xs px-3 py-1 rounded-full transition-all duration-500",
-                            "bg-purple-600/20 text-purple-300 border border-purple-500/30",
-                            isHovered ? "scale-105 bg-purple-600/30" : ""
-                          )}
-                          style={{
-                            transitionDelay: `${skillIndex * 100}ms`
-                          }}
+                          className="text-xs px-3 py-1.5 rounded-full bg-blue-600/20 text-blue-300 border border-blue-500/30 transition-all duration-300 hover:bg-blue-600/30"
                         >
                           {skill}
                         </span>
                       ))}
                       {area.skills.length > 2 && (
-                        <span className="text-xs px-3 py-1 rounded-full bg-slate-700/50 text-slate-400 border border-slate-600/50">
+                        <span className="text-xs px-3 py-1.5 rounded-full bg-slate-700/50 text-slate-400 border border-slate-600/50">
                           +{area.skills.length - 2}
                         </span>
                       )}
                     </div>
                   </div>
-                </Card>
+                </div>
               </div>
             );
           })}
 
-          {/* Floating particles */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {Array.from({ length: 20 }).map((_, i) => (
+          {/* Ambient particles */}
+          <div className="absolute inset-0 pointer-events-none">
+            {Array.from({ length: 30 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute w-1 h-1 bg-purple-400/30 rounded-full animate-pulse"
+                className="absolute w-1 h-1 bg-blue-400/20 rounded-full animate-pulse"
                 style={{
-                  left: `${15 + Math.random() * 70}%`,
-                  top: `${15 + Math.random() * 70}%`,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
                   animationDelay: `${Math.random() * 3}s`,
                   animationDuration: `${2 + Math.random() * 3}s`
                 }}
@@ -323,17 +294,21 @@ const Expertise = () => {
         </div>
 
         {/* Legend */}
-        <div className="flex justify-center gap-8 mt-8">
-          <div className="flex items-center gap-2">
+        <div className="flex justify-center gap-8 mt-12">
+          <div className="flex items-center gap-3 px-4 py-2 bg-slate-800/40 rounded-full border border-slate-700/30">
             <div className="w-3 h-3 rounded-full bg-green-400" />
             <span className="text-sm text-slate-300">Core Competencies</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3 px-4 py-2 bg-slate-800/40 rounded-full border border-slate-700/30">
             <div className="w-3 h-3 rounded-full bg-blue-400" />
             <span className="text-sm text-slate-300">Advanced Specializations</span>
           </div>
         </div>
       </div>
+
+      {/* Background decorative elements */}
+      <div className="absolute top-20 left-20 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-20 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl" />
     </section>
   );
 };
