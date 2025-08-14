@@ -23,8 +23,8 @@ const Hero = () => {
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-400 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
             <img
-              src={heroImage}
-              alt="Nikhil Sharma - SEO Manager"
+              src="/lovable-uploads/209a2e34-b533-4448-a499-e64d4c9cdf98.png"
+              alt="Nikhil Sharma - SEO Expert"
               className="relative w-80 h-80 object-cover rounded-2xl shadow-2xl"
             />
           </div>
