@@ -1,29 +1,48 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { 
+  BarChart3, 
+  Search, 
+  Target, 
+  TrendingUp, 
+  Link, 
+  Bug, 
+  FileText, 
+  Rocket, 
+  PieChart, 
+  Bot, 
+  Sparkles, 
+  Brain, 
+  Palette, 
+  BarChart2, 
+  Heart,
+  Tag
+} from "lucide-react";
 
 const ToolsMindMap = () => {
   const [selectedTool, setSelectedTool] = useState<string | null>(null);
 
   const tools = [
-    { name: "Google Analytics", icon: "📊", color: "from-orange-500 to-orange-600", description: "Web analytics and performance tracking" },
-    { name: "Google Search Console", icon: "🔍", color: "from-blue-500 to-blue-600", description: "Search performance monitoring" },
-    { name: "SEMrush", icon: "🎯", color: "from-orange-600 to-red-600", description: "SEO and competitive analysis" },
-    { name: "Ahrefs", icon: "📈", color: "from-orange-500 to-orange-600", description: "Backlink analysis and keyword research" },
-    { name: "Moz", icon: "🔗", color: "from-blue-500 to-blue-600", description: "SEO tools and domain authority tracking" },
-    { name: "Screaming Frog", icon: "🐸", color: "from-green-500 to-green-600", description: "Website crawling and technical SEO" },
-    { name: "WordPress", icon: "📝", color: "from-blue-500 to-blue-600", description: "Content management system" },
-    { name: "HubSpot", icon: "🚀", color: "from-orange-500 to-orange-600", description: "Marketing automation platform" },
-    { name: "Power BI", icon: "📊", color: "from-yellow-500 to-yellow-600", description: "Business intelligence and data visualization" },
-    { name: "ChatGPT", icon: "🤖", color: "from-green-500 to-green-600", description: "AI-powered content and strategy assistance" },
-    { name: "Gemini", icon: "✨", color: "from-blue-500 to-blue-600", description: "Google's AI assistant for marketing" },
-    { name: "Claude", icon: "🧠", color: "from-orange-500 to-orange-600", description: "AI assistant for content optimization" },
-    { name: "Canva", icon: "🎨", color: "from-blue-400 to-blue-500", description: "Design and visual content creation" },
-    { name: "Looker Studio", icon: "📈", color: "from-blue-500 to-blue-600", description: "Data visualization and reporting" },
-    { name: "Lovable", icon: "💜", color: "from-purple-500 to-purple-600", description: "AI-powered web development" }
+    { name: "Google Analytics", icon: BarChart3, color: "from-orange-500 to-orange-600", description: "Web analytics and performance tracking" },
+    { name: "Google Search Console", icon: Search, color: "from-blue-500 to-blue-600", description: "Search performance monitoring" },
+    { name: "SEMrush", icon: Target, color: "from-orange-600 to-red-600", description: "SEO and competitive analysis" },
+    { name: "Ahrefs", icon: TrendingUp, color: "from-orange-500 to-orange-600", description: "Backlink analysis and keyword research" },
+    { name: "Moz", icon: Link, color: "from-blue-500 to-blue-600", description: "SEO tools and domain authority tracking" },
+    { name: "Screaming Frog", icon: Bug, color: "from-green-500 to-green-600", description: "Website crawling and technical SEO" },
+    { name: "WordPress", icon: FileText, color: "from-blue-500 to-blue-600", description: "Content management system" },
+    { name: "HubSpot", icon: Rocket, color: "from-orange-500 to-orange-600", description: "Marketing automation platform" },
+    { name: "Power BI", icon: PieChart, color: "from-yellow-500 to-yellow-600", description: "Business intelligence and data visualization" },
+    { name: "ChatGPT", icon: Bot, color: "from-green-500 to-green-600", description: "AI-powered content and strategy assistance" },
+    { name: "Gemini", icon: Sparkles, color: "from-blue-500 to-blue-600", description: "Google's AI assistant for marketing" },
+    { name: "Claude", icon: Brain, color: "from-orange-500 to-orange-600", description: "AI assistant for content optimization" },
+    { name: "Canva", icon: Palette, color: "from-blue-400 to-blue-500", description: "Design and visual content creation" },
+    { name: "Looker Studio", icon: BarChart2, color: "from-blue-500 to-blue-600", description: "Data visualization and reporting" },
+    { name: "Google Tag Manager", icon: Tag, color: "from-green-500 to-green-600", description: "Tag management and tracking implementation" },
+    { name: "Lovable", icon: Heart, color: "from-purple-500 to-purple-600", description: "AI-powered web development" }
   ];
 
-  const centerTool = { name: "SEO Tools", icon: "🎯", color: "from-primary to-purple-400" };
+  const centerTool = { name: "SEO Tools", icon: Target, color: "from-primary to-purple-400" };
 
   const getPosition = (index: number, total: number) => {
     const angle = (index * 360) / total;
@@ -49,9 +68,9 @@ const ToolsMindMap = () => {
         <div className="relative h-[600px] flex items-center justify-center">
           {/* Central Hub */}
           <div className="absolute z-10">
-            <Card className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-primary to-purple-400 border-0 shadow-2xl">
+            <Card className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-primary to-purple-400 border-0 shadow-2xl backdrop-blur-md">
               <div className="text-center">
-                <div className="text-4xl mb-2">{centerTool.icon}</div>
+                <centerTool.icon className="w-8 h-8 mx-auto mb-2 text-white" />
                 <div className="text-sm font-semibold text-white">{centerTool.name}</div>
               </div>
             </Card>
@@ -87,7 +106,7 @@ const ToolsMindMap = () => {
 
                 {/* Tool Card */}
                 <Card
-                  className={`absolute w-20 h-20 flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 border-2 ${
+                  className={`absolute w-20 h-20 flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 border-2 bg-card/30 backdrop-blur-md shadow-lg ${
                     isSelected 
                       ? 'border-primary shadow-lg shadow-primary/25 scale-110' 
                       : 'border-border/30 hover:border-primary/50'
@@ -100,7 +119,7 @@ const ToolsMindMap = () => {
                   onClick={() => setSelectedTool(selectedTool === tool.name ? null : tool.name)}
                 >
                   <div className="text-center">
-                    <div className="text-2xl mb-1">{tool.icon}</div>
+                    <tool.icon className="w-6 h-6 mx-auto mb-1 text-primary" />
                     <div className="text-xs font-medium text-center leading-tight">
                       {tool.name.split(' ').map((word, i) => (
                         <div key={i}>{word}</div>
@@ -116,7 +135,7 @@ const ToolsMindMap = () => {
         {/* Tool Description */}
         {selectedTool && (
           <div className="mt-8 text-center">
-            <Card className="max-w-md mx-auto p-6 bg-card/80 backdrop-blur-sm border-primary/30">
+            <Card className="max-w-md mx-auto p-6 bg-card/30 backdrop-blur-md border border-white/20 shadow-xl border-primary/30">
               <h3 className="text-xl font-semibold mb-2 text-primary">{selectedTool}</h3>
               <p className="text-muted-foreground">
                 {tools.find(tool => tool.name === selectedTool)?.description}

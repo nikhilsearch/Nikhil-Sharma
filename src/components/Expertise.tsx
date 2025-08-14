@@ -52,13 +52,16 @@ const Expertise = () => {
           {expertiseAreas.map((area, index) => (
             <Card 
               key={index} 
-              className="bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-all duration-500 hover:shadow-lg hover:shadow-primary/10 hover:scale-105 animate-fade-in hover:-translate-y-2"
+              className="bg-card/30 backdrop-blur-md border border-white/20 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-105 animate-fade-in hover:-translate-y-2 relative overflow-hidden group"
               style={{
                 animationDelay: `${index * 0.1}s`,
                 animationFillMode: 'both'
               }}
             >
-              <CardHeader>
+              {/* Floating glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-purple-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              
+              <CardHeader className="relative z-10">
                 <CardTitle className="text-xl font-semibold text-foreground">
                   {area.title}
                 </CardTitle>
@@ -66,13 +69,13 @@ const Expertise = () => {
                   {area.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="relative z-10">
                 <div className="flex flex-wrap gap-2">
                   {area.skills.map((skill, skillIndex) => (
                     <Badge 
                       key={skillIndex} 
                       variant="secondary" 
-                      className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors"
+                      className="bg-primary/10 text-primary border-primary/20 hover:bg-primary/20 transition-colors backdrop-blur-sm"
                     >
                       {skill}
                     </Badge>
