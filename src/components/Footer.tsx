@@ -46,8 +46,8 @@ const Footer = () => {
                 <h3 className="text-2xl font-bold text-foreground mb-2">Let's work together!</h3>
                 <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                   <Mail className="w-4 h-4" />
-                  <a href="mailto:nikhil.sharma@example.com" className="hover:underline">
-                    nikhil.sharma@example.com
+                  <a href="mailto:imnikhil10@outlook.com" className="hover:underline">
+                    imnikhil10@outlook.com
                   </a>
                 </div>
               </div>
@@ -110,14 +110,14 @@ const Footer = () => {
                 <span>Twitter</span>
               </a>
               <a 
-                href="https://github.com" 
+                href="https://github.com/nikhilsearch" 
                 className="flex items-center gap-2 hover:text-primary transition-colors hover:scale-110 transform duration-200"
               >
                 <Github className="w-5 h-5" />
                 <span>Github</span>
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/nikhil-sharma10/" 
                 className="flex items-center gap-2 hover:text-primary transition-colors hover:scale-110 transform duration-200"
               >
                 <Linkedin className="w-5 h-5" />
