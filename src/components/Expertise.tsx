@@ -166,7 +166,6 @@ const Expertise = () => {
                 
                 {/* Card Header */}
                 <div className="mb-6">
-                  <div className="text-4xl mb-4">{area.image}</div>
                   <h3 className="text-2xl font-bold text-foreground mb-3">
                     {area.title}
                   </h3>
