@@ -2,18 +2,18 @@ import { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 
 const ToolsMindMap = () => {
-  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const [hoveredTool, setHoveredTool] = useState<string | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  const skills = [
-    { name: "Search Engine Optimization (SEO)", level: 95, color: "#10b981" },
-    { name: "Content Marketing", level: 90, color: "#3b82f6" },
-    { name: "Technical SEO", level: 93, color: "#8b5cf6" },
-    { name: "Analytics & Reporting", level: 88, color: "#f59e0b" },
-    { name: "Local SEO", level: 85, color: "#ef4444" },
-    { name: "Keyword Research", level: 92, color: "#06b6d4" },
-    { name: "AI SEO Tools", level: 87, color: "#84cc16" },
-    { name: "Strategic Planning", level: 90, color: "#f97316" }
+  const tools = [
+    { name: "Google Analytics", proficiency: 95, color: "#ea4335", category: "Analytics" },
+    { name: "Google Search Console", proficiency: 93, color: "#4285f4", category: "Monitoring" },
+    { name: "SEMrush", proficiency: 90, color: "#ff642d", category: "Research" },
+    { name: "Ahrefs", proficiency: 88, color: "#ff7900", category: "Analysis" },
+    { name: "Screaming Frog", proficiency: 85, color: "#00c851", category: "Technical" },
+    { name: "WordPress", proficiency: 92, color: "#21759b", category: "CMS" },
+    { name: "ChatGPT", proficiency: 87, color: "#10a37f", category: "AI Tools" },
+    { name: "Power BI", proficiency: 83, color: "#f2c811", category: "Visualization" }
   ];
 
   const centerX = 300;
@@ -21,14 +21,14 @@ const ToolsMindMap = () => {
   const maxRadius = 180;
   const gridLevels = 5;
 
-  // Generate points for the skill polygon
-  const getSkillPoints = () => {
-    return skills.map((skill, index) => {
-      const angle = (index * 2 * Math.PI) / skills.length - Math.PI / 2;
-      const radius = (skill.level / 100) * maxRadius;
+  // Generate points for the tool polygon
+  const getToolPoints = () => {
+    return tools.map((tool, index) => {
+      const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
+      const radius = (tool.proficiency / 100) * maxRadius;
       const x = centerX + Math.cos(angle) * radius;
       const y = centerY + Math.sin(angle) * radius;
-      return { x, y, skill };
+      return { x, y, tool };
     });
   };
 
@@ -42,15 +42,15 @@ const ToolsMindMap = () => {
 
   // Generate axis lines and labels
   const getAxisLines = () => {
-    return skills.map((skill, index) => {
-      const angle = (index * 2 * Math.PI) / skills.length - Math.PI / 2;
+    return tools.map((tool, index) => {
+      const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
       const x = centerX + Math.cos(angle) * (maxRadius + 40);
       const y = centerY + Math.sin(angle) * (maxRadius + 40);
       const lineX = centerX + Math.cos(angle) * maxRadius;
       const lineY = centerY + Math.sin(angle) * maxRadius;
       
       return {
-        skill,
+        tool,
         labelX: x,
         labelY: y,
         lineX,
@@ -60,12 +60,12 @@ const ToolsMindMap = () => {
     });
   };
 
-  const skillPoints = getSkillPoints();
+  const toolPoints = getToolPoints();
   const gridCircles = getGridCircles();
   const axisLines = getAxisLines();
 
-  // Create path string for the skill polygon
-  const pathString = skillPoints
+  // Create path string for the tool polygon
+  const pathString = toolPoints
     .map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`)
     .join(' ') + ' Z';
 
@@ -74,11 +74,11 @@ const ToolsMindMap = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Skills</span>{" "}
-            <span className="text-foreground">Radar</span>
+            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">SEO Tools</span>{" "}
+            <span className="text-foreground">Mastery</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            My expertise levels across different SEO and digital marketing domains
+            Interactive visualization of my proficiency with essential SEO and analytics tools
           </p>
         </div>
 
@@ -117,36 +117,51 @@ const ToolsMindMap = () => {
                     strokeWidth="1"
                     opacity="0.3"
                   />
-                  {/* Skill level dots */}
-                  <circle
-                    cx={skillPoints[index].x}
-                    cy={skillPoints[index].y}
-                    r="6"
-                    fill={axis.skill.color}
-                    className="cursor-pointer transition-all duration-300"
-                    onMouseEnter={() => setHoveredSkill(axis.skill.name)}
-                    onMouseLeave={() => setHoveredSkill(null)}
-                    style={{
-                      transform: hoveredSkill === axis.skill.name ? 'scale(1.5)' : 'scale(1)',
-                      transformOrigin: `${skillPoints[index].x}px ${skillPoints[index].y}px`
-                    }}
-                  />
+                  {/* Tool proficiency dots with floating effect */}
+                  <g>
+                    <circle
+                      cx={toolPoints[index].x}
+                      cy={toolPoints[index].y}
+                      r={hoveredTool === axis.tool.name ? "10" : "6"}
+                      fill={axis.tool.color}
+                      className="cursor-pointer transition-all duration-500 ease-out drop-shadow-lg"
+                      onMouseEnter={() => setHoveredTool(axis.tool.name)}
+                      onMouseLeave={() => setHoveredTool(null)}
+                      style={{
+                        filter: hoveredTool === axis.tool.name ? `drop-shadow(0 0 15px ${axis.tool.color})` : 'none'
+                      }}
+                    />
+                    {/* Floating glow effect */}
+                    {hoveredTool === axis.tool.name && (
+                      <circle
+                        cx={toolPoints[index].x}
+                        cy={toolPoints[index].y}
+                        r="15"
+                        fill={axis.tool.color}
+                        opacity="0.2"
+                        className="animate-pulse"
+                      />
+                    )}
+                  </g>
                 </g>
               ))}
 
-              {/* Skill polygon */}
+              {/* Tool polygon with glow effect */}
               <path
                 d={pathString}
                 fill="hsl(var(--primary))"
-                fillOpacity="0.2"
+                fillOpacity="0.15"
                 stroke="hsl(var(--primary))"
-                strokeWidth="2"
-                className="transition-all duration-500"
+                strokeWidth="3"
+                className="transition-all duration-700 ease-out"
+                style={{
+                  filter: hoveredTool ? 'drop-shadow(0 0 10px hsl(var(--primary)))' : 'none'
+                }}
               />
 
-              {/* Skill labels */}
+              {/* Tool labels with floating effect */}
               {axisLines.map((axis, index) => {
-                const isHovered = hoveredSkill === axis.skill.name;
+                const isHovered = hoveredTool === axis.tool.name;
                 return (
                   <g key={index}>
                     <text
@@ -154,31 +169,35 @@ const ToolsMindMap = () => {
                       y={axis.labelY}
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      className={`text-sm font-medium transition-all duration-300 cursor-pointer ${
+                      className={`text-sm font-medium transition-all duration-500 ease-out cursor-pointer ${
                         isHovered ? 'text-primary' : 'text-foreground'
                       }`}
-                      onMouseEnter={() => setHoveredSkill(axis.skill.name)}
-                      onMouseLeave={() => setHoveredSkill(null)}
+                      onMouseEnter={() => setHoveredTool(axis.tool.name)}
+                      onMouseLeave={() => setHoveredTool(null)}
                       style={{
-                        fontSize: isHovered ? '14px' : '12px',
-                        fontWeight: isHovered ? '600' : '500'
+                        fontSize: isHovered ? '16px' : '12px',
+                        fontWeight: isHovered ? '700' : '500',
+                        transform: isHovered ? 'translateY(-3px)' : 'translateY(0px)',
+                        filter: isHovered ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' : 'none'
                       }}
                     >
-                      {axis.skill.name}
+                      {axis.tool.name}
                     </text>
-                    {/* Skill level percentage */}
+                    {/* Tool proficiency percentage */}
                     <text
                       x={axis.labelX}
-                      y={axis.labelY + (isHovered ? 18 : 16)}
+                      y={axis.labelY + (isHovered ? 22 : 18)}
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      className="text-xs text-muted-foreground"
+                      className="text-xs transition-all duration-500"
                       style={{
+                        fill: isHovered ? axis.tool.color : 'hsl(var(--muted-foreground))',
                         opacity: isHovered ? 1 : 0.7,
-                        fontSize: isHovered ? '11px' : '10px'
+                        fontSize: isHovered ? '12px' : '10px',
+                        fontWeight: isHovered ? '600' : '400'
                       }}
                     >
-                      {axis.skill.level}%
+                      {axis.tool.proficiency}%
                     </text>
                   </g>
                 );
@@ -196,30 +215,35 @@ const ToolsMindMap = () => {
           </div>
         </div>
 
-        {/* Legend */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          {skills.map((skill, index) => (
+        {/* Legend with floating cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+          {tools.map((tool, index) => (
             <Card
               key={index}
-              className={`p-4 cursor-pointer transition-all duration-300 ${
-                hoveredSkill === skill.name
-                  ? 'bg-primary/10 border-primary/50 scale-105'
-                  : 'bg-card/30 backdrop-blur-md border-border/30'
+              className={`p-4 cursor-pointer transition-all duration-500 ease-out ${
+                hoveredTool === tool.name
+                  ? 'bg-primary/10 border-primary/50 scale-110 -translate-y-2 shadow-xl'
+                  : 'bg-card/30 backdrop-blur-md border-border/30 hover:scale-105'
               }`}
-              onMouseEnter={() => setHoveredSkill(skill.name)}
-              onMouseLeave={() => setHoveredSkill(null)}
+              onMouseEnter={() => setHoveredTool(tool.name)}
+              onMouseLeave={() => setHoveredTool(null)}
+              style={{
+                filter: hoveredTool === tool.name ? `drop-shadow(0 8px 20px ${tool.color}30)` : 'none'
+              }}
             >
               <div className="flex items-center gap-3">
                 <div
-                  className="w-4 h-4 rounded-full"
-                  style={{ backgroundColor: skill.color }}
+                  className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                    hoveredTool === tool.name ? 'w-5 h-5' : ''
+                  }`}
+                  style={{ backgroundColor: tool.color }}
                 />
                 <div>
                   <div className="text-sm font-medium text-foreground">
-                    {skill.name.split(' ').slice(0, 2).join(' ')}
+                    {tool.name}
                   </div>
                   <div className="text-xs text-muted-foreground">
-                    {skill.level}% Proficiency
+                    {tool.proficiency}% • {tool.category}
                   </div>
                 </div>
               </div>
@@ -230,11 +254,11 @@ const ToolsMindMap = () => {
         {/* Description */}
         <div className="text-center mt-12">
           <p className="text-lg text-muted-foreground mb-4">
-            <span className="font-semibold text-primary">Comprehensive SEO Expertise</span>
+            <span className="font-semibold text-primary">Professional SEO Toolkit</span>
           </p>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            This radar chart visualizes my proficiency levels across key SEO and digital marketing domains, 
-            showcasing a well-rounded skill set built through years of hands-on experience.
+            This radar visualization showcases my mastery of industry-leading SEO tools and platforms, 
+            each representing years of hands-on experience delivering measurable results.
           </p>
         </div>
       </div>
