@@ -46,64 +46,80 @@ const Expertise = () => {
   const expertiseAreas = [
     {
       id: 1,
-      title: "Technical SEO",
-      description: "Site audits, page speed optimization, schema markup, and crawlability improvements.",
-      skills: ["Core Web Vitals", "Schema Markup", "Site Architecture", "Mobile Optimization"],
-      category: "core"
-    },
-    {
-      id: 2,
-      title: "Keyword Research",
-      description: "Strategic keyword analysis and competitive research for maximum organic visibility.",
-      skills: ["SEMrush", "Ahrefs", "Keyword Planning", "Competitor Analysis"],
-      category: "core"
-    },
-    {
-      id: 3,
-      title: "Content Strategy",
-      description: "SEO-optimized content planning and optimization for better search rankings.",
-      skills: ["Content Optimization", "Topic Clusters", "E-A-T", "User Intent"],
-      category: "core"
-    },
-    {
-      id: 4,
-      title: "Analytics & Reporting",
-      description: "Data-driven insights and comprehensive SEO performance tracking.",
-      skills: ["Google Analytics", "Search Console", "Data Studio", "ROI Tracking"],
-      category: "core"
-    },
-    {
-      id: 5,
-      title: "Local SEO",
-      description: "Google My Business optimization and local search visibility enhancement.",
-      skills: ["Google My Business", "Local Citations", "Review Management", "Local Keywords"],
-      category: "advanced"
-    },
-    {
-      id: 6,
       title: "AI SEO",
       description: "Optimizing websites for AI-powered search engines and LLM models.",
       skills: ["ChatGPT Optimization", "Perplexity SEO", "AI Overview", "LLM Models"],
-      category: "advanced"
+      category: "advanced",
+      bgGradient: "from-purple-600 to-indigo-700",
+      image: "🤖"
     },
     {
-      id: 7,
+      id: 2,
+      title: "Technical SEO",
+      description: "Site audits, page speed optimization, schema markup, and crawlability improvements.",
+      skills: ["Core Web Vitals", "Schema Markup", "Site Architecture", "Mobile Optimization"],
+      category: "core",
+      bgGradient: "from-blue-600 to-cyan-700",
+      image: "⚙️"
+    },
+    {
+      id: 3,
       title: "Semantic SEO",
       description: "Understanding search intent and entity-based optimization strategies.",
       skills: ["Entity Optimization", "Knowledge Graphs", "Topic Modeling", "Intent Matching"],
-      category: "advanced"
+      category: "advanced",
+      bgGradient: "from-green-600 to-emerald-700",
+      image: "🧠"
+    },
+    {
+      id: 4,
+      title: "Keyword Research",
+      description: "Strategic keyword analysis and competitive research for maximum organic visibility.",
+      skills: ["SEMrush", "Ahrefs", "Keyword Planning", "Competitor Analysis"],
+      category: "core",
+      bgGradient: "from-orange-600 to-red-700",
+      image: "🔍"
+    },
+    {
+      id: 5,
+      title: "Content Strategy",
+      description: "SEO-optimized content planning and optimization for better search rankings.",
+      skills: ["Content Optimization", "Topic Clusters", "E-A-T", "User Intent"],
+      category: "core",
+      bgGradient: "from-pink-600 to-rose-700",
+      image: "📝"
+    },
+    {
+      id: 6,
+      title: "Analytics & Reporting",
+      description: "Data-driven insights and comprehensive SEO performance tracking.",
+      skills: ["Google Analytics", "Search Console", "Data Studio", "ROI Tracking"],
+      category: "core",
+      bgGradient: "from-teal-600 to-cyan-700",
+      image: "📊"
+    },
+    {
+      id: 7,
+      title: "Local SEO",
+      description: "Google My Business optimization and local search visibility enhancement.",
+      skills: ["Google My Business", "Local Citations", "Review Management", "Local Keywords"],
+      category: "advanced",
+      bgGradient: "from-violet-600 to-purple-700",
+      image: "📍"
     },
     {
       id: 8,
       title: "Ecommerce SEO",
       description: "Product optimization, category structuring, and conversion-focused SEO.",
       skills: ["Product Schema", "Category Optimization", "Technical Audits", "Conversion Tracking"],
-      category: "advanced"
+      category: "advanced",
+      bgGradient: "from-amber-600 to-orange-700",
+      image: "🛒"
     }
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 text-white relative overflow-hidden">
+    <section className="py-20 px-4 bg-gradient-to-br from-slate-900 via-blue-950 to-slate-800 text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
@@ -111,7 +127,7 @@ const Expertise = () => {
             <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Table</span>
           </h2>
           <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            Interactive expertise map showcasing comprehensive SEO solutions and specializations
+            Comprehensive SEO solutions that drive organic growth and deliver measurable results
           </p>
         </div>
         
@@ -131,247 +147,102 @@ const Expertise = () => {
           ))}
         </div>
 
-        {/* Interactive Radial Tree - Cleaner Design */}
-        <div className="relative h-[900px] flex items-center justify-center">
-          {/* Background glow effects */}
-          <div className="absolute inset-0 bg-gradient-radial from-blue-500/5 via-transparent to-transparent rounded-full" />
-          
-          {/* SVG for tree-like connection structure */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-            {/* Central trunk */}
-            <defs>
-              <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#64748b" stopOpacity="0.8"/>
-                <stop offset="100%" stopColor="#475569" stopOpacity="0.4"/>
-              </linearGradient>
-            </defs>
-            
-            {/* Main trunk */}
-            <rect 
-              x="445" 
-              y="550" 
-              width="10" 
-              height="200" 
-              fill="url(#trunkGradient)" 
-              rx="5"
-              className="opacity-60"
-            />
-            
-            {expertiseAreas.map((area, index) => {
-              const centerX = 450;
-              const centerY = 450;
+        {/* Card Grid Layout - 2 Rows */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {expertiseAreas.map((area, index) => (
+            <Card 
+              key={index} 
+              className="group cursor-pointer transition-all duration-500 hover:scale-105 hover:-translate-y-2 relative overflow-hidden border-0 shadow-2xl animate-fade-in"
+              style={{
+                animationDelay: `${index * 0.1}s`,
+                animationFillMode: 'both'
+              }}
+              onMouseEnter={() => setHoveredCard(index)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              {/* Background Gradient */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${area.bgGradient} opacity-90`} />
               
-              // Perfect angular distribution: 360° / 8 cards = 45° each
-              const baseAngle = (index * 45) - 90; // Start from top (-90°)
-              const angleInRadians = (baseAngle * Math.PI) / 180;
+              {/* Background Pattern */}
+              <div className="absolute inset-0 bg-black/20" />
               
-              // Differentiate radius based on category for better hierarchy
-              const radius = area.category === "core" ? 300 : 380;
-              
-              // Calculate positions with perfect spacing
-              const endX = centerX + Math.cos(angleInRadians) * radius;
-              const endY = centerY + Math.sin(angleInRadians) * radius;
-              
-              const isHovered = hoveredCard === index;
-              
-              // Calculate branch points for tree structure
-              const branchX = centerX + Math.cos(angleInRadians) * 140;
-              const branchY = centerY + Math.sin(angleInRadians) * 140;
-              
-              return (
-                <g key={index}>
-                  {/* Main branch from center */}
-                  <line
-                    x1={centerX}
-                    y1={centerY}
-                    x2={branchX}
-                    y2={branchY}
-                    stroke={isHovered ? "#60a5fa" : "#475569"}
-                    strokeWidth={isHovered ? "4" : "3"}
-                    strokeOpacity="0.7"
-                    className="transition-all duration-500"
-                  />
-                  
-                  {/* Secondary branch to card - curved for natural tree look */}
-                  <path
-                    d={`M ${branchX} ${branchY} Q ${branchX + (endX - branchX) * 0.5} ${branchY + (endY - branchY) * 0.3} ${endX} ${endY}`}
-                    stroke={isHovered ? "#60a5fa" : "#64748b"}
-                    strokeWidth={isHovered ? "3" : "2"}
-                    strokeOpacity={isHovered ? "0.8" : "0.5"}
-                    fill="none"
-                    className="transition-all duration-500"
-                    strokeDasharray={area.category === "core" ? "0" : "4,4"}
-                  />
-                  
-                  {/* Branch nodes */}
-                  <circle
-                    cx={branchX}
-                    cy={branchY}
-                    r={isHovered ? "4" : "3"}
-                    fill={isHovered ? "#60a5fa" : "#64748b"}
-                    className="transition-all duration-300"
-                  />
-                  
-                  {/* Connection leaves */}
-                  <circle
-                    cx={endX - Math.cos(angleInRadians) * 25}
-                    cy={endY - Math.sin(angleInRadians) * 25}
-                    r={isHovered ? "4" : "3"}
-                    fill={area.category === "core" ? "#22c55e" : "#3b82f6"}
-                    className="transition-all duration-300"
-                  />
-                </g>
-              );
-            })}
-          </svg>
+              {/* Hover Glow Effect */}
+              <div className={cn(
+                "absolute inset-0 bg-gradient-to-br from-white/10 to-transparent transition-all duration-500",
+                hoveredCard === index ? "opacity-100" : "opacity-0"
+              )} />
 
-          {/* Central Fruit - SEO Expertise */}
-          <div className="absolute z-10 transform -translate-x-1/2 -translate-y-1/2" style={{ left: '50%', top: '50%' }}>
-            <div className="relative">
-              <div className="w-32 h-32 flex items-center justify-center bg-gradient-to-br from-orange-500 via-red-500 to-pink-600 rounded-full shadow-2xl shadow-orange-500/40 border-4 border-yellow-400/30 relative overflow-hidden">
-                {/* Fruit shine effect */}
-                <div className="absolute top-3 left-3 w-8 h-8 bg-white/30 rounded-full blur-sm" />
-                <div className="text-center text-white relative z-10">
-                  <Target className="w-10 h-10 mx-auto mb-1" />
-                  <div className="text-sm font-bold">SEO</div>
-                  <div className="text-xs opacity-80">Expertise</div>
+              {/* Content */}
+              <CardContent className="relative z-10 p-6 h-full flex flex-col justify-between min-h-[280px]">
+                {/* Header */}
+                <div>
+                  {/* Icon */}
+                  <div className="text-4xl mb-4">{area.image}</div>
+                  
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-white mb-3 leading-tight">
+                    {area.title}
+                  </h3>
+                  
+                  {/* Description */}
+                  <p className="text-white/90 text-sm mb-4 leading-relaxed line-clamp-3">
+                    {area.description}
+                  </p>
                 </div>
-              </div>
-              {/* Fruit glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400/20 to-red-400/20 animate-pulse scale-125" />
-            </div>
-          </div>
 
-          {/* Ingredient Cards - Perfect Angular Distribution */}
-          {expertiseAreas.map((area, index) => {
-            const centerX = 450;
-            const centerY = 450;
-            
-            // Perfect 45° spacing for 8 cards
-            const baseAngle = (index * 45) - 90; // Start from top
-            const angleInRadians = (baseAngle * Math.PI) / 180;
-            
-            // Account for card dimensions with proper radius
-            const radius = area.category === "core" ? 300 : 380;
-            
-            // Calculate position ensuring cards don't overlap
-            const x = centerX + Math.cos(angleInRadians) * radius;
-            const y = centerY + Math.sin(angleInRadians) * radius;
-            
-            const isHovered = hoveredCard === index;
-            
-            return (
-              <div
-                key={index}
-                className="absolute z-10 transform -translate-x-1/2 -translate-y-1/2 animate-fade-in"
-                style={{ 
-                  left: `${x}px`, 
-                  top: `${y}px`,
-                  animationDelay: `${index * 0.1}s`,
-                  animationFillMode: 'both'
-                }}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                <div className={cn(
-                  "w-72 p-5 cursor-pointer transition-all duration-500 ease-out relative overflow-hidden group",
-                  "backdrop-blur-xl border rounded-2xl shadow-xl",
-                  area.category === "core" 
-                    ? "bg-green-900/40 border-green-600/40 shadow-green-500/20" 
-                    : "bg-blue-900/40 border-blue-600/40 shadow-blue-500/20",
-                  isHovered 
-                    ? "scale-110 -translate-y-3 shadow-2xl z-20" 
-                    : "hover:scale-105"
-                )}>
-                  {/* Ingredient type indicator */}
-                  <div className={cn(
-                    "absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium",
-                    area.category === "core" 
-                      ? "bg-green-500/20 text-green-300 border border-green-400/30" 
-                      : "bg-blue-500/20 text-blue-300 border border-blue-400/30"
-                  )}>
-                    {area.category === "core" ? "Core" : "Advanced"}
+                {/* Footer */}
+                <div>
+                  {/* Skills Preview */}
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {area.skills.slice(0, 2).map((skill, skillIndex) => (
+                      <span
+                        key={skillIndex}
+                        className="text-xs px-2 py-1 bg-white/20 text-white rounded-full backdrop-blur-sm"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                    {area.skills.length > 2 && (
+                      <span className="text-xs px-2 py-1 bg-white/10 text-white/80 rounded-full">
+                        +{area.skills.length - 2}
+                      </span>
+                    )}
                   </div>
 
-                  {/* Ingredient number */}
-                  <div className={cn(
-                    "absolute -top-3 -left-3 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white border-3 border-slate-800 shadow-lg",
-                    area.category === "core" ? "bg-gradient-to-br from-green-600 to-green-700" : "bg-gradient-to-br from-blue-600 to-blue-700"
-                  )}>
-                    {area.id}
-                  </div>
-
-                  {/* Ingredient glow effect */}
-                  <div className={cn(
-                    "absolute inset-0 rounded-2xl transition-all duration-500",
-                    area.category === "core" 
-                      ? "bg-gradient-to-r from-green-600/10 to-emerald-600/10" 
-                      : "bg-gradient-to-r from-blue-600/10 to-indigo-600/10",
-                    isHovered ? "opacity-100" : "opacity-0"
-                  )} />
-
-                  {/* Content */}
-                  <div className="relative z-10">
-                    <h3 className="text-xl font-bold text-white mb-2 leading-tight">
-                      {area.title}
-                    </h3>
-                    <p className="text-sm text-slate-300 mb-4 leading-relaxed">
-                      {area.description}
-                    </p>
+                  {/* Category Badge */}
+                  <div className="flex items-center justify-between">
+                    <span className={cn(
+                      "text-xs px-3 py-1 rounded-full font-medium backdrop-blur-sm",
+                      area.category === "core" 
+                        ? "bg-green-500/20 text-green-200 border border-green-400/30" 
+                        : "bg-blue-500/20 text-blue-200 border border-blue-400/30"
+                    )}>
+                      {area.category === "core" ? "Core Skill" : "Advanced"}
+                    </span>
                     
-                    {/* Ingredient components */}
-                    <div className="flex flex-wrap gap-2">
-                      {area.skills.slice(0, 2).map((skill, skillIndex) => (
-                        <span
-                          key={skillIndex}
-                          className={cn(
-                            "text-xs px-3 py-1.5 rounded-full border transition-all duration-300",
-                            area.category === "core" 
-                              ? "bg-green-600/20 text-green-300 border-green-500/30 hover:bg-green-600/30" 
-                              : "bg-blue-600/20 text-blue-300 border-blue-500/30 hover:bg-blue-600/30"
-                          )}
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                      {area.skills.length > 2 && (
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-slate-700/50 text-slate-400 border border-slate-600/50">
-                          +{area.skills.length - 2}
-                        </span>
-                      )}
+                    {/* Plus Icon */}
+                    <div className={cn(
+                      "w-8 h-8 rounded-full bg-white/20 flex items-center justify-center transition-all duration-300",
+                      hoveredCard === index ? "scale-110 bg-white/30" : ""
+                    )}>
+                      <Target className="w-4 h-4 text-white" />
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-
-          {/* Ambient particles */}
-          <div className="absolute inset-0 pointer-events-none">
-            {Array.from({ length: 30 }).map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-blue-400/20 rounded-full animate-pulse"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${2 + Math.random() * 3}s`
-                }}
-              />
-            ))}
-          </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         {/* Legend */}
         <div className="flex justify-center gap-8 mt-12">
           <div className="flex items-center gap-3 px-4 py-2 bg-slate-800/40 rounded-full border border-slate-700/30">
             <div className="w-3 h-3 rounded-full bg-green-400" />
-            <span className="text-sm text-slate-300">Core Competencies</span>
+            <span className="text-sm text-slate-300">Core Skills</span>
           </div>
           <div className="flex items-center gap-3 px-4 py-2 bg-slate-800/40 rounded-full border border-slate-700/30">
             <div className="w-3 h-3 rounded-full bg-blue-400" />
-            <span className="text-sm text-slate-300">Advanced Specializations</span>
+            <span className="text-sm text-slate-300">Advanced Skills</span>
           </div>
         </div>
       </div>
