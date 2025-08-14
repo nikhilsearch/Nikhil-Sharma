@@ -1,230 +1,240 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import { 
-  BarChart3, 
-  Search, 
-  Target, 
-  TrendingUp, 
-  Link, 
-  Bug, 
-  FileText, 
-  Rocket, 
-  PieChart, 
-  Bot, 
-  Sparkles, 
-  Brain, 
-  Palette, 
-  BarChart2, 
-  Heart,
-  Tag,
-  ArrowRight
-} from "lucide-react";
 
 const ToolsMindMap = () => {
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
-  const centralNode = {
-    name: "SEO Growth Strategy",
-    description: "Comprehensive approach to organic growth"
+  const skills = [
+    { name: "Search Engine Optimization (SEO)", level: 95, color: "#10b981" },
+    { name: "Content Marketing", level: 90, color: "#3b82f6" },
+    { name: "Technical SEO", level: 93, color: "#8b5cf6" },
+    { name: "Analytics & Reporting", level: 88, color: "#f59e0b" },
+    { name: "Local SEO", level: 85, color: "#ef4444" },
+    { name: "Keyword Research", level: 92, color: "#06b6d4" },
+    { name: "AI SEO Tools", level: 87, color: "#84cc16" },
+    { name: "Strategic Planning", level: 90, color: "#f97316" }
+  ];
+
+  const centerX = 300;
+  const centerY = 300;
+  const maxRadius = 180;
+  const gridLevels = 5;
+
+  // Generate points for the skill polygon
+  const getSkillPoints = () => {
+    return skills.map((skill, index) => {
+      const angle = (index * 2 * Math.PI) / skills.length - Math.PI / 2;
+      const radius = (skill.level / 100) * maxRadius;
+      const x = centerX + Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius;
+      return { x, y, skill };
+    });
   };
 
-  const stepNodes = [
-    {
-      id: "step1",
-      name: "Step 1: Technical Foundation",
-      description: "Site optimization and performance",
-      tools: ["Google Search Console", "Screaming Frog", "GTM"]
-    },
-    {
-      id: "step2", 
-      name: "Step 2: Keyword Research",
-      description: "Strategic keyword analysis",
-      tools: ["SEMrush", "Ahrefs", "Google Keyword Planner"]
-    },
-    {
-      id: "step3",
-      name: "Step 3: Content Optimization", 
-      description: "Content creation and optimization",
-      tools: ["WordPress", "Canva", "ChatGPT"]
-    },
-    {
-      id: "action",
-      name: "Action Plan: Analytics & Tracking",
-      description: "Performance monitoring and reporting",
-      tools: ["Google Analytics", "Looker Studio", "Power BI"]
-    }
-  ];
+  // Generate grid circles
+  const getGridCircles = () => {
+    return Array.from({ length: gridLevels }, (_, i) => {
+      const radius = ((i + 1) / gridLevels) * maxRadius;
+      return radius;
+    });
+  };
 
-  const strategyNodes = [
-    {
-      id: "targeted",
-      name: "Targeted Approach",
-      description: "Focus on high-impact opportunities"
-    },
-    {
-      id: "helpful", 
-      name: "Be Genuinely Helpful",
-      description: "Create valuable user experiences"
-    },
-    {
-      id: "shareable",
-      name: "Create Shareable Tools", 
-      description: "Build resources that attract links"
-    },
-    {
-      id: "partner",
-      name: "Partner with Others",
-      description: "Collaborate for mutual growth"
-    }
-  ];
+  // Generate axis lines and labels
+  const getAxisLines = () => {
+    return skills.map((skill, index) => {
+      const angle = (index * 2 * Math.PI) / skills.length - Math.PI / 2;
+      const x = centerX + Math.cos(angle) * (maxRadius + 40);
+      const y = centerY + Math.sin(angle) * (maxRadius + 40);
+      const lineX = centerX + Math.cos(angle) * maxRadius;
+      const lineY = centerY + Math.sin(angle) * maxRadius;
+      
+      return {
+        skill,
+        labelX: x,
+        labelY: y,
+        lineX,
+        lineY,
+        angle: angle * (180 / Math.PI)
+      };
+    });
+  };
+
+  const skillPoints = getSkillPoints();
+  const gridCircles = getGridCircles();
+  const axisLines = getAxisLines();
+
+  // Create path string for the skill polygon
+  const pathString = skillPoints
+    .map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x} ${point.y}`)
+    .join(' ') + ' Z';
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-slate-900 to-slate-800 text-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/10">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">My SEO</span>{" "}
-            <span className="text-white">Process</span>
+            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Skills</span>{" "}
+            <span className="text-foreground">Radar</span>
           </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-            A strategic approach to SEO that drives sustainable organic growth through proven methodologies
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            My expertise levels across different SEO and digital marketing domains
           </p>
         </div>
 
-        <div className="relative h-[600px] flex items-center">
-          {/* SVG for curved connections */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
-            {/* Central to steps connections */}
-            {stepNodes.map((step, index) => {
-              const startX = 280;
-              const startY = 300;
-              const endX = 650;
-              const endY = 120 + (index * 100);
-              
-              const controlX1 = startX + 100;
-              const controlY1 = startY;
-              const controlX2 = endX - 100;
-              const controlY2 = endY;
-
-              return (
-                <path
-                  key={step.id}
-                  d={`M ${startX} ${startY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${endX} ${endY}`}
-                  stroke="rgba(148, 163, 184, 0.4)"
-                  strokeWidth={hoveredNode === step.id ? "3" : "2"}
+        <div className="flex justify-center mb-12">
+          <div className="relative">
+            <svg
+              ref={svgRef}
+              width="600"
+              height="600"
+              viewBox="0 0 600 600"
+              className="filter drop-shadow-lg"
+            >
+              {/* Grid circles */}
+              {gridCircles.map((radius, index) => (
+                <circle
+                  key={index}
+                  cx={centerX}
+                  cy={centerY}
+                  r={radius}
                   fill="none"
-                  className="transition-all duration-300"
+                  stroke="hsl(var(--border))"
+                  strokeWidth="1"
+                  opacity="0.3"
                 />
-              );
-            })}
+              ))}
 
-            {/* Steps to strategy connections */}
-            {strategyNodes.map((strategy, index) => {
-              const startX = 900;
-              const startY = 120 + (Math.floor(index / 2) * 200);
-              const endX = 1150;
-              const endY = 150 + (index * 80);
-              
-              const controlX1 = startX + 80;
-              const controlY1 = startY;
-              const controlX2 = endX - 80;
-              const controlY2 = endY;
+              {/* Axis lines */}
+              {axisLines.map((axis, index) => (
+                <g key={index}>
+                  <line
+                    x1={centerX}
+                    y1={centerY}
+                    x2={axis.lineX}
+                    y2={axis.lineY}
+                    stroke="hsl(var(--border))"
+                    strokeWidth="1"
+                    opacity="0.3"
+                  />
+                  {/* Skill level dots */}
+                  <circle
+                    cx={skillPoints[index].x}
+                    cy={skillPoints[index].y}
+                    r="6"
+                    fill={axis.skill.color}
+                    className="cursor-pointer transition-all duration-300"
+                    onMouseEnter={() => setHoveredSkill(axis.skill.name)}
+                    onMouseLeave={() => setHoveredSkill(null)}
+                    style={{
+                      transform: hoveredSkill === axis.skill.name ? 'scale(1.5)' : 'scale(1)',
+                      transformOrigin: `${skillPoints[index].x}px ${skillPoints[index].y}px`
+                    }}
+                  />
+                </g>
+              ))}
 
-              return (
-                <path
-                  key={strategy.id}
-                  d={`M ${startX} ${startY} C ${controlX1} ${controlY1}, ${controlX2} ${controlY2}, ${endX} ${endY}`}
-                  stroke="rgba(34, 197, 94, 0.4)"
-                  strokeWidth={hoveredNode === strategy.id ? "3" : "2"}
-                  fill="none"
-                  className="transition-all duration-300"
+              {/* Skill polygon */}
+              <path
+                d={pathString}
+                fill="hsl(var(--primary))"
+                fillOpacity="0.2"
+                stroke="hsl(var(--primary))"
+                strokeWidth="2"
+                className="transition-all duration-500"
+              />
+
+              {/* Skill labels */}
+              {axisLines.map((axis, index) => {
+                const isHovered = hoveredSkill === axis.skill.name;
+                return (
+                  <g key={index}>
+                    <text
+                      x={axis.labelX}
+                      y={axis.labelY}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className={`text-sm font-medium transition-all duration-300 cursor-pointer ${
+                        isHovered ? 'text-primary' : 'text-foreground'
+                      }`}
+                      onMouseEnter={() => setHoveredSkill(axis.skill.name)}
+                      onMouseLeave={() => setHoveredSkill(null)}
+                      style={{
+                        fontSize: isHovered ? '14px' : '12px',
+                        fontWeight: isHovered ? '600' : '500'
+                      }}
+                    >
+                      {axis.skill.name}
+                    </text>
+                    {/* Skill level percentage */}
+                    <text
+                      x={axis.labelX}
+                      y={axis.labelY + (isHovered ? 18 : 16)}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="text-xs text-muted-foreground"
+                      style={{
+                        opacity: isHovered ? 1 : 0.7,
+                        fontSize: isHovered ? '11px' : '10px'
+                      }}
+                    >
+                      {axis.skill.level}%
+                    </text>
+                  </g>
+                );
+              })}
+
+              {/* Center point */}
+              <circle
+                cx={centerX}
+                cy={centerY}
+                r="4"
+                fill="hsl(var(--primary))"
+                className="animate-pulse"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Legend */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          {skills.map((skill, index) => (
+            <Card
+              key={index}
+              className={`p-4 cursor-pointer transition-all duration-300 ${
+                hoveredSkill === skill.name
+                  ? 'bg-primary/10 border-primary/50 scale-105'
+                  : 'bg-card/30 backdrop-blur-md border-border/30'
+              }`}
+              onMouseEnter={() => setHoveredSkill(skill.name)}
+              onMouseLeave={() => setHoveredSkill(null)}
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-4 h-4 rounded-full"
+                  style={{ backgroundColor: skill.color }}
                 />
-              );
-            })}
-          </svg>
-
-          {/* Central Node */}
-          <div 
-            className="absolute left-[50px] top-1/2 transform -translate-y-1/2 z-10"
-            onMouseEnter={() => setHoveredNode("central")}
-            onMouseLeave={() => setHoveredNode(null)}
-          >
-            <Card className="w-[200px] p-4 bg-slate-700/80 backdrop-blur-md border border-slate-600 hover:border-blue-400 transition-all duration-300 cursor-pointer">
-              <div className="text-center">
-                <Target className="w-8 h-8 mx-auto mb-2 text-blue-400" />
-                <h3 className="font-semibold text-white mb-1">{centralNode.name}</h3>
-                <p className="text-xs text-slate-300">{centralNode.description}</p>
+                <div>
+                  <div className="text-sm font-medium text-foreground">
+                    {skill.name.split(' ').slice(0, 2).join(' ')}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {skill.level}% Proficiency
+                  </div>
+                </div>
               </div>
             </Card>
-          </div>
-
-          {/* Step Nodes */}
-          {stepNodes.map((step, index) => (
-            <div
-              key={step.id}
-              className="absolute z-10"
-              style={{
-                left: `${600}px`,
-                top: `${70 + (index * 100)}px`
-              }}
-              onMouseEnter={() => setHoveredNode(step.id)}
-              onMouseLeave={() => setHoveredNode(null)}
-            >
-              <Card className={`w-[250px] p-4 bg-slate-700/80 backdrop-blur-md border border-slate-600 hover:border-blue-400 transition-all duration-300 cursor-pointer ${
-                hoveredNode === step.id ? 'scale-105 border-blue-400' : ''
-              }`}>
-                <div className="flex items-center gap-3">
-                  <ArrowRight className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-white text-sm mb-1">{step.name}</h3>
-                    <p className="text-xs text-slate-300 mb-2">{step.description}</p>
-                    <div className="flex flex-wrap gap-1">
-                      {step.tools.slice(0, 3).map((tool) => (
-                        <span key={tool} className="text-[10px] px-2 py-1 bg-blue-500/20 text-blue-300 rounded-full">
-                          {tool}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </div>
-          ))}
-
-          {/* Strategy Nodes */}
-          {strategyNodes.map((strategy, index) => (
-            <div
-              key={strategy.id}
-              className="absolute z-10"
-              style={{
-                left: `${1100}px`,
-                top: `${100 + (index * 80)}px`
-              }}
-              onMouseEnter={() => setHoveredNode(strategy.id)}
-              onMouseLeave={() => setHoveredNode(null)}
-            >
-              <Card className={`w-[200px] p-3 bg-green-900/30 backdrop-blur-md border border-green-600/50 hover:border-green-400 transition-all duration-300 cursor-pointer ${
-                hoveredNode === strategy.id ? 'scale-105 border-green-400' : ''
-              }`}>
-                <div className="flex items-center gap-2">
-                  <ArrowRight className="w-4 h-4 text-green-400 flex-shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-white text-sm mb-1">{strategy.name}</h3>
-                    <p className="text-xs text-green-100">{strategy.description}</p>
-                  </div>
-                </div>
-              </Card>
-            </div>
           ))}
         </div>
 
-        {/* Bottom description */}
+        {/* Description */}
         <div className="text-center mt-12">
-          <p className="text-lg text-slate-300 mb-4">
-            <span className="font-semibold text-blue-400">Strategic SEO Implementation</span>
+          <p className="text-lg text-muted-foreground mb-4">
+            <span className="font-semibold text-primary">Comprehensive SEO Expertise</span>
           </p>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            Every project follows this proven framework, ensuring consistent results and sustainable growth through data-driven decision making.
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            This radar chart visualizes my proficiency levels across key SEO and digital marketing domains, 
+            showcasing a well-rounded skill set built through years of hands-on experience.
           </p>
         </div>
       </div>
