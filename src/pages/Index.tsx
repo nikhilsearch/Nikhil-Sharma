@@ -4,6 +4,7 @@ import Experience from "@/components/Experience";
 import ToolsMindMap from "@/components/ToolsMindMap";
 import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <ToolsMindMap />
       <CaseStudies />
       <Testimonials />
+      <Footer />
     </div>
   );
 };
