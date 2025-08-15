@@ -190,24 +190,6 @@ const ToolsMindMap = () => {
                     >
                       {axis.tool.name}
                     </text>
-                    {/* Show value on hover */}
-                    {isHovered && (
-                      <text
-                        x={axis.labelX}
-                        y={axis.labelY + 20}
-                        textAnchor={isRightSide ? "start" : "end"}
-                        dominantBaseline="middle"
-                        className="text-xs transition-all duration-300"
-                        style={{
-                          fill: "hsl(var(--primary))",
-                          fontFamily: "sans-serif",
-                          fontSize: "12px",
-                          fontWeight: "600"
-                        }}
-                      >
-                        {axis.tool.value}/10
-                      </text>
-                    )}
                   </g>
                 );
               })}
@@ -229,10 +211,10 @@ const ToolsMindMap = () => {
           {tools.map((tool, index) => (
             <Card
               key={index}
-              className={`p-4 cursor-pointer transition-all duration-500 ease-out ${
+              className={`p-4 cursor-pointer transition-all duration-500 ease-out transform ${
                 hoveredTool === tool.name
-                  ? 'bg-primary/10 border-primary/50 scale-105 -translate-y-1 shadow-xl'
-                  : 'bg-card/30 backdrop-blur-md border-border/30 hover:scale-102'
+                  ? 'bg-primary/10 border-primary/50 scale-110 -translate-y-2 shadow-xl'
+                  : 'bg-card/30 backdrop-blur-md border-border/30 hover:scale-105'
               }`}
               onMouseEnter={() => setHoveredTool(tool.name)}
               onMouseLeave={() => setHoveredTool(null)}
@@ -250,9 +232,6 @@ const ToolsMindMap = () => {
                 <div>
                   <div className="text-sm font-medium text-foreground">
                     {tool.name}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    {tool.value}/10 • Proficiency
                   </div>
                 </div>
               </div>
