@@ -1,28 +1,29 @@
 import { Card } from "@/components/ui/card";
+import { Search, BarChart3, Tag, Bug, Link, TrendingUp, Moon, Lightbulb, Crown, PieChart, FileSpreadsheet, MessageSquare, Brain, Zap, Sparkles, Gem } from "lucide-react";
 
 const ToolsMindMap = () => {
   const tools = [
     // SEO Tools
-    { name: "Google Search Console", icon: "🔍", category: "SEO" },
-    { name: "Google Analytics", icon: "📊", category: "SEO" },
-    { name: "Google Tag Manager", icon: "🏷️", category: "SEO" },
-    { name: "Screaming Frog", icon: "🐸", category: "SEO" },
-    { name: "Ahrefs", icon: "🔗", category: "SEO" },
-    { name: "Semrush", icon: "📈", category: "SEO" },
-    { name: "Lumar", icon: "🌙", category: "SEO" },
-    { name: "Sitebulb", icon: "💡", category: "SEO" },
-    { name: "Moz", icon: "🦁", category: "SEO" },
+    { name: "Google Search Console", icon: Search, category: "SEO" },
+    { name: "Google Analytics", icon: BarChart3, category: "SEO" },
+    { name: "Google Tag Manager", icon: Tag, category: "SEO" },
+    { name: "Screaming Frog", icon: Bug, category: "SEO" },
+    { name: "Ahrefs", icon: Link, category: "SEO" },
+    { name: "Semrush", icon: TrendingUp, category: "SEO" },
+    { name: "Lumar", icon: Moon, category: "SEO" },
+    { name: "Sitebulb", icon: Lightbulb, category: "SEO" },
+    { name: "Moz", icon: Crown, category: "SEO" },
     
     // Analytics & Data
-    { name: "Looker Studio", icon: "📊", category: "Analytics" },
-    { name: "Google Sheets", icon: "📝", category: "Analytics" },
+    { name: "Looker Studio", icon: PieChart, category: "Analytics" },
+    { name: "Google Sheets", icon: FileSpreadsheet, category: "Analytics" },
     
     // AI Tools
-    { name: "ChatGPT", icon: "🤖", category: "AI" },
-    { name: "Claude", icon: "🧠", category: "AI" },
-    { name: "Perplexity", icon: "🔎", category: "AI" },
-    { name: "Gemini", icon: "✨", category: "AI" },
-    { name: "Jules", icon: "💎", category: "AI" }
+    { name: "ChatGPT", icon: MessageSquare, category: "AI" },
+    { name: "Claude", icon: Brain, category: "AI" },
+    { name: "Perplexity", icon: Zap, category: "AI" },
+    { name: "Gemini", icon: Sparkles, category: "AI" },
+    { name: "Jules", icon: Gem, category: "AI" }
   ];
 
   const getCategoryColor = (category: string) => {
@@ -55,59 +56,32 @@ const ToolsMindMap = () => {
           </p>
         </header>
 
-        {/* Tools by Category */}
-        <div className="space-y-12">
-          {categories.map((category) => (
-            <div key={category.name}>
-              <div className="flex items-center gap-3 mb-6">
-                <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${category.color} flex items-center justify-center`}>
-                  <span className="text-white font-bold text-sm">{category.tools.length}</span>
+        {/* Tools Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {tools.map((tool) => {
+            const IconComponent = tool.icon;
+            return (
+              <Card 
+                key={tool.name} 
+                className="group relative p-6 bg-card hover:bg-card/80 border border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+              >
+                {/* Gradient overlay on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor(tool.category)} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-lg`} />
+                
+                <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+                  {/* Icon */}
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getCategoryColor(tool.category)} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <IconComponent className="w-6 h-6 text-white" />
+                  </div>
+                  
+                  {/* Tool name */}
+                  <h4 className="font-semibold text-foreground text-sm leading-tight group-hover:text-primary transition-colors duration-300">
+                    {tool.name}
+                  </h4>
                 </div>
-                <h3 className="text-2xl font-bold text-foreground">{category.name}</h3>
-              </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {category.tools.map((tool) => (
-                  <Card 
-                    key={tool.name} 
-                    className="group relative p-6 bg-card hover:bg-card/80 border border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
-                  >
-                    {/* Gradient overlay on hover */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-lg`} />
-                    
-                    <div className="relative z-10 flex flex-col items-center text-center space-y-3">
-                      {/* Icon */}
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                        <span className="text-xl text-white">{tool.icon}</span>
-                      </div>
-                      
-                      {/* Tool name */}
-                      <h4 className="font-semibold text-foreground text-sm leading-tight group-hover:text-primary transition-colors duration-300">
-                        {tool.name}
-                      </h4>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Summary Stats */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {categories.map((category) => (
-            <Card key={category.name} className="p-6 bg-card/50 backdrop-blur-sm border border-border/30 text-center">
-              <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center shadow-lg`}>
-                <span className="text-2xl text-white font-bold">{category.tools.length}</span>
-              </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">{category.name} Tools</h3>
-              <p className="text-muted-foreground text-sm">
-                {category.name === "SEO" && "Search optimization & technical analysis"}
-                {category.name === "Analytics" && "Data visualization & reporting"}
-                {category.name === "AI" && "Artificial intelligence & automation"}
-              </p>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>
