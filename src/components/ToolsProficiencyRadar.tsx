@@ -13,17 +13,19 @@ const ToolsProficiencyRadar = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const tools: Tool[] = [
-    { name: 'Google Search Console', proficiency: 95, category: 'seo' },
-    { name: 'Google Analytics', proficiency: 90, category: 'analytics' },
-    { name: 'Screaming Frog', proficiency: 88, category: 'seo' },
-    { name: 'Ahrefs', proficiency: 92, category: 'seo' },
-    { name: 'SEMrush', proficiency: 85, category: 'seo' },
-    { name: 'Looker Studio', proficiency: 87, category: 'analytics' },
-    { name: 'ChatGPT', proficiency: 95, category: 'ai' },
-    { name: 'Gemini', proficiency: 88, category: 'ai' },
+    { name: 'Google Search Console', proficiency: 100, category: 'seo' },
+    { name: 'Google Analytics', proficiency: 80, category: 'analytics' },
+    { name: 'Google Tag Manager', proficiency: 70, category: 'analytics' },
+    { name: 'Screaming Frog', proficiency: 90, category: 'seo' },
+    { name: 'Looker Studio', proficiency: 80, category: 'analytics' },
+    { name: 'Ahrefs', proficiency: 90, category: 'seo' },
+    { name: 'Semrush', proficiency: 80, category: 'seo' },
+    { name: 'Google Sheets', proficiency: 80, category: 'analytics' },
+    { name: 'ChatGPT', proficiency: 90, category: 'ai' },
+    { name: 'Perplexity', proficiency: 90, category: 'ai' },
     { name: 'Claude', proficiency: 90, category: 'ai' },
-    { name: 'Moz', proficiency: 82, category: 'seo' },
-    { name: 'Lumar', proficiency: 78, category: 'seo' }
+    { name: 'Lumar', proficiency: 70, category: 'seo' },
+    { name: 'Sitebulb', proficiency: 70, category: 'seo' }
   ];
 
   useEffect(() => {
