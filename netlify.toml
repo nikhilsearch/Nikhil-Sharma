@@ -1,0 +1,52 @@
+# Netlify configuration for dynamic rendering with Rendertron
+# Based on Google's guidelines: https://developers.google.com/search/blog/2019/01/dynamic-rendering-with-rendertron
+
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+# Edge function for bot detection and dynamic rendering
+[[edge_functions]]
+  path = "/*"
+  function = "dynamic-render"
+
+# Bot user agents that should get prerendered content
+[context.production.environment]
+  RENDERTRON_URL = "https://render-tron.appspot.com/render"
+  
+# Redirect rules for dynamic rendering
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/dynamic-render"
+  status = 200
+  conditions = {User-Agent = "googlebot,bingbot,slurp,duckduckbot,baiduspider,yandexbot,sogou,exabot,facebookexternalhit,twitterbot,whatsapp,skypeuripreview,linkedinbot,embedly,quora link preview,showyoubot,outbrain,pinterest,developers.google.com/+/web/snippet,tumblr,bitlybot,nuzzel,discordbot,google page speed,qwantify,pinterestbot,applebot,flipboard,lighthouse"}
+  force = true
+
+# Headers for better SEO and caching
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Prerender configuration
+[plugins]
+  [[plugins]]
+    package = "@netlify/plugin-prerender"
+    [plugins.inputs]
+      rendererUrl = "https://render-tron.appspot.com/render"
+      crawl = true
+      routes = ["/"]
