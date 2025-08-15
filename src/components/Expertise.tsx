@@ -120,23 +120,23 @@ const Expertise = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/10">
+    <section className="py-12 md:py-20 px-4 bg-gradient-to-b from-background to-muted/10">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
+        <header className="text-center mb-12 md:mb-16">
+          <h2 className="text-2xl md:text-4xl font-bold mb-4">
             <span className="text-foreground">What I Bring to the</span>{" "}
             <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Table</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Comprehensive SEO solutions that drive organic growth and deliver measurable results
           </p>
-        </div>
+        </header>
         
 
         {/* SEO Skills Framework Header */}
-        <div className="text-center mb-12">
-          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-md mx-auto">
-            <h3 className="text-3xl font-bold text-foreground">SEO Skills Framework</h3>
+        <div className="text-center mb-8 md:mb-12">
+          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-sm md:max-w-md mx-auto">
+            <h3 className="text-xl md:text-3xl font-bold text-foreground">SEO Skills Framework</h3>
           </div>
         </div>
 
@@ -146,26 +146,26 @@ const Expertise = () => {
         </div>
 
         {/* Core and Advanced Skills Categories */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 mb-12 md:mb-16">
           
           {/* Core Skills Section */}
-          <div className="space-y-8">
-            <div className="text-center">
-              <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300">
-                <h3 className="text-2xl font-bold text-foreground">Core Skills</h3>
+          <section className="space-y-6 md:space-y-8">
+            <header className="text-center">
+              <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300">
+                <h3 className="text-lg md:text-2xl font-bold text-foreground">Core Skills</h3>
               </div>
-              {/* Connecting Line */}
-              <div className="flex justify-center my-6">
+              {/* Connecting Line - Hidden on mobile for cleaner look */}
+              <div className="hidden md:flex justify-center my-6">
                 <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
               </div>
-            </div>
+            </header>
             
             {/* Core Skills Cards */}
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {expertiseAreas.filter(area => area.category === "core").map((area, index) => (
-                <div 
+                <article 
                   key={area.id} 
-                  className="group cursor-pointer transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-6 animate-fade-in"
+                  className="group cursor-pointer transition-all duration-500 ease-out hover:scale-105 md:hover:scale-110 hover:-translate-y-2 md:hover:-translate-y-6 animate-fade-in"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     animationFillMode: 'both'
@@ -173,9 +173,9 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-primary/20 dark:hover:shadow-primary/30 hover:border-primary/60 dark:hover:border-primary/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-primary/5 before:to-purple-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[200px]">
-                    <div className="mb-4 relative z-10">
-                      <h4 className="text-xl font-bold text-foreground mb-2">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-primary/20 dark:hover:shadow-primary/30 hover:border-primary/60 dark:hover:border-primary/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-primary/5 before:to-purple-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[160px] md:min-h-[200px]">
+                    <div className="mb-3 md:mb-4 relative z-10">
+                      <h4 className="text-lg md:text-xl font-bold text-foreground mb-2">
                         {area.title}
                       </h4>
                       <p className="text-muted-foreground text-sm leading-relaxed">
@@ -183,9 +183,9 @@ const Expertise = () => {
                       </p>
                     </div>
                     
-                    <div className="flex justify-between items-center relative z-10">
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 relative z-10">
                       <div className="flex flex-wrap gap-1">
-                        {area.skills.map((skill, skillIndex) => (
+                        {area.skills.slice(0, 3).map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
                             className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
@@ -193,35 +193,40 @@ const Expertise = () => {
                             {skill}
                           </span>
                         ))}
+                        {area.skills.length > 3 && (
+                          <span className="text-xs px-2 py-1 bg-muted/50 text-muted-foreground border border-muted/30 rounded-full">
+                            +{area.skills.length - 3} more
+                          </span>
+                        )}
                       </div>
-                      <span className="text-xs px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full font-medium">
+                      <span className="text-xs px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full font-medium self-start md:self-auto">
                         Core Skill
                       </span>
                     </div>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
-          </div>
+          </section>
 
           {/* Advanced Skills Section */}
-          <div className="space-y-8">
-            <div className="text-center">
-              <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
-                <h3 className="text-2xl font-bold text-foreground">Advanced Skills</h3>
+          <section className="space-y-6 md:space-y-8">
+            <header className="text-center">
+              <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+                <h3 className="text-lg md:text-2xl font-bold text-foreground">Advanced Skills</h3>
               </div>
-              {/* Connecting Line */}
-              <div className="flex justify-center my-6">
+              {/* Connecting Line - Hidden on mobile for cleaner look */}
+              <div className="hidden md:flex justify-center my-6">
                 <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
               </div>
-            </div>
+            </header>
             
             {/* Advanced Skills Cards */}
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {expertiseAreas.filter(area => area.category === "advanced").map((area, index) => (
-                <div 
+                <article 
                   key={area.id} 
-                  className="group cursor-pointer transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-6 animate-fade-in"
+                  className="group cursor-pointer transition-all duration-500 ease-out hover:scale-105 md:hover:scale-110 hover:-translate-y-2 md:hover:-translate-y-6 animate-fade-in"
                   style={{
                     animationDelay: `${(index + 4) * 0.1}s`,
                     animationFillMode: 'both'
@@ -229,9 +234,9 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/30 hover:border-blue-500/60 dark:hover:border-blue-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-blue-500/5 before:to-cyan-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[200px]">
-                    <div className="mb-4 relative z-10">
-                      <h4 className="text-xl font-bold text-foreground mb-2">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/30 hover:border-blue-500/60 dark:hover:border-blue-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-blue-500/5 before:to-cyan-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[160px] md:min-h-[200px]">
+                    <div className="mb-3 md:mb-4 relative z-10">
+                      <h4 className="text-lg md:text-xl font-bold text-foreground mb-2">
                         {area.title}
                       </h4>
                       <p className="text-muted-foreground text-sm leading-relaxed">
@@ -239,9 +244,9 @@ const Expertise = () => {
                       </p>
                     </div>
                     
-                    <div className="flex justify-between items-center relative z-10">
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 relative z-10">
                       <div className="flex flex-wrap gap-1">
-                        {area.skills.map((skill, skillIndex) => (
+                        {area.skills.slice(0, 3).map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
                             className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
@@ -249,20 +254,25 @@ const Expertise = () => {
                             {skill}
                           </span>
                         ))}
+                        {area.skills.length > 3 && (
+                          <span className="text-xs px-2 py-1 bg-muted/50 text-muted-foreground border border-muted/30 rounded-full">
+                            +{area.skills.length - 3} more
+                          </span>
+                        )}
                       </div>
-                      <span className="text-xs px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full font-medium">
+                      <span className="text-xs px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full font-medium self-start md:self-auto">
                         Advanced
                       </span>
                     </div>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
-          </div>
+          </section>
         </div>
 
-        {/* Connecting Lines to Bottom Section */}
-        <div className="flex justify-center mb-8">
+        {/* Connecting Lines to Bottom Section - Hidden on mobile */}
+        <div className="hidden md:flex justify-center mb-8">
           <div className="relative">
             <div className="w-px h-16 bg-gradient-to-b from-white/40 to-transparent"></div>
             <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-96 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
@@ -272,17 +282,17 @@ const Expertise = () => {
         </div>
 
         {/* Integrated SEO Strategy Section */}
-        <div className="text-center">
-          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-2xl mx-auto">
-            <h3 className="text-2xl font-bold text-foreground mb-4">Integrated SEO Strategy</h3>
-            <p className="text-muted-foreground leading-relaxed">
+        <footer className="text-center mt-8 md:mt-0">
+          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-xl md:max-w-2xl mx-auto">
+            <h3 className="text-lg md:text-2xl font-bold text-foreground mb-3 md:mb-4">Integrated SEO Strategy</h3>
+            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
               Coherent search marketing approach combining core and advanced SEO tactics for comprehensive organic growth and sustainable results.
             </p>
           </div>
-        </div>
+        </footer>
 
         {/* Legend */}
-        <div className="flex justify-center gap-8 mt-12">
+        <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 mt-8 md:mt-12">
           <div className="flex items-center gap-3 px-4 py-2 bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-full shadow-lg hover:shadow-xl hover:shadow-green-500/20 transition-all duration-300">
             <div className="w-3 h-3 rounded-full bg-green-500" />
             <span className="text-sm text-muted-foreground">Core Skills</span>
