@@ -104,8 +104,9 @@ const Hero = () => {
             </a>
             
             <a
-              href="/resume.pdf"
-              download
+              href="https://drive.google.com/file/d/1-1CNRcXNFg0bPG2fHRVenlz3uYm1lzFm/view"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-purple-400 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary/25 transform hover:-translate-y-1"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
