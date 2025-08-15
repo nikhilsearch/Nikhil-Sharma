@@ -135,7 +135,7 @@ const Expertise = () => {
 
         {/* SEO Skills Framework Header */}
         <div className="text-center mb-12">
-          <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl max-w-md mx-auto">
+          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-md mx-auto">
             <h3 className="text-3xl font-bold text-foreground">SEO Skills Framework</h3>
           </div>
         </div>
@@ -151,7 +151,7 @@ const Expertise = () => {
           {/* Core Skills Section */}
           <div className="space-y-8">
             <div className="text-center">
-              <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+              <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300">
                 <h3 className="text-2xl font-bold text-foreground">Core Skills</h3>
               </div>
               {/* Connecting Line */}
@@ -173,8 +173,8 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px] group-hover:shadow-2xl group-hover:shadow-primary/30 group-hover:border-primary/50 group-hover:bg-card/60 group-hover:backdrop-blur-lg transition-all duration-500 ease-out">
-                    <div className="mb-4">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-primary/20 dark:hover:shadow-primary/30 hover:border-primary/60 dark:hover:border-primary/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-primary/5 before:to-purple-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[200px]">
+                    <div className="mb-4 relative z-10">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
                       </h4>
@@ -183,7 +183,7 @@ const Expertise = () => {
                       </p>
                     </div>
                     
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center relative z-10">
                       <div className="flex flex-wrap gap-1">
                         {area.skills.map((skill, skillIndex) => (
                           <span
@@ -207,7 +207,7 @@ const Expertise = () => {
           {/* Advanced Skills Section */}
           <div className="space-y-8">
             <div className="text-center">
-              <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+              <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
                 <h3 className="text-2xl font-bold text-foreground">Advanced Skills</h3>
               </div>
               {/* Connecting Line */}
@@ -229,8 +229,8 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px] group-hover:shadow-2xl group-hover:shadow-blue-500/30 group-hover:border-blue-500/50 group-hover:bg-card/60 group-hover:backdrop-blur-lg transition-all duration-500 ease-out">
-                    <div className="mb-4">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-2xl p-8 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/30 hover:border-blue-500/60 dark:hover:border-blue-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-2xl before:bg-gradient-to-r before:from-blue-500/5 before:to-cyan-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[200px]">
+                    <div className="mb-4 relative z-10">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
                       </h4>
@@ -239,7 +239,7 @@ const Expertise = () => {
                       </p>
                     </div>
                     
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center relative z-10">
                       <div className="flex flex-wrap gap-1">
                         {area.skills.map((skill, skillIndex) => (
                           <span
@@ -273,7 +273,7 @@ const Expertise = () => {
 
         {/* Integrated SEO Strategy Section */}
         <div className="text-center">
-          <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl max-w-2xl mx-auto">
+          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-foreground mb-4">Integrated SEO Strategy</h3>
             <p className="text-muted-foreground leading-relaxed">
               Coherent search marketing approach combining core and advanced SEO tactics for comprehensive organic growth and sustainable results.
@@ -283,11 +283,11 @@ const Expertise = () => {
 
         {/* Legend */}
         <div className="flex justify-center gap-8 mt-12">
-          <div className="flex items-center gap-3 px-4 py-2 bg-card/30 backdrop-blur-md border border-white/20 rounded-full shadow-lg">
+          <div className="flex items-center gap-3 px-4 py-2 bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-full shadow-lg hover:shadow-xl hover:shadow-green-500/20 transition-all duration-300">
             <div className="w-3 h-3 rounded-full bg-green-500" />
             <span className="text-sm text-muted-foreground">Core Skills</span>
           </div>
-          <div className="flex items-center gap-3 px-4 py-2 bg-card/30 backdrop-blur-md border border-white/20 rounded-full shadow-lg">
+          <div className="flex items-center gap-3 px-4 py-2 bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-full shadow-lg hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300">
             <div className="w-3 h-3 rounded-full bg-blue-500" />
             <span className="text-sm text-muted-foreground">Advanced Skills</span>
           </div>
