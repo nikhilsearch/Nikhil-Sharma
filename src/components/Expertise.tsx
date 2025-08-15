@@ -188,7 +188,7 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px]">
                     <div className="mb-4">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
@@ -249,7 +249,7 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px]">
                     <div className="mb-4">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
