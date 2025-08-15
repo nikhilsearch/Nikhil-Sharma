@@ -148,63 +148,162 @@ const Expertise = () => {
           ))}
         </div>
 
-        {/* Neumorphic Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {expertiseAreas.map((area, index) => (
-            <div 
-              key={index} 
-              className="group cursor-pointer transition-all duration-300 hover:scale-[1.02] animate-fade-in"
-              style={{
-                animationDelay: `${index * 0.1}s`,
-                animationFillMode: 'both'
-              }}
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              {/* Neumorphic Card */}
-              <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[350px] flex flex-col">
-                
-                {/* Card Header */}
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-foreground mb-3">
-                    {area.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {area.description}
-                  </p>
-                </div>
+        {/* SEO Skills Framework Header */}
+        <div className="text-center mb-12">
+          <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl max-w-md mx-auto">
+            <h3 className="text-3xl font-bold text-foreground">SEO Skills Framework</h3>
+          </div>
+        </div>
 
-                {/* Skills Preview */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {area.skills.slice(0, 3).map((skill, skillIndex) => (
-                    <span
-                      key={skillIndex}
-                      className="text-xs px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                  {area.skills.length > 3 && (
-                    <span className="text-xs px-3 py-1 bg-muted/20 text-muted-foreground border border-muted/20 rounded-full">
-                      +{area.skills.length - 3}
-                    </span>
-                  )}
-                </div>
+        {/* Connecting Line from Header */}
+        <div className="flex justify-center mb-8">
+          <div className="w-px h-16 bg-gradient-to-b from-white/40 to-transparent"></div>
+        </div>
 
-                {/* Card Footer */}
-                <div className="mt-auto">
-                  <span className={cn(
-                    "text-xs px-3 py-1 rounded-full font-medium",
-                    area.category === "core" 
-                      ? "bg-green-500/10 text-green-400 border border-green-500/20" 
-                      : "bg-blue-500/10 text-blue-400 border border-blue-500/20"
-                  )}>
-                    {area.category === "core" ? "Core Skill" : "Advanced"}
-                  </span>
-                </div>
+        {/* Core and Advanced Skills Categories */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
+          
+          {/* Core Skills Section */}
+          <div className="space-y-8">
+            <div className="text-center">
+              <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+                <h3 className="text-2xl font-bold text-foreground">Core Skills</h3>
+              </div>
+              {/* Connecting Line */}
+              <div className="flex justify-center my-6">
+                <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
               </div>
             </div>
-          ))}
+            
+            {/* Core Skills Cards */}
+            <div className="space-y-6">
+              {expertiseAreas.filter(area => area.category === "core").map((area, index) => (
+                <div 
+                  key={area.id} 
+                  className="group cursor-pointer transition-all duration-300 hover:scale-[1.02] animate-fade-in"
+                  style={{
+                    animationDelay: `${index * 0.1}s`,
+                    animationFillMode: 'both'
+                  }}
+                  onMouseEnter={() => setHoveredCard(area.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+                    <div className="mb-4">
+                      <h4 className="text-xl font-bold text-foreground mb-2">
+                        {area.title}
+                      </h4>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {area.description}
+                      </p>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="flex flex-wrap gap-1">
+                        {area.skills.slice(0, 2).map((skill, skillIndex) => (
+                          <span
+                            key={skillIndex}
+                            className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {area.skills.length > 2 && (
+                          <span className="text-xs px-2 py-1 bg-muted/20 text-muted-foreground border border-muted/20 rounded-full">
+                            +{area.skills.length - 2}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-xs px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full font-medium">
+                        Core Skill
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Advanced Skills Section */}
+          <div className="space-y-8">
+            <div className="text-center">
+              <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+                <h3 className="text-2xl font-bold text-foreground">Advanced Skills</h3>
+              </div>
+              {/* Connecting Line */}
+              <div className="flex justify-center my-6">
+                <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
+              </div>
+            </div>
+            
+            {/* Advanced Skills Cards */}
+            <div className="space-y-6">
+              {expertiseAreas.filter(area => area.category === "advanced").map((area, index) => (
+                <div 
+                  key={area.id} 
+                  className="group cursor-pointer transition-all duration-300 hover:scale-[1.02] animate-fade-in"
+                  style={{
+                    animationDelay: `${(index + 4) * 0.1}s`,
+                    animationFillMode: 'both'
+                  }}
+                  onMouseEnter={() => setHoveredCard(area.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-xl">
+                    <div className="mb-4">
+                      <h4 className="text-xl font-bold text-foreground mb-2">
+                        {area.title}
+                      </h4>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {area.description}
+                      </p>
+                    </div>
+                    
+                    <div className="flex justify-between items-center">
+                      <div className="flex flex-wrap gap-1">
+                        {area.skills.slice(0, 2).map((skill, skillIndex) => (
+                          <span
+                            key={skillIndex}
+                            className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                        {area.skills.length > 2 && (
+                          <span className="text-xs px-2 py-1 bg-muted/20 text-muted-foreground border border-muted/20 rounded-full">
+                            +{area.skills.length - 2}
+                          </span>
+                        )}
+                      </div>
+                      <span className="text-xs px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full font-medium">
+                        Advanced
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Connecting Lines to Bottom Section */}
+        <div className="flex justify-center mb-8">
+          <div className="relative">
+            <div className="w-px h-16 bg-gradient-to-b from-white/40 to-transparent"></div>
+            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-96 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+            <div className="absolute top-8 -left-48 w-px h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
+            <div className="absolute top-8 left-48 w-px h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
+          </div>
+        </div>
+
+        {/* Integrated SEO Strategy Section */}
+        <div className="text-center">
+          <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl max-w-2xl mx-auto">
+            <h3 className="text-2xl font-bold text-foreground mb-4">Integrated SEO Strategy</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              Coherent search marketing approach combining core and advanced SEO tactics for comprehensive organic growth and sustainable results.
+            </p>
+          </div>
         </div>
 
         {/* Legend */}
