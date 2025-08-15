@@ -200,7 +200,7 @@ const Expertise = () => {
                     
                     <div className="flex justify-between items-center">
                       <div className="flex flex-wrap gap-1">
-                        {area.skills.slice(0, 2).map((skill, skillIndex) => (
+                        {area.skills.map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
                             className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
@@ -208,11 +208,6 @@ const Expertise = () => {
                             {skill}
                           </span>
                         ))}
-                        {area.skills.length > 2 && (
-                          <span className="text-xs px-2 py-1 bg-muted/20 text-muted-foreground border border-muted/20 rounded-full">
-                            +{area.skills.length - 2}
-                          </span>
-                        )}
                       </div>
                       <span className="text-xs px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full font-medium">
                         Core Skill
@@ -261,7 +256,7 @@ const Expertise = () => {
                     
                     <div className="flex justify-between items-center">
                       <div className="flex flex-wrap gap-1">
-                        {area.skills.slice(0, 2).map((skill, skillIndex) => (
+                        {area.skills.map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
                             className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
@@ -269,11 +264,6 @@ const Expertise = () => {
                             {skill}
                           </span>
                         ))}
-                        {area.skills.length > 2 && (
-                          <span className="text-xs px-2 py-1 bg-muted/20 text-muted-foreground border border-muted/20 rounded-full">
-                            +{area.skills.length - 2}
-                          </span>
-                        )}
                       </div>
                       <span className="text-xs px-3 py-1 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full font-medium">
                         Advanced
