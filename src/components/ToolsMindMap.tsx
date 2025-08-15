@@ -205,39 +205,6 @@ const ToolsMindMap = () => {
             </svg>
           </div>
         </div>
-
-        {/* Interactive Legend Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-8">
-          {tools.map((tool, index) => (
-            <Card
-              key={index}
-              className={`p-4 cursor-pointer transition-all duration-500 ease-out transform ${
-                hoveredTool === tool.name
-                  ? 'bg-primary/10 border-primary/50 scale-110 -translate-y-2 shadow-xl'
-                  : 'bg-card/30 backdrop-blur-md border-border/30 hover:scale-105'
-              }`}
-              onMouseEnter={() => setHoveredTool(tool.name)}
-              onMouseLeave={() => setHoveredTool(null)}
-              style={{
-                filter: hoveredTool === tool.name ? `drop-shadow(0 8px 20px hsl(var(--primary) / 0.3))` : 'none'
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                    hoveredTool === tool.name ? 'w-5 h-5' : ''
-                  }`}
-                  style={{ backgroundColor: "hsl(var(--primary))" }}
-                />
-                <div>
-                  <div className="text-sm font-medium text-foreground">
-                    {tool.name}
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
       </div>
     </section>
   );
