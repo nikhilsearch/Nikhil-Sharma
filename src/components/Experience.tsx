@@ -8,84 +8,63 @@ const Experience = () => {
 
   const experiences = [
     {
-      company: "Wavel AI",
-      location: "Singapore",
-      position: "SEO Lead",
-      duration: "Oct 2022 - Present",
+      company: "WaveAI",
+      location: "Singapore (Remote)",
+      position: "SEO Team Lead",
+      duration: "11/2022 - Present",
       type: "Full-time",
-      description: "Dynamic SEO Lead with 7+ years of experience driving organic growth for global brands across competitive industries.",
+      description: "Leading global SEO strategy and team across multi-domain ecosystems with expertise in international expansion and AI-driven optimization.",
       achievements: [
-        "Led and managed a cross-functional team of 5 members, comprising SEO specialists and content professionals",
-        "Designed and executed comprehensive global SEO strategy across US, APAC, and Europe regions",
-        "Developed and executed a data-driven SEO roadmap resulting in 120% increase in organic traffic",
-        "Directed comprehensive on-page SEO and technical audits, improving Core Web Vitals by 40%",
-        "Managed link-building program securing 40+ high-authority backlinks monthly"
+        "Global SEO Strategy & International Expansion: Designed and executed SEO strategies across multi-domain ecosystems (US, APAC, Europe), implementing hreflang boosting visibility across localized SERPs and alternative search engines",
+        "Technical SEO & On-Page Excellence: Led technical audits and on-page enhancements including site speed optimization, mobile-first UX, schema implementation, and signed exchange resulting in a 35% lift in Good URLs, 25% improvement in indexation, and 20% higher CTRs",
+        "SaaS Keyword Research & Content Strategy: Drove full-funnel SEO content programs with a focus on bottom-of-the-funnel keywords, cluster-based planning, and persona-aligned search intent increasing blog traffic by 120% and conversions through high-intent landing pages",
+        "AI-Driven SEO & Automation: Utilized generative AI tools (ChatGPT, Gemini, Claude, Perplexity) to streamline keyword clustering, content production, and programmatic SEO, accelerating content velocity while aligning with E-E-A-T principles",
+        "Content Strategy & Competitive Analysis: Developed SEO-driven content strategies and identified content gaps through in-depth competitor analysis, increasing blog traffic by 120% and improving keyword rankings across strategic landing pages",
+        "Cross-Functional Leadership & Scalable SEO Ops: Managed a team of 5 SEO/content specialists and collaborated with SEM, Product, and Content teams. Standardized SEO SOPs, created training playbooks, and aligned SEO with GTM and growth priorities",
+        "SEO + SEM Alignment: Partnered with Paid Search teams to create unified acquisition strategies, align messaging, and optimize budget allocation—maximizing SERP share and conversion efficiency across organic and paid channels",
+        "Product-Led Content & CRO Optimization: Created content focused on showcasing how Wavel's AI features solve real-world problems. Aligned SEO with conversion rate optimization (CRO) goals — increasing demo signups, free trial activation, and driving down CAC",
+        "Customer Acquisition & Retention SEO: Developed SEO-driven strategies to support both new user acquisition and retention — from awareness-stage content to engagement tactics that reduced churn and boosted LTV",
+        "Community Engagement & Referral Traffic Growth: Successfully leveraged public communities such as Product Hunt, driving product visibility from launch to networking support, which led to achieving \"Product of the Day\" on the platform twice. Utilized Reddit to increase referral traffic by 160%, resulting in significant growth in new users and sessions, further boosting organic traffic and user engagement"
       ],
-      skills: ["Team Leadership", "Global SEO Strategy", "Technical SEO", "Content Strategy", "Link Building"]
+      skills: ["Global SEO Strategy", "Technical SEO", "AI-Driven Automation", "Team Leadership", "Content Strategy", "Cross-functional Collaboration", "International SEO", "E-E-A-T Optimization"]
     },
     {
-      company: "Obsev",
-      location: "Udaipur",
-      position: "Tech SEO Specialist",
-      duration: "Mar 2021 - Sep 2022",
+      company: "Obbserv",
+      location: "India",
+      position: "Technical SEO Specialist",
+      duration: "03/2021 - 10/2022",
       type: "Full-time",
-      description: "Specialized in technical SEO optimization and site performance improvements for high-traffic websites.",
+      description: "Specialized in technical SEO implementation and site architecture optimization for JavaScript-heavy platforms and large-scale websites.",
       achievements: [
-        "Optimized canonicalization, internal linking, page structure, and image elements - 30% improvement in crawl efficiency",
-        "Enhanced site performance by executing advanced optimization techniques, improving load times by 40%",
-        "Expertly configured Robots.txt and XML Sitemaps, improving search engine crawlability by 25%",
-        "Implemented comprehensive eCommerce SEO strategies, optimizing 500+ products with Schema markup",
-        "Applied product schemas and Knowledge Graph optimization, boosting search engine visibility by 20%"
+        "Site Architecture, PageSpeed & Crawl Efficiency: Implemented technical SEO fixes including canonicalization, metadata structure, and internal linking—resulting in a 30% improvement in crawl efficiency. Improved Core Web Vitals and reduced LCP by 40% through advanced page speed strategies, lazy loading, and script deferrals",
+        "JavaScript SEO & Rendering Optimization: Resolved critical CSR vs. SSR issues across 1 million pages on a JavaScript-heavy EdTech platform. Enabled seamless crawling and indexing by configuring server-side rendering, enhancing Googlebot compatibility and improving indexation coverage",
+        "Sitemap & Robots.txt Protocol Optimization: Configured XML sitemaps and Robots.txt directives to enhance crawlability and guide search engine behavior. Streamlined sitemap structure to align with deep URL hierarchies, improving discovery of product and blog pages",
+        "Structured Data & Schema Markup: Deployed JSON-LD schema (Product, Article, Breadcrumb) across dynamic and eCommerce pages, enhancing SERP appearance via rich results and boosting CTR by 20%",
+        "Mobile-First & Accessibility Compliance: Ensured full mobile usability and responsiveness by resolving usability errors reported in Google Search Console. Achieved mobile-friendly compliance across all templates, improving engagement metrics and reducing bounce rate",
+        "Indexation Management & Duplicate Content Fixes: Conducted content pruning, canonical tag audits, and hreflang cleanups to avoid duplication and thin content issues. Verified indexed content using GSC and bulk indexing tools to ensure maximum crawl value on priority URLs",
+        "SEO Tools & Reporting Infrastructure: Created SEO automation tools like Crawl+, Bulk Indexing Checker, and Voice+. Developed Studio+, a Looker Studio-powered dashboard for real-time reporting of crawl stats, CWV, and indexed URL trends",
+        "Client Success & Strategic Recognition: Delivered personalized SEO growth strategies for global clients, maintaining a 95% retention rate. Recognized with the High Flyer Award (2021) and Mr. Initiator (2022) for technical innovation and AI-powered SEO automation",
+        "Team Leadership & Cross-Functional Collaboration: Led and mentored SEO professionals, improving team output by 25%. Collaborated across SEO, CRO, UX, and paid teams—driving a 50% uplift in integrated digital performance"
       ],
-      skills: ["Technical SEO", "Site Speed Optimization", "Schema Markup", "eCommerce SEO", "XML Sitemaps"]
-    },
-    {
-      company: "OPositive",
-      location: "India",
-      position: "SEO Product Lead",
-      duration: "Mar 2021 - Sep 2022",
-      type: "Contract",
-      description: "Led product development for SEO tools and automation solutions.",
-      achievements: [
-        "Developed Crawl+, a powerful sitemap audit tool capable of crawling 50,000 URLs at 56 URLs/6 seconds",
-        "Led creation of Voice+, an AI-driven voice-based site audit tool for voice search optimization",
-        "Built Bulk Indexing Checker Tool for fast URL indexing status verification on Google",
-        "Launched Studio+ SEO reporting solution integrated with Google Data Studio",
-        "Recognized as Mr. Initiator 2022 for spearheading AI-powered SEO automation projects"
-      ],
-      skills: ["Product Development", "SEO Tools", "AI Integration", "Data Studio", "Automation"]
-    },
-    {
-      company: "Techup Labs",
-      location: "India",
-      position: "SEO Consultant",
-      duration: "Jun 2023 - Dec 2023",
-      type: "Consulting",
-      description: "Provided comprehensive SEO consulting services with focus on analytics and tracking implementation.",
-      achievements: [
-        "Setup and managed comprehensive GA4 tracking for key metrics and conversion funnels",
-        "Implemented button tracking via GTM to track user interactions across website elements",
-        "Built Looker Studio dashboards integrating data from GA4 and GTM for key performance metrics",
-        "Monitored payment funnel drop-offs and social media shares via UTM parameters",
-        "Enhanced user acquisition, retention, and engagement through data-driven insights"
-      ],
-      skills: ["Google Analytics 4", "Google Tag Manager", "Looker Studio", "UTM Tracking", "Data Analysis"]
+      skills: ["Technical SEO", "JavaScript SEO", "Schema Markup", "Site Speed Optimization", "Mobile-First Indexing", "Crawl Optimization", "SEO Tools Development", "Team Leadership"]
     },
     {
       company: "Elite Info. Tech",
       location: "India",
       position: "SEO Executive",
-      duration: "Apr 2018 - Feb 2021",
+      duration: "04/2018 - 02/2021",
       type: "Full-time",
-      description: "Comprehensive SEO execution across multiple client projects and platforms.",
+      description: "Executed comprehensive SEO strategies across multiple platforms and managed diverse client portfolios with focus on technical implementation and organic growth.",
       achievements: [
-        "Led comprehensive on-page SEO strategies, improving website structure and meta tags",
-        "Conducted in-depth keyword research and optimized content for search intent",
-        "Performed detailed site audits to identify and resolve technical SEO issues",
-        "Developed and implemented strategies to control and sustain organic web traffic",
-        "Managed SEO projects for 30+ websites across WordPress, PHP, WIX, and ASP.NET platforms"
+        "On-Page Optimization: Executed comprehensive on-page SEO strategies, enhancing website architecture, meta tags, and internal linking to boost search engine visibility and improve user experience",
+        "Keyword Research & Content Optimization: Conducted in-depth keyword research and aligned content with user intent, leading to significant organic traffic growth and improved SERP rankings",
+        "Technical SEO Audits: Performed detailed site audits to identify and resolve technical issues affecting crawlability, indexation, and overall site performance, ensuring optimal search engine accessibility",
+        "Web Traffic Analysis & Growth: Developed and implemented data-driven strategies to monitor, control, and sustain organic web traffic growth by analyzing key performance metrics and user behavior",
+        "Full-Spectrum SEO Execution: Led both on-page and off-page SEO initiatives across various digital platforms, resulting in improved keyword rankings, higher engagement, and increased site authority",
+        "Project & Workflow Management: Successfully managed 30+ SEO projects and optimized over 100 websites built on platforms such as WordPress, PHP, WIX, and ASP.NET, ensuring timely delivery and high-quality execution",
+        "International SEO Experience: Oversaw SEO strategies for clients across regions including the US, Canada, UK, Europe, Australia, and Asia—tailoring campaigns to regional search trends, cultural nuances, and local algorithm updates"
       ],
-      skills: ["On-Page SEO", "Keyword Research", "Site Audits", "Multi-Platform SEO", "Project Management"]
+      skills: ["On-Page SEO", "Keyword Research", "Technical Audits", "Multi-Platform SEO", "International SEO", "Project Management", "Web Traffic Analysis"]
     }
   ];
 
