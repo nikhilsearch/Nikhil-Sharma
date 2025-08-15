@@ -58,26 +58,45 @@ const ContactForm = ({ isOpen, onOpenChange }: ContactFormProps) => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log('Form submitted:', values);
-    
-    // Reset form
-    form.reset();
-    
-    // Show thank you message
-    setShowThankYou(true);
-    
-    // Hide thank you message after 3 seconds and close dialog
-    setTimeout(() => {
-      setShowThankYou(false);
-      onOpenChange(false);
-    }, 3000);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      const response = await fetch(`https://arogadbaofjxyzlsptyw.supabase.co/functions/v1/send-contact-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
 
-    toast({
-      title: "Form submitted successfully!",
-      description: "We'll get back to you soon.",
-      duration: 3000,
-    });
+      if (!response.ok) {
+        throw new Error('Failed to send email');
+      }
+
+      // Reset form
+      form.reset();
+      
+      // Show thank you message
+      setShowThankYou(true);
+      
+      // Hide thank you message after 3 seconds and close dialog
+      setTimeout(() => {
+        setShowThankYou(false);
+        onOpenChange(false);
+      }, 3000);
+
+      toast({
+        title: "Request Submitted",
+        description: "We'll get back to you soon with your free SEO audit!",
+        duration: 3000,
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: "Failed to submit request. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleClose = () => {
