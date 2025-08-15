@@ -6,29 +6,52 @@ const StaticSnapshot = () => {
     name: "Nikhil Sharma",
     jobTitle: "Digital Marketing & SEO Specialist",
     description: "Experienced Digital Marketing Specialist with 6+ years in SEO, SEM, Social Media & AI SEO. Proven track record of boosting organic traffic by 300%+",
-    skills: [
-      "Search Engine Optimization (SEO)",
-      "Search Engine Marketing (SEM)", 
-      "Social Media Marketing",
-      "AI-Powered SEO",
-      "Content Marketing",
+    coreCompetencies: [
+      "Team Leadership",
+      "Global SEO Strategy",
+      "Technical SEO",
+      "AI-Driven Automation",
+      "Content Strategy",
+      "International SEO"
+    ],
+    tools: [
       "Google Analytics",
-      "Google Ads",
-      "Facebook Ads",
-      "Conversion Rate Optimization"
+      "Google Search Console",
+      "SEMrush",
+      "Ahrefs",
+      "Screaming Frog",
+      "Looker Studio"
     ],
     experience: [
       {
-        title: "Senior Digital Marketing Specialist",
-        company: "TechCorp",
-        period: "2020 - Present",
-        achievements: ["Increased organic traffic by 300%", "Managed $500K+ ad spend", "Led team of 5 marketers"]
+        title: "SEO Team Lead",
+        company: "Wavel AI",
+        period: "11/2022 - Present",
+        achievements: [
+          "Led team of 5 SEO specialists across US, APAC, and European markets",
+          "Increased blog traffic by 120% through high-intent keyword clustering",
+          "Improved technical SEO performance with 35% lift in Good URLs"
+        ]
       },
       {
-        title: "SEO Specialist",
-        company: "MarketingPro",
-        period: "2018 - 2020", 
-        achievements: ["Improved search rankings for 50+ keywords", "Reduced acquisition cost by 40%"]
+        title: "Technical SEO Specialist",
+        company: "Obbserv",
+        period: "03/2021 - 10/2022", 
+        achievements: [
+          "Improved crawl efficiency by 30% through technical optimizations",
+          "Maintained 95% client retention rate",
+          "Mentored SEO professionals and improved team output by 25%"
+        ]
+      },
+      {
+        title: "SEO Executive",
+        company: "Elite Info. Tech",
+        period: "04/2018 - 02/2021",
+        achievements: [
+          "Managed 30+ SEO projects across multiple platforms",
+          "Optimized 100+ websites with full-spectrum SEO approach",
+          "Executed international SEO for clients across 6 regions"
+        ]
       }
     ],
     contact: {
@@ -47,7 +70,7 @@ const StaticSnapshot = () => {
           name: staticContent.name,
           jobTitle: staticContent.jobTitle,
           description: staticContent.description,
-          skills: staticContent.skills,
+          skills: [...staticContent.coreCompetencies, ...staticContent.tools],
           email: staticContent.contact.email,
           sameAs: [staticContent.contact.linkedin]
         }} 
@@ -78,11 +101,22 @@ const StaticSnapshot = () => {
 
         <main className="container mx-auto px-4">
           <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6">Core Skills</h2>
+            <h2 className="text-2xl font-semibold mb-6">Core Competencies</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {staticContent.skills.map((skill, index) => (
+              {staticContent.coreCompetencies.map((skill, index) => (
                 <div key={index} className="p-4 border rounded-lg">
                   <h3 className="font-medium">{skill}</h3>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold mb-6">Tools & Technologies</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {staticContent.tools.map((tool, index) => (
+                <div key={index} className="p-3 text-center border rounded">
+                  {tool}
                 </div>
               ))}
             </div>
@@ -105,16 +139,6 @@ const StaticSnapshot = () => {
             </div>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-semibold mb-6">Tools & Technologies</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {["Google Analytics", "Google Ads", "Facebook Ads", "SEMrush", "Ahrefs", "Screaming Frog", "Google Search Console", "Hotjar"].map((tool, index) => (
-                <div key={index} className="p-3 text-center border rounded">
-                  {tool}
-                </div>
-              ))}
-            </div>
-          </section>
 
           <section>
             <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>

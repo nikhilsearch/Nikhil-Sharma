@@ -13,20 +13,20 @@ const Experience = () => {
       position: "SEO Team Lead",
       duration: "11/2022 - Present",
       type: "Full-time",
-      description: "Leading global SEO strategy and team across multi-domain ecosystems with expertise in international expansion and AI-driven optimization.",
+      description: "Led a team of 5 SEO specialists to establish organic search as the primary acquisition channel across US, APAC, and European markets for AI-powered SaaS platform.",
       achievements: [
-        "Global SEO Strategy & International Expansion: Designed and executed SEO strategies across multi-domain ecosystems (US, APAC, Europe), implementing hreflang boosting visibility across localized SERPs and alternative search engines",
-        "Technical SEO & On-Page Excellence: Led technical audits and on-page enhancements including site speed optimization, mobile-first UX, schema implementation, and signed exchange resulting in a 35% lift in Good URLs, 25% improvement in indexation, and 20% higher CTRs",
-        "SaaS Keyword Research & Content Strategy: Drove full-funnel SEO content programs with a focus on bottom-of-the-funnel keywords, cluster-based planning, and persona-aligned search intent increasing blog traffic by 120% and conversions through high-intent landing pages",
-        "AI-Driven SEO & Automation: Utilized generative AI tools (ChatGPT, Gemini, Claude, Perplexity) to streamline keyword clustering, content production, and programmatic SEO, accelerating content velocity while aligning with E-E-A-T principles",
-        "Content Strategy & Competitive Analysis: Developed SEO-driven content strategies and identified content gaps through in-depth competitor analysis, increasing blog traffic by 120% and improving keyword rankings across strategic landing pages",
-        "Cross-Functional Leadership & Scalable SEO Ops: Managed a team of 5 SEO/content specialists and collaborated with SEM, Product, and Content teams. Standardized SEO SOPs, created training playbooks, and aligned SEO with GTM and growth priorities",
-        "SEO + SEM Alignment: Partnered with Paid Search teams to create unified acquisition strategies, align messaging, and optimize budget allocation—maximizing SERP share and conversion efficiency across organic and paid channels",
-        "Product-Led Content & CRO Optimization: Created content focused on showcasing how Wavel's AI features solve real-world problems. Aligned SEO with conversion rate optimization (CRO) goals — increasing demo signups, free trial activation, and driving down CAC",
-        "Customer Acquisition & Retention SEO: Developed SEO-driven strategies to support both new user acquisition and retention — from awareness-stage content to engagement tactics that reduced churn and boosted LTV",
-        "Community Engagement & Referral Traffic Growth: Successfully leveraged public communities such as Product Hunt, driving product visibility from launch to networking support, which led to achieving \"Product of the Day\" on the platform twice. Utilized Reddit to increase referral traffic by 160%, resulting in significant growth in new users and sessions, further boosting organic traffic and user engagement"
+        "Increased blog traffic by 120% by developing a full-funnel content strategy centered on high-intent, persona-aligned keyword clusters",
+        "Boosted technical SEO performance with 35% lift in Good URLs, 25% improvement in indexation, and 20% higher CTRs through site speed optimization and schema implementation",
+        "Enhanced organic acquisition by implementing hreflang and multi-domain SEO strategies across US, APAC, and European markets",
+        "Accelerated content velocity by 3x using AI-driven automation tools (ChatGPT, Gemini, Claude) for keyword clustering and programmatic SEO",
+        "Led team of 5 SEO/content specialists while collaborating with SEM, Product, and Content teams to align growth priorities",
+        "Standardized SEO operations by creating SOPs and training playbooks, improving team efficiency by 40%",
+        "Achieved 'Product of the Day' on Product Hunt twice through strategic community engagement and product launch optimization",
+        "Increased referral traffic by 160% through targeted Reddit community engagement and organic brand building",
+        "Reduced customer acquisition cost (CAC) by optimizing demo signups and free trial activation through product-led content",
+        "Maximized SERP share by partnering with Paid Search teams to create unified messaging and budget allocation strategies"
       ],
-      skills: ["Global SEO Strategy", "Technical SEO", "AI-Driven Automation", "Team Leadership", "Content Strategy", "Cross-functional Collaboration", "International SEO", "E-E-A-T Optimization"]
+      skills: ["Team Leadership", "Global SEO Strategy", "Technical SEO", "AI-Driven Automation", "Content Strategy", "International SEO"]
     },
     {
       company: "Obbserv",
@@ -34,19 +34,20 @@ const Experience = () => {
       position: "Technical SEO Specialist",
       duration: "03/2021 - 10/2022",
       type: "Full-time",
-      description: "Specialized in technical SEO implementation and site architecture optimization for JavaScript-heavy platforms and large-scale websites.",
+      description: "Delivered technical SEO solutions for JavaScript-heavy platforms and large-scale websites, mentoring SEO professionals while maintaining 95% client retention rate.",
       achievements: [
-        "Site Architecture, PageSpeed & Crawl Efficiency: Implemented technical SEO fixes including canonicalization, metadata structure, and internal linking—resulting in a 30% improvement in crawl efficiency. Improved Core Web Vitals and reduced LCP by 40% through advanced page speed strategies, lazy loading, and script deferrals",
-        "JavaScript SEO & Rendering Optimization: Resolved critical CSR vs. SSR issues across 1 million pages on a JavaScript-heavy EdTech platform. Enabled seamless crawling and indexing by configuring server-side rendering, enhancing Googlebot compatibility and improving indexation coverage",
-        "Sitemap & Robots.txt Protocol Optimization: Configured XML sitemaps and Robots.txt directives to enhance crawlability and guide search engine behavior. Streamlined sitemap structure to align with deep URL hierarchies, improving discovery of product and blog pages",
-        "Structured Data & Schema Markup: Deployed JSON-LD schema (Product, Article, Breadcrumb) across dynamic and eCommerce pages, enhancing SERP appearance via rich results and boosting CTR by 20%",
-        "Mobile-First & Accessibility Compliance: Ensured full mobile usability and responsiveness by resolving usability errors reported in Google Search Console. Achieved mobile-friendly compliance across all templates, improving engagement metrics and reducing bounce rate",
-        "Indexation Management & Duplicate Content Fixes: Conducted content pruning, canonical tag audits, and hreflang cleanups to avoid duplication and thin content issues. Verified indexed content using GSC and bulk indexing tools to ensure maximum crawl value on priority URLs",
-        "SEO Tools & Reporting Infrastructure: Created SEO automation tools like Crawl+, Bulk Indexing Checker, and Voice+. Developed Studio+, a Looker Studio-powered dashboard for real-time reporting of crawl stats, CWV, and indexed URL trends",
-        "Client Success & Strategic Recognition: Delivered personalized SEO growth strategies for global clients, maintaining a 95% retention rate. Recognized with the High Flyer Award (2021) and Mr. Initiator (2022) for technical innovation and AI-powered SEO automation",
-        "Team Leadership & Cross-Functional Collaboration: Led and mentored SEO professionals, improving team output by 25%. Collaborated across SEO, CRO, UX, and paid teams—driving a 50% uplift in integrated digital performance"
+        "Improved crawl efficiency by 30% through technical SEO fixes including canonicalization, metadata optimization, and internal linking structure",
+        "Reduced page load time (LCP) by 40% using advanced Core Web Vitals optimization, lazy loading, and script deferrals",
+        "Resolved server-side rendering issues across 1 million pages on JavaScript-heavy EdTech platform, improving indexation coverage",
+        "Enhanced SERP visibility by implementing JSON-LD schema markup across dynamic pages, boosting CTR by 20%",
+        "Achieved full mobile-friendly compliance across all website templates, reducing bounce rate and improving engagement metrics",
+        "Streamlined XML sitemap structure for deep URL hierarchies, improving product and blog page discovery",
+        "Built SEO automation tools (Crawl+, Bulk Indexing Checker, Voice+) and Looker Studio dashboard for real-time reporting",
+        "Maintained 95% client retention rate by delivering personalized SEO growth strategies for global clients",
+        "Mentored SEO professionals and improved team output by 25% through knowledge sharing and best practices",
+        "Recognized with High Flyer Award (2021) and Mr. Initiator (2022) for technical innovation and automation"
       ],
-      skills: ["Technical SEO", "JavaScript SEO", "Schema Markup", "Site Speed Optimization", "Mobile-First Indexing", "Crawl Optimization", "SEO Tools Development", "Team Leadership"]
+      skills: ["Technical SEO", "JavaScript SEO", "Schema Markup", "Site Speed Optimization", "SEO Tools Development", "Team Mentoring"]
     },
     {
       company: "Elite Info. Tech",
@@ -54,17 +55,17 @@ const Experience = () => {
       position: "SEO Executive",
       duration: "04/2018 - 02/2021",
       type: "Full-time",
-      description: "Executed comprehensive SEO strategies across multiple platforms and managed diverse client portfolios with focus on technical implementation and organic growth.",
+      description: "Managed 30+ SEO projects and optimized 100+ websites across multiple platforms, delivering comprehensive SEO strategies for international clients.",
       achievements: [
-        "On-Page Optimization: Executed comprehensive on-page SEO strategies, enhancing website architecture, meta tags, and internal linking to boost search engine visibility and improve user experience",
-        "Keyword Research & Content Optimization: Conducted in-depth keyword research and aligned content with user intent, leading to significant organic traffic growth and improved SERP rankings",
-        "Technical SEO Audits: Performed detailed site audits to identify and resolve technical issues affecting crawlability, indexation, and overall site performance, ensuring optimal search engine accessibility",
-        "Web Traffic Analysis & Growth: Developed and implemented data-driven strategies to monitor, control, and sustain organic web traffic growth by analyzing key performance metrics and user behavior",
-        "Full-Spectrum SEO Execution: Led both on-page and off-page SEO initiatives across various digital platforms, resulting in improved keyword rankings, higher engagement, and increased site authority",
-        "Project & Workflow Management: Successfully managed 30+ SEO projects and optimized over 100 websites built on platforms such as WordPress, PHP, WIX, and ASP.NET, ensuring timely delivery and high-quality execution",
-        "International SEO Experience: Oversaw SEO strategies for clients across regions including the US, Canada, UK, Europe, Australia, and Asia—tailoring campaigns to regional search trends, cultural nuances, and local algorithm updates"
+        "Enhanced website architecture, meta tags, and internal linking structure to boost search engine visibility and user experience",
+        "Conducted in-depth keyword research aligned with user intent, leading to significant organic traffic growth",
+        "Performed technical site audits to resolve crawlability and indexation issues, ensuring optimal search engine accessibility",
+        "Developed data-driven strategies to monitor and sustain organic web traffic growth through performance metrics analysis",
+        "Managed 30+ SEO projects across WordPress, PHP, WIX, and ASP.NET platforms with timely delivery",
+        "Optimized 100+ websites using full-spectrum SEO approach, improving keyword rankings and site authority",
+        "Executed international SEO strategies for clients across US, Canada, UK, Europe, Australia, and Asia markets"
       ],
-      skills: ["On-Page SEO", "Keyword Research", "Technical Audits", "Multi-Platform SEO", "International SEO", "Project Management", "Web Traffic Analysis"]
+      skills: ["On-Page SEO", "Keyword Research", "Technical Audits", "Multi-Platform SEO", "International SEO", "Project Management"]
     }
   ];
 
