@@ -32,7 +32,7 @@ const Testimonials = () => {
       name: "Vishnu Sudevan",
       role: "SEO Business Manager",
       company: "Publicis Global Delivery",
-      text: "I have worked with Nikhil on a couple of projects on SEO. What amazed me about him was his expertise in technical SEO and moreover his enthusiasm to learn, experiment and get quality results. He is someone who will always get into the depth of any issue and find out the best possible solution for them. I would recommend his technical SEO skills to anyone who is looking out. ",
+      text: "I have worked with Nikhil on a couple of projects on SEO. What amazed me about him was his expertise in technical SEO and moreover his enthusiasm to learn, experiment and get quality results. He is someone who will always get into the depth of any issue and find out the best possible solution for them. I would recommend his technical SEO skills to anyone who is looking out.",
     },
     {
       name: "Mariya Pathanwala",
@@ -50,7 +50,7 @@ const Testimonials = () => {
       name: "Divyani Paliwal",
       role: "Sr. Customer Success Manager",
       company: "Volopay",
-      text: “He is very dedicated towards his work and a go getter! I have worked with him for a brief period but I strongly appreciate his technical skills and commitment towards SEO.”,
+      text: "He is very dedicated towards his work and a go getter! I have worked with him for a brief period but I strongly appreciate his technical skills and commitment towards SEO.",
     }
   ];
 
