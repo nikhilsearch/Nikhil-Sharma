@@ -6,14 +6,17 @@ const ToolsMindMap = () => {
   const svgRef = useRef<SVGSVGElement>(null);
 
   const tools = [
-    { name: "Google Analytics", proficiency: 95, color: "#ea4335", category: "Analytics" },
-    { name: "Google Search Console", proficiency: 93, color: "#4285f4", category: "Monitoring" },
-    { name: "SEMrush", proficiency: 90, color: "#ff642d", category: "Research" },
-    { name: "Ahrefs", proficiency: 88, color: "#ff7900", category: "Analysis" },
-    { name: "Screaming Frog", proficiency: 85, color: "#00c851", category: "Technical" },
-    { name: "WordPress", proficiency: 92, color: "#21759b", category: "CMS" },
-    { name: "ChatGPT", proficiency: 87, color: "#10a37f", category: "AI Tools" },
-    { name: "Power BI", proficiency: 83, color: "#f2c811", category: "Visualization" }
+    { name: "Google Search Console", proficiency: 95, color: "#4285f4", category: "Monitoring" },
+    { name: "Google Analytics", proficiency: 93, color: "#ea4335", category: "Analytics" },
+    { name: "Screaming Frog", proficiency: 92, color: "#00c851", category: "Technical" },
+    { name: "Ahrefs", proficiency: 90, color: "#ff7900", category: "Analysis" },
+    { name: "SEMrush", proficiency: 88, color: "#ff642d", category: "Research" },
+    { name: "Looker Studio", proficiency: 87, color: "#4285f4", category: "Visualization" },
+    { name: "ChatGPT", proficiency: 85, color: "#10a37f", category: "AI Tools" },
+    { name: "Gemini", proficiency: 83, color: "#4285f4", category: "AI Tools" },
+    { name: "Claude", proficiency: 85, color: "#d97706", category: "AI Tools" },
+    { name: "Moz", proficiency: 87, color: "#61dafb", category: "Research" },
+    { name: "Lumar", proficiency: 83, color: "#9333ea", category: "Technical" }
   ];
 
   const centerX = 300;
