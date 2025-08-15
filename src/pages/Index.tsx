@@ -6,6 +6,7 @@ import ToolsMindMap from "@/components/ToolsMindMap";
 import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Index = () => {
   return (
@@ -28,6 +29,7 @@ const Index = () => {
       <section id="contact">
         <Footer />
       </section>
+      <ThemeToggle />
     </div>
   );
 };
