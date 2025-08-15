@@ -73,14 +73,14 @@ const ToolsMindMap = () => {
     .join(' ') + ' Z';
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/10">
+    <section className="py-20 px-4 bg-gray-900">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">SEO & AI Tools</span>{" "}
-            <span className="text-foreground">Proficiency</span>
+            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">SEO & AI Tools</span>{" "}
+            <span className="text-white">Proficiency</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Interactive visualization of professional expertise across essential SEO and AI tools
           </p>
         </div>
@@ -101,9 +101,9 @@ const ToolsMindMap = () => {
                   cy={centerY}
                   r={radius}
                   fill="none"
-                  stroke="hsl(var(--border))"
+                  stroke="#374151"
                   strokeWidth="1"
-                  opacity="0.3"
+                  opacity="0.5"
                 />
               ))}
 
@@ -115,9 +115,9 @@ const ToolsMindMap = () => {
                   y1={centerY}
                   x2={axis.lineX}
                   y2={axis.lineY}
-                  stroke="hsl(var(--border))"
+                  stroke="#374151"
                   strokeWidth="1"
-                  opacity="0.3"
+                  opacity="0.5"
                 />
               ))}
 
@@ -143,7 +143,7 @@ const ToolsMindMap = () => {
                       cx={point.x}
                       cy={point.y}
                       r={isHovered ? "5" : "3"}
-                      fill="black"
+                       fill="white"
                       className="cursor-pointer transition-all duration-300 ease-out"
                       onMouseEnter={() => setHoveredTool(point.tool.name)}
                       onMouseLeave={() => setHoveredTool(null)}
@@ -176,13 +176,13 @@ const ToolsMindMap = () => {
                       textAnchor={isRightSide ? "start" : "end"}
                       dominantBaseline="middle"
                       className="font-medium transition-all duration-300 ease-out cursor-pointer"
-                      style={{
-                        fill: isHovered ? "#3bb273" : "hsl(var(--foreground))",
-                        fontFamily: "sans-serif",
-                        fontSize: isHovered ? "16px" : "14px",
-                        fontWeight: isHovered ? "600" : "500",
-                        filter: isHovered ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' : 'none'
-                      }}
+                       style={{
+                         fill: isHovered ? "#3bb273" : "#ffffff",
+                         fontFamily: "sans-serif",
+                         fontSize: isHovered ? "16px" : "14px",
+                         fontWeight: isHovered ? "600" : "500",
+                         filter: isHovered ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' : 'none'
+                       }}
                       onMouseEnter={() => setHoveredTool(axis.tool.name)}
                       onMouseLeave={() => setHoveredTool(null)}
                     >
@@ -259,7 +259,7 @@ const ToolsMindMap = () => {
         </div>
 
         {/* Scale indicators */}
-        <div className="text-center text-muted-foreground text-sm">
+        <div className="text-center text-gray-400 text-sm">
           <p>Interactive Scale: 0 - 10 (Proficiency Level)</p>
         </div>
       </div>
