@@ -137,7 +137,7 @@ const CaseStudies = () => {
                     </div>
                   </div>
 
-                  <div>
+                  <div className="bg-card/50 backdrop-blur-sm border border-primary/20 rounded-xl p-4 hover:bg-card/80 hover:border-primary/40 transition-all duration-300">
                     <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                       <TrendingUp className="w-4 h-4 text-primary" />
                       Results
@@ -146,15 +146,14 @@ const CaseStudies = () => {
                       {study.results.map((result, resultIndex) => (
                         <div 
                           key={resultIndex} 
-                          className="flex justify-between items-center p-3 bg-primary/5 rounded-lg border border-primary/10 hover:bg-primary/10 transition-colors duration-300"
+                          className="group flex justify-between items-center p-4 bg-muted/30 rounded-lg border border-muted/40 hover:bg-muted/50 hover:border-green-500/40 hover:shadow-md hover:shadow-green-500/10 transition-all duration-300 hover:scale-[1.02]"
                         >
-                          <span className="text-foreground font-medium">{result.metric}</span>
-                          <Badge 
-                            variant="secondary" 
-                            className="bg-primary/20 text-primary border-primary/30 font-bold"
-                          >
+                          <span className="text-foreground font-medium group-hover:text-foreground/90 transition-colors duration-200">
+                            {result.metric}
+                          </span>
+                          <span className="text-green-400 font-bold text-lg px-3 py-1 bg-green-500/10 rounded-full border border-green-500/20 group-hover:bg-green-500/20 group-hover:border-green-500/40 group-hover:text-green-300 group-hover:scale-110 transition-all duration-300">
                             {result.increase}
-                          </Badge>
+                          </span>
                         </div>
                       ))}
                     </div>
