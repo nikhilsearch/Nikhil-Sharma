@@ -42,7 +42,18 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Email sent successfully:", emailResponse);
+    if (emailResponse && (emailResponse as any).error) {
+      console.error("Resend send error:", (emailResponse as any).error);
+      return new Response(
+        JSON.stringify({ success: false, error: (emailResponse as any).error.message }),
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
+    console.log("Email queued successfully:", emailResponse);
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,
