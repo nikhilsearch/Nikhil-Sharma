@@ -32,9 +32,9 @@ const ToolsProficiencyRadar = () => {
   }, []);
 
   const generateRadarPoints = () => {
-    const centerX = 250;
-    const centerY = 250;
-    const maxRadius = 180;
+    const centerX = 300;
+    const centerY = 200;
+    const maxRadius = 160;
     
     return tools.map((tool, index) => {
       const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
@@ -43,8 +43,8 @@ const ToolsProficiencyRadar = () => {
       return {
         x: centerX + radius * Math.cos(angle),
         y: centerY + radius * Math.sin(angle),
-        labelX: centerX + (maxRadius + 50) * Math.cos(angle),
-        labelY: centerY + (maxRadius + 50) * Math.sin(angle),
+        labelX: centerX + (maxRadius + 60) * Math.cos(angle),
+        labelY: centerY + (maxRadius + 60) * Math.sin(angle),
         tool,
         angle
       };
@@ -52,9 +52,9 @@ const ToolsProficiencyRadar = () => {
   };
 
   const generateGridLines = () => {
-    const centerX = 250;
-    const centerY = 250;
-    const maxRadius = 180;
+    const centerX = 300;
+    const centerY = 200;
+    const maxRadius = 160;
     const levels = [0.2, 0.4, 0.6, 0.8, 1.0];
     
     return levels.map(level => {
@@ -94,15 +94,15 @@ const ToolsProficiencyRadar = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-12 items-start">
-          {/* Radar Chart - Takes 2 columns */}
-          <div className="lg:col-span-2 relative">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
+          {/* Radar Chart */}
+          <div className="flex-1 w-full">
             <Card className="bg-card/30 backdrop-blur-md border border-white/10 overflow-hidden">
               <CardContent className="p-8">
                 <svg 
-                  width="500" 
-                  height="500" 
-                  viewBox="0 0 500 500"
+                  width="600" 
+                  height="400" 
+                  viewBox="0 0 600 400"
                   className={`w-full h-auto transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                 >
                   {/* Background Grid */}
@@ -121,8 +121,8 @@ const ToolsProficiencyRadar = () => {
                   {radarPoints.map((point, index) => (
                     <line
                       key={index}
-                      x1="250"
-                      y1="250"
+                      x1="300"
+                      y1="200"
                       x2={point.labelX}
                       y2={point.labelY}
                       stroke="hsl(var(--border))"
@@ -166,10 +166,10 @@ const ToolsProficiencyRadar = () => {
                       key={index}
                       x={point.labelX}
                       y={point.labelY}
-                      textAnchor={point.labelX > 250 ? "start" : point.labelX < 250 ? "end" : "middle"}
-                      dominantBaseline={point.labelY > 250 ? "hanging" : point.labelY < 250 ? "text-bottom" : "central"}
+                      textAnchor={point.labelX > 300 ? "start" : point.labelX < 300 ? "end" : "middle"}
+                      dominantBaseline={point.labelY > 200 ? "hanging" : point.labelY < 200 ? "text-bottom" : "central"}
                       fill="hsl(var(--foreground))"
-                      fontSize="14"
+                      fontSize="13"
                       fontWeight={hoveredTool === point.tool.name ? "600" : "400"}
                       className={`transition-all duration-200 cursor-pointer ${
                         hoveredTool === point.tool.name ? 'text-primary' : ''
@@ -185,8 +185,8 @@ const ToolsProficiencyRadar = () => {
             </Card>
           </div>
 
-          {/* Tool Details - Takes 1 column */}
-          <div className="space-y-6">
+          {/* Tool Details */}
+          <div className="w-full lg:w-80 shrink-0">
             {hoveredTool && (
               <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in">
                 <CardHeader>
