@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Expertise from "@/components/Expertise";
 import Experience from "@/components/Experience";
-import ToolsMindMap from "@/components/ToolsMindMap";
+import ToolsProficiencyRadar from "@/components/ToolsProficiencyRadar";
 import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
@@ -42,7 +42,7 @@ const Index = () => {
         </section>
         <section id="skills">
           <Expertise />
-          <ToolsMindMap />
+          <ToolsProficiencyRadar />
         </section>
         <section id="experience">
           <Experience />
