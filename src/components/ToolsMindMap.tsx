@@ -73,14 +73,14 @@ const ToolsMindMap = () => {
     .join(' ') + ' Z';
 
   return (
-    <section className="py-20 px-4 bg-gray-900">
+    <section className="py-20 px-4 bg-background">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">SEO & AI Tools</span>{" "}
-            <span className="text-white">Proficiency</span>
+            <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">SEO & AI Tools</span>{" "}
+            <span className="text-foreground">Proficiency</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Interactive visualization of professional expertise across essential SEO and AI tools
           </p>
         </div>
@@ -101,7 +101,7 @@ const ToolsMindMap = () => {
                   cy={centerY}
                   r={radius}
                   fill="none"
-                  stroke="#374151"
+                  stroke="hsl(var(--border))"
                   strokeWidth="1"
                   opacity="0.5"
                 />
@@ -115,7 +115,7 @@ const ToolsMindMap = () => {
                   y1={centerY}
                   x2={axis.lineX}
                   y2={axis.lineY}
-                  stroke="#374151"
+                  stroke="hsl(var(--border))"
                   strokeWidth="1"
                   opacity="0.5"
                 />
@@ -124,13 +124,13 @@ const ToolsMindMap = () => {
               {/* Tool polygon */}
               <path
                 d={pathString}
-                fill="#3bb273"
+                fill="hsl(var(--primary))"
                 fillOpacity={hoveredTool ? "0.6" : "0.4"}
-                stroke="#3bb273"
+                stroke="hsl(var(--primary))"
                 strokeWidth="2"
                 className="transition-all duration-300 ease-out"
                 style={{
-                  filter: hoveredTool ? 'drop-shadow(0 0 10px #3bb273)' : 'none'
+                  filter: hoveredTool ? 'drop-shadow(0 0 10px hsl(var(--primary)))' : 'none'
                 }}
               />
 
@@ -143,7 +143,9 @@ const ToolsMindMap = () => {
                       cx={point.x}
                       cy={point.y}
                       r={isHovered ? "5" : "3"}
-                       fill="white"
+                      fill="hsl(var(--background))"
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="2"
                       className="cursor-pointer transition-all duration-300 ease-out"
                       onMouseEnter={() => setHoveredTool(point.tool.name)}
                       onMouseLeave={() => setHoveredTool(null)}
@@ -154,7 +156,7 @@ const ToolsMindMap = () => {
                         cx={point.x}
                         cy={point.y}
                         r="12"
-                        fill="#3bb273"
+                        fill="hsl(var(--primary))"
                         opacity="0.3"
                         className="animate-pulse"
                       />
@@ -176,13 +178,13 @@ const ToolsMindMap = () => {
                       textAnchor={isRightSide ? "start" : "end"}
                       dominantBaseline="middle"
                       className="font-medium transition-all duration-300 ease-out cursor-pointer"
-                       style={{
-                         fill: isHovered ? "#3bb273" : "#ffffff",
-                         fontFamily: "sans-serif",
-                         fontSize: isHovered ? "16px" : "14px",
-                         fontWeight: isHovered ? "600" : "500",
-                         filter: isHovered ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' : 'none'
-                       }}
+                      style={{
+                        fill: isHovered ? "hsl(var(--primary))" : "hsl(var(--foreground))",
+                        fontFamily: "sans-serif",
+                        fontSize: isHovered ? "16px" : "14px",
+                        fontWeight: isHovered ? "600" : "500",
+                        filter: isHovered ? 'drop-shadow(0 2px 4px hsl(var(--foreground) / 0.3))' : 'none'
+                      }}
                       onMouseEnter={() => setHoveredTool(axis.tool.name)}
                       onMouseLeave={() => setHoveredTool(null)}
                     >
@@ -197,7 +199,7 @@ const ToolsMindMap = () => {
                         dominantBaseline="middle"
                         className="text-xs transition-all duration-300"
                         style={{
-                          fill: "#3bb273",
+                          fill: "hsl(var(--primary))",
                           fontFamily: "sans-serif",
                           fontSize: "12px",
                           fontWeight: "600"
@@ -215,7 +217,7 @@ const ToolsMindMap = () => {
                 cx={centerX}
                 cy={centerY}
                 r="3"
-                fill="#3bb273"
+                fill="hsl(var(--primary))"
                 className="animate-pulse"
               />
             </svg>
@@ -235,7 +237,7 @@ const ToolsMindMap = () => {
               onMouseEnter={() => setHoveredTool(tool.name)}
               onMouseLeave={() => setHoveredTool(null)}
               style={{
-                filter: hoveredTool === tool.name ? `drop-shadow(0 8px 20px #3bb27330)` : 'none'
+                filter: hoveredTool === tool.name ? `drop-shadow(0 8px 20px hsl(var(--primary) / 0.3))` : 'none'
               }}
             >
               <div className="flex items-center gap-3">
@@ -243,7 +245,7 @@ const ToolsMindMap = () => {
                   className={`w-4 h-4 rounded-full transition-all duration-300 ${
                     hoveredTool === tool.name ? 'w-5 h-5' : ''
                   }`}
-                  style={{ backgroundColor: "#3bb273" }}
+                  style={{ backgroundColor: "hsl(var(--primary))" }}
                 />
                 <div>
                   <div className="text-sm font-medium text-foreground">
@@ -259,7 +261,7 @@ const ToolsMindMap = () => {
         </div>
 
         {/* Scale indicators */}
-        <div className="text-center text-gray-400 text-sm">
+        <div className="text-center text-muted-foreground text-sm">
           <p>Interactive Scale: 0 - 10 (Proficiency Level)</p>
         </div>
       </div>
