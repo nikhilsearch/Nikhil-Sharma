@@ -132,21 +132,6 @@ const Expertise = () => {
           </p>
         </div>
         
-        {/* Animated Stats Section */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
-          {stats.map((stat, index) => (
-            <div 
-              key={index}
-              className="text-center p-6 bg-card/30 backdrop-blur-md border border-white/20 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300"
-            >
-              <stat.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
-              <div className="text-3xl font-bold text-foreground mb-2">
-                {animatedStats[index]}{stat.suffix}
-              </div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </div>
-          ))}
-        </div>
 
         {/* SEO Skills Framework Header */}
         <div className="text-center mb-12">
