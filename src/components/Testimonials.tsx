@@ -44,7 +44,7 @@ const Testimonials = () => {
       name: "Richa Sharma",
       role: "Senior Marketing Manager",
       company: "People10 Technologies Inc",
-      text: "I highly recommend Dinidu for any UX Design role. As his former employer, I was consistently impressed by his exceptional design skills, work ethic, and professional demeanor. And his positive attitude and high level of emotional intelligence make him an excellent collaborator and team player.",
+      text: "Nikhil is a giver! When I first interacted with him, the domain score of their website was 9, a month later it shot up to 20, and that's where Nikhil spells his magic. He is a marketing genius with a deep understanding of organic growth. I've got to learn a lot from him, and I am still learning! All the best for his future endeavors!",
     },
     {
       name: "Divyani Paliwal",
