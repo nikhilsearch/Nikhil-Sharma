@@ -35,7 +35,7 @@ const ToolsProficiencyRadar = () => {
 
   const generateRadarPoints = () => {
     const centerX = 300;
-    const centerY = 200;
+    const centerY = 250;
     const maxRadius = 120;
     
     return tools.map((tool, index) => {
@@ -55,7 +55,7 @@ const ToolsProficiencyRadar = () => {
 
   const generateGridLines = () => {
     const centerX = 300;
-    const centerY = 200;
+    const centerY = 250;
     const maxRadius = 120;
     const levels = [0.2, 0.4, 0.6, 0.8, 1.0];
     
@@ -103,8 +103,8 @@ const ToolsProficiencyRadar = () => {
               <CardContent className="p-8">
                 <svg 
                   width="600" 
-                  height="400" 
-                  viewBox="0 0 600 400"
+                  height="500" 
+                  viewBox="0 0 600 500"
                   className={`w-full h-auto transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                 >
                   {/* Background Grid */}
@@ -124,7 +124,7 @@ const ToolsProficiencyRadar = () => {
                     <line
                       key={index}
                       x1="300"
-                      y1="200"
+                      y1="250"
                       x2={point.labelX}
                       y2={point.labelY}
                       stroke="hsl(var(--border))"
