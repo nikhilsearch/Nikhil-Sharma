@@ -2,60 +2,24 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Eye } from "lucide-react";
 
-// Realistic human eye component with blinking animation
+// Eye component with blinking animation
 const BlinkingEye = () => {
   const [isBlinking, setIsBlinking] = useState(false);
 
   useEffect(() => {
     const blinkInterval = setInterval(() => {
       setIsBlinking(true);
-      setTimeout(() => setIsBlinking(false), 180);
-    }, 2500 + Math.random() * 3000); // Random blink between 2.5-5.5 seconds
+      setTimeout(() => setIsBlinking(false), 150);
+    }, 2000 + Math.random() * 3000); // Random blink between 2-5 seconds
 
     return () => clearInterval(blinkInterval);
   }, []);
 
   return (
-    <div className="relative w-20 h-12 mx-auto mb-6">
-      {/* Eye socket/background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-muted/10 to-muted/30 rounded-full shadow-inner"></div>
-      
-      {/* Eye shape */}
-      <div className="relative w-full h-full bg-white dark:bg-gray-100 rounded-full overflow-hidden shadow-lg border border-muted/20">
-        {/* Iris */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-radial from-blue-400 via-blue-600 to-blue-800 rounded-full">
-          {/* Iris pattern */}
-          <div className="absolute inset-0 bg-gradient-radial from-transparent via-blue-300/30 to-transparent rounded-full"></div>
-          <div className="absolute inset-1 bg-gradient-conic from-blue-500/40 via-transparent to-blue-700/40 rounded-full"></div>
-          
-          {/* Pupil */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-black rounded-full">
-            {/* Light reflection */}
-            <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full opacity-80"></div>
-          </div>
-        </div>
-        
-        {/* Eye highlight */}
-        <div className="absolute top-2 right-3 w-1.5 h-1.5 bg-white/60 rounded-full blur-[0.5px]"></div>
-      </div>
-      
-      {/* Eyelids */}
-      <div className={`absolute inset-0 transition-all duration-180 ease-out ${isBlinking ? 'scale-y-0' : 'scale-y-100'}`}>
-        {/* Upper eyelid */}
-        <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-muted/80 to-transparent rounded-t-full transform origin-bottom transition-transform duration-180"></div>
-        {/* Lower eyelid */}
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-muted/60 to-transparent rounded-b-full transform origin-top transition-transform duration-180"></div>
-      </div>
-      
-      {/* Blinking overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-b from-muted via-muted to-muted rounded-full transition-all duration-180 ease-out ${isBlinking ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'}`}></div>
-      
-      {/* Subtle eyelashes */}
-      <div className="absolute -top-0.5 left-1/2 transform -translate-x-1/2">
-        <div className="flex space-x-0.5">
-          {[...Array(5)].map((_, i) => (
-            <div key={i} className="w-px h-1 bg-muted-foreground/40 transform rotate-12 origin-bottom"></div>
-          ))}
+    <div className="relative w-16 h-16 mx-auto mb-6">
+      <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-300 rounded-full flex items-center justify-center border-2 border-gray-400 shadow-lg">
+        <div className={`w-8 h-8 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center transition-all duration-150 ${isBlinking ? 'scale-y-0' : 'scale-y-100'}`}>
+          <div className="w-2 h-2 bg-black rounded-full"></div>
         </div>
       </div>
     </div>
