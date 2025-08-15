@@ -165,7 +165,14 @@ const Expertise = () => {
               {expertiseAreas.filter(area => area.category === "core").map((area, index) => (
                 <div 
                   key={area.id} 
-                  className="group cursor-pointer transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-6 animate-fade-in"
+                  className={cn(
+                    "group cursor-pointer animate-fade-in",
+                    // Different hover effects for each skill
+                    area.title === "Technical SEO" && "transition-all duration-500 hover:scale-105 hover:-translate-y-4 hover:rotate-1",
+                    area.title === "Keyword Research" && "transition-all duration-400 hover:scale-110 hover:-translate-y-8 hover:-rotate-2", 
+                    area.title === "Content Strategy" && "transition-all duration-600 hover:scale-108 hover:-translate-y-6 hover:rotate-2",
+                    area.title === "Analytics & Reporting" && "transition-all duration-500 hover:scale-112 hover:-translate-y-10 hover:-rotate-1"
+                  )}
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     animationFillMode: 'both'
@@ -173,7 +180,14 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px] group-hover:shadow-2xl group-hover:shadow-primary/30 group-hover:border-primary/50 group-hover:bg-card/60 group-hover:backdrop-blur-lg transition-all duration-500 ease-out">
+                  <div className={cn(
+                    "bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px] transition-all duration-500",
+                    // Different shadow effects for each skill
+                    area.title === "Technical SEO" && "group-hover:shadow-2xl group-hover:shadow-blue-500/40 group-hover:border-blue-500/60 group-hover:bg-gradient-to-br group-hover:from-blue-500/10 group-hover:to-cyan-500/10",
+                    area.title === "Keyword Research" && "group-hover:shadow-2xl group-hover:shadow-orange-500/40 group-hover:border-orange-500/60 group-hover:bg-gradient-to-br group-hover:from-orange-500/10 group-hover:to-red-500/10",
+                    area.title === "Content Strategy" && "group-hover:shadow-2xl group-hover:shadow-pink-500/40 group-hover:border-pink-500/60 group-hover:bg-gradient-to-br group-hover:from-pink-500/10 group-hover:to-rose-500/10",
+                    area.title === "Analytics & Reporting" && "group-hover:shadow-2xl group-hover:shadow-teal-500/40 group-hover:border-teal-500/60 group-hover:bg-gradient-to-br group-hover:from-teal-500/10 group-hover:to-cyan-500/10"
+                  )}>
                     <div className="mb-4">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
@@ -221,7 +235,14 @@ const Expertise = () => {
               {expertiseAreas.filter(area => area.category === "advanced").map((area, index) => (
                 <div 
                   key={area.id} 
-                  className="group cursor-pointer transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-6 animate-fade-in"
+                  className={cn(
+                    "group cursor-pointer animate-fade-in",
+                    // Different hover effects for each advanced skill
+                    area.title === "AI SEO" && "transition-all duration-700 hover:scale-115 hover:-translate-y-12 hover:rotate-3",
+                    area.title === "Semantic SEO" && "transition-all duration-500 hover:scale-108 hover:-translate-y-6 hover:-rotate-1", 
+                    area.title === "Local SEO" && "transition-all duration-600 hover:scale-112 hover:-translate-y-8 hover:rotate-2",
+                    area.title === "Ecommerce SEO" && "transition-all duration-400 hover:scale-110 hover:-translate-y-10 hover:-rotate-3"
+                  )}
                   style={{
                     animationDelay: `${(index + 4) * 0.1}s`,
                     animationFillMode: 'both'
@@ -229,7 +250,14 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px] group-hover:shadow-2xl group-hover:shadow-blue-500/30 group-hover:border-blue-500/50 group-hover:bg-card/60 group-hover:backdrop-blur-lg transition-all duration-500 ease-out">
+                  <div className={cn(
+                    "bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px] transition-all duration-500",
+                    // Different shadow effects for each advanced skill
+                    area.title === "AI SEO" && "group-hover:shadow-2xl group-hover:shadow-purple-500/40 group-hover:border-purple-500/60 group-hover:bg-gradient-to-br group-hover:from-purple-500/10 group-hover:to-indigo-500/10",
+                    area.title === "Semantic SEO" && "group-hover:shadow-2xl group-hover:shadow-green-500/40 group-hover:border-green-500/60 group-hover:bg-gradient-to-br group-hover:from-green-500/10 group-hover:to-emerald-500/10",
+                    area.title === "Local SEO" && "group-hover:shadow-2xl group-hover:shadow-violet-500/40 group-hover:border-violet-500/60 group-hover:bg-gradient-to-br group-hover:from-violet-500/10 group-hover:to-purple-500/10",
+                    area.title === "Ecommerce SEO" && "group-hover:shadow-2xl group-hover:shadow-amber-500/40 group-hover:border-amber-500/60 group-hover:bg-gradient-to-br group-hover:from-amber-500/10 group-hover:to-orange-500/10"
+                  )}>
                     <div className="mb-4">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
