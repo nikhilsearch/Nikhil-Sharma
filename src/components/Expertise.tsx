@@ -58,7 +58,7 @@ const Expertise = () => {
       id: 2,
       title: "Technical SEO",
       description: "Site audits, page speed optimization, schema markup, and crawlability improvements.",
-      skills: ["Core Web Vitals", "Schema Markup", "Site Architecture", "Mobile Optimization"],
+      skills: ["Core Web Vitals", "Schema Markup", "Site Architecture", "Mobile SEO"],
       category: "core",
       bgGradient: "from-blue-600 to-cyan-700",
       image: "⚙️"
@@ -173,11 +173,8 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className={cn(
-                    "bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl h-[240px] flex flex-col transition-all duration-300",
-                    hoveredCard === area.id && "scale-105 shadow-2xl border-primary/30"
-                  )}>
-                    <div className="mb-4 flex-grow">
+                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px]">
+                    <div className="mb-4">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
                       </h4>
@@ -186,7 +183,7 @@ const Expertise = () => {
                       </p>
                     </div>
                     
-                    <div className="flex justify-between items-end mt-auto">
+                    <div className="flex justify-between items-center">
                       <div className="flex flex-wrap gap-1">
                         {area.skills.map((skill, skillIndex) => (
                           <span
@@ -232,11 +229,8 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className={cn(
-                    "bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl h-[240px] flex flex-col transition-all duration-300",
-                    hoveredCard === area.id && "scale-105 shadow-2xl border-primary/30"
-                  )}>
-                    <div className="mb-4 flex-grow">
+                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px]">
+                    <div className="mb-4">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
                       </h4>
@@ -245,7 +239,7 @@ const Expertise = () => {
                       </p>
                     </div>
                     
-                    <div className="flex justify-between items-end mt-auto">
+                    <div className="flex justify-between items-center">
                       <div className="flex flex-wrap gap-1">
                         {area.skills.map((skill, skillIndex) => (
                           <span
