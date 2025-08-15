@@ -8,7 +8,7 @@ const Experience = () => {
 
   const experiences = [
     {
-      company: "WaveAI",
+      company: "Wavel AI",
       location: "Singapore (Remote)",
       position: "SEO Team Lead",
       duration: "11/2022 - Present",
