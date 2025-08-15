@@ -165,7 +165,7 @@ const Expertise = () => {
               {expertiseAreas.filter(area => area.category === "core").map((area, index) => (
                 <div 
                   key={area.id} 
-                  className="group cursor-pointer transition-all duration-300 hover:scale-[1.02] animate-fade-in"
+                  className="group cursor-pointer transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-6 animate-fade-in"
                   style={{
                     animationDelay: `${index * 0.1}s`,
                     animationFillMode: 'both'
@@ -173,7 +173,7 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px]">
+                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px] group-hover:shadow-2xl group-hover:shadow-primary/30 group-hover:border-primary/50 group-hover:bg-card/60 group-hover:backdrop-blur-lg transition-all duration-500 ease-out">
                     <div className="mb-4">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
@@ -221,7 +221,7 @@ const Expertise = () => {
               {expertiseAreas.filter(area => area.category === "advanced").map((area, index) => (
                 <div 
                   key={area.id} 
-                  className="group cursor-pointer transition-all duration-300 hover:scale-[1.02] animate-fade-in"
+                  className="group cursor-pointer transition-all duration-500 ease-out hover:scale-110 hover:-translate-y-6 animate-fade-in"
                   style={{
                     animationDelay: `${(index + 4) * 0.1}s`,
                     animationFillMode: 'both'
@@ -229,7 +229,7 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px]">
+                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px] group-hover:shadow-2xl group-hover:shadow-blue-500/30 group-hover:border-blue-500/50 group-hover:bg-card/60 group-hover:backdrop-blur-lg transition-all duration-500 ease-out">
                     <div className="mb-4">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
