@@ -29,28 +29,28 @@ const BlinkingEye = () => {
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "Maurice C. Nootenboom",
-      role: "Founder | Managing Director",
-      company: "",
-      text: "Dinidu is a collaborative problem-solver who thrives in interdisciplinary settings. Their strong communication skills enable them to effectively partner with engineers, developers, and stakeholders to bridge communication gaps and build consensus.",
+      name: "Vishnu Sudevan",
+      role: "SEO Business Manager",
+      company: "Publicis Global Delivery",
+      text: "I have worked with Nikhil on a couple of projects on SEO. What amazed me about him was his expertise in technical SEO and moreover his enthusiasm to learn, experiment and get quality results. He is someone who will always get into the depth of any issue and find out the best possible solution for them. I would recommend his technical SEO skills to anyone who is looking out. ",
     },
     {
-      name: "Jose Fernandez Castaño",
-      role: "Co-Founder & COO at Velaris",
-      company: "",
-      text: "Highly recommend Dinidu. I've worked with him on several graphic design projects and he always delivered on time with great quality",
+      name: "Mariya Pathanwala",
+      role: "Senior Manager - Client Servicing",
+      company: "IProspect",
+      text: "Nikhil is proactive & dedicated team member. He has good knowledge of SEO and being a great team player, he would push himself and the team to do better work. I recommend Nikhil as he would be a great addition to any company he joins.",
     },
     {
-      name: "Malith Hatanachchige",
-      role: "Founder and Ex CEO of Revox",
-      company: "",
+      name: "Richa Sharma",
+      role: "Senior Marketing Manager",
+      company: "People10 Technologies Inc",
       text: "I highly recommend Dinidu for any UX Design role. As his former employer, I was consistently impressed by his exceptional design skills, work ethic, and professional demeanor. And his positive attitude and high level of emotional intelligence make him an excellent collaborator and team player.",
     },
     {
-      name: "Dilima Janadith",
-      role: "Lecturer | Researcher",
-      company: "",
-      text: "Dinidu is an exceptionally well-rounded designer, with a capacity that extends far beyond traditional UX/UI roles. His ability to empathize with users throughout the design process allows him to create thoughtful and impactful designs.",
+      name: "Divyani Paliwal",
+      role: "Sr. Customer Success Manager",
+      company: "Volopay",
+      text: “He is very dedicated towards his work and a go getter! I have worked with him for a brief period but I strongly appreciate his technical skills and commitment towards SEO.”,
     }
   ];
 
