@@ -57,29 +57,34 @@ const ToolsMindMap = () => {
         </header>
 
         {/* Tools Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {tools.map((tool) => {
             const IconComponent = tool.icon;
             return (
-              <Card 
+              <div 
                 key={tool.name} 
-                className="group relative p-6 bg-card hover:bg-card/80 border border-border/50 hover:border-border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+                className="group relative bg-card/30 backdrop-blur-sm border border-border/20 rounded-2xl p-8 hover:bg-card/50 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
               >
-                {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor(tool.category)} opacity-0 group-hover:opacity-5 transition-opacity duration-300 rounded-lg`} />
-                
-                <div className="relative z-10 flex flex-col items-center text-center space-y-3">
-                  {/* Icon */}
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getCategoryColor(tool.category)} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="w-6 h-6 text-white" />
-                  </div>
-                  
-                  {/* Tool name */}
-                  <h4 className="font-semibold text-foreground text-sm leading-tight group-hover:text-primary transition-colors duration-300">
-                    {tool.name}
-                  </h4>
+                {/* Icon container */}
+                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${getCategoryColor(tool.category)} flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <IconComponent className="w-8 h-8 text-white" />
                 </div>
-              </Card>
+                
+                {/* Tool name */}
+                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                  {tool.name}
+                </h3>
+                
+                {/* Category description */}
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {tool.category === "SEO" && "Search optimization & technical analysis tool"}
+                  {tool.category === "Analytics" && "Data visualization & reporting platform"}
+                  {tool.category === "AI" && "Artificial intelligence & automation assistant"}
+                </p>
+
+                {/* Hover effect overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${getCategoryColor(tool.category)} opacity-0 group-hover:opacity-[0.02] transition-opacity duration-300 rounded-2xl`} />
+              </div>
             );
           })}
         </div>
