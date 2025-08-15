@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Copy } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
+  const { toast } = useToast();
+  const email = "imnikhil10@outlook.com";
 
   const navigationItems = [
     { name: "About Me", href: "#about", id: "about" },
@@ -24,6 +27,21 @@ const Header = () => {
       });
     }
     setIsMenuOpen(false);
+  };
+
+  // Handle Get Free Audit button click
+  const handleGetFreeAudit = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      toast({
+        title: "Email copied!",
+        description: `${email} has been copied to your clipboard.`,
+        duration: 3000,
+      });
+    } catch (err) {
+      // Fallback for browsers that don't support clipboard API
+      window.open(`mailto:${email}?subject=Free SEO Audit Request`, '_blank');
+    }
   };
 
   // Track active section based on scroll position
@@ -76,9 +94,10 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden md:flex">
             <Button
-              onClick={() => scrollToSection("#contact")}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+              onClick={handleGetFreeAudit}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2"
             >
+              <Copy className="w-4 h-4" />
               Get Free Audit
             </Button>
           </div>
@@ -119,9 +138,10 @@ const Header = () => {
               ))}
               <div className="pt-4">
                 <Button
-                  onClick={() => scrollToSection("#contact")}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                  onClick={handleGetFreeAudit}
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 justify-center"
                 >
+                  <Copy className="w-4 h-4" />
                   Get Free Audit
                 </Button>
               </div>

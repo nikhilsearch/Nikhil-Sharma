@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Clock, MapPin, Twitter, Github, Linkedin } from "lucide-react";
+import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Copy } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const { toast } = useToast();
+  const email = "imnikhil10@outlook.com";
 
   const currentTime = new Date().toLocaleTimeString('en-US', {
     timeZone: 'Asia/Kolkata',
@@ -12,6 +15,20 @@ const Footer = () => {
     minute: '2-digit',
     second: '2-digit'
   });
+
+  const handleGetInTouch = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      toast({
+        title: "Email copied!",
+        description: `${email} has been copied to your clipboard.`,
+        duration: 3000,
+      });
+    } catch (err) {
+      // Fallback for browsers that don't support clipboard API
+      window.open(`mailto:${email}`, '_blank');
+    }
+  };
 
   return (
     <footer className="relative bg-gradient-to-br from-background via-background to-muted/30 py-16 px-4 overflow-hidden">
@@ -46,8 +63,8 @@ const Footer = () => {
                 <h3 className="text-2xl font-bold text-foreground mb-2">Let's work together!</h3>
                 <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                   <Mail className="w-4 h-4" />
-                  <a href="mailto:imnikhil10@outlook.com" className="hover:underline">
-                    imnikhil10@outlook.com
+                  <a href={`mailto:${email}`} className="hover:underline">
+                    {email}
                   </a>
                 </div>
               </div>
@@ -64,8 +81,10 @@ const Footer = () => {
             <div className="flex justify-center lg:justify-end">
               <Button
                 size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                onClick={handleGetInTouch}
+                className="bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-purple-400/50 rounded-xl px-8 py-3 flex items-center gap-2"
               >
+                <Copy className="w-4 h-4" />
                 Get in touch
               </Button>
             </div>
