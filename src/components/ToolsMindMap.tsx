@@ -1,41 +1,37 @@
-import { useState, useRef, useEffect } from "react";
-import { Card } from "@/components/ui/card";
+import { useState } from "react";
 
 const ToolsMindMap = () => {
-  const [hoveredTool, setHoveredTool] = useState<string | null>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-
   const tools = [
-    { name: "Google Search Console", proficiency: 95, color: "#4285f4", category: "Monitoring" },
-    { name: "Google Analytics", proficiency: 93, color: "#ea4335", category: "Analytics" },
-    { name: "Screaming Frog", proficiency: 92, color: "#00c851", category: "Technical" },
-    { name: "Ahrefs", proficiency: 90, color: "#ff7900", category: "Analysis" },
-    { name: "SEMrush", proficiency: 88, color: "#ff642d", category: "Research" },
-    { name: "Looker Studio", proficiency: 87, color: "#4285f4", category: "Visualization" },
-    { name: "ChatGPT", proficiency: 85, color: "#10a37f", category: "AI Tools" },
-    { name: "Gemini", proficiency: 83, color: "#4285f4", category: "AI Tools" },
-    { name: "Claude", proficiency: 85, color: "#d97706", category: "AI Tools" },
-    { name: "Moz", proficiency: 87, color: "#61dafb", category: "Research" },
-    { name: "Lumar", proficiency: 83, color: "#9333ea", category: "Technical" }
+    { name: "Google Search Console", value: 9.5 },
+    { name: "Google Analytics", value: 9.5 },
+    { name: "Screaming Frog", value: 8.5 },
+    { name: "Ahrefs", value: 8.8 },
+    { name: "SEMrush", value: 9.0 },
+    { name: "Looker Studio", value: 8.7 },
+    { name: "ChatGPT", value: 8.7 },
+    { name: "Gemini", value: 8.5 },
+    { name: "Claude", value: 8.4 },
+    { name: "Moz", value: 8.0 },
+    { name: "Lumar", value: 8.2 }
   ];
 
   const centerX = 300;
   const centerY = 300;
-  const maxRadius = 180;
-  const gridLevels = 5;
+  const maxRadius = 150;
+  const gridLevels = 10;
 
   // Generate points for the tool polygon
   const getToolPoints = () => {
     return tools.map((tool, index) => {
       const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
-      const radius = (tool.proficiency / 100) * maxRadius;
+      const radius = (tool.value / 10) * maxRadius;
       const x = centerX + Math.cos(angle) * radius;
       const y = centerY + Math.sin(angle) * radius;
       return { x, y, tool };
     });
   };
 
-  // Generate grid circles
+  // Generate grid circles (scale 0-10)
   const getGridCircles = () => {
     return Array.from({ length: gridLevels }, (_, i) => {
       const radius = ((i + 1) / gridLevels) * maxRadius;
@@ -47,8 +43,9 @@ const ToolsMindMap = () => {
   const getAxisLines = () => {
     return tools.map((tool, index) => {
       const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
-      const x = centerX + Math.cos(angle) * (maxRadius + 40);
-      const y = centerY + Math.sin(angle) * (maxRadius + 40);
+      const labelDistance = maxRadius + 60;
+      const x = centerX + Math.cos(angle) * labelDistance;
+      const y = centerY + Math.sin(angle) * labelDistance;
       const lineX = centerX + Math.cos(angle) * maxRadius;
       const lineY = centerY + Math.sin(angle) * maxRadius;
       
@@ -73,26 +70,24 @@ const ToolsMindMap = () => {
     .join(' ') + ' Z';
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/10">
+    <section className="py-20 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">SEO Tools</span>{" "}
-            <span className="text-foreground">Mastery</span>
+          <h2 className="text-4xl font-bold mb-4 text-black">
+            SEO & AI Tools Proficiency
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Interactive visualization of my proficiency with essential SEO and analytics tools
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Professional expertise across essential SEO and AI tools
           </p>
         </div>
 
         <div className="flex justify-center mb-12">
           <div className="relative">
             <svg
-              ref={svgRef}
               width="600"
               height="600"
               viewBox="0 0 600 600"
-              className="filter drop-shadow-lg"
+              className="bg-white"
             >
               {/* Grid circles */}
               {gridCircles.map((radius, index) => (
@@ -102,107 +97,64 @@ const ToolsMindMap = () => {
                   cy={centerY}
                   r={radius}
                   fill="none"
-                  stroke="hsl(var(--border))"
+                  stroke="#e5e5e5"
                   strokeWidth="1"
-                  opacity="0.3"
                 />
               ))}
 
               {/* Axis lines */}
               {axisLines.map((axis, index) => (
-                <g key={index}>
-                  <line
-                    x1={centerX}
-                    y1={centerY}
-                    x2={axis.lineX}
-                    y2={axis.lineY}
-                    stroke="hsl(var(--border))"
-                    strokeWidth="1"
-                    opacity="0.3"
-                  />
-                  {/* Tool proficiency dots with floating effect */}
-                  <g>
-                    <circle
-                      cx={toolPoints[index].x}
-                      cy={toolPoints[index].y}
-                      r={hoveredTool === axis.tool.name ? "10" : "6"}
-                      fill={axis.tool.color}
-                      className="cursor-pointer transition-all duration-500 ease-out drop-shadow-lg"
-                      onMouseEnter={() => setHoveredTool(axis.tool.name)}
-                      onMouseLeave={() => setHoveredTool(null)}
-                      style={{
-                        filter: hoveredTool === axis.tool.name ? `drop-shadow(0 0 15px ${axis.tool.color})` : 'none'
-                      }}
-                    />
-                    {/* Floating glow effect */}
-                    {hoveredTool === axis.tool.name && (
-                      <circle
-                        cx={toolPoints[index].x}
-                        cy={toolPoints[index].y}
-                        r="15"
-                        fill={axis.tool.color}
-                        opacity="0.2"
-                        className="animate-pulse"
-                      />
-                    )}
-                  </g>
-                </g>
+                <line
+                  key={index}
+                  x1={centerX}
+                  y1={centerY}
+                  x2={axis.lineX}
+                  y2={axis.lineY}
+                  stroke="#e5e5e5"
+                  strokeWidth="1"
+                />
               ))}
 
-              {/* Tool polygon with glow effect */}
+              {/* Tool polygon */}
               <path
                 d={pathString}
-                fill="hsl(var(--primary))"
-                fillOpacity="0.15"
-                stroke="hsl(var(--primary))"
-                strokeWidth="3"
-                className="transition-all duration-700 ease-out"
-                style={{
-                  filter: hoveredTool ? 'drop-shadow(0 0 10px hsl(var(--primary)))' : 'none'
-                }}
+                fill="#3bb273"
+                fillOpacity="0.4"
+                stroke="#3bb273"
+                strokeWidth="2"
               />
 
-              {/* Tool labels with floating effect */}
+              {/* Tool points */}
+              {toolPoints.map((point, index) => (
+                <circle
+                  key={index}
+                  cx={point.x}
+                  cy={point.y}
+                  r="3"
+                  fill="black"
+                />
+              ))}
+
+              {/* Tool labels */}
               {axisLines.map((axis, index) => {
-                const isHovered = hoveredTool === axis.tool.name;
+                const isRightSide = axis.labelX > centerX;
+                const isTopSide = axis.labelY < centerY;
+                
                 return (
-                  <g key={index}>
-                    <text
-                      x={axis.labelX}
-                      y={axis.labelY}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className={`text-sm font-medium transition-all duration-500 ease-out cursor-pointer ${
-                        isHovered ? 'text-primary' : 'text-foreground'
-                      }`}
-                      onMouseEnter={() => setHoveredTool(axis.tool.name)}
-                      onMouseLeave={() => setHoveredTool(null)}
-                      style={{
-                        fontSize: isHovered ? '16px' : '12px',
-                        fontWeight: isHovered ? '700' : '500',
-                        transform: isHovered ? 'translateY(-3px)' : 'translateY(0px)',
-                        filter: isHovered ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' : 'none'
-                      }}
-                    >
-                      {axis.tool.name}
-                    </text>
-                    {/* Tool proficiency percentage */}
-                    <text
-                      x={axis.labelX}
-                      y={axis.labelY + (isHovered ? 22 : 18)}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      className="text-xs transition-all duration-500"
-                      style={{
-                        fill: isHovered ? axis.tool.color : 'hsl(var(--muted-foreground))',
-                        opacity: isHovered ? 1 : 0.7,
-                        fontSize: isHovered ? '12px' : '10px',
-                        fontWeight: isHovered ? '600' : '400'
-                      }}
-                    >
-                      {axis.tool.proficiency}%
-                    </text>
-                  </g>
+                  <text
+                    key={index}
+                    x={axis.labelX}
+                    y={axis.labelY}
+                    textAnchor={isRightSide ? "start" : "end"}
+                    dominantBaseline="middle"
+                    className="text-sm font-medium fill-black"
+                    style={{
+                      fontFamily: "sans-serif",
+                      fontSize: "14px"
+                    }}
+                  >
+                    {axis.tool.name}
+                  </text>
                 );
               })}
 
@@ -210,59 +162,16 @@ const ToolsMindMap = () => {
               <circle
                 cx={centerX}
                 cy={centerY}
-                r="4"
-                fill="hsl(var(--primary))"
-                className="animate-pulse"
+                r="2"
+                fill="#3bb273"
               />
             </svg>
           </div>
         </div>
 
-        {/* Legend with floating cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
-          {tools.map((tool, index) => (
-            <Card
-              key={index}
-              className={`p-4 cursor-pointer transition-all duration-500 ease-out ${
-                hoveredTool === tool.name
-                  ? 'bg-primary/10 border-primary/50 scale-110 -translate-y-2 shadow-xl'
-                  : 'bg-card/30 backdrop-blur-md border-border/30 hover:scale-105'
-              }`}
-              onMouseEnter={() => setHoveredTool(tool.name)}
-              onMouseLeave={() => setHoveredTool(null)}
-              style={{
-                filter: hoveredTool === tool.name ? `drop-shadow(0 8px 20px ${tool.color}30)` : 'none'
-              }}
-            >
-              <div className="flex items-center gap-3">
-                <div
-                  className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                    hoveredTool === tool.name ? 'w-5 h-5' : ''
-                  }`}
-                  style={{ backgroundColor: tool.color }}
-                />
-                <div>
-                  <div className="text-sm font-medium text-foreground">
-                    {tool.name}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    {tool.proficiency}% • {tool.category}
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        {/* Description */}
-        <div className="text-center mt-12">
-          <p className="text-lg text-muted-foreground mb-4">
-            <span className="font-semibold text-primary">Professional SEO Toolkit</span>
-          </p>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            This radar visualization showcases my mastery of industry-leading SEO tools and platforms, 
-            each representing years of hands-on experience delivering measurable results.
-          </p>
+        {/* Scale indicators */}
+        <div className="text-center text-gray-600 text-sm">
+          <p>Scale: 0 - 10 (Proficiency Level)</p>
         </div>
       </div>
     </section>
