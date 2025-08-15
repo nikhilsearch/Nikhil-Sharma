@@ -173,8 +173,11 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px]">
-                    <div className="mb-4">
+                  <div className={cn(
+                    "bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl h-[240px] flex flex-col transition-all duration-300",
+                    hoveredCard === area.id && "scale-105 shadow-2xl border-primary/30"
+                  )}>
+                    <div className="mb-4 flex-grow">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
                       </h4>
@@ -183,7 +186,7 @@ const Expertise = () => {
                       </p>
                     </div>
                     
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-end mt-auto">
                       <div className="flex flex-wrap gap-1">
                         {area.skills.map((skill, skillIndex) => (
                           <span
@@ -229,8 +232,11 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl min-h-[200px]">
-                    <div className="mb-4">
+                  <div className={cn(
+                    "bg-card/30 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-xl h-[240px] flex flex-col transition-all duration-300",
+                    hoveredCard === area.id && "scale-105 shadow-2xl border-primary/30"
+                  )}>
+                    <div className="mb-4 flex-grow">
                       <h4 className="text-xl font-bold text-foreground mb-2">
                         {area.title}
                       </h4>
@@ -239,7 +245,7 @@ const Expertise = () => {
                       </p>
                     </div>
                     
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-end mt-auto">
                       <div className="flex flex-wrap gap-1">
                         {area.skills.map((skill, skillIndex) => (
                           <span
