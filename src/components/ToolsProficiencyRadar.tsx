@@ -36,7 +36,7 @@ const ToolsProficiencyRadar = () => {
   const generateRadarPoints = () => {
     const centerX = 300;
     const centerY = 200;
-    const maxRadius = 160;
+    const maxRadius = 120;
     
     return tools.map((tool, index) => {
       const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
@@ -45,8 +45,8 @@ const ToolsProficiencyRadar = () => {
       return {
         x: centerX + radius * Math.cos(angle),
         y: centerY + radius * Math.sin(angle),
-        labelX: centerX + (maxRadius + 60) * Math.cos(angle),
-        labelY: centerY + (maxRadius + 60) * Math.sin(angle),
+        labelX: centerX + (maxRadius + 80) * Math.cos(angle),
+        labelY: centerY + (maxRadius + 80) * Math.sin(angle),
         tool,
         angle
       };
@@ -56,7 +56,7 @@ const ToolsProficiencyRadar = () => {
   const generateGridLines = () => {
     const centerX = 300;
     const centerY = 200;
-    const maxRadius = 160;
+    const maxRadius = 120;
     const levels = [0.2, 0.4, 0.6, 0.8, 1.0];
     
     return levels.map(level => {
