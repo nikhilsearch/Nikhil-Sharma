@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { Card } from "@/components/ui/card";
 
 const ToolsMindMap = () => {
+  const [hoveredTool, setHoveredTool] = useState<string | null>(null);
+
   const tools = [
     { name: "Google Search Console", value: 9.5 },
     { name: "Google Analytics", value: 9.5 },
@@ -70,14 +73,15 @@ const ToolsMindMap = () => {
     .join(' ') + ' Z';
 
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/10">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 text-black">
-            SEO & AI Tools Proficiency
+          <h2 className="text-4xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">SEO & AI Tools</span>{" "}
+            <span className="text-foreground">Proficiency</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Professional expertise across essential SEO and AI tools
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Interactive visualization of professional expertise across essential SEO and AI tools
           </p>
         </div>
 
@@ -87,7 +91,7 @@ const ToolsMindMap = () => {
               width="600"
               height="600"
               viewBox="0 0 600 600"
-              className="bg-white"
+              className="filter drop-shadow-lg"
             >
               {/* Grid circles */}
               {gridCircles.map((radius, index) => (
@@ -97,8 +101,9 @@ const ToolsMindMap = () => {
                   cy={centerY}
                   r={radius}
                   fill="none"
-                  stroke="#e5e5e5"
+                  stroke="hsl(var(--border))"
                   strokeWidth="1"
+                  opacity="0.3"
                 />
               ))}
 
@@ -110,8 +115,9 @@ const ToolsMindMap = () => {
                   y1={centerY}
                   x2={axis.lineX}
                   y2={axis.lineY}
-                  stroke="#e5e5e5"
+                  stroke="hsl(var(--border))"
                   strokeWidth="1"
+                  opacity="0.3"
                 />
               ))}
 
@@ -119,42 +125,88 @@ const ToolsMindMap = () => {
               <path
                 d={pathString}
                 fill="#3bb273"
-                fillOpacity="0.4"
+                fillOpacity={hoveredTool ? "0.6" : "0.4"}
                 stroke="#3bb273"
                 strokeWidth="2"
+                className="transition-all duration-300 ease-out"
+                style={{
+                  filter: hoveredTool ? 'drop-shadow(0 0 10px #3bb273)' : 'none'
+                }}
               />
 
-              {/* Tool points */}
-              {toolPoints.map((point, index) => (
-                <circle
-                  key={index}
-                  cx={point.x}
-                  cy={point.y}
-                  r="3"
-                  fill="black"
-                />
-              ))}
+              {/* Tool points with interactive effects */}
+              {toolPoints.map((point, index) => {
+                const isHovered = hoveredTool === point.tool.name;
+                return (
+                  <g key={index}>
+                    <circle
+                      cx={point.x}
+                      cy={point.y}
+                      r={isHovered ? "5" : "3"}
+                      fill="black"
+                      className="cursor-pointer transition-all duration-300 ease-out"
+                      onMouseEnter={() => setHoveredTool(point.tool.name)}
+                      onMouseLeave={() => setHoveredTool(null)}
+                    />
+                    {/* Glow effect on hover */}
+                    {isHovered && (
+                      <circle
+                        cx={point.x}
+                        cy={point.y}
+                        r="12"
+                        fill="#3bb273"
+                        opacity="0.3"
+                        className="animate-pulse"
+                      />
+                    )}
+                  </g>
+                );
+              })}
 
-              {/* Tool labels */}
+              {/* Tool labels with interactive effects */}
               {axisLines.map((axis, index) => {
+                const isHovered = hoveredTool === axis.tool.name;
                 const isRightSide = axis.labelX > centerX;
-                const isTopSide = axis.labelY < centerY;
                 
                 return (
-                  <text
-                    key={index}
-                    x={axis.labelX}
-                    y={axis.labelY}
-                    textAnchor={isRightSide ? "start" : "end"}
-                    dominantBaseline="middle"
-                    className="text-sm font-medium fill-black"
-                    style={{
-                      fontFamily: "sans-serif",
-                      fontSize: "14px"
-                    }}
-                  >
-                    {axis.tool.name}
-                  </text>
+                  <g key={index}>
+                    <text
+                      x={axis.labelX}
+                      y={axis.labelY}
+                      textAnchor={isRightSide ? "start" : "end"}
+                      dominantBaseline="middle"
+                      className="font-medium transition-all duration-300 ease-out cursor-pointer"
+                      style={{
+                        fill: isHovered ? "#3bb273" : "hsl(var(--foreground))",
+                        fontFamily: "sans-serif",
+                        fontSize: isHovered ? "16px" : "14px",
+                        fontWeight: isHovered ? "600" : "500",
+                        filter: isHovered ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' : 'none'
+                      }}
+                      onMouseEnter={() => setHoveredTool(axis.tool.name)}
+                      onMouseLeave={() => setHoveredTool(null)}
+                    >
+                      {axis.tool.name}
+                    </text>
+                    {/* Show value on hover */}
+                    {isHovered && (
+                      <text
+                        x={axis.labelX}
+                        y={axis.labelY + 20}
+                        textAnchor={isRightSide ? "start" : "end"}
+                        dominantBaseline="middle"
+                        className="text-xs transition-all duration-300"
+                        style={{
+                          fill: "#3bb273",
+                          fontFamily: "sans-serif",
+                          fontSize: "12px",
+                          fontWeight: "600"
+                        }}
+                      >
+                        {axis.tool.value}/10
+                      </text>
+                    )}
+                  </g>
                 );
               })}
 
@@ -162,16 +214,53 @@ const ToolsMindMap = () => {
               <circle
                 cx={centerX}
                 cy={centerY}
-                r="2"
+                r="3"
                 fill="#3bb273"
+                className="animate-pulse"
               />
             </svg>
           </div>
         </div>
 
+        {/* Interactive Legend Cards */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto mb-8">
+          {tools.map((tool, index) => (
+            <Card
+              key={index}
+              className={`p-4 cursor-pointer transition-all duration-500 ease-out ${
+                hoveredTool === tool.name
+                  ? 'bg-primary/10 border-primary/50 scale-105 -translate-y-1 shadow-xl'
+                  : 'bg-card/30 backdrop-blur-md border-border/30 hover:scale-102'
+              }`}
+              onMouseEnter={() => setHoveredTool(tool.name)}
+              onMouseLeave={() => setHoveredTool(null)}
+              style={{
+                filter: hoveredTool === tool.name ? `drop-shadow(0 8px 20px #3bb27330)` : 'none'
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                    hoveredTool === tool.name ? 'w-5 h-5' : ''
+                  }`}
+                  style={{ backgroundColor: "#3bb273" }}
+                />
+                <div>
+                  <div className="text-sm font-medium text-foreground">
+                    {tool.name}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {tool.value}/10 • Proficiency
+                  </div>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+
         {/* Scale indicators */}
-        <div className="text-center text-gray-600 text-sm">
-          <p>Scale: 0 - 10 (Proficiency Level)</p>
+        <div className="text-center text-muted-foreground text-sm">
+          <p>Interactive Scale: 0 - 10 (Proficiency Level)</p>
         </div>
       </div>
     </section>
