@@ -238,11 +238,6 @@ const ToolsMindMap = () => {
             </Card>
           ))}
         </div>
-
-        {/* Scale indicators */}
-        <div className="text-center text-muted-foreground text-sm">
-          <p>Interactive Scale: 0 - 10 (Proficiency Level)</p>
-        </div>
       </div>
     </section>
   );
