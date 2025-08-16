@@ -134,22 +134,57 @@ const Expertise = () => {
         
 
         {/* SEO Skills Framework Header */}
-        <div className="text-center mb-4 md:mb-6">
+        <div className="text-center mb-6 md:mb-8">
           <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-sm md:max-w-md mx-auto">
             <h3 className="text-xl md:text-3xl font-bold text-foreground">SEO Skills Framework</h3>
           </div>
         </div>
 
-        {/* Interactive Arrow from Header */}
-        <div className="flex justify-center mb-4 md:mb-6">
-          <div className="relative group">
-            <div className="w-px h-8 md:h-12 bg-gradient-to-b from-primary/60 to-purple-500/60 group-hover:from-primary group-hover:to-purple-500 transition-all duration-500"></div>
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-primary/60 group-hover:text-primary transition-all duration-500 hover:scale-110">
-              <svg className="w-3 h-3 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div>
+        {/* Curved Arrow Connections */}
+        <div className="relative mb-8 md:mb-12">
+          <svg className="w-full h-32 md:h-40" viewBox="0 0 800 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Main stem down from header */}
+            <path 
+              d="M400 20 L400 60" 
+              stroke="url(#gradient1)" 
+              strokeWidth="2" 
+              className="animate-pulse"
+            />
+            
+            {/* Curved paths to Core and Advanced Skills */}
+            <path 
+              d="M400 60 Q400 80 200 100 L200 140" 
+              stroke="url(#gradient2)" 
+              strokeWidth="2" 
+              className="hover:stroke-[3] transition-all duration-300"
+            />
+            <path 
+              d="M400 60 Q400 80 600 100 L600 140" 
+              stroke="url(#gradient3)" 
+              strokeWidth="2" 
+              className="hover:stroke-[3] transition-all duration-300"
+            />
+            
+            {/* Arrow heads */}
+            <polygon points="196,136 200,144 204,136" fill="url(#gradient2)" className="animate-bounce" />
+            <polygon points="596,136 600,144 604,136" fill="url(#gradient3)" className="animate-bounce" />
+            
+            {/* Gradient definitions */}
+            <defs>
+              <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
+              </linearGradient>
+              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.6" />
+              </linearGradient>
+              <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="rgb(14, 165, 233)" stopOpacity="0.6" />
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
 
         {/* Core and Advanced Skills Categories */}
