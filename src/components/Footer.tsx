@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Copy } from "lucide-react";
+import { Mail, Clock, MapPin, X, Github, Linkedin, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
@@ -125,8 +125,8 @@ const Footer = () => {
                 href="https://x.com/imnikhill10" 
                 className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-all hover:scale-110 transform duration-200 group"
               >
-                <Twitter className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
-                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Twitter</span>
+                <X className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">X</span>
               </a>
               <a 
                 href="https://github.com/nikhilsearch" 
