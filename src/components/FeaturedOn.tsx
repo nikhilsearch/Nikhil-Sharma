@@ -106,26 +106,6 @@ const FeaturedOn = () => {
             ))}
           </div>
         </div>
-
-        {/* Interactive Indicators */}
-        <div className="flex justify-center gap-3 mb-16">
-          {featuredData.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`relative w-4 h-4 rounded-full transition-all duration-300 ${
-                index === currentIndex
-                  ? 'bg-primary shadow-lg scale-125' 
-                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50 hover:scale-110'
-              }`}
-              aria-label={`Go to feature ${index + 1}`}
-            >
-              {index === currentIndex && (
-                <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
-              )}
-            </button>
-          ))}
-        </div>
       </div>
     </section>
   );
