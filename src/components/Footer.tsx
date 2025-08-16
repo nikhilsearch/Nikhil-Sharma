@@ -123,24 +123,24 @@ const Footer = () => {
             <div className="flex gap-4">
               <a 
                 href="https://x.com/imnikhill10" 
-                className="flex items-center gap-2 hover:text-primary transition-colors hover:scale-110 transform duration-200"
+                className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-all hover:scale-110 transform duration-200 group"
               >
-                <Twitter className="w-5 h-5" />
-                <span>Twitter</span>
+                <Twitter className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Twitter</span>
               </a>
               <a 
                 href="https://github.com/nikhilsearch" 
-                className="flex items-center gap-2 hover:text-primary transition-colors hover:scale-110 transform duration-200"
+                className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-all hover:scale-110 transform duration-200 group"
               >
-                <Github className="w-5 h-5" />
-                <span>Github</span>
+                <Github className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Github</span>
               </a>
               <a 
                 href="https://www.linkedin.com/in/nikhil-sharma10/" 
-                className="flex items-center gap-2 hover:text-primary transition-colors hover:scale-110 transform duration-200"
+                className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-all hover:scale-110 transform duration-200 group"
               >
-                <Linkedin className="w-5 h-5" />
-                <span>LinkedIn</span>
+                <Linkedin className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">LinkedIn</span>
               </a>
             </div>
           </div>
