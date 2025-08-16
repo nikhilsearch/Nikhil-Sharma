@@ -120,33 +120,13 @@ const Expertise = () => {
   ];
 
   return (
-    <section className="py-12 md:py-20 px-4 relative overflow-hidden">
-      {/* Immersive Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/5" />
-      <div className="absolute inset-0">
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-primary/30 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${4 + Math.random() * 3}s`,
-            }}
-          />
-        ))}
-      </div>
-      
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="py-12 md:py-20 px-4 bg-gradient-to-b from-background to-muted/10">
+      <div className="max-w-7xl mx-auto">
         <header className="text-center mb-12 md:mb-16">
-          <div className="relative group">
-            <h2 className="text-2xl md:text-4xl font-bold mb-4 relative z-10">
-              <span className="text-foreground">What I Bring to the</span>{" "}
-              <span className="bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent animate-gradient bg-[length:200%_200%]">Table</span>
-            </h2>
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000 animate-glow-pulse" />
-          </div>
+          <h2 className="text-2xl md:text-4xl font-bold mb-4">
+            <span className="text-foreground">What I Bring to the</span>{" "}
+            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Table</span>
+          </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Comprehensive SEO solutions that drive organic growth and deliver measurable results
           </p>
@@ -245,7 +225,7 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="relative bg-card/80 backdrop-blur-xl border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-primary/30 dark:hover:shadow-primary/40 hover:border-primary/60 dark:hover:border-primary/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-2xl transition-all duration-700 ease-out hover:-translate-y-4 hover:scale-[1.03] hover:rotate-1 before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-primary/10 before:to-green-500/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-700 min-h-[160px] md:min-h-[200px] overflow-hidden group">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-primary/20 dark:hover:shadow-primary/30 hover:border-primary/60 dark:hover:border-primary/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-primary/5 before:to-purple-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[160px] md:min-h-[200px]">
                     <div className="mb-3 md:mb-4 relative z-10">
                       <h4 className="text-lg md:text-xl font-bold text-foreground mb-2">
                         {area.title}
@@ -303,7 +283,7 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="relative bg-card/80 backdrop-blur-xl border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-blue-500/30 dark:hover:shadow-blue-500/40 hover:border-blue-500/60 dark:hover:border-blue-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-2xl transition-all duration-700 ease-out hover:-translate-y-4 hover:scale-[1.03] hover:rotate-1 before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-blue-500/10 before:to-cyan-500/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-700 min-h-[160px] md:min-h-[200px] overflow-hidden group">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/30 hover:border-blue-500/60 dark:hover:border-blue-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-blue-500/5 before:to-cyan-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[160px] md:min-h-[200px]">
                     <div className="mb-3 md:mb-4 relative z-10">
                       <h4 className="text-lg md:text-xl font-bold text-foreground mb-2">
                         {area.title}

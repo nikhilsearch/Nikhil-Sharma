@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import Expertise from "@/components/Expertise";
 import Experience from "@/components/Experience";
 import ToolsProficiencyRadar from "@/components/ToolsProficiencyRadar";
-import InteractiveToolsShowcase from "@/components/InteractiveToolsShowcase";
 import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
 import FeaturedOn from "@/components/FeaturedOn";
@@ -47,7 +46,6 @@ const Index = () => {
         </section>
         <section id="skills">
           <Expertise />
-          <InteractiveToolsShowcase />
           <ToolsProficiencyRadar />
         </section>
         <section id="experience">
