@@ -99,7 +99,7 @@ const ToolsProficiencyRadar = () => {
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* Radar Chart */}
           <div className="flex-1 w-full">
-            <Card className="bg-card/50 backdrop-blur-md border border-primary/20 overflow-hidden shadow-lg dark:shadow-primary/10">
+            <Card className="bg-card/30 backdrop-blur-md border border-white/10 overflow-hidden">
               <CardContent className="p-8">
                 <svg 
                   width="600" 
@@ -107,18 +107,6 @@ const ToolsProficiencyRadar = () => {
                   viewBox="0 0 600 500"
                   className={`w-full h-auto transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                 >
-                  {/* Gradient Definitions */}
-                  <defs>
-                    <radialGradient id="radarGradient" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-                    </radialGradient>
-                    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.3" />
-                      <stop offset="50%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.2" />
-                      <stop offset="100%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.3" />
-                    </linearGradient>
-                  </defs>
                   {/* Background Grid */}
                   {gridLines.map((grid, index) => (
                     <polygon
@@ -139,22 +127,20 @@ const ToolsProficiencyRadar = () => {
                       y1="250"
                       x2={point.labelX}
                       y2={point.labelY}
-                      stroke="hsl(var(--primary))"
-                      strokeWidth="1.5"
-                      opacity="0.6"
+                      stroke="hsl(var(--border))"
+                      strokeWidth="1"
+                      opacity="0.3"
                     />
                   ))}
                   
                   {/* Proficiency Area */}
                   <polygon
                     points={pathPoints}
-                    fill="url(#areaGradient)"
+                    fill="hsl(var(--primary))"
+                    fillOpacity="0.3"
                     stroke="hsl(var(--primary))"
-                    strokeWidth="3"
+                    strokeWidth="2"
                     className={`transition-all duration-1000 ${isVisible ? 'animate-scale-in' : ''}`}
-                    style={{
-                      filter: 'drop-shadow(0 4px 12px hsl(var(--primary) / 0.3))'
-                    }}
                   />
                   
                   {/* Data Points */}
@@ -163,15 +149,13 @@ const ToolsProficiencyRadar = () => {
                       key={index}
                       cx={point.x}
                       cy={point.y}
-                      r={hoveredTool === point.tool.name ? "8" : "5"}
+                      r={hoveredTool === point.tool.name ? "6" : "4"}
                       fill={getCategoryColor(point.tool.category)}
                       stroke="white"
-                      strokeWidth="3"
-                      className="transition-all duration-300 cursor-pointer hover:scale-110"
+                      strokeWidth="2"
+                      className="transition-all duration-200 cursor-pointer"
                       style={{
-                        filter: hoveredTool === point.tool.name ? 
-                          'drop-shadow(0 0 12px currentColor) drop-shadow(0 0 20px currentColor)' : 
-                          'drop-shadow(0 2px 4px rgba(0,0,0,0.2))'
+                        filter: hoveredTool === point.tool.name ? 'drop-shadow(0 0 8px currentColor)' : 'none'
                       }}
                       onMouseEnter={() => setHoveredTool(point.tool.name)}
                       onMouseLeave={() => setHoveredTool(null)}
