@@ -106,7 +106,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div>
               <h4 className="text-foreground font-medium mb-2">Version</h4>
-              <p>2024 © Edition</p>
+              <p>2025 © Edition</p>
             </div>
             <div>
               <h4 className="text-foreground font-medium mb-2">Timezone</h4>
