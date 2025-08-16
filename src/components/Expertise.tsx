@@ -134,19 +134,26 @@ const Expertise = () => {
         
 
         {/* SEO Skills Framework Header */}
-        <div className="text-center mb-8 md:mb-12">
-          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-sm md:max-w-md mx-auto">
+        <div className="text-center mb-4 md:mb-6">
+          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-sm md:max-w-md mx-auto">
             <h3 className="text-xl md:text-3xl font-bold text-foreground">SEO Skills Framework</h3>
           </div>
         </div>
 
-        {/* Connecting Line from Header */}
-        <div className="flex justify-center mb-8">
-          <div className="w-px h-16 bg-gradient-to-b from-white/40 to-transparent"></div>
+        {/* Interactive Arrow from Header */}
+        <div className="flex justify-center mb-4 md:mb-6">
+          <div className="relative group">
+            <div className="w-px h-8 md:h-12 bg-gradient-to-b from-primary/60 to-purple-500/60 group-hover:from-primary group-hover:to-purple-500 transition-all duration-500"></div>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-primary/60 group-hover:text-primary transition-all duration-500 hover:scale-110">
+              <svg className="w-3 h-3 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
+          </div>
         </div>
 
         {/* Core and Advanced Skills Categories */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 mb-12 md:mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 mb-8 md:mb-12">
           
           {/* Core Skills Section */}
           <section className="space-y-6 md:space-y-8">
@@ -154,9 +161,16 @@ const Expertise = () => {
               <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300">
                 <h3 className="text-lg md:text-2xl font-bold text-foreground">Core Skills</h3>
               </div>
-              {/* Connecting Line - Hidden on mobile for cleaner look */}
-              <div className="hidden md:flex justify-center my-6">
-                <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
+              {/* Interactive Arrow to Core Skills */}
+              <div className="hidden md:flex justify-center my-4">
+                <div className="relative group">
+                  <div className="w-px h-8 bg-gradient-to-b from-green-500/60 to-emerald-500/60 group-hover:from-green-500 group-hover:to-emerald-500 transition-all duration-500"></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-green-500/60 group-hover:text-green-500 transition-all duration-500 hover:scale-110">
+                    <svg className="w-3 h-3 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </header>
             
@@ -210,9 +224,16 @@ const Expertise = () => {
               <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
                 <h3 className="text-lg md:text-2xl font-bold text-foreground">Advanced Skills</h3>
               </div>
-              {/* Connecting Line - Hidden on mobile for cleaner look */}
-              <div className="hidden md:flex justify-center my-6">
-                <div className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"></div>
+              {/* Interactive Arrow to Advanced Skills */}
+              <div className="hidden md:flex justify-center my-4">
+                <div className="relative group">
+                  <div className="w-px h-8 bg-gradient-to-b from-blue-500/60 to-cyan-500/60 group-hover:from-blue-500 group-hover:to-cyan-500 transition-all duration-500"></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-blue-500/60 group-hover:text-blue-500 transition-all duration-500 hover:scale-110">
+                    <svg className="w-3 h-3 animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
               </div>
             </header>
             
@@ -261,13 +282,18 @@ const Expertise = () => {
           </section>
         </div>
 
-        {/* Connecting Lines to Bottom Section - Hidden on mobile */}
-        <div className="hidden md:flex justify-center mb-8">
-          <div className="relative">
-            <div className="w-px h-16 bg-gradient-to-b from-white/40 to-transparent"></div>
-            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 w-96 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
-            <div className="absolute top-8 -left-48 w-px h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
-            <div className="absolute top-8 left-48 w-px h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
+        {/* Interactive Connecting Arrows to Bottom Section */}
+        <div className="hidden md:flex justify-center mb-6">
+          <div className="relative group">
+            <div className="w-px h-12 bg-gradient-to-b from-primary/50 to-purple-500/50 group-hover:from-primary group-hover:to-purple-500 transition-all duration-500"></div>
+            <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-80 h-px bg-gradient-to-r from-transparent via-primary/50 via-purple-500/50 to-transparent group-hover:via-primary group-hover:via-purple-500 transition-all duration-500"></div>
+            <div className="absolute top-6 -left-40 w-px h-6 bg-gradient-to-b from-green-500/50 to-transparent group-hover:from-green-500 transition-all duration-500"></div>
+            <div className="absolute top-6 left-40 w-px h-6 bg-gradient-to-b from-blue-500/50 to-transparent group-hover:from-blue-500 transition-all duration-500"></div>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-primary/50 group-hover:text-primary transition-all duration-500 hover:scale-110">
+              <svg className="w-3 h-3 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
           </div>
         </div>
 
