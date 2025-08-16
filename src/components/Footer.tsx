@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Clock, MapPin, X, Github, Linkedin, Copy } from "lucide-react";
+import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
@@ -125,15 +125,15 @@ const Footer = () => {
                 href="https://x.com/imnikhill10" 
                 className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-all hover:scale-110 transform duration-200 group"
               >
-                <X className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
-                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">X</span>
+                <Twitter className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Twitter</span>
               </a>
               <a 
                 href="https://github.com/nikhilsearch" 
-                className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-all hover:scale-110 transform duration-200 group"
+                className="flex items-center gap-2 text-gray-300 hover:text-white transition-all hover:scale-110 transform duration-200 group"
               >
-                <Github className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]" />
-                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">Github</span>
+                <Github className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
+                <span className="bg-gradient-to-r from-gray-300 to-white bg-clip-text text-transparent">Github</span>
               </a>
               <a 
                 href="https://www.linkedin.com/in/nikhil-sharma10/" 
