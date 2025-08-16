@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Dialog,
   DialogContent,
@@ -37,6 +38,9 @@ const formSchema = z.object({
   }).min(10, {
     message: "Contact number must be at least 10 digits.",
   }),
+  message: z.string().min(10, {
+    message: "Message must be at least 10 characters.",
+  }),
 });
 
 interface ContactFormProps {
@@ -55,6 +59,7 @@ const ContactForm = ({ isOpen, onOpenChange }: ContactFormProps) => {
       email: "",
       website: "",
       contactNumber: "",
+      message: "",
     },
   });
 
@@ -182,6 +187,24 @@ const ContactForm = ({ isOpen, onOpenChange }: ContactFormProps) => {
                         <Input 
                           type="tel" 
                           placeholder="Enter your contact number" 
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Message</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Tell us about your project and requirements..." 
+                          className="min-h-[100px]"
                           {...field} 
                         />
                       </FormControl>
