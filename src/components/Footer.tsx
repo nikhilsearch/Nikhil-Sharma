@@ -115,29 +115,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter Subscribe Section */}
-        <div className="mt-12 mb-8">
-          <div className="text-center mb-6">
-            <h4 className="text-xl font-bold text-foreground mb-2">Stay Updated</h4>
-            <p className="text-muted-foreground">Get the latest SEO trends, insights, and strategies delivered to your inbox</p>
-          </div>
-          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-            <Input
-              type="email"
-              placeholder="Enter your email address"
-              value={subscribeEmail}
-              onChange={(e) => setSubscribeEmail(e.target.value)}
-              className="flex-1 bg-background/50 border-white/20 focus:border-primary/50"
-            />
-            <Button
-              type="submit"
-              className="bg-gradient-to-r from-primary to-purple-400 text-white hover:from-primary/80 hover:to-purple-400/80 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-primary/50 rounded-xl px-6 flex items-center gap-2"
-            >
-              <Send className="w-4 h-4" />
-              Subscribe
-            </Button>
-          </form>
-        </div>
 
         {/* Bottom Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-muted-foreground">
@@ -165,10 +142,10 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Socials */}
+          {/* Socials & Subscribe */}
           <div>
             <h4 className="text-foreground font-medium mb-4">Socials</h4>
-            <div className="flex gap-4">
+            <div className="flex gap-4 mb-6">
               <a 
                 href="https://x.com/imnikhill10" 
                 className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-all hover:scale-110 transform duration-200 group"
@@ -191,6 +168,24 @@ const Footer = () => {
                 <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">LinkedIn</span>
               </a>
             </div>
+            
+            {/* Subscribe Form */}
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
+              <Input
+                type="email"
+                placeholder="Enter your email address"
+                value={subscribeEmail}
+                onChange={(e) => setSubscribeEmail(e.target.value)}
+                className="flex-1 bg-background/50 border-white/20 focus:border-primary/50 rounded-xl"
+              />
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-primary to-purple-400 text-white hover:from-primary/80 hover:to-purple-400/80 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-primary/50 rounded-xl px-6 flex items-center gap-2 whitespace-nowrap"
+              >
+                <Send className="w-4 h-4" />
+                Subscribe
+              </Button>
+            </form>
           </div>
         </div>
       </div>
