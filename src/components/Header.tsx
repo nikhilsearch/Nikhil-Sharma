@@ -62,7 +62,7 @@ const Header = () => {
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
             <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
-              SEO Expert
+              Nikhil Sharma
             </h1>
           </div>
 
