@@ -172,16 +172,19 @@ const Expertise = () => {
             {/* Gradient definitions */}
             <defs>
               <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
+                <stop offset="0%" stopColor="rgb(147, 51, 234)" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="rgb(168, 85, 247)" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="rgb(196, 181, 253)" stopOpacity="0.7" />
               </linearGradient>
               <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.6" />
+                <stop offset="0%" stopColor="rgb(147, 51, 234)" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="rgb(168, 85, 247)" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="rgb(34, 197, 94)" stopOpacity="0.7" />
               </linearGradient>
               <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="rgb(14, 165, 233)" stopOpacity="0.6" />
+                <stop offset="0%" stopColor="rgb(147, 51, 234)" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="rgb(168, 85, 247)" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="rgb(59, 130, 246)" stopOpacity="0.7" />
               </linearGradient>
             </defs>
           </svg>
