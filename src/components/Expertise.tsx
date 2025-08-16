@@ -57,8 +57,8 @@ const Expertise = () => {
     {
       id: 2,
       title: "Technical SEO",
-      description: "Site audits, page speed optimization, schema markup, and crawlability improvements.",
-      skills: ["Core Web Vitals", "Schema Markup", "Site Architecture", "Mobile SEO"],
+      description: "Improve site performance, fix crawl paths, and keep search bots happy. We tune Core Web Vitals, resolve crawl issues & sitemaps, guide robots/indexing and JS framework rendering, and ship structured data / schema updates..",
+      skills: ["Core Web Vitals", "Schema Markup", "Sitemaps", "Robots & Indexing", "JS Frameworks · Rendering", "Structured Data", "Site Architecture" ].,
       category: "core",
       bgGradient: "from-blue-600 to-cyan-700",
       image: "⚙️"
