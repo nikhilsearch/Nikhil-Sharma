@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Copy } from "lucide-react";
+import { Menu, X, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import ContactForm from "./ContactForm";
 
@@ -89,7 +89,7 @@ const Header = () => {
               onClick={handleGetFreeAudit}
               className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2"
             >
-              <Copy className="w-4 h-4" />
+              <Eye className="w-4 h-4" />
               Get Free Audit
             </Button>
           </div>
@@ -133,7 +133,7 @@ const Header = () => {
                   onClick={handleGetFreeAudit}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 justify-center"
                 >
-                  <Copy className="w-4 h-4" />
+                  <Eye className="w-4 h-4" />
                   Get Free Audit
                 </Button>
               </div>
