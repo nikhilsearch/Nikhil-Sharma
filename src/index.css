@@ -44,6 +44,9 @@ All colors MUST be HSL.
     --shadow-glow: 0 0 40px hsl(263 70% 50% / 0.3);
     --shadow-card: 0 8px 32px hsl(240 3.7% 15.9% / 0.5);
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Animation keyframes */
+    --animation-scroll: scroll 30s linear infinite;
 
     --sidebar-background: 0 0% 98%;
 
@@ -163,4 +166,14 @@ All colors MUST be HSL.
 
 .delay-1000 {
   animation-delay: 1s;
+}
+
+/* Featured On section scroll animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
 }

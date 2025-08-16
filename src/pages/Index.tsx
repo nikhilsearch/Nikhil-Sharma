@@ -5,6 +5,7 @@ import Experience from "@/components/Experience";
 import ToolsProficiencyRadar from "@/components/ToolsProficiencyRadar";
 import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
+import FeaturedOn from "@/components/FeaturedOn";
 import Footer from "@/components/Footer";
 import ThemeToggle from "@/components/ThemeToggle";
 import BotSnapshot from "@/components/SEO/BotSnapshot";
@@ -50,6 +51,9 @@ const Index = () => {
         <section id="stories">
           <CaseStudies />
           <Testimonials />
+        </section>
+        <section id="featured">
+          <FeaturedOn />
         </section>
         <section id="contact">
           <Footer />
