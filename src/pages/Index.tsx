@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import SkillsFramework from "@/components/SkillsFramework/SkillsFramework";
+import Expertise from "@/components/Expertise";
 import Experience from "@/components/Experience";
 import ToolsProficiencyRadar from "@/components/ToolsProficiencyRadar";
 import CaseStudies from "@/components/CaseStudies";
@@ -41,7 +41,7 @@ const Index = () => {
           <Hero />
         </section>
         <section id="skills">
-          <SkillsFramework />
+          <Expertise />
           <ToolsProficiencyRadar />
         </section>
         <section id="experience">
