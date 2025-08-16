@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Copy } from "lucide-react";
+import { Mail, Clock, MapPin, Twitter, Github, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import ContactForm from "./ContactForm";
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const { toast } = useToast();
   const email = "imnikhil10@outlook.com";
 
@@ -19,7 +17,7 @@ const Footer = () => {
   });
 
   const handleGetInTouch = () => {
-    setIsContactFormOpen(true);
+    window.open(`mailto:${email}?subject=Let's Work Together - Project Inquiry&body=Hi Nikhil,%0D%0A%0D%0AI'd like to discuss a potential project with you.%0D%0A%0D%0ABest regards,`, '_blank');
   };
 
   return (
@@ -154,12 +152,6 @@ const Footer = () => {
           />
         ))}
       </div>
-      
-      {/* Contact Form Modal */}
-      <ContactForm 
-        isOpen={isContactFormOpen} 
-        onOpenChange={setIsContactFormOpen} 
-      />
     </footer>
   );
 };
