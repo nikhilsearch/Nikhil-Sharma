@@ -117,28 +117,26 @@ const Footer = () => {
 
         {/* Newsletter Subscribe Section */}
         <div className="mt-12 mb-8">
-          <div className="backdrop-blur-lg bg-white/5 dark:bg-black/10 border border-white/10 rounded-2xl p-6">
-            <div className="text-center mb-6">
-              <h4 className="text-xl font-bold text-foreground mb-2">Stay Updated</h4>
-              <p className="text-muted-foreground">Get the latest SEO trends, insights, and strategies delivered to your inbox</p>
-            </div>
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <Input
-                type="email"
-                placeholder="Enter your email address"
-                value={subscribeEmail}
-                onChange={(e) => setSubscribeEmail(e.target.value)}
-                className="flex-1 bg-background/50 border-white/20 focus:border-primary/50"
-              />
-              <Button
-                type="submit"
-                className="bg-gradient-to-r from-primary to-purple-400 text-white hover:from-primary/80 hover:to-purple-400/80 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-primary/50 rounded-xl px-6 flex items-center gap-2"
-              >
-                <Send className="w-4 h-4" />
-                Subscribe
-              </Button>
-            </form>
+          <div className="text-center mb-6">
+            <h4 className="text-xl font-bold text-foreground mb-2">Stay Updated</h4>
+            <p className="text-muted-foreground">Get the latest SEO trends, insights, and strategies delivered to your inbox</p>
           </div>
+          <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <Input
+              type="email"
+              placeholder="Enter your email address"
+              value={subscribeEmail}
+              onChange={(e) => setSubscribeEmail(e.target.value)}
+              className="flex-1 bg-background/50 border-white/20 focus:border-primary/50"
+            />
+            <Button
+              type="submit"
+              className="bg-gradient-to-r from-primary to-purple-400 text-white hover:from-primary/80 hover:to-purple-400/80 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-primary/50 rounded-xl px-6 flex items-center gap-2"
+            >
+              <Send className="w-4 h-4" />
+              Subscribe
+            </Button>
+          </form>
         </div>
 
         {/* Bottom Section */}
