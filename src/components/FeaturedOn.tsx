@@ -130,35 +130,6 @@ const FeaturedOn = () => {
             </button>
           ))}
         </div>
-
-        {/* Enhanced Scrolling Strip */}
-        <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
-          
-          <div className="flex animate-[scroll_25s_linear_infinite] hover:pause">
-            {[...featuredData, ...featuredData, ...featuredData].map((item, index) => (
-              <a
-                key={`${item.name}-${index}`}
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 mx-6 p-4 bg-card/60 backdrop-blur-sm rounded-xl border border-border/30 hover:border-primary/50 transition-all duration-300 hover:scale-110 hover:bg-card/80 group whitespace-nowrap"
-              >
-                <div className="w-12 h-12 p-2 bg-background/80 rounded-lg border border-border group-hover:border-primary/50 transition-all duration-300">
-                  <img
-                    src={item.logo}
-                    alt={`${item.name} logo`}
-                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                  />
-                </div>
-                <span className="text-foreground font-medium group-hover:text-primary transition-colors">
-                  {item.name}
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
