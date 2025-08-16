@@ -1,31 +1,27 @@
 import { useEffect, useState } from "react";
-import hubspotLogo from "@/assets/hubspot-logo.png";
-import seotestingLogo from "@/assets/seotesting-logo.png";
-import embedsocialLogo from "@/assets/embedsocial-logo.png";
-import amaPhoenixLogo from "@/assets/ama-phoenix-logo.png";
 
 const featuredData = [
   {
     name: "HubSpot",
-    logo: hubspotLogo,
+    logo: "/lovable-uploads/ce220e1a-ebc4-44ea-ad0a-b9b052690dad.png",
     url: "https://blog.hubspot.com/sales/ai-business-integration",
     description: "AI Business Integration"
   },
   {
     name: "SEO Testing",
-    logo: seotestingLogo,
+    logo: "/lovable-uploads/dd6ffc15-a466-42d6-806a-b1e09afa7961.png",
     url: "https://seotesting.com/blog/technical-seo-for-ecommerce/",
     description: "Technical SEO for eCommerce"
   },
   {
     name: "EmbedSocial",
-    logo: embedsocialLogo,
+    logo: "/lovable-uploads/d51feb89-7e27-4c22-a309-218e50771efd.png",
     url: "https://embedsocial.com/blog/increase-google-business-profile-traffic/",
     description: "Google Business Profile Traffic"
   },
   {
     name: "AMA Phoenix",
-    logo: amaPhoenixLogo,
+    logo: "/lovable-uploads/249694a1-7a4b-4d70-a02b-45a8b2f46a3d.png",
     url: "https://amaphoenix.org/2024/01/25/how-to-approach-competitor-analysis-to-inform-your-marketing-strategy/",
     description: "Competitor Analysis Strategy"
   },
