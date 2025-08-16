@@ -323,11 +323,11 @@ const Expertise = () => {
         {/* Interactive Connecting Arrows to Bottom Section */}
         <div className="hidden md:flex justify-center mb-6">
           <div className="relative group">
-            <div className="w-px h-12 bg-gradient-to-b from-primary/50 to-purple-500/50 group-hover:from-primary group-hover:to-purple-500 transition-all duration-500"></div>
-            <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-80 h-px bg-gradient-to-r from-transparent via-primary/50 via-purple-500/50 to-transparent group-hover:via-primary group-hover:via-purple-500 transition-all duration-500"></div>
-            <div className="absolute top-6 -left-40 w-px h-6 bg-gradient-to-b from-green-500/50 to-transparent group-hover:from-green-500 transition-all duration-500"></div>
-            <div className="absolute top-6 left-40 w-px h-6 bg-gradient-to-b from-blue-500/50 to-transparent group-hover:from-blue-500 transition-all duration-500"></div>
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-primary/50 group-hover:text-primary transition-all duration-500 hover:scale-110">
+            <div className="w-px h-12 bg-gradient-to-b from-purple-500/70 to-purple-400/50 group-hover:from-purple-500 group-hover:to-purple-400 transition-all duration-500"></div>
+            <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-80 h-px bg-gradient-to-r from-transparent via-purple-500/70 via-purple-400/70 to-transparent group-hover:via-purple-500 group-hover:via-purple-400 transition-all duration-500"></div>
+            <div className="absolute top-6 -left-40 w-px h-6 bg-gradient-to-b from-purple-500/70 to-transparent group-hover:from-purple-500 transition-all duration-500"></div>
+            <div className="absolute top-6 left-40 w-px h-6 bg-gradient-to-b from-purple-500/70 to-transparent group-hover:from-purple-500 transition-all duration-500"></div>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 text-purple-500/70 group-hover:text-purple-500 transition-all duration-500 hover:scale-110">
               <svg className="w-3 h-3 animate-bounce" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
