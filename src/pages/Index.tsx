@@ -41,6 +41,9 @@ const Index = () => {
         <section id="about">
           <Hero />
         </section>
+        <section id="featured">
+          <FeaturedOn />
+        </section>
         <section id="skills">
           <Expertise />
           <ToolsProficiencyRadar />
@@ -51,9 +54,6 @@ const Index = () => {
         <section id="stories">
           <CaseStudies />
           <Testimonials />
-        </section>
-        <section id="featured">
-          <FeaturedOn />
         </section>
         <section id="contact">
           <Footer />
