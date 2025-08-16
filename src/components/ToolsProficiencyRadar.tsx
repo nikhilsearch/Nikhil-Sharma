@@ -84,12 +84,12 @@ const ToolsProficiencyRadar = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/5">
+    <section className="py-20 px-4 bg-gradient-to-br from-background via-muted/10 to-primary/5">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
             <span className="text-foreground">SEO & AI Tools</span>{" "}
-            <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Proficiency</span>
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">Proficiency</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Interactive visualization of professional expertise across essential SEO and AI tools
@@ -99,23 +99,43 @@ const ToolsProficiencyRadar = () => {
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* Radar Chart */}
           <div className="flex-1 w-full">
-            <Card className="bg-card/30 backdrop-blur-md border border-white/10 overflow-hidden">
-              <CardContent className="p-8">
+            <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
+              <CardContent className="p-8 relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
                 <svg 
                   width="600" 
                   height="500" 
                   viewBox="0 0 600 500"
-                  className={`w-full h-auto transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                  className={`w-full h-auto transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                 >
+                  {/* Gradient Definitions */}
+                  <defs>
+                    <radialGradient id="chartGradient" cx="300" cy="250" r="120">
+                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+                      <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+                      <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                    </radialGradient>
+                    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
+                      <stop offset="50%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.4" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Background Glow */}
+                  <circle cx="300" cy="250" r="120" fill="url(#chartGradient)" />
+                  
                   {/* Background Grid */}
                   {gridLines.map((grid, index) => (
                     <polygon
                       key={index}
                       points={grid.points}
                       fill="none"
-                      stroke="hsl(var(--border))"
-                      strokeWidth="1"
-                      opacity={grid.opacity}
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="2"
+                      opacity={0.3 - (index * 0.05)}
+                      className="animate-pulse"
+                      style={{ animationDelay: `${index * 0.2}s` }}
                     />
                   ))}
                   
@@ -127,39 +147,54 @@ const ToolsProficiencyRadar = () => {
                       y1="250"
                       x2={point.labelX}
                       y2={point.labelY}
-                      stroke="hsl(var(--border))"
-                      strokeWidth="1"
-                      opacity="0.3"
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="2"
+                      opacity="0.4"
+                      className="transition-all duration-300 hover:opacity-60"
                     />
                   ))}
                   
                   {/* Proficiency Area */}
                   <polygon
                     points={pathPoints}
-                    fill="hsl(var(--primary))"
-                    fillOpacity="0.3"
+                    fill="url(#areaGradient)"
                     stroke="hsl(var(--primary))"
-                    strokeWidth="2"
+                    strokeWidth="3"
                     className={`transition-all duration-1000 ${isVisible ? 'animate-scale-in' : ''}`}
+                    filter="drop-shadow(0 0 20px hsl(var(--primary) / 0.3))"
                   />
                   
                   {/* Data Points */}
                   {radarPoints.map((point, index) => (
-                    <circle
-                      key={index}
-                      cx={point.x}
-                      cy={point.y}
-                      r={hoveredTool === point.tool.name ? "6" : "4"}
-                      fill={getCategoryColor(point.tool.category)}
-                      stroke="white"
-                      strokeWidth="2"
-                      className="transition-all duration-200 cursor-pointer"
-                      style={{
-                        filter: hoveredTool === point.tool.name ? 'drop-shadow(0 0 8px currentColor)' : 'none'
-                      }}
-                      onMouseEnter={() => setHoveredTool(point.tool.name)}
-                      onMouseLeave={() => setHoveredTool(null)}
-                    />
+                    <g key={index}>
+                      {/* Outer Glow Ring */}
+                      <circle
+                        cx={point.x}
+                        cy={point.y}
+                        r={hoveredTool === point.tool.name ? "12" : "8"}
+                        fill={getCategoryColor(point.tool.category)}
+                        opacity="0.2"
+                        className="transition-all duration-300 animate-pulse"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      />
+                      {/* Main Point */}
+                      <circle
+                        cx={point.x}
+                        cy={point.y}
+                        r={hoveredTool === point.tool.name ? "7" : "5"}
+                        fill={getCategoryColor(point.tool.category)}
+                        stroke="hsl(var(--background))"
+                        strokeWidth="3"
+                        className="transition-all duration-200 cursor-pointer hover-scale"
+                        style={{
+                          filter: hoveredTool === point.tool.name 
+                            ? `drop-shadow(0 0 15px ${getCategoryColor(point.tool.category)})` 
+                            : `drop-shadow(0 0 5px ${getCategoryColor(point.tool.category)})`
+                        }}
+                        onMouseEnter={() => setHoveredTool(point.tool.name)}
+                        onMouseLeave={() => setHoveredTool(null)}
+                      />
+                    </g>
                   ))}
                   
                   {/* Tool Labels */}
@@ -172,10 +207,14 @@ const ToolsProficiencyRadar = () => {
                       dominantBaseline={point.labelY > 200 ? "hanging" : point.labelY < 200 ? "text-bottom" : "central"}
                       fill="hsl(var(--foreground))"
                       fontSize="13"
-                      fontWeight={hoveredTool === point.tool.name ? "600" : "400"}
-                      className={`transition-all duration-200 cursor-pointer ${
+                      fontWeight={hoveredTool === point.tool.name ? "700" : "500"}
+                      className={`transition-all duration-200 cursor-pointer story-link ${
                         hoveredTool === point.tool.name ? 'text-primary' : ''
                       }`}
+                      style={{
+                        filter: hoveredTool === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
+                        textShadow: hoveredTool === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
+                      }}
                       onMouseEnter={() => setHoveredTool(point.tool.name)}
                       onMouseLeave={() => setHoveredTool(null)}
                     >
