@@ -113,9 +113,9 @@ const ToolsProficiencyRadar = () => {
                       key={index}
                       points={grid.points}
                       fill="none"
-                      stroke="hsl(var(--border))"
-                      strokeWidth="1"
-                      opacity={grid.opacity}
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="2"
+                      opacity="0.4"
                     />
                   ))}
                   
