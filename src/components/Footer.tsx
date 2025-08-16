@@ -122,7 +122,7 @@ const Footer = () => {
             <h4 className="text-foreground font-medium mb-4">Socials</h4>
             <div className="flex gap-4">
               <a 
-                href="https://twitter.com" 
+                href="https://x.com/imnikhill10" 
                 className="flex items-center gap-2 hover:text-primary transition-colors hover:scale-110 transform duration-200"
               >
                 <Twitter className="w-5 h-5" />
