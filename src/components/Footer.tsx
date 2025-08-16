@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Phone, MessageCircle, Send } from "lucide-react";
+import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Phone, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const [subscribeEmail, setSubscribeEmail] = useState("");
   const { toast } = useToast();
   const email = "imnikhil10@outlook.com";
   const phoneNumber = "+91-9680514780";
@@ -21,25 +19,6 @@ const Footer = () => {
 
   const handleGetInTouch = () => {
     window.open(`mailto:${email}?subject=Let's Work Together - Project Inquiry&body=Hi Nikhil,%0D%0A%0D%0AI'd like to discuss a potential project with you.%0D%0A%0D%0ABest regards,`, '_blank');
-  };
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!subscribeEmail) {
-      toast({
-        title: "Email Required",
-        description: "Please enter your email address to subscribe.",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    // Here you would typically send the email to your newsletter service
-    toast({
-      title: "Successfully Subscribed!",
-      description: "You'll receive the latest SEO trends and insights.",
-    });
-    setSubscribeEmail("");
   };
 
   return (
@@ -62,8 +41,8 @@ const Footer = () => {
         >
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
             {/* Profile Section */}
-            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
-              <div className="relative group flex-shrink-0">
+            <div className="flex items-center gap-6">
+              <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <img
                   src="/lovable-uploads/209a2e34-b533-4448-a499-e64d4c9cdf98.png"
@@ -71,9 +50,9 @@ const Footer = () => {
                   className="relative w-20 h-20 object-cover rounded-full border-2 border-white/20"
                 />
               </div>
-              <div className="text-center sm:text-left">
-                <h3 className="text-2xl font-bold text-foreground mb-3">Let's work together!</h3>
-                <div className="flex flex-col sm:flex-row items-center gap-3">
+              <div>
+                <h3 className="text-2xl font-bold text-foreground mb-2">Let's work together!</h3>
+                <div className="flex items-center gap-4">
                   <a 
                     href={`https://wa.me/919680514780`}
                     target="_blank"
@@ -81,14 +60,14 @@ const Footer = () => {
                     className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors group"
                   >
                     <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-medium">WhatsApp</span>
+                    <span className="text-sm">WhatsApp</span>
                   </a>
                   <a 
                     href={`tel:${phoneNumber}`}
                     className="flex items-center gap-2 text-blue-500 hover:text-blue-400 transition-colors group"
                   >
                     <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-medium">Call</span>
+                    <span className="text-sm">Call</span>
                   </a>
                 </div>
               </div>
@@ -115,9 +94,8 @@ const Footer = () => {
           </div>
         </div>
 
-
         {/* Bottom Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-muted-foreground">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-muted-foreground">
           {/* About */}
           <div className="space-y-2">
             <p className="text-foreground font-medium">SEO Expert | Dynamic Lead</p>
@@ -142,10 +120,10 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Socials & Subscribe */}
+          {/* Socials */}
           <div>
             <h4 className="text-foreground font-medium mb-4">Socials</h4>
-            <div className="flex gap-4 mb-6">
+            <div className="flex gap-4">
               <a 
                 href="https://x.com/imnikhill10" 
                 className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-all hover:scale-110 transform duration-200 group"
@@ -168,24 +146,6 @@ const Footer = () => {
                 <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">LinkedIn</span>
               </a>
             </div>
-            
-            {/* Subscribe Form */}
-            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 w-full max-w-sm">
-              <Input
-                type="email"
-                placeholder="Enter your email address"
-                value={subscribeEmail}
-                onChange={(e) => setSubscribeEmail(e.target.value)}
-                className="flex-1 bg-background/50 border-white/20 focus:border-primary/50 rounded-xl"
-              />
-              <Button
-                type="submit"
-                className="bg-gradient-to-r from-primary to-purple-400 text-white hover:from-primary/80 hover:to-purple-400/80 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-primary/50 rounded-xl px-6 flex items-center gap-2 whitespace-nowrap"
-              >
-                <Send className="w-4 h-4" />
-                Subscribe
-              </Button>
-            </form>
           </div>
         </div>
       </div>
