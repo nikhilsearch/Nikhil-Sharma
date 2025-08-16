@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import ContactForm from "./ContactForm";
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const { toast } = useToast();
   const email = "imnikhil10@outlook.com";
 
@@ -16,18 +18,8 @@ const Footer = () => {
     second: '2-digit'
   });
 
-  const handleGetInTouch = async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-      toast({
-        title: "Email copied!",
-        description: `${email} has been copied to your clipboard.`,
-        duration: 3000,
-      });
-    } catch (err) {
-      // Fallback for browsers that don't support clipboard API
-      window.open(`mailto:${email}`, '_blank');
-    }
+  const handleGetInTouch = () => {
+    setIsContactFormOpen(true);
   };
 
   return (
@@ -84,7 +76,7 @@ const Footer = () => {
                 onClick={handleGetInTouch}
                 className="bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-purple-400/50 rounded-xl px-8 py-3 flex items-center gap-2"
               >
-                <Copy className="w-4 h-4" />
+                <Mail className="w-4 h-4" />
                 Get in touch
               </Button>
             </div>
@@ -162,6 +154,12 @@ const Footer = () => {
           />
         ))}
       </div>
+      
+      {/* Contact Form Modal */}
+      <ContactForm 
+        isOpen={isContactFormOpen} 
+        onOpenChange={setIsContactFormOpen} 
+      />
     </footer>
   );
 };

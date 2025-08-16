@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Eye } from "lucide-react";
+import ContactForm from "./ContactForm";
 
 // Eye component with blinking animation
 const BlinkingEye = () => {
@@ -27,6 +28,11 @@ const BlinkingEye = () => {
 };
 
 const Testimonials = () => {
+  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  
+  const handleGetFreeAudit = () => {
+    setIsContactFormOpen(true);
+  };
   const testimonials = [
     {
       name: "Vishnu Sudevan",
@@ -140,14 +146,20 @@ const Testimonials = () => {
           <p className="text-lg text-muted-foreground mb-6">
             Ready to join our satisfied clients and transform your SEO results?
           </p>
-          <a 
-            href="#contact" 
+          <button 
+            onClick={handleGetFreeAudit}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-primary/90 hover:to-purple-600/90 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             Get Your Free SEO Audit
             <Eye className="w-5 h-5" />
-          </a>
+          </button>
         </div>
+        
+        {/* Contact Form Modal */}
+        <ContactForm 
+          isOpen={isContactFormOpen} 
+          onOpenChange={setIsContactFormOpen} 
+        />
       </div>
     </section>
   );
