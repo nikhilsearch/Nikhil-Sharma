@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Phone, MessageCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Phone, MessageCircle, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [subscribeEmail, setSubscribeEmail] = useState("");
   const { toast } = useToast();
   const email = "imnikhil10@outlook.com";
   const phoneNumber = "+91-9680514780";
@@ -19,6 +21,25 @@ const Footer = () => {
 
   const handleGetInTouch = () => {
     window.open(`mailto:${email}?subject=Let's Work Together - Project Inquiry&body=Hi Nikhil,%0D%0A%0D%0AI'd like to discuss a potential project with you.%0D%0A%0D%0ABest regards,`, '_blank');
+  };
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!subscribeEmail) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address to subscribe.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Here you would typically send the email to your newsletter service
+    toast({
+      title: "Successfully Subscribed!",
+      description: "You'll receive the latest SEO trends and insights.",
+    });
+    setSubscribeEmail("");
   };
 
   return (
@@ -94,8 +115,34 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Newsletter Subscribe Section */}
+        <div className="mt-12 mb-8">
+          <div className="backdrop-blur-lg bg-white/5 dark:bg-black/10 border border-white/10 rounded-2xl p-6">
+            <div className="text-center mb-6">
+              <h4 className="text-xl font-bold text-foreground mb-2">Stay Updated</h4>
+              <p className="text-muted-foreground">Get the latest SEO trends, insights, and strategies delivered to your inbox</p>
+            </div>
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <Input
+                type="email"
+                placeholder="Enter your email address"
+                value={subscribeEmail}
+                onChange={(e) => setSubscribeEmail(e.target.value)}
+                className="flex-1 bg-background/50 border-white/20 focus:border-primary/50"
+              />
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-primary to-purple-400 text-white hover:from-primary/80 hover:to-purple-400/80 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-primary/50 rounded-xl px-6 flex items-center gap-2"
+              >
+                <Send className="w-4 h-4" />
+                Subscribe
+              </Button>
+            </form>
+          </div>
+        </div>
+
         {/* Bottom Section */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-muted-foreground">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-muted-foreground">
           {/* About */}
           <div className="space-y-2">
             <p className="text-foreground font-medium">SEO Expert | Dynamic Lead</p>
