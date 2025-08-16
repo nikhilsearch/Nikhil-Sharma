@@ -127,9 +127,9 @@ const ToolsProficiencyRadar = () => {
                       y1="250"
                       x2={point.labelX}
                       y2={point.labelY}
-                      stroke="hsl(var(--border))"
-                      strokeWidth="1"
-                      opacity="0.3"
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="1.5"
+                      opacity="0.6"
                     />
                   ))}
                   
