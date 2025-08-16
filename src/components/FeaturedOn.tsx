@@ -33,122 +33,125 @@ const featuredData = [
 
 const FeaturedOn = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % featuredData.length);
+      if (!isHovered) {
+        setCurrentIndex((prev) => (prev + 1) % featuredData.length);
+      }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovered]);
 
   return (
-    <section className="py-16 bg-gradient-to-r from-background to-muted/20 overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+    <section className="py-20 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5 animate-gradient bg-[length:400%_400%]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--primary)_0%,_transparent_50%)] opacity-20" />
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-block mb-4">
+            <span className="px-4 py-2 bg-primary/10 text-primary text-sm font-medium rounded-full border border-primary/20">
+              ✨ Trusted by Industry Leaders
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent mb-6">
             As Featured On
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Trusted insights and expertise recognized by leading industry publications
           </p>
         </div>
 
-        {/* Floating Animation Container */}
-        <div className="relative h-40 overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
-            {featuredData.map((item, index) => {
-              const isActive = index === currentIndex;
-              const isPrev = index === (currentIndex - 1 + featuredData.length) % featuredData.length;
-              const isNext = index === (currentIndex + 1) % featuredData.length;
-              
-              let translateX = '100%';
-              let opacity = 0;
-              let scale = 0.8;
-              
-              if (isActive) {
-                translateX = '0%';
-                opacity = 1;
-                scale = 1;
-              } else if (isPrev) {
-                translateX = '-100%';
-                opacity = 0.6;
-                scale = 0.8;
-              } else if (isNext) {
-                translateX = '100%';
-                opacity = 0.6;
-                scale = 0.8;
-              }
-
-              return (
-                <div
-                  key={item.name}
-                  className="absolute inset-0 flex items-center justify-center transition-all duration-1000 ease-in-out"
-                  style={{
-                    transform: `translateX(${translateX}) scale(${scale})`,
-                    opacity,
-                  }}
-                >
-                  <a
-                    href={item.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center gap-4 p-8 bg-card/80 backdrop-blur-sm rounded-2xl border border-border/50 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:scale-105"
-                  >
-                    <div className="w-32 h-32 flex items-center justify-center p-4 bg-background rounded-xl border border-border group-hover:border-primary/50 transition-all duration-300">
-                      <img
-                        src={item.logo}
-                        alt={`${item.name} logo`}
-                        className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                      />
-                    </div>
-                    <div className="text-center">
-                      <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {item.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {item.description}
-                      </p>
-                    </div>
-                  </a>
+        {/* Interactive Feature Cards */}
+        <div className="relative mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {featuredData.map((item, index) => (
+              <div
+                key={item.name}
+                className={`group relative p-6 bg-card/80 backdrop-blur-sm rounded-2xl border transition-all duration-500 hover:scale-105 hover:rotate-1 cursor-pointer animate-fade-in ${
+                  index === currentIndex 
+                    ? 'border-primary/50 shadow-lg shadow-primary/20' 
+                    : 'border-border/50 hover:border-primary/30'
+                }`}
+                style={{ animationDelay: `${index * 100}ms` }}
+                onMouseEnter={() => {
+                  setIsHovered(true);
+                  setCurrentIndex(index);
+                }}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={() => window.open(item.url, '_blank')}
+              >
+                {/* Glow Effect */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                
+                <div className="relative z-10">
+                  <div className="w-20 h-20 mx-auto mb-4 p-3 bg-background/80 rounded-xl border border-border group-hover:border-primary/50 transition-all duration-300 group-hover:shadow-lg">
+                    <img
+                      src={item.logo}
+                      alt={`${item.name} logo`}
+                      className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-110"
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300 mb-2">
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                    {item.description}
+                  </p>
                 </div>
-              );
-            })}
+
+                {/* Corner Accent */}
+                <div className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Floating Indicators */}
-        <div className="flex justify-center gap-2 mt-8">
+        {/* Interactive Indicators */}
+        <div className="flex justify-center gap-3 mb-16">
           {featuredData.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`relative w-4 h-4 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? 'bg-primary shadow-lg scale-125'
-                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  ? 'bg-primary shadow-lg scale-125' 
+                  : 'bg-muted-foreground/30 hover:bg-muted-foreground/50 hover:scale-110'
               }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
+              aria-label={`Go to feature ${index + 1}`}
+            >
+              {index === currentIndex && (
+                <div className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75" />
+              )}
+            </button>
           ))}
         </div>
 
-        {/* Horizontal Walking Animation */}
-        <div className="mt-16 relative overflow-hidden">
-          <div className="flex animate-[scroll_30s_linear_infinite] whitespace-nowrap">
+        {/* Enhanced Scrolling Strip */}
+        <div className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
+          
+          <div className="flex animate-[scroll_25s_linear_infinite] hover:pause">
             {[...featuredData, ...featuredData, ...featuredData].map((item, index) => (
               <a
                 key={`${item.name}-${index}`}
                 href={item.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-4 mx-8 p-4 bg-card/50 rounded-xl border border-border/30 hover:border-primary/50 transition-all duration-300 hover:scale-110 group"
+                className="inline-flex items-center gap-4 mx-6 p-4 bg-card/60 backdrop-blur-sm rounded-xl border border-border/30 hover:border-primary/50 transition-all duration-300 hover:scale-110 hover:bg-card/80 group whitespace-nowrap"
               >
-                <img
-                  src={item.logo}
-                  alt={`${item.name} logo`}
-                  className="w-12 h-12 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                />
+                <div className="w-12 h-12 p-2 bg-background/80 rounded-lg border border-border group-hover:border-primary/50 transition-all duration-300">
+                  <img
+                    src={item.logo}
+                    alt={`${item.name} logo`}
+                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                  />
+                </div>
                 <span className="text-foreground font-medium group-hover:text-primary transition-colors">
                   {item.name}
                 </span>
