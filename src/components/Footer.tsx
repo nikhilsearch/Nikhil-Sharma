@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Clock, MapPin, Twitter, Github, Linkedin } from "lucide-react";
+import { Mail, Clock, MapPin, Twitter, Github, Linkedin, Phone, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Footer = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { toast } = useToast();
   const email = "imnikhil10@outlook.com";
+  const phoneNumber = "+91-9680514780";
 
   const currentTime = new Date().toLocaleTimeString('en-US', {
     timeZone: 'Asia/Kolkata',
@@ -55,6 +56,24 @@ const Footer = () => {
                   <Mail className="w-4 h-4" />
                   <a href={`mailto:${email}`} className="hover:underline">
                     {email}
+                  </a>
+                </div>
+                <div className="flex items-center gap-4 mt-2">
+                  <a 
+                    href={`https://wa.me/919680514780`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors group"
+                  >
+                    <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <span className="text-sm">WhatsApp</span>
+                  </a>
+                  <a 
+                    href={`tel:${phoneNumber}`}
+                    className="flex items-center gap-2 text-blue-500 hover:text-blue-400 transition-colors group"
+                  >
+                    <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                    <span className="text-sm">Call</span>
                   </a>
                 </div>
               </div>
