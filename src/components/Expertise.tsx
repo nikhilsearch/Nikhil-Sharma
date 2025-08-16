@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
 import { TrendingUp, Users, Award, Target } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Arrow from "@/components/Arrow";
 
 const Expertise = () => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -135,56 +136,15 @@ const Expertise = () => {
 
         {/* SEO Skills Framework Header */}
         <div className="text-center mb-6 md:mb-8">
-          <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-sm md:max-w-md mx-auto">
+          <div id="skills-framework" className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all duration-300 max-w-sm md:max-w-md mx-auto">
             <h3 className="text-xl md:text-3xl font-bold text-foreground">SEO Skills Framework</h3>
           </div>
         </div>
 
-        {/* Curved Arrow Connections */}
-        <div className="relative mb-4 md:mb-6">
-          <svg className="w-full h-24 md:h-32" viewBox="0 0 800 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Main stem down from SEO Skills Framework */}
-            <path 
-              d="M400 10 L400 40" 
-              stroke="url(#gradient1)" 
-              strokeWidth="2" 
-              className="animate-pulse"
-            />
-            
-            {/* Curved paths to Core and Advanced Skills - precisely positioned */}
-            <path 
-              d="M400 40 Q400 55 200 70 L200 110" 
-              stroke="url(#gradient2)" 
-              strokeWidth="2" 
-              className="hover:stroke-[3] transition-all duration-300"
-            />
-            <path 
-              d="M400 40 Q400 55 600 70 L600 110" 
-              stroke="url(#gradient3)" 
-              strokeWidth="2" 
-              className="hover:stroke-[3] transition-all duration-300"
-            />
-            
-            {/* Arrow heads pointing to skill category boxes */}
-            <polygon points="196,106 200,114 204,106" fill="url(#gradient2)" className="animate-bounce" />
-            <polygon points="596,106 600,114 604,106" fill="url(#gradient3)" className="animate-bounce" />
-            
-            {/* Gradient definitions */}
-            <defs>
-              <linearGradient id="gradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-              </linearGradient>
-              <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="rgb(34, 197, 94)" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="rgb(16, 185, 129)" stopOpacity="0.6" />
-              </linearGradient>
-              <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="rgb(59, 130, 246)" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="rgb(14, 165, 233)" stopOpacity="0.6" />
-              </linearGradient>
-            </defs>
-          </svg>
+        {/* Dynamic Arrow Connections */}
+        <div className="relative mb-4 md:mb-6 h-32">
+          <Arrow fromId="skills-framework" toId="core-skills" variant="core" />
+          <Arrow fromId="skills-framework" toId="advanced-skills" variant="advanced" />
         </div>
 
         {/* Core and Advanced Skills Categories */}
@@ -193,7 +153,7 @@ const Expertise = () => {
           {/* Core Skills Section */}
           <section className="space-y-6 md:space-y-8">
             <header className="text-center">
-              <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300">
+              <div id="core-skills" className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-300">
                 <h3 className="text-lg md:text-2xl font-bold text-foreground">Core Skills</h3>
               </div>
               {/* Interactive Arrow to Core Skills */}
@@ -256,7 +216,7 @@ const Expertise = () => {
           {/* Advanced Skills Section */}
           <section className="space-y-6 md:space-y-8">
             <header className="text-center">
-              <div className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+              <div id="advanced-skills" className="bg-card/80 backdrop-blur-md border-2 border-border/50 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-6 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
                 <h3 className="text-lg md:text-2xl font-bold text-foreground">Advanced Skills</h3>
               </div>
               {/* Interactive Arrow to Advanced Skills */}
