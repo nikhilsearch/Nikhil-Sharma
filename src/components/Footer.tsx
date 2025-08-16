@@ -52,13 +52,7 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">Let's work together!</h3>
-                <div className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-                  <Mail className="w-4 h-4" />
-                  <a href={`mailto:${email}`} className="hover:underline">
-                    {email}
-                  </a>
-                </div>
-                <div className="flex items-center gap-4 mt-2">
+                <div className="flex items-center gap-4">
                   <a 
                     href={`https://wa.me/919680514780`}
                     target="_blank"
