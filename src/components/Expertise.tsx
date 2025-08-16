@@ -141,33 +141,33 @@ const Expertise = () => {
         </div>
 
         {/* Curved Arrow Connections */}
-        <div className="relative mb-8 md:mb-12">
-          <svg className="w-full h-32 md:h-40" viewBox="0 0 800 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-            {/* Main stem down from header */}
+        <div className="relative mb-4 md:mb-6">
+          <svg className="w-full h-24 md:h-32" viewBox="0 0 800 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Main stem down from SEO Skills Framework */}
             <path 
-              d="M400 20 L400 60" 
+              d="M400 10 L400 40" 
               stroke="url(#gradient1)" 
               strokeWidth="2" 
               className="animate-pulse"
             />
             
-            {/* Curved paths to Core and Advanced Skills */}
+            {/* Curved paths to Core and Advanced Skills - precisely positioned */}
             <path 
-              d="M400 60 Q400 80 200 100 L200 140" 
+              d="M400 40 Q400 55 200 70 L200 110" 
               stroke="url(#gradient2)" 
               strokeWidth="2" 
               className="hover:stroke-[3] transition-all duration-300"
             />
             <path 
-              d="M400 60 Q400 80 600 100 L600 140" 
+              d="M400 40 Q400 55 600 70 L600 110" 
               stroke="url(#gradient3)" 
               strokeWidth="2" 
               className="hover:stroke-[3] transition-all duration-300"
             />
             
-            {/* Arrow heads */}
-            <polygon points="196,136 200,144 204,136" fill="url(#gradient2)" className="animate-bounce" />
-            <polygon points="596,136 600,144 604,136" fill="url(#gradient3)" className="animate-bounce" />
+            {/* Arrow heads pointing to skill category boxes */}
+            <polygon points="196,106 200,114 204,106" fill="url(#gradient2)" className="animate-bounce" />
+            <polygon points="596,106 600,114 604,106" fill="url(#gradient3)" className="animate-bounce" />
             
             {/* Gradient definitions */}
             <defs>
