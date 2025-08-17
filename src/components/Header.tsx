@@ -15,17 +15,22 @@ const Header = () => {
     { name: "Skills", href: "#skills", id: "skills" },
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Success Stories", href: "#stories", id: "stories" },
+    { name: "Blog", href: "/blog", id: "blog" },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
 
-  // Smooth scroll function
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+  // Smooth scroll function or navigation
+  const handleNavigation = (href: string) => {
+    if (href.startsWith('#')) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    } else {
+      window.location.href = href;
     }
     setIsMenuOpen(false);
   };
@@ -71,7 +76,7 @@ const Header = () => {
             {navigationItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => handleNavigation(item.href)}
                 className={`transition-all duration-300 hover:text-primary font-medium ${
                   activeSection === item.id
                     ? "text-primary border-b-2 border-primary"
@@ -118,7 +123,7 @@ const Header = () => {
               {navigationItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => handleNavigation(item.href)}
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
                     activeSection === item.id
                       ? "text-primary bg-primary/10"
