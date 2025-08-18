@@ -16,40 +16,76 @@ export type Database = {
     Tables: {
       posts: {
         Row: {
+          author_avatar_url: string | null
+          author_bio: string | null
           author_name: string | null
+          auto_save_timestamp: string | null
+          content_html: string | null
           content_markdown: string
           cover_image_url: string | null
           created_at: string
+          draft_data: Json | null
           excerpt: string | null
+          featured_image_alt: string | null
           id: string
+          meta_description: string | null
+          meta_keywords: string | null
+          meta_title: string | null
           published_at: string | null
+          reading_time: number | null
+          schema_data: Json | null
           slug: string
+          social_sharing: Json | null
           status: Database["public"]["Enums"]["post_status"]
           title: string
           updated_at: string
         }
         Insert: {
+          author_avatar_url?: string | null
+          author_bio?: string | null
           author_name?: string | null
+          auto_save_timestamp?: string | null
+          content_html?: string | null
           content_markdown: string
           cover_image_url?: string | null
           created_at?: string
+          draft_data?: Json | null
           excerpt?: string | null
+          featured_image_alt?: string | null
           id?: string
+          meta_description?: string | null
+          meta_keywords?: string | null
+          meta_title?: string | null
           published_at?: string | null
+          reading_time?: number | null
+          schema_data?: Json | null
           slug: string
+          social_sharing?: Json | null
           status?: Database["public"]["Enums"]["post_status"]
           title: string
           updated_at?: string
         }
         Update: {
+          author_avatar_url?: string | null
+          author_bio?: string | null
           author_name?: string | null
+          auto_save_timestamp?: string | null
+          content_html?: string | null
           content_markdown?: string
           cover_image_url?: string | null
           created_at?: string
+          draft_data?: Json | null
           excerpt?: string | null
+          featured_image_alt?: string | null
           id?: string
+          meta_description?: string | null
+          meta_keywords?: string | null
+          meta_title?: string | null
           published_at?: string | null
+          reading_time?: number | null
+          schema_data?: Json | null
           slug?: string
+          social_sharing?: Json | null
           status?: Database["public"]["Enums"]["post_status"]
           title?: string
           updated_at?: string
