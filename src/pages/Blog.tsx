@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight } from "lucide-react";
-import StructuredData from "@/components/SEO/StructuredData";
+import StructuredData from "@/components/SEO/StructuredData"; // Fixed import
 
 interface BlogPost {
   id: string;

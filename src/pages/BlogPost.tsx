@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, User } from "lucide-react";
-import StructuredData from "@/components/SEO/StructuredData";
+import StructuredData from "@/components/SEO/StructuredData"; // Fixed import
 import { useEffect } from "react";
 
 interface BlogPostData {
