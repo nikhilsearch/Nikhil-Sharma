@@ -22,7 +22,7 @@ const ToolsProficiencyRadar = () => {
     { name: 'Google Sheets', category: 'analytics' },
     { name: 'ChatGPT', category: 'ai' },
     { name: 'Perplexity', category: 'ai' },
-    {name: 'Gemini', category: 'ai' },
+    {name: 'Google Gemini', category: 'ai' },
     { name: 'Claude', category: 'ai' },
     { name: 'Lumar', category: 'seo' },
     { name: 'Sitebulb', category: 'seo' }
