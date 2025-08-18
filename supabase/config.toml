@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.update-post]
 verify_jwt = false
+
+[functions.tinymce-key]
+verify_jwt = false
