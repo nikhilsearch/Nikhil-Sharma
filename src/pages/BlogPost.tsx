@@ -184,53 +184,70 @@ const BlogPost = () => {
   };
 
   const formatContent = (content: string) => {
-    // Add proper IDs to headings for table of contents
-    let formattedContent = content
-      // Convert H2 headings with proper IDs
-      .replace(/## Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy/g, '<h2 id="beyond-clicks">Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy</h2>')
-      .replace(/## The Psychology Behind AI Search: Why GEO Resonates with Modern Users/g, '<h2 id="psychology-behind-ai-search">The Psychology Behind AI Search: Why GEO Resonates with Modern Users</h2>')
-      .replace(/## Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy/g, '<h2 id="core-pillars">Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy</h2>')
-      .replace(/## Practical Steps to Start Your GEO Journey/g, '<h2 id="practical-steps">Practical Steps to Start Your GEO Journey</h2>')
-      .replace(/## Conclusion/g, '<h2 id="conclusion">Conclusion</h2>')
-      // Convert H3 headings with proper IDs
-      .replace(/### 1\. Create Content for Understanding, Not Just Keywords/g, '<h3 id="create-content-for-understanding">1. Create Content for Understanding, Not Just Keywords</h3>')
-      .replace(/### 2\. Master the Art of Direct, Comprehensive Answers/g, '<h3 id="master-direct-answers">2. Master the Art of Direct, Comprehensive Answers</h3>')
-      .replace(/### 3\. Build Unassailable Authority and Trust/g, '<h3 id="build-authority-trust">3. Build Unassailable Authority and Trust</h3>')
-      .replace(/### 4\. The Technical Backbone: A Clean Website is an AI\'s Best Friend/g, '<h3 id="technical-backbone">4. The Technical Backbone: A Clean Website is an AI\'s Best Friend</h3>')
-      // Bold text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // Convert bullet points to proper lists with bullets
-      .replace(/^• (.*)$/gm, '<li>$1</li>')
-      .replace(/(<li>.*?<\/li>(\n<li>.*?<\/li>)*)/gs, '<ul>$1</ul>')
-      // Convert numbered lists
-      .replace(/^(\d+)\. (.*)$/gm, '<li>$2</li>')
-      .replace(/(<li>.*?<\/li>(\n<li>.*?<\/li>)*)/gs, (match) => {
-        // Check if this is part of the practical steps section
-        if (match.includes('Conduct \"AI-Driven\"') || match.includes('Audit Your Existing') || match.includes('Create a New Content') || match.includes('Monitor AI Overviews') || match.includes('Embrace the Future')) {
-          return `<ol>${match}</ol>`;
-        }
-        return `<ul>${match}</ul>`;
-      })
-      // Handle action items
-      .replace(/\*\*Action Items:\*\*/g, '<h4>Action Items:</h4>')
-      // Convert paragraphs
-      .replace(/\n\n/g, '</p><p>')
-      .replace(/^/, '<p>')
-      .replace(/$/, '</p>')
-      // Clean up empty paragraphs and fix heading formatting
-      .replace(/<p><\/p>/g, '')
-      .replace(/<p>(<h[1-6])/g, '$1')
-      .replace(/(<\/h[1-6])><\/p>/g, '$1>')
-      .replace(/<p>(<ol>)/g, '$1')
-      .replace(/(<\/ol>)<\/p>/g, '$1')
-      .replace(/<p>(<ul>)/g, '$1')
-      .replace(/(<\/ul>)<\/p>/g, '$1')
-      .replace(/<p>(<h4>)/g, '$1')
-      .replace(/(<\/h4>)<\/p>/g, '$1')
-      .replace(/<\/ul>\s*<ul>/g, '') // Merge consecutive lists
-      .replace(/<\/ol>\s*<ol>/g, ''); // Merge consecutive numbered lists
-
-    return formattedContent;
+    // Split content into sections based on double line breaks
+    const sections = content.split('\n\n');
+    
+    return sections.map(section => {
+      const trimmed = section.trim();
+      
+      // Handle H2 headings
+      if (trimmed.startsWith('## ')) {
+        const title = trimmed.replace('## ', '');
+        let id = '';
+        if (title.includes('Beyond Clicks')) id = 'beyond-clicks';
+        else if (title.includes('Psychology Behind')) id = 'psychology-behind-ai-search';
+        else if (title.includes('Your Path')) id = 'core-pillars';
+        else if (title.includes('Practical Steps')) id = 'practical-steps';
+        else if (title.includes('Conclusion')) id = 'conclusion';
+        return `<h2 id="${id}">${title}</h2>`;
+      }
+      
+      // Handle H3 headings
+      if (trimmed.startsWith('### ')) {
+        const title = trimmed.replace('### ', '');
+        let id = '';
+        if (title.includes('1. Create Content')) id = 'create-content-for-understanding';
+        else if (title.includes('2. Master the Art')) id = 'master-direct-answers';
+        else if (title.includes('3. Build Unassailable')) id = 'build-authority-trust';
+        else if (title.includes('4. The Technical')) id = 'technical-backbone';
+        return `<h3 id="${id}">${title}</h3>`;
+      }
+      
+      // Handle Action Items
+      if (trimmed.includes('**Action Items:**')) {
+        return '<h4>Action Items:</h4>';
+      }
+      
+      // Handle bullet lists
+      if (trimmed.includes('• ')) {
+        const items = trimmed.split('\n').map(line => {
+          if (line.trim().startsWith('• ')) {
+            return `<li>${line.replace('• ', '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</li>`;
+          }
+          return '';
+        }).filter(item => item).join('');
+        return `<ul>${items}</ul>`;
+      }
+      
+      // Handle numbered lists (for practical steps)
+      if (trimmed.match(/^\d+\./)) {
+        const items = trimmed.split(/(?=\d+\.)/g).map(item => {
+          if (item.trim()) {
+            const content = item.replace(/^\d+\.\s*/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            return `<li>${content}</li>`;
+          }
+          return '';
+        }).filter(item => item).join('');
+        return `<ol>${items}</ol>`;
+      }
+      
+      // Handle regular paragraphs
+      if (trimmed && !trimmed.startsWith('<')) {
+        return `<p>${trimmed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>`;
+      }
+      
+      return '';
+    }).filter(section => section).join('');
   };
 
   return (
