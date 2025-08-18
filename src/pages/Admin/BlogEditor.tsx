@@ -110,7 +110,7 @@ const BlogEditor = () => {
         // Update existing post
         const { data: result, error } = await supabase.functions.invoke('update-post', {
           body: { ...data, id },
-          headers: { 'x-admin-token': adminToken },
+          headers: { 'x-admin-token': adminToken, 'authorization': `Bearer ${adminToken}` },
         });
 
         if (error) {
@@ -132,7 +132,7 @@ const BlogEditor = () => {
         // Create new post
         const { data: result, error } = await supabase.functions.invoke('create-post', {
           body: data,
-          headers: { 'x-admin-token': adminToken },
+          headers: { 'x-admin-token': adminToken, 'authorization': `Bearer ${adminToken}` },
         });
 
         if (error) {

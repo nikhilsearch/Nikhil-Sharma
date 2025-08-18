@@ -148,7 +148,7 @@ const BlogEditorEnhanced = () => {
           reading_time: readingTimeMinutes,
           draft_data: formData
         },
-        headers: { 'x-admin-token': adminToken },
+        headers: { 'x-admin-token': adminToken, 'authorization': `Bearer ${adminToken}` },
       });
 
       if (!error) {
@@ -239,7 +239,7 @@ const BlogEditorEnhanced = () => {
         
         const { data: result, error } = await supabase.functions.invoke('update-post', {
           body: { ...postData, id },
-          headers: { 'x-admin-token': adminToken },
+          headers: { 'x-admin-token': adminToken, 'authorization': `Bearer ${adminToken}` },
         });
 
         console.log('Update response:', { result, error });
@@ -265,7 +265,7 @@ const BlogEditorEnhanced = () => {
         // Create new post
         const { data: result, error } = await supabase.functions.invoke('create-post', {
           body: postData,
-          headers: { 'x-admin-token': adminToken },
+          headers: { 'x-admin-token': adminToken, 'authorization': `Bearer ${adminToken}` },
         });
 
         if (error) {
