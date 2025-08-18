@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface Tool {
   name: string;
-  proficiency: number; // 0-100
   category: 'seo' | 'ai' | 'analytics';
 }
 
@@ -13,19 +12,19 @@ const ToolsProficiencyRadar = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const tools: Tool[] = [
-    { name: 'Google Search Console', proficiency: 100, category: 'seo' },
-    { name: 'Google Analytics', proficiency: 80, category: 'analytics' },
-    { name: 'Google Tag Manager', proficiency: 70, category: 'analytics' },
-    { name: 'Screaming Frog', proficiency: 90, category: 'seo' },
-    { name: 'Looker Studio', proficiency: 80, category: 'analytics' },
-    { name: 'Ahrefs', proficiency: 90, category: 'seo' },
-    { name: 'Semrush', proficiency: 80, category: 'seo' },
-    { name: 'Google Sheets', proficiency: 80, category: 'analytics' },
-    { name: 'ChatGPT', proficiency: 90, category: 'ai' },
-    { name: 'Perplexity', proficiency: 90, category: 'ai' },
-    { name: 'Claude', proficiency: 90, category: 'ai' },
-    { name: 'Lumar', proficiency: 70, category: 'seo' },
-    { name: 'Sitebulb', proficiency: 70, category: 'seo' }
+    { name: 'Google Search Console', category: 'seo' },
+    { name: 'Google Analytics', category: 'analytics' },
+    { name: 'Google Tag Manager', category: 'analytics' },
+    { name: 'Screaming Frog', category: 'seo' },
+    { name: 'Looker Studio', category: 'analytics' },
+    { name: 'Ahrefs', category: 'seo' },
+    { name: 'Semrush', category: 'seo' },
+    { name: 'Google Sheets', category: 'analytics' },
+    { name: 'ChatGPT', category: 'ai' },
+    { name: 'Perplexity', category: 'ai' },
+    { name: 'Claude', category: 'ai' },
+    { name: 'Lumar', category: 'seo' },
+    { name: 'Sitebulb', category: 'seo' }
   ];
 
   useEffect(() => {
@@ -40,7 +39,7 @@ const ToolsProficiencyRadar = () => {
     
     return tools.map((tool, index) => {
       const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
-      const radius = (tool.proficiency / 100) * maxRadius;
+      const radius = maxRadius; // All tools at max radius since no proficiency
       
       return {
         x: centerX + radius * Math.cos(angle),
@@ -88,11 +87,11 @@ const ToolsProficiencyRadar = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="text-foreground">SEO & AI Tools</span>{" "}
-            <span className="bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">Proficiency</span>
+            <span className="text-foreground">SEO & AI</span>{" "}
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">Tools</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Interactive visualization of professional expertise across essential SEO and AI tools
+            Interactive visualization of professional tools across essential SEO and AI categories
           </p>
         </div>
 
@@ -240,19 +239,6 @@ const ToolsProficiencyRadar = () => {
                     const tool = tools.find(t => t.name === hoveredTool);
                     return tool ? (
                       <div className="space-y-3">
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Proficiency</span>
-                          <span className="text-foreground font-semibold">{tool.proficiency}%</span>
-                        </div>
-                        <div className="w-full bg-muted rounded-full h-2">
-                          <div 
-                            className="h-2 rounded-full transition-all duration-500"
-                            style={{ 
-                              width: `${tool.proficiency}%`,
-                              backgroundColor: getCategoryColor(tool.category)
-                            }}
-                          />
-                        </div>
                         <Badge 
                           variant="outline" 
                           className="capitalize"
