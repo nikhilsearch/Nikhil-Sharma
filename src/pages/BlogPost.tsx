@@ -185,50 +185,123 @@ const BlogPost = () => {
   };
 
   const formatContent = (content: string) => {
-    return content
-      // H2 headings with IDs first
-      .replace(/## Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy/g, '<h2 id="beyond-clicks">Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy</h2>')
-      .replace(/## The Psychology Behind AI Search: Why GEO Resonates with Modern Users/g, '<h2 id="psychology-behind-ai-search">The Psychology Behind AI Search: Why GEO Resonates with Modern Users</h2>')
-      .replace(/## Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy/g, '<h2 id="core-pillars">Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy</h2>')
-      .replace(/## Practical Steps to Start Your GEO Journey/g, '<h2 id="practical-steps">Practical Steps to Start Your GEO Journey</h2>')
-      .replace(/## Conclusion/g, '<h2 id="conclusion">Conclusion</h2>')
+    // Simple and reliable HTML conversion
+    const lines = content.split('\n');
+    const htmlLines = [];
+    let inList = false;
+    let inOrderedList = false;
+    
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
       
-      // H3 headings with IDs
-      .replace(/### 1\. Create Content for Understanding, Not Just Keywords/g, '<h3 id="create-content-for-understanding">1. Create Content for Understanding, Not Just Keywords</h3>')
-      .replace(/### 2\. Master the Art of Direct, Comprehensive Answers/g, '<h3 id="master-direct-answers">2. Master the Art of Direct, Comprehensive Answers</h3>')
-      .replace(/### 3\. Build Unassailable Authority and Trust/g, '<h3 id="build-authority-trust">3. Build Unassailable Authority and Trust</h3>')
-      .replace(/### 4\. The Technical Backbone: A Clean Website is an AI's Best Friend/g, '<h3 id="technical-backbone">4. The Technical Backbone: A Clean Website is an AI\'s Best Friend</h3>')
+      if (!line) {
+        if (inList) {
+          htmlLines.push('</ul>');
+          inList = false;
+        }
+        if (inOrderedList) {
+          htmlLines.push('</ol>');
+          inOrderedList = false;
+        }
+        htmlLines.push('');
+        continue;
+      }
       
-      // Action Items heading
-      .replace(/\*\*Action Items:\*\*/g, '<h4>Action Items:</h4>')
+      // Handle H2 headings
+      if (line.startsWith('## ')) {
+        if (inList) {
+          htmlLines.push('</ul>');
+          inList = false;
+        }
+        if (inOrderedList) {
+          htmlLines.push('</ol>');
+          inOrderedList = false;
+        }
+        const title = line.replace('## ', '');
+        let id = title.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-');
+        htmlLines.push(`<h2 id="${id}">${title}</h2>`);
+        continue;
+      }
       
-      // Bold text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Handle H3 headings  
+      if (line.match(/^\d+\. [A-Z]/)) {
+        if (inList) {
+          htmlLines.push('</ul>');
+          inList = false;
+        }
+        if (inOrderedList) {
+          htmlLines.push('</ol>');
+          inOrderedList = false;
+        }
+        const title = line;
+        let id = title.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-');
+        htmlLines.push(`<h3 id="${id}">${title}</h3>`);
+        continue;
+      }
       
-      // Numbered lists for practical steps
-      .replace(/1\. \*\*Conduct "AI-Driven" User Research\*\*: (.*?)(?=\n\n|2\.)/gs, '<ol><li><strong>Conduct "AI-Driven" User Research</strong>: $1</li>')
-      .replace(/2\. \*\*Audit Your Existing Content\*\*: (.*?)(?=\n\n|3\.)/gs, '<li><strong>Audit Your Existing Content</strong>: $1</li>')
-      .replace(/3\. \*\*Create a New Content Pillar\*\*: (.*?)(?=\n\n|4\.)/gs, '<li><strong>Create a New Content Pillar</strong>: $1</li>')
-      .replace(/4\. \*\*Monitor AI Overviews and Chatbot Responses\*\*: (.*?)(?=\n\n|5\.)/gs, '<li><strong>Monitor AI Overviews and Chatbot Responses</strong>: $1</li>')
-      .replace(/5\. \*\*Embrace the Future\*\*: (.*?)(?=\n\n|##)/gs, '<li><strong>Embrace the Future</strong>: $1</li></ol>')
+      // Handle Action Items
+      if (line === 'Action Items:') {
+        if (inList) {
+          htmlLines.push('</ul>');
+          inList = false;
+        }
+        if (inOrderedList) {
+          htmlLines.push('</ol>');
+          inOrderedList = false;
+        }
+        htmlLines.push('<h4>Action Items:</h4>');
+        continue;
+      }
       
-      // Bullet points for action items
-      .replace(/• \*\*(.*?)\*\*: (.*?)(?=\n• |\n\n)/gs, '<li><strong>$1</strong>: $2</li>')
-      .replace(/(<li><strong>.*?<\/li>\s*)+/g, '<ul>$&</ul>')
+      // Handle bullet points
+      if (line.startsWith('• ')) {
+        if (!inList) {
+          if (inOrderedList) {
+            htmlLines.push('</ol>');
+            inOrderedList = false;
+          }
+          htmlLines.push('<ul>');
+          inList = true;
+        }
+        const content = line.replace('• ', '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        htmlLines.push(`<li>${content}</li>`);
+        continue;
+      }
       
-      // Paragraphs - handle line breaks
-      .replace(/\n\n/g, '</p><p>')
-      .replace(/^(?!<)/, '<p>')
-      .replace(/(?!>)$/, '</p>')
+      // Handle numbered lists (practical steps)
+      if (line.match(/^\d+\. /)) {
+        if (!inOrderedList) {
+          if (inList) {
+            htmlLines.push('</ul>');
+            inList = false;
+          }
+          htmlLines.push('<ol>');
+          inOrderedList = true;
+        }
+        const content = line.replace(/^\d+\. /, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        htmlLines.push(`<li>${content}</li>`);
+        continue;
+      }
       
-      // Clean up formatting
-      .replace(/<p><\/p>/g, '')
-      .replace(/<p>(<h[1-6])/g, '$1')
-      .replace(/(<\/h[1-6]>)<\/p>/g, '$1')
-      .replace(/<p>(<[uo]l)/g, '$1')
-      .replace(/(<\/[uo]l>)<\/p>/g, '$1')
-      .replace(/<p>(<h4)/g, '$1')
-      .replace(/(<\/h4>)<\/p>/g, '$1');
+      // Handle regular paragraphs
+      if (inList) {
+        htmlLines.push('</ul>');
+        inList = false;
+      }
+      if (inOrderedList) {
+        htmlLines.push('</ol>');
+        inOrderedList = false;
+      }
+      
+      const formattedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      htmlLines.push(`<p>${formattedLine}</p>`);
+    }
+    
+    // Close any remaining lists
+    if (inList) htmlLines.push('</ul>');
+    if (inOrderedList) htmlLines.push('</ol>');
+    
+    return htmlLines.join('\n');
   };
 
   return (
