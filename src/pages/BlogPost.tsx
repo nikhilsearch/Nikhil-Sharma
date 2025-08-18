@@ -366,8 +366,65 @@ const BlogPost = () => {
 
                 {/* Main Content */}
                 <div className="lg:col-span-3">
-                  <article className="prose prose-lg max-w-none prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary hover:prose-a:text-primary/80">
-                    <div dangerouslySetInnerHTML={{ __html: blogPost.content.replace(/\n/g, '<br />') }} />
+                  <article className="max-w-none">
+                    <div 
+                      className="blog-content space-y-6"
+                      dangerouslySetInnerHTML={{
+                        __html: blogPost.content
+                          .split('\n\n')
+                          .map(paragraph => {
+                            // Handle headings
+                            if (paragraph.startsWith('## ')) {
+                              const id = paragraph.slice(3).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                              return `<h2 id="${id}" class="text-2xl lg:text-3xl font-bold text-foreground mt-12 mb-6 scroll-mt-24">${paragraph.slice(3)}</h2>`;
+                            }
+                            if (paragraph.startsWith('### ')) {
+                              const id = paragraph.slice(4).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                              return `<h3 id="${id}" class="text-xl lg:text-2xl font-semibold text-foreground mt-8 mb-4 scroll-mt-24">${paragraph.slice(4)}</h3>`;
+                            }
+                            
+                            // Handle action items section
+                            if (paragraph.includes('**Action Items:**')) {
+                              const parts = paragraph.split('**Action Items:**');
+                              return `${parts[0] ? `<p class="text-base lg:text-lg text-muted-foreground leading-relaxed mb-4">${parts[0]}</p>` : ''}<h4 class="text-lg font-semibold text-foreground mt-6 mb-4">Action Items:</h4>`;
+                            }
+                            
+                            // Handle bullet points with bold text
+                            if (paragraph.includes('- **')) {
+                              const items = paragraph.split('\n').map(item => {
+                                if (item.startsWith('- **') && item.includes('**:')) {
+                                  const [title, ...desc] = item.slice(2).split('**:');
+                                  return `<li class="mb-3"><strong class="text-foreground font-semibold">${title.slice(2)}</strong>: ${desc.join('**:')}</li>`;
+                                } else if (item.startsWith('- ')) {
+                                  return `<li class="mb-2">${item.slice(2)}</li>`;
+                                }
+                                return '';
+                              }).filter(item => item.startsWith('<li'));
+                              return `<ul class="space-y-2 my-6 pl-6 list-disc marker:text-primary">${items.join('')}</ul>`;
+                            }
+                            
+                            // Handle step lists
+                            if (paragraph.includes('**Step ')) {
+                              const steps = paragraph.split('\n\n').map(step => {
+                                if (step.startsWith('**Step ')) {
+                                  const [title, ...desc] = step.split('**:');
+                                  return `<li class="mb-4"><strong class="text-foreground font-semibold">${title.slice(2)}</strong>: ${desc.join('**:')}</li>`;
+                                }
+                                return '';
+                              }).filter(item => item);
+                              return `<ol class="space-y-3 my-6 pl-6 list-decimal marker:text-primary">${steps.join('')}</ol>`;
+                            }
+                            
+                            // Handle regular paragraphs
+                            if (paragraph.trim() && !paragraph.startsWith('#')) {
+                              return `<p class="text-base lg:text-lg text-muted-foreground leading-relaxed mb-6">${paragraph}</p>`;
+                            }
+                            
+                            return '';
+                          })
+                          .join('')
+                      }}
+                    />
                   </article>
                   
                   {/* Tags */}

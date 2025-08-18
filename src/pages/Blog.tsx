@@ -14,8 +14,8 @@ import StructuredData from "@/components/SEO/StructuredData";
 // Sample blog data - replace with real data from your CMS/API
 const featuredPost = {
   id: "featured-1",
-  title: "Advanced SEO Strategies for 2025: AI-Powered Optimization",
-  excerpt: "Discover how AI is revolutionizing SEO and learn advanced strategies to boost your organic traffic by 300%+",
+  title: "What Is Generative Engine Optimization",
+  excerpt: "Are You Ready to Future-Proof Your Brand? The Invisible Revolution of Generative Engine Optimization is Here",
   author: {
     name: "Nikhil Sharma",
     avatar: "/lovable-uploads/841ad87e-550c-470b-bbf2-4286877526c9.png",
@@ -23,84 +23,42 @@ const featuredPost = {
   },
   category: "SEO",
   date: "2025-01-15",
-  readTime: "8min read",
+  readTime: "12min read",
   image: "/lovable-uploads/ce220e1a-ebc4-44ea-ad0a-b9b052690dad.png",
-  slug: "advanced-seo-strategies-2025"
+  slug: "what-is-generative-engine-optimization"
 };
 
 const recentPosts = [
   {
     id: "1",
-    title: "Content Marketing ROI: How to Measure and Improve Performance",
-    excerpt: "Learn proven strategies to track and optimize your content marketing ROI with data-driven insights.",
+    title: "What Is Generative Engine Optimization",
+    excerpt: "Are You Ready to Future-Proof Your Brand? The Invisible Revolution of Generative Engine Optimization is Here",
     author: {
       name: "Nikhil Sharma",
       avatar: "/lovable-uploads/841ad87e-550c-470b-bbf2-4286877526c9.png"
     },
-    category: "Content Marketing",
-    date: "2025-01-10",
-    readTime: "6min read",
-    image: "/lovable-uploads/d51feb89-7e27-4c22-a309-218e50771efd.png",
-    slug: "content-marketing-roi-measurement"
-  },
-  {
-    id: "2", 
-    title: "Social Media Marketing Trends That Will Dominate 2025",
-    excerpt: "Stay ahead of the curve with these emerging social media trends and platforms that savvy marketers are already leveraging.",
-    author: {
-      name: "Nikhil Sharma",
-      avatar: "/lovable-uploads/841ad87e-550c-470b-bbf2-4286877526c9.png"
-    },
-    category: "Social Media",
-    date: "2025-01-08",
-    readTime: "5min read",
-    image: "/lovable-uploads/d2660981-df09-44a7-a121-b45a0e93a84b.png",
-    slug: "social-media-trends-2025"
-  },
-  {
-    id: "3",
-    title: "Email Marketing Automation: Complete Guide to Drip Campaigns",
-    excerpt: "Build high-converting email sequences that nurture leads and drive sales with advanced automation strategies.",
-    author: {
-      name: "Nikhil Sharma", 
-      avatar: "/lovable-uploads/841ad87e-550c-470b-bbf2-4286877526c9.png"
-    },
-    category: "Email Marketing",
-    date: "2025-01-05",
-    readTime: "7min read",
-    image: "/lovable-uploads/dd6ffc15-a466-42d6-806a-b1e09afa7961.png",
-    slug: "email-marketing-automation-guide"
+    category: "SEO",
+    date: "2025-01-15",
+    readTime: "12min read",
+    image: "/lovable-uploads/ce220e1a-ebc4-44ea-ad0a-b9b052690dad.png",
+    slug: "what-is-generative-engine-optimization"
   }
 ];
 
 const popularPosts = [
   {
-    id: "4",
-    title: "SEO Case Study: 10x Organic Traffic Growth in 6 Months",
-    excerpt: "Real-world case study showing how strategic SEO implementation led to massive organic growth.",
+    id: "1",
+    title: "What Is Generative Engine Optimization",
+    excerpt: "Are You Ready to Future-Proof Your Brand? The Invisible Revolution of Generative Engine Optimization is Here",
     author: {
       name: "Nikhil Sharma",
       avatar: "/lovable-uploads/841ad87e-550c-470b-bbf2-4286877526c9.png"
     },
-    category: "Case Studies",
-    date: "2024-12-20",
+    category: "SEO",
+    date: "2025-01-15",
     readTime: "12min read",
-    image: "/lovable-uploads/d36fecdb-f8ef-4a23-aacd-99b355b4b622.png",
-    slug: "seo-case-study-10x-growth"
-  },
-  {
-    id: "5",
-    title: "PPC Campaign Optimization: Reducing CPA by 50%",
-    excerpt: "Learn the exact strategies used to dramatically reduce cost-per-acquisition while maintaining quality leads.",
-    author: {
-      name: "Nikhil Sharma",
-      avatar: "/lovable-uploads/841ad87e-550c-470b-bbf2-4286877526c9.png"
-    },
-    category: "PPC",
-    date: "2024-12-15",
-    readTime: "9min read",
-    image: "/lovable-uploads/8dccb528-d5d2-4c33-8f80-15dc3c51f949.png",
-    slug: "ppc-optimization-reduce-cpa"
+    image: "/lovable-uploads/ce220e1a-ebc4-44ea-ad0a-b9b052690dad.png",
+    slug: "what-is-generative-engine-optimization"
   }
 ];
 
