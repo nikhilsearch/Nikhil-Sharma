@@ -23,7 +23,6 @@ import StructuredData from "@/components/SEO/StructuredData";
 const blogPost = {
   id: "what-is-generative-engine-optimization",
   title: "What Is Generative Engine Optimization",
-  subtitle: "Are You Ready to Future-Proof Your Brand? The Invisible Revolution of Generative Engine Optimization is Here",
   excerpt: "Are You Ready to Future-Proof Your Brand? The Invisible Revolution of Generative Engine Optimization is Here",
   content: `Have you ever felt like the digital world is a giant, ever-changing maze? One minute you've mastered the rules, and the next, a new platform or technology appears and changes everything. You've put in the time and effort to build a strong online presence, and you've probably become an expert at traditional SEO, the art of getting your website to show up in a list of search results. But what if the very way people search for information is fundamentally shifting?
 
@@ -138,8 +137,8 @@ const relatedPosts = [
 
 const tableOfContents = [
   { id: "beyond-clicks", title: "Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy" },
-  { id: "psychology-behind-ai-search", title: "The Psychology Behind AI Search: Why GEO Resonates with Modern Users" },
-  { id: "core-pillars", title: "Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy" },
+  { id: "psychology-behind-ai-search", title: "The Psychology Behind AI Search" },
+  { id: "core-pillars", title: "Your Path to Becoming an AI Authority" },
   { id: "create-content-for-understanding", title: "1. Create Content for Understanding, Not Just Keywords" },
   { id: "master-direct-answers", title: "2. Master the Art of Direct, Comprehensive Answers" },
   { id: "build-authority-trust", title: "3. Build Unassailable Authority and Trust" },
@@ -185,123 +184,53 @@ const BlogPost = () => {
   };
 
   const formatContent = (content: string) => {
-    // Simple and reliable HTML conversion
-    const lines = content.split('\n');
-    const htmlLines = [];
-    let inList = false;
-    let inOrderedList = false;
-    
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i].trim();
-      
-      if (!line) {
-        if (inList) {
-          htmlLines.push('</ul>');
-          inList = false;
+    // Add proper IDs to headings for table of contents
+    let formattedContent = content
+      // Convert H2 headings with proper IDs
+      .replace(/## Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy/g, '<h2 id="beyond-clicks">Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy</h2>')
+      .replace(/## The Psychology Behind AI Search: Why GEO Resonates with Modern Users/g, '<h2 id="psychology-behind-ai-search">The Psychology Behind AI Search: Why GEO Resonates with Modern Users</h2>')
+      .replace(/## Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy/g, '<h2 id="core-pillars">Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy</h2>')
+      .replace(/## Practical Steps to Start Your GEO Journey/g, '<h2 id="practical-steps">Practical Steps to Start Your GEO Journey</h2>')
+      .replace(/## Conclusion/g, '<h2 id="conclusion">Conclusion</h2>')
+      // Convert H3 headings with proper IDs
+      .replace(/### 1\. Create Content for Understanding, Not Just Keywords/g, '<h3 id="create-content-for-understanding">1. Create Content for Understanding, Not Just Keywords</h3>')
+      .replace(/### 2\. Master the Art of Direct, Comprehensive Answers/g, '<h3 id="master-direct-answers">2. Master the Art of Direct, Comprehensive Answers</h3>')
+      .replace(/### 3\. Build Unassailable Authority and Trust/g, '<h3 id="build-authority-trust">3. Build Unassailable Authority and Trust</h3>')
+      .replace(/### 4\. The Technical Backbone: A Clean Website is an AI\'s Best Friend/g, '<h3 id="technical-backbone">4. The Technical Backbone: A Clean Website is an AI\'s Best Friend</h3>')
+      // Bold text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Convert bullet points to proper lists with bullets
+      .replace(/^• (.*)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\n<li>.*?<\/li>)*)/gs, '<ul>$1</ul>')
+      // Convert numbered lists
+      .replace(/^(\d+)\. (.*)$/gm, '<li>$2</li>')
+      .replace(/(<li>.*?<\/li>(\n<li>.*?<\/li>)*)/gs, (match) => {
+        // Check if this is part of the practical steps section
+        if (match.includes('Conduct \"AI-Driven\"') || match.includes('Audit Your Existing') || match.includes('Create a New Content') || match.includes('Monitor AI Overviews') || match.includes('Embrace the Future')) {
+          return `<ol>${match}</ol>`;
         }
-        if (inOrderedList) {
-          htmlLines.push('</ol>');
-          inOrderedList = false;
-        }
-        htmlLines.push('');
-        continue;
-      }
-      
-      // Handle H2 headings
-      if (line.startsWith('## ')) {
-        if (inList) {
-          htmlLines.push('</ul>');
-          inList = false;
-        }
-        if (inOrderedList) {
-          htmlLines.push('</ol>');
-          inOrderedList = false;
-        }
-        const title = line.replace('## ', '');
-        let id = title.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-');
-        htmlLines.push(`<h2 id="${id}">${title}</h2>`);
-        continue;
-      }
-      
-      // Handle H3 headings  
-      if (line.match(/^\d+\. [A-Z]/)) {
-        if (inList) {
-          htmlLines.push('</ul>');
-          inList = false;
-        }
-        if (inOrderedList) {
-          htmlLines.push('</ol>');
-          inOrderedList = false;
-        }
-        const title = line;
-        let id = title.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '-');
-        htmlLines.push(`<h3 id="${id}">${title}</h3>`);
-        continue;
-      }
-      
-      // Handle Action Items
-      if (line === 'Action Items:') {
-        if (inList) {
-          htmlLines.push('</ul>');
-          inList = false;
-        }
-        if (inOrderedList) {
-          htmlLines.push('</ol>');
-          inOrderedList = false;
-        }
-        htmlLines.push('<h4>Action Items:</h4>');
-        continue;
-      }
-      
-      // Handle bullet points
-      if (line.startsWith('• ')) {
-        if (!inList) {
-          if (inOrderedList) {
-            htmlLines.push('</ol>');
-            inOrderedList = false;
-          }
-          htmlLines.push('<ul>');
-          inList = true;
-        }
-        const content = line.replace('• ', '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        htmlLines.push(`<li>${content}</li>`);
-        continue;
-      }
-      
-      // Handle numbered lists (practical steps)
-      if (line.match(/^\d+\. /)) {
-        if (!inOrderedList) {
-          if (inList) {
-            htmlLines.push('</ul>');
-            inList = false;
-          }
-          htmlLines.push('<ol>');
-          inOrderedList = true;
-        }
-        const content = line.replace(/^\d+\. /, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-        htmlLines.push(`<li>${content}</li>`);
-        continue;
-      }
-      
-      // Handle regular paragraphs
-      if (inList) {
-        htmlLines.push('</ul>');
-        inList = false;
-      }
-      if (inOrderedList) {
-        htmlLines.push('</ol>');
-        inOrderedList = false;
-      }
-      
-      const formattedLine = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      htmlLines.push(`<p>${formattedLine}</p>`);
-    }
-    
-    // Close any remaining lists
-    if (inList) htmlLines.push('</ul>');
-    if (inOrderedList) htmlLines.push('</ol>');
-    
-    return htmlLines.join('\n');
+        return `<ul>${match}</ul>`;
+      })
+      // Handle action items
+      .replace(/\*\*Action Items:\*\*/g, '<h4>Action Items:</h4>')
+      // Convert paragraphs
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^/, '<p>')
+      .replace(/$/, '</p>')
+      // Clean up empty paragraphs and fix heading formatting
+      .replace(/<p><\/p>/g, '')
+      .replace(/<p>(<h[1-6])/g, '$1')
+      .replace(/(<\/h[1-6])><\/p>/g, '$1>')
+      .replace(/<p>(<ol>)/g, '$1')
+      .replace(/(<\/ol>)<\/p>/g, '$1')
+      .replace(/<p>(<ul>)/g, '$1')
+      .replace(/(<\/ul>)<\/p>/g, '$1')
+      .replace(/<p>(<h4>)/g, '$1')
+      .replace(/(<\/h4>)<\/p>/g, '$1')
+      .replace(/<\/ul>\s*<ul>/g, '') // Merge consecutive lists
+      .replace(/<\/ol>\s*<ol>/g, ''); // Merge consecutive numbered lists
+
+    return formattedContent;
   };
 
   return (
@@ -334,116 +263,119 @@ const BlogPost = () => {
         <Header />
         
         <main className="pt-20">
-          {/* Hero Section - ClickUp Style */}
-          <section className="py-16 bg-gradient-to-b from-primary/5 to-background">
-            <div className="container mx-auto px-4 max-w-7xl">
-              <div className="grid lg:grid-cols-12 gap-12 items-start">
-                {/* Left Content - 8 columns */}
-                <div className="lg:col-span-8 space-y-8">
-                  {/* Featured Image */}
-                  <div className="aspect-video rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/10 to-primary/5 p-8 flex items-center justify-center">
-                    <img 
-                      src={blogPost.image} 
-                      alt={blogPost.title}
-                      className="w-full h-full object-contain rounded-lg"
-                    />
-                  </div>
+          {/* Hero Section */}
+          <section className="py-12 lg:py-16">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <div className="space-y-6">
+                {/* Breadcrumb */}
+                <nav className="text-sm text-muted-foreground">
+                  <Link to="/blog" className="hover:text-primary transition-colors">
+                    Blog
+                  </Link>
+                  <span className="mx-2">/</span>
+                  <Badge variant="outline">{blogPost.category}</Badge>
+                </nav>
 
-                  {/* Category Badge */}
-                  <div className="flex items-center gap-2">
-                    <Badge variant="secondary" className="bg-primary/10 text-primary font-semibold px-4 py-2 text-sm uppercase tracking-wide">
-                      {blogPost.category}
-                    </Badge>
-                  </div>
-
-                  {/* Title */}
-                  <div className="space-y-6">
-                    <h1 className="text-4xl lg:text-6xl font-bold text-foreground leading-tight tracking-tight">
-                      {blogPost.title}
-                    </h1>
-                    
-                    <p className="text-xl lg:text-2xl text-muted-foreground font-medium leading-relaxed">
-                      {blogPost.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Author and Meta Info */}
-                  <div className="flex flex-wrap items-center gap-6">
-                    <div className="flex items-center gap-3">
-                      <Avatar className="w-12 h-12 ring-2 ring-primary/20">
+                {/* Title and Meta */}
+                <div className="space-y-4">
+                  <h1 className="text-3xl lg:text-5xl font-bold text-foreground leading-tight">
+                    {blogPost.title}
+                  </h1>
+                  
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-2">
+                      <Avatar className="w-8 h-8">
                         <AvatarImage src={blogPost.author.avatar} alt={blogPost.author.name} />
                         <AvatarFallback>{blogPost.author.name[0]}</AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="font-semibold text-foreground text-lg">{blogPost.author.name}</p>
-                        <p className="text-muted-foreground text-sm">{blogPost.author.role}</p>
+                        <p className="font-medium text-foreground">{blogPost.author.name}</p>
+                        <p className="text-xs">{blogPost.author.role}</p>
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-6 text-muted-foreground">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        <span className="font-medium">{new Date(blogPost.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                      </div>
-                      
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        <span className="font-medium">{blogPost.readTime}</span>
-                      </div>
+                    <Separator orientation="vertical" className="h-8" />
+                    
+                    <div className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(blogPost.date).toLocaleDateString()}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      <span>{blogPost.readTime}</span>
                     </div>
                   </div>
 
                   {/* Share Buttons */}
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">Share:</span>
                     <Button 
-                      variant="outline" 
+                      variant="ghost" 
                       size="sm" 
                       onClick={() => handleShare('twitter')}
-                      className="px-4 py-2 rounded-full"
+                      className="p-2"
                     >
-                      <Twitter className="w-4 h-4 mr-2" />
-                      Twitter
+                      <Twitter className="w-4 h-4" />
                     </Button>
                     <Button 
-                      variant="outline" 
+                      variant="ghost" 
                       size="sm" 
                       onClick={() => handleShare('linkedin')}
-                      className="px-4 py-2 rounded-full"
+                      className="p-2"
                     >
-                      <Linkedin className="w-4 h-4 mr-2" />
-                      LinkedIn
+                      <Linkedin className="w-4 h-4" />
                     </Button>
                     <Button 
-                      variant="outline" 
+                      variant="ghost" 
                       size="sm" 
                       onClick={() => handleShare('facebook')}
-                      className="px-4 py-2 rounded-full"
+                      className="p-2"
                     >
-                      <Facebook className="w-4 h-4 mr-2" />
-                      Facebook
+                      <Facebook className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
 
-                {/* Right Sidebar - Table of Contents - 4 columns */}
-                <div className="lg:col-span-4">
-                  <div className="sticky top-24">
-                    <Card className="shadow-lg border-0 bg-muted/30 backdrop-blur-sm">
+          {/* Featured Image */}
+          <section className="mb-12">
+            <div className="container mx-auto px-4 max-w-4xl">
+              <div className="aspect-video rounded-lg overflow-hidden shadow-2xl">
+                <img 
+                  src={blogPost.image} 
+                  alt={blogPost.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* Article Content */}
+          <section className="pb-16">
+            <div className="container mx-auto px-4 max-w-6xl">
+              <div className="grid lg:grid-cols-4 gap-12">
+                {/* Table of Contents - Sidebar */}
+                <div className="lg:col-span-1">
+                  <div className="sticky top-24 space-y-6">
+                    {/* Toggle for mobile */}
+                    <Button
+                      variant="outline"
+                      onClick={() => setShowTableOfContents(!showTableOfContents)}
+                      className="lg:hidden w-full justify-between"
+                    >
+                      Table of Contents
+                      <ChevronUp className={`w-4 h-4 transition-transform ${showTableOfContents ? 'rotate-180' : ''}`} />
+                    </Button>
+
+                    {/* Table of Contents */}
+                    <Card className={`${showTableOfContents ? 'block' : 'hidden'} lg:block`}>
                       <CardContent className="p-6">
-                        <div className="flex items-center justify-between mb-6">
-                          <h3 className="font-bold text-foreground text-lg uppercase tracking-wide">Table of Contents</h3>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setShowTableOfContents(!showTableOfContents)}
-                            className="lg:hidden"
-                          >
-                            <ChevronUp className={`w-4 h-4 transition-transform ${showTableOfContents ? 'rotate-180' : ''}`} />
-                          </Button>
-                        </div>
-                        
-                        <nav className={`space-y-3 ${showTableOfContents ? 'block' : 'hidden'} lg:block`}>
-                          {tableOfContents.map((item, index) => (
+                        <h3 className="font-semibold text-foreground mb-4">Table of Contents</h3>
+                        <nav className="space-y-2">
+                          {tableOfContents.map((item) => (
                             <a
                               key={item.id}
                               href={`#${item.id}`}
@@ -457,15 +389,12 @@ const BlogPost = () => {
                                   });
                                 }
                               }}
-                              className={`block text-sm font-medium transition-all duration-200 py-2 px-3 rounded-lg ${
+                              className={`block text-sm hover:text-primary transition-colors py-2 px-3 rounded-md ${
                                 activeSection === item.id 
-                                  ? 'text-primary bg-primary/10 border-l-4 border-primary font-semibold' 
-                                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                                  ? 'text-primary bg-primary/10 font-medium border-l-2 border-primary' 
+                                  : 'text-muted-foreground hover:bg-muted/50'
                               }`}
                             >
-                              <span className="text-xs text-muted-foreground mr-2">
-                                {String(index + 1).padStart(2, '0')}
-                              </span>
                               {item.title}
                             </a>
                           ))}
@@ -474,95 +403,95 @@ const BlogPost = () => {
                     </Card>
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
 
-          {/* Article Content */}
-          <section className="py-16">
-            <div className="container mx-auto px-4 max-w-4xl">
-              <article className="space-y-8">
-                <div 
-                  className="prose prose-xl max-w-none
-                  prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-24
-                  prose-h1:text-5xl prose-h1:mb-8 prose-h1:mt-0 prose-h1:leading-tight prose-h1:text-foreground
-                  prose-h2:text-3xl prose-h2:mb-8 prose-h2:mt-16 prose-h2:text-foreground prose-h2:border-b-2 prose-h2:border-primary/20 prose-h2:pb-4
-                  prose-h3:text-2xl prose-h3:mb-6 prose-h3:mt-12 prose-h3:text-foreground prose-h3:font-semibold
-                  prose-h4:text-xl prose-h4:mb-4 prose-h4:mt-8 prose-h4:text-primary prose-h4:font-semibold
-                  prose-p:text-lg prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-6
-                  prose-strong:text-foreground prose-strong:font-semibold
-                  prose-ul:my-8 prose-ul:space-y-3 prose-ul:text-lg
-                  prose-ol:my-8 prose-ol:space-y-4 prose-ol:text-lg prose-ol:pl-6
-                  prose-li:text-muted-foreground prose-li:leading-relaxed prose-li:mb-2
-                  prose-li:marker:text-primary prose-li:marker:font-bold prose-li:marker:text-lg
-                  prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-muted/30 prose-blockquote:p-6 prose-blockquote:rounded-r-lg prose-blockquote:my-8 prose-blockquote:italic
-                  prose-code:text-primary prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-base prose-code:font-medium
-                  prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:p-6 prose-pre:rounded-lg prose-pre:my-8
-                  prose-a:text-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:text-primary/80 hover:prose-a:underline prose-a:transition-all prose-a:duration-200
-                  [&>*:first-child]:mt-0
-                  [&_ul]:list-disc [&_ol]:list-decimal 
-                  [&_ul_li]:list-item [&_ol_li]:list-item [&_li]:ml-0 
-                  [&_ol_li]:pl-2 [&_ul_li]:pl-2
-                  [&_ol_li]:font-medium [&_ul_li]:font-medium"
-                  dangerouslySetInnerHTML={{ 
-                    __html: formatContent(blogPost.content)
-                  }}
-                />
+                {/* Main Content */}
+                <div className="lg:col-span-3">
+                  <article className="space-y-8">
+                    <div className="space-y-6">
+                      <div 
+                        className="prose prose-xl max-w-none
+                        prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-24
+                        prose-h1:text-4xl prose-h1:mb-8 prose-h1:mt-0 prose-h1:leading-tight prose-h1:text-foreground
+                        prose-h2:text-3xl prose-h2:mb-8 prose-h2:mt-16 prose-h2:text-foreground prose-h2:border-b-2 prose-h2:border-primary/20 prose-h2:pb-4
+                        prose-h3:text-2xl prose-h3:mb-6 prose-h3:mt-12 prose-h3:text-foreground prose-h3:font-semibold
+                        prose-h4:text-xl prose-h4:mb-4 prose-h4:mt-8 prose-h4:text-primary prose-h4:font-semibold
+                        prose-p:text-lg prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-6
+                        prose-strong:text-foreground prose-strong:font-semibold
+                        prose-ul:my-8 prose-ul:space-y-3 prose-ul:text-lg
+                        prose-ol:my-8 prose-ol:space-y-4 prose-ol:text-lg
+                        prose-li:text-muted-foreground prose-li:leading-relaxed prose-li:mb-2
+                        prose-li:marker:text-primary prose-li:marker:font-bold prose-li:marker:text-lg
+                        prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-muted/30 prose-blockquote:p-6 prose-blockquote:rounded-r-lg prose-blockquote:my-8 prose-blockquote:italic
+                        prose-code:text-primary prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-base prose-code:font-medium
+                        prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:p-6 prose-pre:rounded-lg prose-pre:my-8
+                        prose-a:text-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:text-primary/80 hover:prose-a:underline prose-a:transition-all prose-a:duration-200
+                        [&>*:first-child]:mt-0
+                        [&_ul]:list-disc [&_ol]:list-decimal 
+                        [&_ul_li]:list-item [&_ol_li]:list-item [&_li]:ml-0 
+                        [&_ol_li]:pl-2 [&_ul_li]:pl-2
+                        [&_ol_li]:font-medium [&_ul_li]:font-medium"
+                        dangerouslySetInnerHTML={{ 
+                          __html: formatContent(blogPost.content)
+                        }}
+                      />
+                    </div>
 
-                {/* Tags */}
-                <div className="pt-8 border-t border-border">
-                  <div className="flex flex-wrap gap-3">
-                    {blogPost.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-sm px-4 py-2 font-medium">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Author Bio */}
-                <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
-                  <CardContent className="p-8">
-                    <div className="flex items-start gap-6">
-                      <Avatar className="w-20 h-20 ring-2 ring-primary/30">
-                        <AvatarImage src={blogPost.author.avatar} alt={blogPost.author.name} />
-                        <AvatarFallback>{blogPost.author.name[0]}</AvatarFallback>
-                      </Avatar>
-                      <div className="space-y-3">
-                        <h3 className="font-bold text-foreground text-xl">{blogPost.author.name}</h3>
-                        <p className="text-primary font-semibold">{blogPost.author.role}</p>
-                        <p className="text-muted-foreground leading-relaxed">{blogPost.author.bio}</p>
+                    {/* Tags */}
+                    <div className="pt-8 border-t border-border">
+                      <div className="flex flex-wrap gap-2">
+                        {blogPost.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-sm">
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </article>
+
+                    {/* Author Bio */}
+                    <Card className="bg-muted/50">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <Avatar className="w-16 h-16">
+                            <AvatarImage src={blogPost.author.avatar} alt={blogPost.author.name} />
+                            <AvatarFallback>{blogPost.author.name[0]}</AvatarFallback>
+                          </Avatar>
+                          <div className="space-y-2">
+                            <h3 className="font-semibold text-foreground text-lg">{blogPost.author.name}</h3>
+                            <p className="text-sm text-primary font-medium">{blogPost.author.role}</p>
+                            <p className="text-muted-foreground text-sm leading-relaxed">{blogPost.author.bio}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </article>
+                </div>
+              </div>
             </div>
           </section>
 
           {/* Related Articles */}
           <section className="py-16 bg-muted/30">
             <div className="container mx-auto px-4 max-w-6xl">
-              <h2 className="text-3xl font-bold text-foreground mb-12 text-center">Related Articles</h2>
+              <h2 className="text-3xl font-bold text-foreground mb-8">Related Articles</h2>
               <div className="grid md:grid-cols-2 gap-8">
                 {relatedPosts.map((post) => (
-                  <Card key={post.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                  <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={post.image} 
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <CardContent className="p-8">
-                      <h3 className="font-bold text-foreground text-xl mb-4 leading-tight group-hover:text-primary transition-colors">
+                    <CardContent className="p-6">
+                      <h3 className="font-semibold text-foreground text-lg mb-3 hover:text-primary transition-colors">
                         <Link to={`/blog/${post.slug}`}>
                           {post.title}
                         </Link>
                       </h3>
-                      <Button variant="outline" size="lg" asChild className="font-semibold">
+                      <Button variant="outline" size="sm" asChild>
                         <Link to={`/blog/${post.slug}`}>
-                          Read Article
+                          Read More
                         </Link>
                       </Button>
                     </CardContent>
