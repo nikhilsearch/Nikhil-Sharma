@@ -24,14 +24,15 @@ const blogPost = {
   id: "what-is-generative-engine-optimization",
   title: "What Is Generative Engine Optimization",
   excerpt: "Are You Ready to Future-Proof Your Brand? The Invisible Revolution of Generative Engine Optimization is Here",
-  content: `
-## Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy
+  content: 
 
 Have you ever felt like the digital world is a giant, ever-changing maze? One minute you've mastered the rules, and the next, a new platform or technology appears and changes everything. You've put in the time and effort to build a strong online presence, and you've probably become an expert at traditional SEO, the art of getting your website to show up in a list of search results. But what if the very way people search for information is fundamentally shifting?
 
 A quiet but powerful revolution is underway, and it's being led by AI. Today, millions of people are no longer starting their search on Google's famous ten blue links. They're going to AI assistants like ChatGPT, Claude, and Google's own AI Overviews for a single, direct, and comprehensive answer to their question. They aren't looking for a website to click on; they're looking for a summary, a citation, or a direct response.
 
 This is the world of Generative Engine Optimization (GEO). It's not about competing for clicks. It's about becoming the trusted, authoritative source that these intelligent assistants rely on to provide their answers. It's about ensuring that your knowledge, your expertise, and your brand's voice are directly featured in the conversations that are shaping the future of information.
+
+## Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy
 
 Traditional SEO is an art form focused on getting traffic to your website. It's a wonderful, proven strategy. You optimize for keywords, build backlinks, and perfect technical elements to climb the ranks of a search results page. Your ultimate goal is a user's click.
 
