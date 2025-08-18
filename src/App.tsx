@@ -24,9 +24,9 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/admin/blog/*" element={<BlogDashboard />} />
-              <Route path="/admin/blog-new" element={<Navigate to="/admin/blog/new" replace />} />
-              <Route path="/admin/blog-edit/:id" element={<Navigate to="/admin/blog/edit/$1" replace />} />
+            <Route path="/admin/blog/*" element={<BlogDashboard />} />
+            <Route path="/admin/blog-new" element={<Navigate to="/admin/blog/new" replace />} />
+            <Route path="/admin/blog-edit/:id" element={<Navigate to="/admin/blog/edit/$1" replace />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
