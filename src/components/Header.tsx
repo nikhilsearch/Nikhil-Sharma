@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Link, useLocation } from "react-router-dom";
 import ContactForm from "./ContactForm";
 
 const Header = () => {
@@ -9,12 +10,14 @@ const Header = () => {
   const [activeSection, setActiveSection] = useState("about");
   const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const { toast } = useToast();
+  const location = useLocation();
 
   const navigationItems = [
     { name: "About Me", href: "#about", id: "about" },
     { name: "Skills", href: "#skills", id: "skills" },
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Success Stories", href: "#stories", id: "stories" },
+    { name: "Blog", href: "/blog", id: "blog", isRoute: true },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
 
@@ -61,26 +64,42 @@ const Header = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
-            <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
+            <Link to="/" className="text-xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
               Nikhil Sharma
-            </h1>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            {navigationItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.href)}
-                className={`transition-all duration-300 hover:text-primary font-medium ${
-                  activeSection === item.id
-                    ? "text-primary border-b-2 border-primary"
-                    : "text-foreground hover:text-primary"
-                }`}
-              >
-                {item.name}
-              </button>
-            ))}
+            {navigationItems.map((item) => {
+              const isActive = item.isRoute ? location.pathname.startsWith(item.href) : activeSection === item.id;
+              
+              return item.isRoute ? (
+                <Link
+                  key={item.id}
+                  to={item.href}
+                  className={`transition-all duration-300 hover:text-primary font-medium ${
+                    isActive
+                      ? "text-primary border-b-2 border-primary"
+                      : "text-foreground hover:text-primary"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`transition-all duration-300 hover:text-primary font-medium ${
+                    isActive
+                      ? "text-primary border-b-2 border-primary"
+                      : "text-foreground hover:text-primary"
+                  }`}
+                >
+                  {item.name}
+                </button>
+              );
+            })}
           </nav>
 
           {/* CTA Button */}
@@ -115,19 +134,36 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border/40">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.href)}
-                  className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
-                    activeSection === item.id
-                      ? "text-primary bg-primary/10"
-                      : "text-foreground hover:text-primary hover:bg-muted"
-                  }`}
-                >
-                  {item.name}
-                </button>
-              ))}
+              {navigationItems.map((item) => {
+                const isActive = item.isRoute ? location.pathname.startsWith(item.href) : activeSection === item.id;
+                
+                return item.isRoute ? (
+                  <Link
+                    key={item.id}
+                    to={item.href}
+                    className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
+                      isActive
+                        ? "text-primary bg-primary/10"
+                        : "text-foreground hover:text-primary hover:bg-muted"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ) : (
+                  <button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.href)}
+                    className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
+                      isActive
+                        ? "text-primary bg-primary/10"
+                        : "text-foreground hover:text-primary hover:bg-muted"
+                    }`}
+                  >
+                    {item.name}
+                  </button>
+                );
+              })}
               <div className="pt-4">
                 <Button
                   onClick={handleGetFreeAudit}
