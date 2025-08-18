@@ -56,9 +56,9 @@ Forget keyword density. Think about a topic from every possible angle. Your goal
 
 **Action Items:**
 
-- **Map a Topic Cluster**: Instead of one blog post, create a "pillar page" that provides a comprehensive overview of a broad topic (e.g., "Sustainable Gardening").
-- **Build Supporting Content**: Write a series of detailed articles that answer specific, related questions (e.g., "Best Organic Fertilizers," "How to Grow Tomatoes," "Natural Pest Control").
-- **Link Everything Together**: Use internal links to connect all your related content, showing AI the relationship between each piece.
+• **Map a Topic Cluster**: Instead of one blog post, create a "pillar page" that provides a comprehensive overview of a broad topic (e.g., "Sustainable Gardening").
+• **Build Supporting Content**: Write a series of detailed articles that answer specific, related questions (e.g., "Best Organic Fertilizers," "How to Grow Tomatoes," "Natural Pest Control").
+• **Link Everything Together**: Use internal links to connect all your related content, showing AI the relationship between each piece.
 
 ### 2. Master the Art of Direct, Comprehensive Answers
 
@@ -66,9 +66,9 @@ AI loves a clear, definitive answer. Use structured content to make your informa
 
 **Action Items:**
 
-- **Use Question-Based Headings**: Frame your headings as direct questions (e.g., "What is Generative Engine Optimization?") and follow them immediately with the answer.
-- **Provide Concise Summaries**: Start your content or key sections with a brief, clear summary that gives the main point upfront.
-- **Use Lists and Bullet Points**: Break down complex information into easy-to-read lists. This is a powerful way to make your content digestible for both humans and AI.
+• **Use Question-Based Headings**: Frame your headings as direct questions (e.g., "What is Generative Engine Optimization?") and follow them immediately with the answer.
+• **Provide Concise Summaries**: Start your content or key sections with a brief, clear summary that gives the main point upfront.
+• **Use Lists and Bullet Points**: Break down complex information into easy-to-read lists. This is a powerful way to make your content digestible for both humans and AI.
 
 ### 3. Build Unassailable Authority and Trust
 
@@ -76,9 +76,9 @@ AI models are trained to prioritize high-quality, trustworthy information. This 
 
 **Action Items:**
 
-- **Cite Your Sources**: Link to credible, authoritative sources to back up your claims.
-- **Showcase Your Expertise**: Include author bios with clear qualifications and expertise.
-- **Use Data and Statistics**: Back up your claims with hard numbers from reputable studies or your own proprietary data.
+• **Cite Your Sources**: Link to credible, authoritative sources to back up your claims.
+• **Showcase Your Expertise**: Include author bios with clear qualifications and expertise.
+• **Use Data and Statistics**: Back up your claims with hard numbers from reputable studies or your own proprietary data.
 
 ### 4. The Technical Backbone: A Clean Website is an AI's Best Friend
 
@@ -86,23 +86,23 @@ While GEO is heavily focused on content, the technical foundation of your websit
 
 **Action Items:**
 
-- **Implement Structured Data (Schema Markup)**: Use schema markup (like FAQPage or Article schema) to explicitly tell the AI what your content is about.
-- **Ensure Clean Site Architecture**: Make sure your website's navigation is logical and your internal linking is sensible.
-- **Optimize for Speed**: A fast-loading site is a signal of a well-maintained, professional brand.
+• **Implement Structured Data (Schema Markup)**: Use schema markup (like FAQPage or Article schema) to explicitly tell the AI what your content is about.
+• **Ensure Clean Site Architecture**: Make sure your website's navigation is logical and your internal linking is sensible.
+• **Optimize for Speed**: A fast-loading site is a signal of a well-maintained, professional brand.
 
 ## Practical Steps to Start Your GEO Journey
 
 Ready to put these ideas into action? Here's a quick checklist to get you started on your path to becoming an AI authority:
 
-**Step 1**: Conduct "AI-Driven" User Research. Go beyond simple keyword research. Use tools like ChatGPT or Perplexity to ask common questions in your industry and analyze the responses.
+1. **Conduct "AI-Driven" User Research**: Go beyond simple keyword research. Use tools like ChatGPT or Perplexity to ask common questions in your industry and analyze the responses.
 
-**Step 2**: Audit Your Existing Content. Look at your top-performing blog posts. How could you make them more comprehensive and direct in their answers?
+2. **Audit Your Existing Content**: Look at your top-performing blog posts. How could you make them more comprehensive and direct in their answers?
 
-**Step 3**: Create a New Content Pillar. Choose a major topic and build an entire cluster of content around it, with one long-form, comprehensive piece as the central hub.
+3. **Create a New Content Pillar**: Choose a major topic and build an entire cluster of content around it, with one long-form, comprehensive piece as the central hub.
 
-**Step 4**: Monitor AI Overviews and Chatbot Responses. Search for your key topics and see what the AI generates. If your competitors are being cited, study their content to understand why.
+4. **Monitor AI Overviews and Chatbot Responses**: Search for your key topics and see what the AI generates. If your competitors are being cited, study their content to understand why.
 
-**Step 5**: Embrace the Future. The key to success is to see GEO as an ongoing, evolving strategy. As Search Engine Journal notes, winning in the GEO space means focusing on concrete workflows, from creating for machine-readability to embracing social media. The more you produce high-quality, authoritative, and AI-friendly content, the more you cement your brand as a foundational pillar of knowledge in your industry.
+5. **Embrace the Future**: The key to success is to see GEO as an ongoing, evolving strategy. As Search Engine Journal notes, winning in the GEO space means focusing on concrete workflows, from creating for machine-readability to embracing social media (source: <a href="https://www.searchenginejournal.com/win-generative-engine-optimization-peecai-spa/550612/" target="_blank" rel="noopener noreferrer">Search Engine Journal on Winning in GEO</a>). The more you produce high-quality, authoritative, and AI-friendly content, the more you cement your brand as a foundational pillar of knowledge in your industry.
 
 ## Conclusion
 
@@ -116,7 +116,7 @@ The future of search is conversational and intelligent. It's no longer just abou
   category: "SEO",
   date: "2025-01-15",
   readTime: "12min read",
-  image: "/lovable-uploads/ce220e1a-ebc4-44ea-ad0a-b9b052690dad.png",
+  image: "/lovable-uploads/b674ab5d-c4ab-4f11-b4fc-a8be5d4162e2.png",
   tags: ["GEO", "AI", "SEO", "Digital Marketing", "Future of Search"]
 };
 
@@ -128,7 +128,7 @@ const relatedPosts = [
     slug: "content-marketing-roi-measurement"
   },
   {
-    id: "2",
+    id: "2", 
     title: "Social Media Marketing Trends for 2025",
     image: "/lovable-uploads/d2660981-df09-44a7-a121-b45a0e93a84b.png",
     slug: "social-media-trends-2025"
@@ -181,6 +181,56 @@ const BlogPost = () => {
     };
     
     window.open(urls[platform as keyof typeof urls], '_blank', 'width=600,height=400');
+  };
+
+  const formatContent = (content: string) => {
+    // Add proper IDs to headings for table of contents
+    let formattedContent = content
+      // Convert H2 headings with proper IDs
+      .replace(/## Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy/g, '<h2 id="beyond-clicks">Beyond Clicks: Why the AI Revolution Demands a New SEO Strategy</h2>')
+      .replace(/## The Psychology Behind AI Search: Why GEO Resonates with Modern Users/g, '<h2 id="psychology-behind-ai-search">The Psychology Behind AI Search: Why GEO Resonates with Modern Users</h2>')
+      .replace(/## Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy/g, '<h2 id="core-pillars">Your Path to Becoming an AI Authority: The Core Pillars of a GEO Strategy</h2>')
+      .replace(/## Practical Steps to Start Your GEO Journey/g, '<h2 id="practical-steps">Practical Steps to Start Your GEO Journey</h2>')
+      .replace(/## Conclusion/g, '<h2 id="conclusion">Conclusion</h2>')
+      // Convert H3 headings with proper IDs
+      .replace(/### 1\. Create Content for Understanding, Not Just Keywords/g, '<h3 id="create-content-for-understanding">1. Create Content for Understanding, Not Just Keywords</h3>')
+      .replace(/### 2\. Master the Art of Direct, Comprehensive Answers/g, '<h3 id="master-direct-answers">2. Master the Art of Direct, Comprehensive Answers</h3>')
+      .replace(/### 3\. Build Unassailable Authority and Trust/g, '<h3 id="build-authority-trust">3. Build Unassailable Authority and Trust</h3>')
+      .replace(/### 4\. The Technical Backbone: A Clean Website is an AI\'s Best Friend/g, '<h3 id="technical-backbone">4. The Technical Backbone: A Clean Website is an AI\'s Best Friend</h3>')
+      // Bold text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Convert bullet points to proper lists with bullets
+      .replace(/^• (.*)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\n<li>.*?<\/li>)*)/gs, '<ul>$1</ul>')
+      // Convert numbered lists
+      .replace(/^(\d+)\. (.*)$/gm, '<li>$2</li>')
+      .replace(/(<li>.*?<\/li>(\n<li>.*?<\/li>)*)/gs, (match) => {
+        // Check if this is part of the practical steps section
+        if (match.includes('Conduct \"AI-Driven\"') || match.includes('Audit Your Existing') || match.includes('Create a New Content') || match.includes('Monitor AI Overviews') || match.includes('Embrace the Future')) {
+          return `<ol>${match}</ol>`;
+        }
+        return `<ul>${match}</ul>`;
+      })
+      // Handle action items
+      .replace(/\*\*Action Items:\*\*/g, '<h4>Action Items:</h4>')
+      // Convert paragraphs
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^/, '<p>')
+      .replace(/$/, '</p>')
+      // Clean up empty paragraphs and fix heading formatting
+      .replace(/<p><\/p>/g, '')
+      .replace(/<p>(<h[1-6])/g, '$1')
+      .replace(/(<\/h[1-6])><\/p>/g, '$1>')
+      .replace(/<p>(<ol>)/g, '$1')
+      .replace(/(<\/ol>)<\/p>/g, '$1')
+      .replace(/<p>(<ul>)/g, '$1')
+      .replace(/(<\/ul>)<\/p>/g, '$1')
+      .replace(/<p>(<h4>)/g, '$1')
+      .replace(/(<\/h4>)<\/p>/g, '$1')
+      .replace(/<\/ul>\s*<ul>/g, '') // Merge consecutive lists
+      .replace(/<\/ol>\s*<ol>/g, ''); // Merge consecutive numbered lists
+
+    return formattedContent;
   };
 
   return (
@@ -293,7 +343,7 @@ const BlogPost = () => {
           {/* Featured Image */}
           <section className="mb-12">
             <div className="container mx-auto px-4 max-w-4xl">
-              <div className="aspect-video rounded-lg overflow-hidden">
+              <div className="aspect-video rounded-lg overflow-hidden shadow-2xl">
                 <img 
                   src={blogPost.image} 
                   alt={blogPost.title}
@@ -329,8 +379,20 @@ const BlogPost = () => {
                             <a
                               key={item.id}
                               href={`#${item.id}`}
-                              className={`block text-sm transition-colors hover:text-primary ${
-                                activeSection === item.id ? 'text-primary font-medium' : 'text-muted-foreground'
+                              onClick={(e) => {
+                                e.preventDefault();
+                                const element = document.getElementById(item.id);
+                                if (element) {
+                                  element.scrollIntoView({ 
+                                    behavior: 'smooth',
+                                    block: 'start'
+                                  });
+                                }
+                              }}
+                              className={`block text-sm hover:text-primary transition-colors py-2 px-3 rounded-md ${
+                                activeSection === item.id 
+                                  ? 'text-primary bg-primary/10 font-medium border-l-2 border-primary' 
+                                  : 'text-muted-foreground hover:bg-muted/50'
                               }`}
                             >
                               {item.title}
@@ -339,143 +401,101 @@ const BlogPost = () => {
                         </nav>
                       </CardContent>
                     </Card>
-
-                    {/* CTA Card */}
-                    <Card className="bg-primary/5 border-primary/20">
-                      <CardContent className="p-6 space-y-4">
-                        <div className="flex items-center gap-2">
-                          <CheckSquare className="w-5 h-5 text-primary" />
-                          <h3 className="font-semibold text-foreground">Start using these strategies today</h3>
-                        </div>
-                        <ul className="space-y-2 text-sm text-muted-foreground">
-                          <li>• Boost your organic traffic</li>
-                          <li>• Improve search rankings</li>
-                          <li>• Get expert guidance</li>
-                        </ul>
-                        <Button className="w-full">
-                          Get Started
-                        </Button>
-                      </CardContent>
-                    </Card>
                   </div>
                 </div>
 
                 {/* Main Content */}
                 <div className="lg:col-span-3">
-                  <article className="max-w-none">
-                    <div 
-                      className="blog-content space-y-6"
-                      dangerouslySetInnerHTML={{
-                        __html: blogPost.content
-                          .split('\n\n')
-                          .map(paragraph => {
-                            // Handle headings
-                            if (paragraph.startsWith('## ')) {
-                              const id = paragraph.slice(3).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                              return `<h2 id="${id}" class="text-2xl lg:text-3xl font-bold text-foreground mt-12 mb-6 scroll-mt-24">${paragraph.slice(3)}</h2>`;
-                            }
-                            if (paragraph.startsWith('### ')) {
-                              const id = paragraph.slice(4).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-                              return `<h3 id="${id}" class="text-xl lg:text-2xl font-semibold text-foreground mt-8 mb-4 scroll-mt-24">${paragraph.slice(4)}</h3>`;
-                            }
-                            
-                            // Handle action items section
-                            if (paragraph.includes('**Action Items:**')) {
-                              const parts = paragraph.split('**Action Items:**');
-                              return `${parts[0] ? `<p class="text-base lg:text-lg text-muted-foreground leading-relaxed mb-4">${parts[0]}</p>` : ''}<h4 class="text-lg font-semibold text-foreground mt-6 mb-4">Action Items:</h4>`;
-                            }
-                            
-                            // Handle bullet points with bold text
-                            if (paragraph.includes('- **')) {
-                              const items = paragraph.split('\n').map(item => {
-                                if (item.startsWith('- **') && item.includes('**:')) {
-                                  const [title, ...desc] = item.slice(2).split('**:');
-                                  return `<li class="mb-3"><strong class="text-foreground font-semibold">${title.slice(2)}</strong>: ${desc.join('**:')}</li>`;
-                                } else if (item.startsWith('- ')) {
-                                  return `<li class="mb-2">${item.slice(2)}</li>`;
-                                }
-                                return '';
-                              }).filter(item => item.startsWith('<li'));
-                              return `<ul class="space-y-2 my-6 pl-6 list-disc marker:text-primary">${items.join('')}</ul>`;
-                            }
-                            
-                            // Handle step lists
-                            if (paragraph.includes('**Step ')) {
-                              const steps = paragraph.split('\n\n').map(step => {
-                                if (step.startsWith('**Step ')) {
-                                  const [title, ...desc] = step.split('**:');
-                                  return `<li class="mb-4"><strong class="text-foreground font-semibold">${title.slice(2)}</strong>: ${desc.join('**:')}</li>`;
-                                }
-                                return '';
-                              }).filter(item => item);
-                              return `<ol class="space-y-3 my-6 pl-6 list-decimal marker:text-primary">${steps.join('')}</ol>`;
-                            }
-                            
-                            // Handle regular paragraphs
-                            if (paragraph.trim() && !paragraph.startsWith('#')) {
-                              return `<p class="text-base lg:text-lg text-muted-foreground leading-relaxed mb-6">${paragraph}</p>`;
-                            }
-                            
-                            return '';
-                          })
-                          .join('')
-                      }}
-                    />
-                  </article>
-                  
-                  {/* Tags */}
-                  <div className="mt-12 pt-8 border-t border-border">
-                    <div className="flex flex-wrap gap-2">
-                      {blogPost.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary">
-                          {tag}
-                        </Badge>
-                      ))}
+                  <article className="space-y-8">
+                    <div className="space-y-6">
+                      <div 
+                        className="prose prose-lg max-w-none text-foreground
+                        prose-headings:text-foreground prose-headings:font-bold prose-headings:scroll-mt-24
+                        prose-h1:text-4xl prose-h1:mb-8 prose-h1:mt-0 prose-h1:leading-tight prose-h1:border-b prose-h1:border-border prose-h1:pb-4
+                        prose-h2:text-2xl prose-h2:mb-6 prose-h2:mt-12 prose-h2:border-b prose-h2:border-border prose-h2:pb-3 prose-h2:scroll-mt-24
+                        prose-h3:text-xl prose-h3:mb-4 prose-h3:mt-8 prose-h3:font-semibold prose-h3:scroll-mt-24
+                        prose-h4:text-lg prose-h4:mb-3 prose-h4:mt-6 prose-h4:font-semibold prose-h4:text-primary
+                        prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-6 prose-p:text-base
+                        prose-strong:text-foreground prose-strong:font-semibold
+                        prose-ul:my-6 prose-ul:space-y-2 prose-ul:pl-6
+                        prose-ol:my-6 prose-ol:space-y-2 prose-ol:pl-6
+                        prose-li:text-muted-foreground prose-li:leading-relaxed prose-li:text-base prose-li:mb-2
+                        prose-li:marker:text-primary prose-li:marker:font-medium
+                        prose-blockquote:border-primary prose-blockquote:bg-muted/50 prose-blockquote:p-6 prose-blockquote:rounded-lg prose-blockquote:my-8
+                        prose-code:text-primary prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
+                        prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:p-4 prose-pre:rounded-lg prose-pre:my-6
+                        prose-a:text-primary prose-a:underline prose-a:decoration-primary/30 hover:prose-a:decoration-primary prose-a:font-medium
+                        [&>*:first-child]:mt-0
+                        [&_ul]:list-disc [&_ol]:list-decimal [&_ol]:pl-6
+                        [&_ul_li]:list-item [&_ol_li]:list-item [&_li]:ml-0 
+                        [&_ol_li]:pl-2 [&_ul_li]:pl-2"
+                        dangerouslySetInnerHTML={{ 
+                          __html: formatContent(blogPost.content)
+                        }}
+                      />
                     </div>
-                  </div>
 
-                  {/* Author Bio */}
-                  <Card className="mt-8">
-                    <CardContent className="p-6">
-                      <div className="flex gap-4">
-                        <Avatar className="w-16 h-16">
-                          <AvatarImage src={blogPost.author.avatar} alt={blogPost.author.name} />
-                          <AvatarFallback>{blogPost.author.name[0]}</AvatarFallback>
-                        </Avatar>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-foreground mb-1">{blogPost.author.name}</h3>
-                          <p className="text-sm text-muted-foreground mb-2">{blogPost.author.role}</p>
-                          <p className="text-sm text-muted-foreground">{blogPost.author.bio}</p>
-                        </div>
+                    {/* Tags */}
+                    <div className="pt-8 border-t border-border">
+                      <div className="flex flex-wrap gap-2">
+                        {blogPost.tags.map((tag) => (
+                          <Badge key={tag} variant="secondary" className="text-sm">
+                            {tag}
+                          </Badge>
+                        ))}
                       </div>
+                    </div>
+
+                    {/* Author Bio */}
+                    <Card className="bg-muted/50">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <Avatar className="w-16 h-16">
+                            <AvatarImage src={blogPost.author.avatar} alt={blogPost.author.name} />
+                            <AvatarFallback>{blogPost.author.name[0]}</AvatarFallback>
+                          </Avatar>
+                          <div className="space-y-2">
+                            <h3 className="font-semibold text-foreground text-lg">{blogPost.author.name}</h3>
+                            <p className="text-sm text-primary font-medium">{blogPost.author.role}</p>
+                            <p className="text-muted-foreground text-sm leading-relaxed">{blogPost.author.bio}</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Related Articles */}
+          <section className="py-16 bg-muted/30">
+            <div className="container mx-auto px-4 max-w-6xl">
+              <h2 className="text-3xl font-bold text-foreground mb-8">Related Articles</h2>
+              <div className="grid md:grid-cols-2 gap-8">
+                {relatedPosts.map((post) => (
+                  <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                    <div className="aspect-video overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <CardContent className="p-6">
+                      <h3 className="font-semibold text-foreground text-lg mb-3 hover:text-primary transition-colors">
+                        <Link to={`/blog/${post.slug}`}>
+                          {post.title}
+                        </Link>
+                      </h3>
+                      <Button variant="outline" size="sm" asChild>
+                        <Link to={`/blog/${post.slug}`}>
+                          Read More
+                        </Link>
+                      </Button>
                     </CardContent>
                   </Card>
-
-                  {/* Related Posts */}
-                  <div className="mt-12">
-                    <h3 className="text-2xl font-bold text-foreground mb-6">Related Articles</h3>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {relatedPosts.map((post) => (
-                        <Link key={post.id} to={`/blog/${post.slug}`}>
-                          <Card className="group hover:shadow-lg transition-all duration-300 border-border/50 hover:border-primary/20 overflow-hidden">
-                            <div className="aspect-video overflow-hidden">
-                              <img 
-                                src={post.image} 
-                                alt={post.title}
-                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                              />
-                            </div>
-                            <CardContent className="p-4">
-                              <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                                {post.title}
-                              </h4>
-                            </CardContent>
-                          </Card>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </section>
