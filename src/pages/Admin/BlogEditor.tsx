@@ -28,6 +28,9 @@ type BlogPostForm = z.infer<typeof blogPostSchema>;
 const BlogEditor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const [adminToken, setAdminToken] = useState<string>(
+    typeof window !== 'undefined' ? localStorage.getItem('ADMIN_BLOG_TOKEN') || '' : ''
+  );
 
   const form = useForm<BlogPostForm>({
     resolver: zodResolver(blogPostSchema),
@@ -56,11 +59,17 @@ const BlogEditor = () => {
   const onSubmit = async (data: BlogPostForm) => {
     setIsLoading(true);
     try {
+      if (!adminToken) {
+        toast({
+          title: "Admin token required",
+          description: "Paste your ADMIN_BLOG_TOKEN above and click Save.",
+          variant: "destructive",
+        });
+        return;
+      }
       const { data: result, error } = await supabase.functions.invoke('create-post', {
         body: data,
-        headers: {
-          'Authorization': `Bearer 8f3c2a9e1b7d6c5f4e2d1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0`
-        }
+        headers: { 'x-admin-token': adminToken },
       });
 
       if (error) {
@@ -111,6 +120,27 @@ const BlogEditor = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
+            <div className="mb-6">
+              <FormLabel>Admin Token</FormLabel>
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Paste ADMIN_BLOG_TOKEN"
+                  value={adminToken}
+                  onChange={(e) => setAdminToken(e.target.value)}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    localStorage.setItem('ADMIN_BLOG_TOKEN', adminToken);
+                    toast({ title: 'Saved', description: 'Admin token saved locally.' });
+                  }}
+                >
+                  Save
+                </Button>
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">Stored in your browser only. Required to create posts.</p>
+            </div>
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

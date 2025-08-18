@@ -15,9 +15,14 @@ serve(async (req) => {
   try {
     // Verify admin token
     const authHeader = req.headers.get('authorization');
+    const xAdminHeader = req.headers.get('x-admin-token');
     const adminToken = Deno.env.get('ADMIN_BLOG_TOKEN');
     
-    if (!authHeader || authHeader !== `Bearer ${adminToken}`) {
+    const isAuthorized =
+      (authHeader && authHeader === `Bearer ${adminToken}`) ||
+      (xAdminHeader && xAdminHeader === adminToken);
+    
+    if (!isAuthorized) {
       console.log('Unauthorized access attempt');
       return new Response(
         JSON.stringify({ error: 'Unauthorized' }),
