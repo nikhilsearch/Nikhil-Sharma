@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,7 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, Save, Eye } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const blogPostSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -28,9 +29,31 @@ type BlogPostForm = z.infer<typeof blogPostSchema>;
 const BlogEditor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [adminToken, setAdminToken] = useState<string>(
     typeof window !== 'undefined' ? localStorage.getItem('ADMIN_BLOG_TOKEN') || '' : ''
   );
+
+  const isEditMode = !!id;
+
+  // Fetch existing post data for edit mode
+  const { data: existingPost, isLoading: isLoadingPost } = useQuery({
+    queryKey: ["blog-post-edit", id],
+    queryFn: async () => {
+      if (!id) return null;
+      
+      const { data, error } = await supabase
+        .from("posts")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+      if (error) throw error;
+      return data;
+    },
+    enabled: isEditMode,
+  });
 
   const form = useForm<BlogPostForm>({
     resolver: zodResolver(blogPostSchema),
@@ -44,6 +67,21 @@ const BlogEditor = () => {
       status: "draft",
     },
   });
+
+  // Populate form with existing post data in edit mode
+  useEffect(() => {
+    if (existingPost && isEditMode) {
+      form.reset({
+        title: existingPost.title,
+        slug: existingPost.slug,
+        excerpt: existingPost.excerpt || "",
+        content_markdown: existingPost.content_markdown,
+        cover_image_url: existingPost.cover_image_url || "",
+        author_name: existingPost.author_name || "",
+        status: existingPost.status,
+      });
+    }
+  }, [existingPost, isEditMode, form]);
 
   // Auto-generate slug from title
   const handleTitleChange = (title: string) => {
@@ -67,37 +105,74 @@ const BlogEditor = () => {
         });
         return;
       }
-      const { data: result, error } = await supabase.functions.invoke('create-post', {
-        body: data,
-        headers: { 'x-admin-token': adminToken },
-      });
 
-      if (error) {
-        throw error;
+      if (isEditMode && id) {
+        // Update existing post
+        const { data: result, error } = await supabase.functions.invoke('update-post', {
+          body: { ...data, id },
+          headers: { 'x-admin-token': adminToken },
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
+        toast({
+          title: "Success!",
+          description: `Blog post ${data.status === 'published' ? 'updated and published' : 'updated as draft'} successfully.`,
+        });
+
+        // Navigate back to blog
+        navigate('/blog');
+      } else {
+        // Create new post
+        const { data: result, error } = await supabase.functions.invoke('create-post', {
+          body: data,
+          headers: { 'x-admin-token': adminToken },
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
+        toast({
+          title: "Success!",
+          description: `Blog post ${data.status === 'published' ? 'published' : 'saved as draft'} successfully.`,
+        });
+
+        // Reset form
+        form.reset();
       }
-
-      if (result.error) {
-        throw new Error(result.error);
-      }
-
-      toast({
-        title: "Success!",
-        description: `Blog post ${data.status === 'published' ? 'published' : 'saved as draft'} successfully.`,
-      });
-
-      // Reset form
-      form.reset();
     } catch (error) {
-      console.error('Error creating post:', error);
+      console.error(`Error ${isEditMode ? 'updating' : 'creating'} post:`, error);
       toast({
         title: "Error",
-        description: "Failed to create blog post. Please try again.",
+        description: `Failed to ${isEditMode ? 'update' : 'create'} blog post. Please try again.`,
         variant: "destructive",
       });
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (isEditMode && isLoadingPost) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p>Loading post...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -109,7 +184,9 @@ const BlogEditor = () => {
               Back to Blog
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold text-foreground">Create New Blog Post</h1>
+          <h1 className="text-3xl font-bold text-foreground">
+            {isEditMode ? 'Edit Blog Post' : 'Create New Blog Post'}
+          </h1>
         </div>
 
         <Card>
@@ -270,10 +347,10 @@ const BlogEditor = () => {
 
                 <div className="flex gap-4">
                   <Button type="submit" disabled={isLoading} className="flex-1">
-                    {isLoading ? "Creating..." : (
+                    {isLoading ? (isEditMode ? "Updating..." : "Creating...") : (
                       <>
                         <Save className="w-4 h-4 mr-2" />
-                        Create Blog Post
+                        {isEditMode ? 'Update Blog Post' : 'Create Blog Post'}
                       </>
                     )}
                   </Button>

@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, User, ArrowRight } from "lucide-react";
+import { Calendar, User, ArrowRight, Edit } from "lucide-react";
 import StructuredData from "@/components/SEO/StructuredData"; // Fixed import
 
 interface BlogPost {
@@ -16,6 +16,8 @@ interface BlogPost {
   cover_image_url: string | null;
   published_at: string;
   author_name: string | null;
+  status: string;
+  created_at: string;
 }
 
 const Blog = () => {
@@ -24,8 +26,7 @@ const Blog = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("posts")
-        .select("id, slug, title, excerpt, cover_image_url, published_at, author_name")
-        .eq("status", "published")
+        .select("id, slug, title, excerpt, cover_image_url, published_at, author_name, status, created_at")
         .order("published_at", { ascending: false });
 
       if (error) throw error;
@@ -83,33 +84,79 @@ const Blog = () => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => (
-                <Link key={post.id} to={`/blog/${post.slug}`}>
-                  <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-border/50">
-                    {post.cover_image_url && (
-                      <div className="aspect-video overflow-hidden rounded-t-lg">
-                        <img
-                          src={post.cover_image_url}
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          loading="lazy"
-                        />
-                      </div>
-                    )}
-                    <CardHeader>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {format(new Date(post.published_at), "MMM d, yyyy")}
+              {posts?.filter(post => post.status === 'published').map((post) => (
+                <div key={post.id} className="relative">
+                  <Link to={`/blog/${post.slug}`}>
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-border/50">
+                      {post.cover_image_url && (
+                        <div className="aspect-video overflow-hidden rounded-t-lg">
+                          <img
+                            src={post.cover_image_url}
+                            alt={post.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                          />
                         </div>
-                        {post.author_name && (
+                      )}
+                      <CardHeader>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                           <div className="flex items-center gap-1">
-                            <User className="w-4 h-4" />
-                            {post.author_name}
+                            <Calendar className="w-4 h-4" />
+                            {format(new Date(post.published_at), "MMM d, yyyy")}
                           </div>
+                          {post.author_name && (
+                            <div className="flex items-center gap-1">
+                              <User className="w-4 h-4" />
+                              {post.author_name}
+                            </div>
+                          )}
+                        </div>
+                        <h2 className="text-xl font-semibold line-clamp-2 group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h2>
+                      </CardHeader>
+                      <CardContent>
+                        {post.excerpt && (
+                          <p className="text-muted-foreground line-clamp-3 mb-4">
+                            {post.excerpt}
+                          </p>
                         )}
+                        <Button variant="ghost" className="p-0 h-auto font-semibold group-hover:text-primary">
+                          Read more
+                          <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                  
+                  {/* Edit button - only visible on hover */}
+                  <Link 
+                    to={`/admin/blog-edit/${post.id}`}
+                    className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Button size="sm" variant="secondary" className="shadow-lg">
+                      <Edit className="w-4 h-4" />
+                    </Button>
+                  </Link>
+                </div>
+              ))}
+              
+              {/* Show all posts including drafts for admin purposes */}
+              {posts?.filter(post => post.status === 'draft').map((post) => (
+                <div key={post.id} className="relative">
+                  <Card className="border-dashed border-2 border-muted-foreground/30 opacity-60">
+                    <CardHeader>
+                      <div className="flex items-center justify-between mb-3">
+                        <Badge variant="outline">Draft</Badge>
+                        <Link to={`/admin/blog-edit/${post.id}`}>
+                          <Button size="sm" variant="secondary">
+                            <Edit className="w-4 h-4 mr-2" />
+                            Edit
+                          </Button>
+                        </Link>
                       </div>
-                      <h2 className="text-xl font-semibold line-clamp-2 group-hover:text-primary transition-colors">
+                      <h2 className="text-xl font-semibold line-clamp-2">
                         {post.title}
                       </h2>
                     </CardHeader>
@@ -119,13 +166,12 @@ const Blog = () => {
                           {post.excerpt}
                         </p>
                       )}
-                      <Button variant="ghost" className="p-0 h-auto font-semibold group-hover:text-primary">
-                        Read more
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                      </Button>
+                      <p className="text-sm text-muted-foreground">
+                        Created: {format(new Date(post.published_at || post.created_at), "MMM d, yyyy")}
+                      </p>
                     </CardContent>
                   </Card>
-                </Link>
+                </div>
               ))}
             </div>
           )}
