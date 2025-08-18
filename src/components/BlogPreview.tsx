@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { SocialSharing } from './SocialSharing';
 import { format } from 'date-fns';
-import readingTime from 'reading-time';
+import { calculateReadingTime, formatReadingTime } from '@/utils/readingTime';
 
 interface BlogPreviewProps {
   title: string;
@@ -36,7 +36,7 @@ export const BlogPreview: React.FC<BlogPreviewProps> = ({
   metaDescription,
   metaKeywords
 }) => {
-  const stats = readingTime(content || '');
+  const readingTimeMinutes = calculateReadingTime(content || '');
   const currentUrl = window.location.href;
 
   return (
@@ -130,7 +130,7 @@ export const BlogPreview: React.FC<BlogPreviewProps> = ({
 
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
-                  <span>{stats.text}</span>
+                  <span>{formatReadingTime(readingTimeMinutes)}</span>
                 </div>
               </div>
             </header>

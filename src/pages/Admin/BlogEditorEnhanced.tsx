@@ -18,7 +18,7 @@ import { useQuery } from "@tanstack/react-query";
 import { RichTextEditor } from "@/components/RichTextEditor";
 import { ImageUploader } from "@/components/ImageUploader";
 import { BlogPreview } from "@/components/BlogPreview";
-import readingTime from 'reading-time';
+import { calculateReadingTime } from "@/utils/readingTime";
 
 const blogPostSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -139,13 +139,13 @@ const BlogEditorEnhanced = () => {
     setAutoSaving(true);
     try {
       const formData = form.getValues();
-      const stats = readingTime(formData.content_html || formData.content_markdown);
+      const readingTimeMinutes = calculateReadingTime(formData.content_html || formData.content_markdown);
       
       const { error } = await supabase.functions.invoke('update-post', {
         body: { 
           ...formData, 
           id,
-          reading_time: Math.ceil(stats.minutes),
+          reading_time: readingTimeMinutes,
           draft_data: formData
         },
         headers: { 'x-admin-token': adminToken },
@@ -222,10 +222,10 @@ const BlogEditorEnhanced = () => {
       }
 
       // Calculate reading time
-      const stats = readingTime(data.content_html || data.content_markdown);
+      const readingTimeMinutes = calculateReadingTime(data.content_html || data.content_markdown);
       const postData = {
         ...data,
-        reading_time: Math.ceil(stats.minutes),
+        reading_time: readingTimeMinutes,
         published_at: data.status === 'published' ? new Date().toISOString() : null
       };
 
