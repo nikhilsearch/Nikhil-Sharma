@@ -42,6 +42,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
       </CardHeader>
       <CardContent>
         <Editor
+          apiKey={import.meta.env.VITE_TINYMCE_API_KEY || 'no-api-key'}
           onInit={(evt, editor) => editorRef.current = editor}
           value={value}
           onEditorChange={onChange}
