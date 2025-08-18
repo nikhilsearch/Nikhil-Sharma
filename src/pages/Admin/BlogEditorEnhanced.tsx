@@ -212,6 +212,9 @@ const BlogEditorEnhanced = () => {
   const onSubmit = async (data: BlogPostForm) => {
     setIsLoading(true);
     try {
+      console.log('Admin token present:', !!adminToken);
+      console.log('Admin token length:', adminToken?.length || 0);
+      
       if (!adminToken) {
         toast({
           title: "Admin token required",
@@ -231,16 +234,23 @@ const BlogEditorEnhanced = () => {
 
       if (isEditMode && id) {
         // Update existing post
+        console.log('Attempting to update post with ID:', id);
+        console.log('Using admin token (first 8 chars):', adminToken.substring(0, 8) + '...');
+        
         const { data: result, error } = await supabase.functions.invoke('update-post', {
           body: { ...postData, id },
           headers: { 'x-admin-token': adminToken },
         });
 
+        console.log('Update response:', { result, error });
+
         if (error) {
+          console.error('Supabase invoke error:', error);
           throw error;
         }
 
-        if (result.error) {
+        if (result?.error) {
+          console.error('Function response error:', result.error);
           throw new Error(result.error);
         }
 
