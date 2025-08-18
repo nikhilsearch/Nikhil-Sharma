@@ -24,9 +24,7 @@ const blogPost = {
   id: "what-is-generative-engine-optimization",
   title: "What Is Generative Engine Optimization",
   excerpt: "Are You Ready to Future-Proof Your Brand? The Invisible Revolution of Generative Engine Optimization is Here",
-  content: 
-
-Have you ever felt like the digital world is a giant, ever-changing maze? One minute you've mastered the rules, and the next, a new platform or technology appears and changes everything. You've put in the time and effort to build a strong online presence, and you've probably become an expert at traditional SEO, the art of getting your website to show up in a list of search results. But what if the very way people search for information is fundamentally shifting?
+  content: `Have you ever felt like the digital world is a giant, ever-changing maze? One minute you've mastered the rules, and the next, a new platform or technology appears and changes everything. You've put in the time and effort to build a strong online presence, and you've probably become an expert at traditional SEO, the art of getting your website to show up in a list of search results. But what if the very way people search for information is fundamentally shifting?
 
 A quiet but powerful revolution is underway, and it's being led by AI. Today, millions of people are no longer starting their search on Google's famous ten blue links. They're going to AI assistants like ChatGPT, Claude, and Google's own AI Overviews for a single, direct, and comprehensive answer to their question. They aren't looking for a website to click on; they're looking for a summary, a citation, or a direct response.
 
@@ -108,8 +106,7 @@ Ready to put these ideas into action? Here's a quick checklist to get you starte
 
 ## Conclusion
 
-The future of search is conversational and intelligent. It's no longer just about optimizing for an algorithm; it's about optimizing for understanding. By embracing Generative Engine Optimization, you are not just positioning your brand for short-term visibility, you are securing its place in the future of how information is found and shared.
-  `,
+The future of search is conversational and intelligent. It's no longer just about optimizing for an algorithm; it's about optimizing for understanding. By embracing Generative Engine Optimization, you are not just positioning your brand for short-term visibility, you are securing its place in the future of how information is found and shared.`,
   author: {
     name: "Nikhil Sharma",
     avatar: "/lovable-uploads/841ad87e-550c-470b-bbf2-4286877526c9.png",
