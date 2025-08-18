@@ -5,8 +5,9 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Calendar, User } from "lucide-react";
-import StructuredData from "@/components/SEO/StructuredData";
+import StructuredData from "@/components/SEO/StructuredData"; // Fixed import
 import { useEffect } from "react";
 
 interface BlogPostData {
@@ -28,7 +29,7 @@ const BlogPost = () => {
     queryKey: ["blog-post", slug],
     queryFn: async () => {
       if (!slug) throw new Error("No slug provided");
-
+      
       const { data, error } = await supabase
         .from("posts")
         .select("*")
@@ -38,22 +39,24 @@ const BlogPost = () => {
 
       if (error) throw error;
       if (!data) throw new Error("Post not found");
-
+      
       return data as BlogPostData;
     },
     enabled: !!slug,
   });
 
-  // SEO: Update document title and meta tags
+  // Update document title and meta description
   useEffect(() => {
     if (post) {
       document.title = `${post.title} | Blog`;
-
+      
+      // Update meta description
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         metaDescription.setAttribute("content", post.excerpt || post.title);
       }
 
+      // Add canonical URL
       let canonical = document.querySelector('link[rel="canonical"]');
       if (!canonical) {
         canonical = document.createElement("link");
@@ -64,7 +67,7 @@ const BlogPost = () => {
     }
 
     return () => {
-      document.title = "Your Site Title";
+      document.title = "Your Site Title"; // Reset to default
     };
   }, [post]);
 
@@ -108,7 +111,6 @@ const BlogPost = () => {
 
   return (
     <>
-      {/* SEO Structured Data */}
       <StructuredData
         type="Portfolio"
         data={{
@@ -119,56 +121,46 @@ const BlogPost = () => {
           datePublished: post.published_at,
           author: {
             "@type": "Person",
-            name: post.author_name || "Author",
+            name: post.author_name || "Author"
           },
           publisher: {
             "@type": "Organization",
-            name: "Your Site Name",
+            name: "Your Site Name"
           },
-          mainEntityOfPage: {
-            "@type": "WebPage",
-            "@id": `${window.location.origin}/blog/${post.slug}`,
-          },
-          url: `${window.location.origin}/blog/${post.slug}`,
+          url: `${window.location.origin}/blog/${post.slug}`
         }}
       />
 
       <article className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto">
-
-            {/* Back Button */}
+            {/* Back button */}
             <Button
-              variant="outline"
+              variant="ghost"
               onClick={() => navigate("/blog")}
-              className="mb-8"
+              className="mb-8 hover:bg-muted"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Blog
             </Button>
 
-            {/* Cover Image */}
-            {post.cover_image_url ? (
+            {/* Cover image */}
+            {post.cover_image_url && (
               <div className="aspect-video overflow-hidden rounded-lg mb-8">
                 <img
                   src={post.cover_image_url}
                   alt={post.title}
                   className="w-full h-full object-cover"
-                  loading="lazy"
                 />
-              </div>
-            ) : (
-              <div className="aspect-video bg-muted rounded-lg mb-8 flex items-center justify-center text-muted-foreground text-sm italic">
-                No image available
               </div>
             )}
 
-            {/* Post Header */}
+            {/* Header */}
             <header className="mb-8">
               <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                 {post.title}
               </h1>
-
+              
               <div className="flex flex-wrap items-center gap-6 text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5" />
@@ -183,15 +175,15 @@ const BlogPost = () => {
                   </div>
                 )}
               </div>
-
+              
               {post.excerpt && (
-                <p className="text-lg text-muted-foreground mt-4 leading-relaxed">
+                <p className="text-xl text-muted-foreground mt-6 leading-relaxed">
                   {post.excerpt}
                 </p>
               )}
             </header>
 
-            {/* Markdown Content */}
+            {/* Content */}
             <div className="prose prose-lg max-w-none 
               prose-headings:text-foreground prose-headings:font-bold
               prose-p:text-foreground prose-p:leading-relaxed
