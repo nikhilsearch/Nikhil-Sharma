@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 
 interface StructuredDataProps {
-  type: 'Person' | 'WebSite' | 'Organization' | 'Portfolio' | 'Article';
+  type: 'Person' | 'WebSite' | 'Organization' | 'Portfolio';
   data: Record<string, any>;
 }
 
@@ -67,21 +67,6 @@ const StructuredData = ({ type, data }: StructuredDataProps) => {
           },
           "about": data.about || "Digital Marketing Portfolio",
           "url": window.location.href
-        };
-        break;
-      
-      case 'Article':
-        structuredData = {
-          ...structuredData,
-          "@type": "Article",
-          "headline": data.headline,
-          "description": data.description,
-          "author": data.author,
-          "datePublished": data.datePublished,
-          "dateModified": data.dateModified,
-          "image": data.image,
-          "publisher": data.publisher,
-          "mainEntityOfPage": data.mainEntityOfPage
         };
         break;
     }

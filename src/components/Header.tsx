@@ -15,22 +15,17 @@ const Header = () => {
     { name: "Skills", href: "#skills", id: "skills" },
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Success Stories", href: "#stories", id: "stories" },
-    { name: "Blog", href: "/blog", id: "blog" },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
 
-  // Smooth scroll function or navigation
-  const handleNavigation = (href: string) => {
-    if (href.startsWith('#')) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    } else {
-      window.location.href = href;
+  // Smooth scroll function
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
     setIsMenuOpen(false);
   };
@@ -44,16 +39,13 @@ const Header = () => {
   // Track active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navigationItems
-        .filter(item => item.href.startsWith('#'))
-        .map(item => document.querySelector(item.href));
+      const sections = navigationItems.map(item => document.querySelector(item.href));
       const scrollY = window.scrollY + 100;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i] as HTMLElement;
         if (section && section.offsetTop <= scrollY) {
-          const sectionId = navigationItems.filter(item => item.href.startsWith('#'))[i].id;
-          setActiveSection(sectionId);
+          setActiveSection(navigationItems[i].id);
           break;
         }
       }
@@ -79,7 +71,7 @@ const Header = () => {
             {navigationItems.map((item) => (
               <button
                 key={item.id}
-                onClick={() => handleNavigation(item.href)}
+                onClick={() => scrollToSection(item.href)}
                 className={`transition-all duration-300 hover:text-primary font-medium ${
                   activeSection === item.id
                     ? "text-primary border-b-2 border-primary"
@@ -126,7 +118,7 @@ const Header = () => {
               {navigationItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => handleNavigation(item.href)}
+                  onClick={() => scrollToSection(item.href)}
                   className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
                     activeSection === item.id
                       ? "text-primary bg-primary/10"
