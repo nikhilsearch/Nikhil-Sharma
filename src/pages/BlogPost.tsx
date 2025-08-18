@@ -409,26 +409,27 @@ const BlogPost = () => {
                   <article className="space-y-8">
                     <div className="space-y-6">
                       <div 
-                        className="prose prose-lg max-w-none text-foreground
-                        prose-headings:text-foreground prose-headings:font-bold prose-headings:scroll-mt-24
-                        prose-h1:text-4xl prose-h1:mb-8 prose-h1:mt-0 prose-h1:leading-tight prose-h1:border-b prose-h1:border-border prose-h1:pb-4
-                        prose-h2:text-2xl prose-h2:mb-6 prose-h2:mt-12 prose-h2:border-b prose-h2:border-border prose-h2:pb-3 prose-h2:scroll-mt-24
-                        prose-h3:text-xl prose-h3:mb-4 prose-h3:mt-8 prose-h3:font-semibold prose-h3:scroll-mt-24
-                        prose-h4:text-lg prose-h4:mb-3 prose-h4:mt-6 prose-h4:font-semibold prose-h4:text-primary
-                        prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-6 prose-p:text-base
+                        className="prose prose-xl max-w-none
+                        prose-headings:font-bold prose-headings:tracking-tight prose-headings:scroll-mt-24
+                        prose-h1:text-4xl prose-h1:mb-8 prose-h1:mt-0 prose-h1:leading-tight prose-h1:text-foreground
+                        prose-h2:text-3xl prose-h2:mb-8 prose-h2:mt-16 prose-h2:text-foreground prose-h2:border-b-2 prose-h2:border-primary/20 prose-h2:pb-4
+                        prose-h3:text-2xl prose-h3:mb-6 prose-h3:mt-12 prose-h3:text-foreground prose-h3:font-semibold
+                        prose-h4:text-xl prose-h4:mb-4 prose-h4:mt-8 prose-h4:text-primary prose-h4:font-semibold
+                        prose-p:text-lg prose-p:text-muted-foreground prose-p:leading-relaxed prose-p:mb-6
                         prose-strong:text-foreground prose-strong:font-semibold
-                        prose-ul:my-6 prose-ul:space-y-2 prose-ul:pl-6
-                        prose-ol:my-6 prose-ol:space-y-2 prose-ol:pl-6
-                        prose-li:text-muted-foreground prose-li:leading-relaxed prose-li:text-base prose-li:mb-2
-                        prose-li:marker:text-primary prose-li:marker:font-medium
-                        prose-blockquote:border-primary prose-blockquote:bg-muted/50 prose-blockquote:p-6 prose-blockquote:rounded-lg prose-blockquote:my-8
-                        prose-code:text-primary prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm
-                        prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:p-4 prose-pre:rounded-lg prose-pre:my-6
-                        prose-a:text-primary prose-a:underline prose-a:decoration-primary/30 hover:prose-a:decoration-primary prose-a:font-medium
+                        prose-ul:my-8 prose-ul:space-y-3 prose-ul:text-lg
+                        prose-ol:my-8 prose-ol:space-y-4 prose-ol:text-lg
+                        prose-li:text-muted-foreground prose-li:leading-relaxed prose-li:mb-2
+                        prose-li:marker:text-primary prose-li:marker:font-bold prose-li:marker:text-lg
+                        prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:bg-muted/30 prose-blockquote:p-6 prose-blockquote:rounded-r-lg prose-blockquote:my-8 prose-blockquote:italic
+                        prose-code:text-primary prose-code:bg-muted prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-base prose-code:font-medium
+                        prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:p-6 prose-pre:rounded-lg prose-pre:my-8
+                        prose-a:text-primary prose-a:font-semibold prose-a:no-underline hover:prose-a:text-primary/80 hover:prose-a:underline prose-a:transition-all prose-a:duration-200
                         [&>*:first-child]:mt-0
-                        [&_ul]:list-disc [&_ol]:list-decimal [&_ol]:pl-6
+                        [&_ul]:list-disc [&_ol]:list-decimal 
                         [&_ul_li]:list-item [&_ol_li]:list-item [&_li]:ml-0 
-                        [&_ol_li]:pl-2 [&_ul_li]:pl-2"
+                        [&_ol_li]:pl-2 [&_ul_li]:pl-2
+                        [&_ol_li]:font-medium [&_ul_li]:font-medium"
                         dangerouslySetInnerHTML={{ 
                           __html: formatContent(blogPost.content)
                         }}
