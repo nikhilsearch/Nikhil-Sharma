@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -51,6 +51,15 @@ const CaseStudies = () => {
       color: "from-purple-500 to-purple-600"
     }
   ];
+
+  // Auto-slide functionality
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCase((prev) => (prev + 1) % caseStudies.length);
+    }, 4000); // Change slide every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [caseStudies.length]);
 
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/5">
