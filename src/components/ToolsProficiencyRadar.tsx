@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 interface Tool {
   name: string;
   category: 'seo' | 'ai' | 'analytics';
+  description: string;
 }
 
 const ToolsProficiencyRadar = () => {
@@ -12,20 +13,76 @@ const ToolsProficiencyRadar = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const tools: Tool[] = [
-    { name: 'Google Search Console', category: 'seo' },
-    { name: 'Google Analytics', category: 'analytics' },
-    { name: 'Google Tag Manager', category: 'analytics' },
-    { name: 'Screaming Frog', category: 'seo' },
-    { name: 'Looker Studio', category: 'analytics' },
-    { name: 'Ahrefs', category: 'seo' },
-    { name: 'Semrush', category: 'seo' },
-    { name: 'Google Sheets', category: 'analytics' },
-    { name: 'ChatGPT', category: 'ai' },
-    { name: 'Perplexity', category: 'ai' },
-    {name: 'Google Gemini', category: 'ai' },
-    { name: 'Claude', category: 'ai' },
-    { name: 'Lumar', category: 'seo' },
-    { name: 'Sitebulb', category: 'seo' }
+    { 
+      name: 'Google Search Console', 
+      category: 'seo',
+      description: 'My primary source for organic performance data. I monitor impressions, clicks, CTR, and keyword positions. I also use GSC to submit sitemaps, identify indexation issues, and analyze Core Web Vitals.'
+    },
+    { 
+      name: 'Google Analytics', 
+      category: 'analytics',
+      description: 'Tracks user behavior and traffic sources. I use event tracking to measure conversions, analyze engagement per landing page, and align SEO KPIs with business goals.'
+    },
+    { 
+      name: 'Google Tag Manager', 
+      category: 'analytics',
+      description: 'Essential for deploying tracking pixels and custom events without dev dependency. I often configure scroll depth tracking, button clicks, and structured data testing via GTM.'
+    },
+    { 
+      name: 'Screaming Frog', 
+      category: 'seo',
+      description: 'My crawling powerhouse. I use it for large-scale site audits, broken link checks, redirect chain analysis, and extracting structured data.'
+    },
+    { 
+      name: 'Looker Studio', 
+      category: 'analytics',
+      description: 'I build client dashboards combining GA4, GSC, and third-party SEO data, creating real-time visualizations for performance tracking.'
+    },
+    { 
+      name: 'Ahrefs', 
+      category: 'seo',
+      description: 'My go-to for backlink analysis, broken link opportunities, and competitive keyword gap research. I also use its content explorer for link prospecting.'
+    },
+    { 
+      name: 'Semrush', 
+      category: 'seo',
+      description: 'I rely on it for keyword tracking, SERP analysis, and competitive audits. I often cross-validate keyword data with Ahrefs for accuracy.'
+    },
+    { 
+      name: 'Google Sheets', 
+      category: 'analytics',
+      description: 'My go-to for organizing keyword research, backlink audits, and content calendars. I connect Sheets with APIs (e.g., GSC, Semrush) to automate reporting.'
+    },
+    { 
+      name: 'ChatGPT', 
+      category: 'ai',
+      description: 'Helps me draft content briefs, generate schema markup, and even create quick scripts for data formatting. Also useful for brainstorming content angles.'
+    },
+    { 
+      name: 'Perplexity', 
+      category: 'ai',
+      description: 'Great for quick research and staying updated on SEO trends with cited sources.'
+    },
+    { 
+      name: 'Google Gemini', 
+      category: 'ai',
+      description: 'Useful for multimodal insights (text + data), helping me interpret analytics patterns or brainstorm optimization strategies.'
+    },
+    { 
+      name: 'Claude', 
+      category: 'ai',
+      description: 'I use it for summarizing long reports, competitor pages, or technical documentation into actionable insights.'
+    },
+    { 
+      name: 'Lumar', 
+      category: 'seo',
+      description: 'I rely on it for enterprise-level crawling, monitoring site migrations, and maintaining clean indexation across large websites.'
+    },
+    { 
+      name: 'Sitebulb', 
+      category: 'seo',
+      description: 'Complements Screaming Frog with visual site audits and prioritization insights for developers. Great for explaining issues to non-technical stakeholders.'
+    }
   ];
 
   useEffect(() => {
@@ -239,7 +296,7 @@ const ToolsProficiencyRadar = () => {
                   {(() => {
                     const tool = tools.find(t => t.name === hoveredTool);
                     return tool ? (
-                      <div className="space-y-3">
+                      <div className="space-y-4">
                         <Badge 
                           variant="outline" 
                           className="capitalize"
@@ -247,6 +304,9 @@ const ToolsProficiencyRadar = () => {
                         >
                           {tool.category} Tool
                         </Badge>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {tool.description}
+                        </p>
                       </div>
                     ) : null;
                   })()}
