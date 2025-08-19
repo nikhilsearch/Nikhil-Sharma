@@ -9,42 +9,42 @@ const CaseStudies = () => {
 
   const caseStudies = [
     {
-      title: "E-commerce Growth Strategy",
-      client: "TechRetail Inc.",
-      challenge: "Low organic traffic and poor search rankings",
-      solution: "Comprehensive technical SEO audit, content optimization, and link building campaign",
+      title: "EdTech Platform Optimization",
+      client: "Doubtnut.com",
+      challenge: "Poor search engine crawling and low organic visibility",
+      solution: "Technical SEO optimization, crawl budget management, and content structure enhancement",
       results: [
-        { metric: "Organic Traffic", increase: "+285%" },
-        { metric: "Keyword Rankings", increase: "+150%" },
-        { metric: "Conversion Rate", increase: "+45%" }
+        { metric: "Crawling Efficiency", increase: "+70%" },
+        { metric: "Organic Traffic", increase: "+80%" },
+        { metric: "Keyword Rankings", increase: "+120%" }
       ],
-      timeline: "6 months",
-      industry: "E-commerce",
+      timeline: "4 months",
+      industry: "EdTech",
       color: "from-blue-500 to-blue-600"
     },
     {
-      title: "Local Business Dominance",
-      client: "Metro Services",
-      challenge: "Invisible in local search results",
-      solution: "Local SEO optimization, Google My Business enhancement, and review management",
+      title: "E-commerce SEO Success",
+      client: "Novoshoes.co.nz",
+      challenge: "Limited online visibility in competitive footwear market",
+      solution: "Comprehensive SEO strategy with technical optimization and content marketing",
       results: [
-        { metric: "Local Rankings", increase: "+400%" },
-        { metric: "Phone Calls", increase: "+180%" },
-        { metric: "Store Visits", increase: "+65%" }
+        { metric: "Organic Traffic", increase: "+150%" },
+        { metric: "Keywords Ranking", increase: "+130%" },
+        { metric: "Conversion Rate", increase: "+35%" }
       ],
-      timeline: "4 months",
-      industry: "Local Services",
+      timeline: "6 months",
+      industry: "E-commerce",
       color: "from-green-500 to-green-600"
     },
     {
-      title: "AI-Powered Content Strategy",
-      client: "StartupTech AI",
-      challenge: "Competing in saturated AI market",
-      solution: "AI SEO optimization for ChatGPT, Perplexity, and LLM model visibility",
+      title: "AI Technology Growth",
+      client: "Wavel AI",
+      challenge: "Breaking through in the competitive AI technology space",
+      solution: "Strategic content optimization and technical SEO for AI-focused search queries",
       results: [
-        { metric: "AI Search Visibility", increase: "+320%" },
-        { metric: "Brand Mentions", increase: "+250%" },
-        { metric: "Thought Leadership", increase: "+190%" }
+        { metric: "Organic Traffic", increase: "+220%" },
+        { metric: "Keywords Ranking", increase: "+120%" },
+        { metric: "Conversion Rate", increase: "+35%" }
       ],
       timeline: "5 months",
       industry: "AI Technology",
