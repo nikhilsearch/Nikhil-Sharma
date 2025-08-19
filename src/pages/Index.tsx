@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Expertise from "@/components/Expertise";
@@ -13,6 +14,18 @@ import StaticSnapshot from "@/components/SEO/StaticSnapshot";
 import StructuredData from "@/components/SEO/StructuredData";
 
 const Index = () => {
+  useEffect(() => {
+    // Add canonical tag
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', 'https://nikhil-search.vercel.app/');
+    } else {
+      const newCanonicalLink = document.createElement('link');
+      newCanonicalLink.setAttribute('rel', 'canonical');
+      newCanonicalLink.setAttribute('href', 'https://nikhil-search.vercel.app/');
+      document.head.appendChild(newCanonicalLink);
+    }
+  }, []);
   return (
     <BotSnapshot fallback={<StaticSnapshot />}>
       <StructuredData 
