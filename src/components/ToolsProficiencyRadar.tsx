@@ -283,12 +283,12 @@ const ToolsProficiencyRadar = () => {
             </Card>
           </div>
 
-          {/* Tool Details - Floating Card */}
-          {hoveredTool && (
-            <div className="fixed top-20 right-4 w-80 z-50 animate-fade-in">
-              <Card className="bg-background/95 backdrop-blur-xl border-2 border-primary/30 shadow-2xl shadow-primary/20 dark:bg-background/98 dark:border-primary/40 dark:shadow-primary/30">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg text-primary font-semibold">
+          {/* Tool Details */}
+          <div className="w-full lg:w-80 shrink-0">
+            {hoveredTool && (
+              <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in">
+                <CardHeader>
+                  <CardTitle className="text-lg text-primary">
                     {hoveredTool}
                   </CardTitle>
                 </CardHeader>
@@ -298,18 +298,13 @@ const ToolsProficiencyRadar = () => {
                     return tool ? (
                       <div className="space-y-4">
                         <Badge 
-                          variant="secondary" 
-                          className="capitalize font-medium px-3 py-1"
-                          style={{ 
-                            backgroundColor: `${getCategoryColor(tool.category)}20`,
-                            borderColor: getCategoryColor(tool.category), 
-                            color: getCategoryColor(tool.category),
-                            border: `1px solid ${getCategoryColor(tool.category)}`
-                          }}
+                          variant="outline" 
+                          className="capitalize"
+                          style={{ borderColor: getCategoryColor(tool.category), color: getCategoryColor(tool.category) }}
                         >
                           {tool.category} Tool
                         </Badge>
-                        <p className="text-sm text-foreground/90 leading-relaxed font-medium">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
                           {tool.description}
                         </p>
                       </div>
@@ -317,8 +312,8 @@ const ToolsProficiencyRadar = () => {
                   })()}
                 </CardContent>
               </Card>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </section>
