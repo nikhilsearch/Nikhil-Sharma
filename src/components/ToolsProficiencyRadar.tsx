@@ -106,9 +106,9 @@ const ToolsProficiencyRadar = () => {
   }, []);
 
   const generateRadarPoints = () => {
-    const centerX = 200;
-    const centerY = 160;
-    const maxRadius = 80;
+    const centerX = 300;
+    const centerY = 250;
+    const maxRadius = 120;
     
     return tools.map((tool, index) => {
       const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
@@ -117,8 +117,8 @@ const ToolsProficiencyRadar = () => {
       return {
         x: centerX + radius * Math.cos(angle),
         y: centerY + radius * Math.sin(angle),
-        labelX: centerX + (maxRadius + 50) * Math.cos(angle),
-        labelY: centerY + (maxRadius + 50) * Math.sin(angle),
+        labelX: centerX + (maxRadius + 80) * Math.cos(angle),
+        labelY: centerY + (maxRadius + 80) * Math.sin(angle),
         tool,
         angle
       };
@@ -126,9 +126,9 @@ const ToolsProficiencyRadar = () => {
   };
 
   const generateGridLines = () => {
-    const centerX = 200;
-    const centerY = 160;
-    const maxRadius = 80;
+    const centerX = 300;
+    const centerY = 250;
+    const maxRadius = 120;
     const levels = [0.2, 0.4, 0.6, 0.8, 1.0];
     
     return levels.map(level => {
@@ -157,33 +157,33 @@ const ToolsProficiencyRadar = () => {
   };
 
   return (
-    <section className="py-12 px-4 bg-gradient-to-br from-background via-muted/10 to-primary/5">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-3">
+    <section className="py-20 px-4 bg-gradient-to-br from-background via-muted/10 to-primary/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4">
             <span className="text-foreground">Professional</span>{" "}
-            <span className="bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent">Tools</span>
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">Tools</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Interactive visualization of professional tools across SEO, AI, Analytics, and Project Management
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 items-start">
+        <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* Radar Chart */}
           <div className="flex-1 w-full">
-            <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-xl shadow-primary/10 overflow-hidden hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500">
-              <CardContent className="p-4 relative">
+            <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
+              <CardContent className="p-8 relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
                 <svg 
-                  width="400" 
-                  height="320" 
-                  viewBox="0 0 400 320"
+                  width="600" 
+                  height="500" 
+                  viewBox="0 0 600 500"
                   className={`w-full h-auto transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                 >
                   {/* Gradient Definitions */}
                   <defs>
-                    <radialGradient id="chartGradient" cx="200" cy="160" r="80">
+                    <radialGradient id="chartGradient" cx="300" cy="250" r="120">
                       <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
                       <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
                       <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
@@ -197,7 +197,7 @@ const ToolsProficiencyRadar = () => {
                   </defs>
                   
                   {/* Background Glow */}
-                  <circle cx="200" cy="160" r="80" fill="url(#chartGradient)" />
+                  <circle cx="300" cy="250" r="120" fill="url(#chartGradient)" />
                   
                   {/* Background Grid */}
                   {gridLines.map((grid, index) => (
@@ -206,7 +206,7 @@ const ToolsProficiencyRadar = () => {
                       points={grid.points}
                       fill="none"
                       stroke="hsl(var(--primary))"
-                      strokeWidth="1.5"
+                      strokeWidth="2"
                       opacity={0.3 - (index * 0.05)}
                       className="animate-pulse"
                       style={{ animationDelay: `${index * 0.2}s` }}
@@ -217,12 +217,12 @@ const ToolsProficiencyRadar = () => {
                   {radarPoints.map((point, index) => (
                     <line
                       key={index}
-                      x1="200"
-                      y1="160"
+                      x1="300"
+                      y1="250"
                       x2={point.labelX}
                       y2={point.labelY}
                       stroke="hsl(var(--primary))"
-                      strokeWidth="1.5"
+                      strokeWidth="2"
                       opacity="0.4"
                       className="transition-all duration-300 hover:opacity-60"
                     />
@@ -233,9 +233,9 @@ const ToolsProficiencyRadar = () => {
                     points={pathPoints}
                     fill="url(#areaGradient)"
                     stroke="hsl(var(--primary))"
-                    strokeWidth="2"
+                    strokeWidth="3"
                     className={`transition-all duration-1000 ${isVisible ? 'animate-scale-in' : ''}`}
-                    filter="drop-shadow(0 0 15px hsl(var(--primary) / 0.3))"
+                    filter="drop-shadow(0 0 20px hsl(var(--primary) / 0.3))"
                   />
                   
                   {/* Data Points */}
@@ -245,7 +245,7 @@ const ToolsProficiencyRadar = () => {
                       <circle
                         cx={point.x}
                         cy={point.y}
-                        r={hoveredTool === point.tool.name ? "8" : "6"}
+                        r={hoveredTool === point.tool.name ? "12" : "8"}
                         fill={getCategoryColor(point.tool.category)}
                         opacity="0.2"
                         className="transition-all duration-300 animate-pulse"
@@ -255,15 +255,15 @@ const ToolsProficiencyRadar = () => {
                       <circle
                         cx={point.x}
                         cy={point.y}
-                        r={hoveredTool === point.tool.name ? "5" : "3.5"}
+                        r={hoveredTool === point.tool.name ? "7" : "5"}
                         fill={getCategoryColor(point.tool.category)}
                         stroke="hsl(var(--background))"
-                        strokeWidth="2"
+                        strokeWidth="3"
                         className="transition-all duration-200 cursor-pointer hover-scale"
                         style={{
                           filter: hoveredTool === point.tool.name 
-                            ? `drop-shadow(0 0 10px ${getCategoryColor(point.tool.category)})` 
-                            : `drop-shadow(0 0 3px ${getCategoryColor(point.tool.category)})`
+                            ? `drop-shadow(0 0 15px ${getCategoryColor(point.tool.category)})` 
+                            : `drop-shadow(0 0 5px ${getCategoryColor(point.tool.category)})`
                         }}
                         onMouseEnter={() => setHoveredTool(point.tool.name)}
                         onMouseLeave={() => setHoveredTool(null)}
@@ -277,17 +277,17 @@ const ToolsProficiencyRadar = () => {
                       key={index}
                       x={point.labelX}
                       y={point.labelY}
-                      textAnchor={point.labelX > 200 ? "start" : point.labelX < 200 ? "end" : "middle"}
-                      dominantBaseline={point.labelY > 140 ? "hanging" : point.labelY < 140 ? "text-bottom" : "central"}
+                      textAnchor={point.labelX > 300 ? "start" : point.labelX < 300 ? "end" : "middle"}
+                      dominantBaseline={point.labelY > 200 ? "hanging" : point.labelY < 200 ? "text-bottom" : "central"}
                       fill="hsl(var(--foreground))"
-                      fontSize="11"
+                      fontSize="13"
                       fontWeight={hoveredTool === point.tool.name ? "700" : "500"}
                       className={`transition-all duration-200 cursor-pointer story-link ${
                         hoveredTool === point.tool.name ? 'text-primary' : ''
                       }`}
                       style={{
-                        filter: hoveredTool === point.tool.name ? 'drop-shadow(0 1px 2px hsl(var(--primary) / 0.3))' : 'none',
-                        textShadow: hoveredTool === point.tool.name ? '0 0 8px hsl(var(--primary) / 0.5)' : 'none'
+                        filter: hoveredTool === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
+                        textShadow: hoveredTool === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
                       }}
                       onMouseEnter={() => setHoveredTool(point.tool.name)}
                       onMouseLeave={() => setHoveredTool(null)}
@@ -301,27 +301,27 @@ const ToolsProficiencyRadar = () => {
           </div>
 
           {/* Tool Details */}
-          <div className="w-full lg:w-72 shrink-0">
+          <div className="w-full lg:w-80 shrink-0">
             {hoveredTool && (
               <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-base text-primary">
+                <CardHeader>
+                  <CardTitle className="text-lg text-primary">
                     {hoveredTool}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="pt-0">
+                <CardContent>
                   {(() => {
                     const tool = tools.find(t => t.name === hoveredTool);
                     return tool ? (
-                      <div className="space-y-3">
+                      <div className="space-y-4">
                         <Badge 
                           variant="outline" 
-                          className="capitalize text-xs"
+                          className="capitalize"
                           style={{ borderColor: getCategoryColor(tool.category), color: getCategoryColor(tool.category) }}
                         >
-                          {tool.category.replace('-', ' ')} Tool
+                          {tool.category} Tool
                         </Badge>
-                        <p className="text-xs text-muted-foreground leading-relaxed">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
                           {tool.description}
                         </p>
                       </div>
