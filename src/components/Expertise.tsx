@@ -239,7 +239,7 @@ const Expertise = () => {
                       {area.skills.map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
-                          className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
+                          className="text-xs px-2 py-1 bg-primary/20 dark:bg-primary/30 text-primary dark:text-primary-foreground border border-primary/30 dark:border-primary/50 rounded-full font-medium dark:shadow-lg dark:shadow-primary/20"
                         >
                           {skill}
                         </span>
@@ -297,7 +297,7 @@ const Expertise = () => {
                       {area.skills.map((skill, skillIndex) => (
                         <span
                           key={skillIndex}
-                          className="text-xs px-2 py-1 bg-primary/10 text-primary border border-primary/20 rounded-full"
+                          className="text-xs px-2 py-1 bg-primary/20 dark:bg-primary/30 text-primary dark:text-primary-foreground border border-primary/30 dark:border-primary/50 rounded-full font-medium dark:shadow-lg dark:shadow-primary/20"
                         >
                           {skill}
                         </span>
