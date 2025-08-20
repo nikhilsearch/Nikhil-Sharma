@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface Tool {
   name: string;
-  category: 'seo' | 'ai' | 'analytics';
+  category: 'seo' | 'ai' | 'analytics' | 'project-management';
   description: string;
 }
 
@@ -82,6 +82,21 @@ const ToolsProficiencyRadar = () => {
       name: 'Sitebulb', 
       category: 'seo',
       description: 'Complements Screaming Frog with visual site audits and prioritization insights for developers. Great for explaining issues to non-technical stakeholders.'
+    },
+    { 
+      name: 'Jira', 
+      category: 'project-management',
+      description: 'My go-to for managing complex SEO projects with development teams. I use it to track technical SEO implementations, create detailed tickets for developers, and maintain sprint planning for website optimization projects.'
+    },
+    { 
+      name: 'Asana', 
+      category: 'project-management',
+      description: 'Perfect for client project coordination and content marketing campaigns. I use it to manage content calendars, track deliverables, assign tasks to team members, and maintain visibility into project timelines.'
+    },
+    { 
+      name: 'Trello', 
+      category: 'project-management',
+      description: 'Great for visual project management and workflow organization. I use Kanban boards to track SEO audit processes, content production stages, and client communication workflows from ideation to completion.'
     }
   ];
 
@@ -136,6 +151,7 @@ const ToolsProficiencyRadar = () => {
       case 'seo': return 'hsl(var(--primary))';
       case 'ai': return 'hsl(280, 100%, 70%)';
       case 'analytics': return 'hsl(200, 100%, 70%)';
+      case 'project-management': return 'hsl(120, 100%, 60%)';
       default: return 'hsl(var(--primary))';
     }
   };
@@ -145,11 +161,11 @@ const ToolsProficiencyRadar = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="text-foreground">SEO & AI</span>{" "}
+            <span className="text-foreground">Professional</span>{" "}
             <span className="bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">Tools</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Interactive visualization of professional tools across essential SEO and AI categories
+            Interactive visualization of professional tools across SEO, AI, Analytics, and Project Management
           </p>
         </div>
 
@@ -174,8 +190,9 @@ const ToolsProficiencyRadar = () => {
                     </radialGradient>
                     <linearGradient id="areaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-                      <stop offset="50%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.4" />
+                      <stop offset="33%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.3" />
+                      <stop offset="66%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="hsl(120, 100%, 60%)" stopOpacity="0.4" />
                     </linearGradient>
                   </defs>
                   
