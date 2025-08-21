@@ -180,9 +180,9 @@ const ToolsProficiencyRadar = () => {
           </p>
         </div>
 
-        <div className="flex flex-col gap-8 items-center">
+        <div className={`${isMobile ? 'flex flex-col gap-8 items-center' : 'flex items-center gap-8'}`}>
           {/* Radar Chart */}
-          <div className="w-full max-w-4xl">
+          <div className={`${isMobile ? 'w-full' : 'flex-1'} max-w-4xl`}>
             <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
               <CardContent className={`${isMobile ? 'p-4' : 'p-8'} relative`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
@@ -324,37 +324,79 @@ const ToolsProficiencyRadar = () => {
             </Card>
           </div>
 
-          {/* Tool Details */}
-          <div className="w-full max-w-md mx-auto">
-            {hoveredTool && (
-              <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in">
-                <CardHeader>
-                  <CardTitle className="text-lg text-primary">
-                    {hoveredTool}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {(() => {
-                    const tool = tools.find(t => t.name === hoveredTool);
-                    return tool ? (
-                      <div className="space-y-4">
-                        <Badge 
-                          variant="outline" 
-                          className="capitalize"
-                          style={{ borderColor: getCategoryColor(tool.category), color: getCategoryColor(tool.category) }}
-                        >
-                          {tool.category.replace('-', ' ')} Tool
-                        </Badge>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
-                          {tool.description}
-                        </p>
-                      </div>
-                    ) : null;
-                  })()}
-                </CardContent>
-              </Card>
-            )}
-          </div>
+          {/* Tool Details - Right side and center aligned */}
+          {!isMobile && (
+            <div className="w-80 flex items-center justify-center h-full">
+              {hoveredTool ? (
+                <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in w-full">
+                  <CardHeader>
+                    <CardTitle className="text-lg text-primary">
+                      {hoveredTool}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {(() => {
+                      const tool = tools.find(t => t.name === hoveredTool);
+                      return tool ? (
+                        <div className="space-y-4">
+                          <Badge 
+                            variant="outline" 
+                            className="capitalize"
+                            style={{ borderColor: getCategoryColor(tool.category), color: getCategoryColor(tool.category) }}
+                          >
+                            {tool.category.replace('-', ' ')} Tool
+                          </Badge>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {tool.description}
+                          </p>
+                        </div>
+                      ) : null;
+                    })()}
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="w-full h-32 flex items-center justify-center">
+                  <p className="text-muted-foreground text-sm text-center">
+                    Hover over a tool to see details
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Mobile Tool Details - Below chart */}
+          {isMobile && (
+            <div className="w-full max-w-md mx-auto">
+              {hoveredTool && (
+                <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in">
+                  <CardHeader>
+                    <CardTitle className="text-lg text-primary">
+                      {hoveredTool}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    {(() => {
+                      const tool = tools.find(t => t.name === hoveredTool);
+                      return tool ? (
+                        <div className="space-y-4">
+                          <Badge 
+                            variant="outline" 
+                            className="capitalize"
+                            style={{ borderColor: getCategoryColor(tool.category), color: getCategoryColor(tool.category) }}
+                          >
+                            {tool.category.replace('-', ' ')} Tool
+                          </Badge>
+                          <p className="text-sm text-muted-foreground leading-relaxed">
+                            {tool.description}
+                          </p>
+                        </div>
+                      ) : null;
+                    })()}
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </section>
