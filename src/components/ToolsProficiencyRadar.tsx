@@ -105,30 +105,31 @@ const ToolsProficiencyRadar = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const generateRadarPoints = () => {
-    const centerX = 300;
-    const centerY = 250;
-    const maxRadius = 120;
+  const generateRadarPoints = (isMobile = false) => {
+    const centerX = isMobile ? 200 : 300;
+    const centerY = isMobile ? 180 : 250;
+    const maxRadius = isMobile ? 80 : 120;
     
     return tools.map((tool, index) => {
       const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
       const radius = maxRadius; // All tools at max radius since no proficiency
       
+      const labelDistance = isMobile ? maxRadius + 40 : maxRadius + 80;
       return {
         x: centerX + radius * Math.cos(angle),
         y: centerY + radius * Math.sin(angle),
-        labelX: centerX + (maxRadius + 80) * Math.cos(angle),
-        labelY: centerY + (maxRadius + 80) * Math.sin(angle),
+        labelX: centerX + labelDistance * Math.cos(angle),
+        labelY: centerY + labelDistance * Math.sin(angle),
         tool,
         angle
       };
     });
   };
 
-  const generateGridLines = () => {
-    const centerX = 300;
-    const centerY = 250;
-    const maxRadius = 120;
+  const generateGridLines = (isMobile = false) => {
+    const centerX = isMobile ? 200 : 300;
+    const centerY = isMobile ? 180 : 250;
+    const maxRadius = isMobile ? 80 : 120;
     const levels = [0.2, 0.4, 0.6, 0.8, 1.0];
     
     return levels.map(level => {
@@ -142,8 +143,18 @@ const ToolsProficiencyRadar = () => {
     });
   };
 
-  const radarPoints = generateRadarPoints();
-  const gridLines = generateGridLines();
+  // Check if we're on mobile
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const radarPoints = generateRadarPoints(isMobile);
+  const gridLines = generateGridLines(isMobile);
   const pathPoints = radarPoints.map(point => `${point.x},${point.y}`).join(' ');
 
   const getCategoryColor = (category: string) => {
@@ -169,21 +180,26 @@ const ToolsProficiencyRadar = () => {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
+        <div className="flex flex-col gap-8 items-center">
           {/* Radar Chart */}
-          <div className="flex-1 w-full">
+          <div className="w-full max-w-4xl">
             <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
-              <CardContent className="p-8 relative">
+              <CardContent className={`${isMobile ? 'p-4' : 'p-8'} relative`}>
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
                 <svg 
-                  width="600" 
-                  height="500" 
-                  viewBox="0 0 600 500"
+                  width={isMobile ? "400" : "600"} 
+                  height={isMobile ? "320" : "500"} 
+                  viewBox={isMobile ? "0 0 400 320" : "0 0 600 500"}
                   className={`w-full h-auto transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
                 >
                   {/* Gradient Definitions */}
                   <defs>
-                    <radialGradient id="chartGradient" cx="300" cy="250" r="120">
+                    <radialGradient 
+                      id="chartGradient" 
+                      cx={isMobile ? "200" : "300"} 
+                      cy={isMobile ? "180" : "250"} 
+                      r={isMobile ? "80" : "120"}
+                    >
                       <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
                       <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
                       <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
@@ -197,7 +213,12 @@ const ToolsProficiencyRadar = () => {
                   </defs>
                   
                   {/* Background Glow */}
-                  <circle cx="300" cy="250" r="120" fill="url(#chartGradient)" />
+                  <circle 
+                    cx={isMobile ? "200" : "300"} 
+                    cy={isMobile ? "180" : "250"} 
+                    r={isMobile ? "80" : "120"} 
+                    fill="url(#chartGradient)" 
+                  />
                   
                   {/* Background Grid */}
                   {gridLines.map((grid, index) => (
@@ -217,12 +238,12 @@ const ToolsProficiencyRadar = () => {
                   {radarPoints.map((point, index) => (
                     <line
                       key={index}
-                      x1="300"
-                      y1="250"
+                      x1={isMobile ? "200" : "300"}
+                      y1={isMobile ? "180" : "250"}
                       x2={point.labelX}
                       y2={point.labelY}
                       stroke="hsl(var(--primary))"
-                      strokeWidth="2"
+                      strokeWidth={isMobile ? "1" : "2"}
                       opacity="0.4"
                       className="transition-all duration-300 hover:opacity-60"
                     />
@@ -273,27 +294,30 @@ const ToolsProficiencyRadar = () => {
                   
                   {/* Tool Labels */}
                   {radarPoints.map((point, index) => (
-                    <text
-                      key={index}
-                      x={point.labelX}
-                      y={point.labelY}
-                      textAnchor={point.labelX > 300 ? "start" : point.labelX < 300 ? "end" : "middle"}
-                      dominantBaseline={point.labelY > 200 ? "hanging" : point.labelY < 200 ? "text-bottom" : "central"}
-                      fill="hsl(var(--foreground))"
-                      fontSize="13"
-                      fontWeight={hoveredTool === point.tool.name ? "700" : "500"}
-                      className={`transition-all duration-200 cursor-pointer story-link ${
-                        hoveredTool === point.tool.name ? 'text-primary' : ''
-                      }`}
-                      style={{
-                        filter: hoveredTool === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
-                        textShadow: hoveredTool === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
-                      }}
-                      onMouseEnter={() => setHoveredTool(point.tool.name)}
-                      onMouseLeave={() => setHoveredTool(null)}
-                    >
-                      {point.tool.name}
-                    </text>
+                      <text
+                        key={index}
+                        x={point.labelX}
+                        y={point.labelY}
+                        textAnchor={point.labelX > (isMobile ? 200 : 300) ? "start" : point.labelX < (isMobile ? 200 : 300) ? "end" : "middle"}
+                        dominantBaseline={point.labelY > (isMobile ? 140 : 200) ? "hanging" : point.labelY < (isMobile ? 140 : 200) ? "text-bottom" : "central"}
+                        fill="hsl(var(--foreground))"
+                        fontSize={isMobile ? "10" : "13"}
+                        fontWeight={hoveredTool === point.tool.name ? "700" : "500"}
+                        className={`transition-all duration-200 cursor-pointer story-link ${
+                          hoveredTool === point.tool.name ? 'text-primary' : ''
+                        }`}
+                        style={{
+                          filter: hoveredTool === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
+                          textShadow: hoveredTool === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
+                        }}
+                        onMouseEnter={() => setHoveredTool(point.tool.name)}
+                        onMouseLeave={() => setHoveredTool(null)}
+                      >
+                        {isMobile && point.tool.name.length > 15 ? 
+                          point.tool.name.substring(0, 12) + '...' : 
+                          point.tool.name
+                        }
+                      </text>
                   ))}
                 </svg>
               </CardContent>
@@ -301,7 +325,7 @@ const ToolsProficiencyRadar = () => {
           </div>
 
           {/* Tool Details */}
-          <div className="w-full lg:w-80 shrink-0">
+          <div className="w-full max-w-md mx-auto">
             {hoveredTool && (
               <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in">
                 <CardHeader>
@@ -319,7 +343,7 @@ const ToolsProficiencyRadar = () => {
                           className="capitalize"
                           style={{ borderColor: getCategoryColor(tool.category), color: getCategoryColor(tool.category) }}
                         >
-                          {tool.category} Tool
+                          {tool.category.replace('-', ' ')} Tool
                         </Badge>
                         <p className="text-sm text-muted-foreground leading-relaxed">
                           {tool.description}
