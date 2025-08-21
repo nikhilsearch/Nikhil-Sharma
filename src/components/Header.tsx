@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Eye } from "lucide-react";
+import { Menu, X, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useLocation } from "react-router-dom";
-import ContactForm from "./ContactForm";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
   const { toast } = useToast();
   const location = useLocation();
 
@@ -33,9 +31,9 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  // Handle Get Free Audit button click
-  const handleGetFreeAudit = () => {
-    setIsContactFormOpen(true);
+  // Handle Get in Touch button click
+  const handleGetInTouch = () => {
+    window.location.href = "mailto:imnikhil10@outlook.com?subject=Let's discuss your project&body=Hi Nikhil,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0ABest regards";
     setIsMenuOpen(false);
   };
 
@@ -105,11 +103,11 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden md:flex">
             <Button
-              onClick={handleGetFreeAudit}
+              onClick={handleGetInTouch}
               className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2"
             >
-              <Eye className="w-4 h-4" />
-              Get Free Audit
+              <Mail className="w-4 h-4" />
+              Get in Touch
             </Button>
           </div>
 
@@ -166,23 +164,17 @@ const Header = () => {
               })}
               <div className="pt-4">
                 <Button
-                  onClick={handleGetFreeAudit}
+                  onClick={handleGetInTouch}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 justify-center"
                 >
-                  <Eye className="w-4 h-4" />
-                  Get Free Audit
+                  <Mail className="w-4 h-4" />
+                  Get in Touch
                 </Button>
               </div>
             </div>
           </div>
         )}
       </div>
-      
-      {/* Contact Form Modal */}
-      <ContactForm 
-        isOpen={isContactFormOpen} 
-        onOpenChange={setIsContactFormOpen} 
-      />
     </header>
   );
 };
