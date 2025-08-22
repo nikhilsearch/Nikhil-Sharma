@@ -89,22 +89,38 @@ const Experience = () => {
               {experiences.map((exp, index) => (
                 <Card
                   key={index}
-                  className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
+                  className={`group cursor-pointer transition-all duration-500 hover:shadow-2xl relative overflow-hidden ${
                     activeExperience === index
-                      ? "bg-primary/10 border-primary shadow-lg scale-105"
-                      : "bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card/80"
+                      ? "bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-primary shadow-xl scale-105 shadow-primary/20"
+                      : "bg-card/50 backdrop-blur-sm border-border/50 hover:bg-gradient-to-br hover:from-primary/5 hover:via-purple-500/5 hover:to-cyan-500/5 hover:border-primary/30 hover:scale-102 hover:shadow-primary/10"
                   }`}
                   onClick={() => setActiveExperience(index)}
                 >
-                  <CardContent className="p-4">
+                  {/* Gradient overlay for hover effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  
+                  {/* Animated border glow */}
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 pointer-events-none" />
+                  
+                  <CardContent className="p-4 relative z-10">
                     <div className="flex items-start space-x-3">
-                      <div className={`w-3 h-3 rounded-full mt-2 ${
-                        activeExperience === index ? "bg-primary" : "bg-muted-foreground/30"
+                      <div className={`w-3 h-3 rounded-full mt-2 transition-all duration-300 ${
+                        activeExperience === index 
+                          ? "bg-primary shadow-lg shadow-primary/50" 
+                          : "bg-muted-foreground/30 group-hover:bg-primary/70 group-hover:shadow-md group-hover:shadow-primary/30"
                       }`} />
                       <div className="flex-1">
-                        <h3 className="font-semibold text-foreground">{exp.position}</h3>
-                        <p className="text-sm text-primary font-medium">{exp.company}</p>
-                        <div className="flex items-center text-xs text-muted-foreground mt-1">
+                        <h3 className={`font-semibold transition-all duration-300 ${
+                          activeExperience === index 
+                            ? "text-primary" 
+                            : "text-foreground group-hover:text-primary"
+                        }`}>
+                          {exp.position}
+                        </h3>
+                        <p className="text-sm text-primary font-medium group-hover:text-primary transition-colors duration-300">
+                          {exp.company}
+                        </p>
+                        <div className="flex items-center text-xs text-muted-foreground mt-1 group-hover:text-foreground/80 transition-colors duration-300">
                           <Calendar className="w-3 h-3 mr-1" />
                           {exp.duration}
                         </div>
