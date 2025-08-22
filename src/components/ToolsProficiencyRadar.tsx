@@ -162,7 +162,7 @@ const ToolsProficiencyRadar = () => {
       case 'seo': return 'hsl(var(--primary))';
       case 'ai': return 'hsl(280, 100%, 70%)';
       case 'analytics': return 'hsl(200, 100%, 70%)';
-      case 'project-management': return 'hsl(120, 100%, 60%)';
+      case 'project-management': return 'hsl(140, 80%, 35%)';
       default: return 'hsl(var(--primary))';
     }
   };
@@ -208,7 +208,7 @@ const ToolsProficiencyRadar = () => {
                       <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
                       <stop offset="33%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.3" />
                       <stop offset="66%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="hsl(120, 100%, 60%)" stopOpacity="0.4" />
+                      <stop offset="100%" stopColor="hsl(140, 80%, 35%)" stopOpacity="0.4" />
                     </linearGradient>
                   </defs>
                   
