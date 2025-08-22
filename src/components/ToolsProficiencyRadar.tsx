@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  Search, BarChart3, Tag, Megaphone, Eye, FileSpreadsheet, 
+  MessageSquare, Zap, Bot, Brain, CheckSquare, Trello, Users 
+} from 'lucide-react';
 
 interface Tool {
   name: string;
@@ -100,6 +104,30 @@ const ToolsProficiencyRadar = () => {
     }
   ];
 
+  // Tool icon mapping
+  const getToolIcon = (toolName: string) => {
+    const iconMap: { [key: string]: any } = {
+      'Google Search Console': Search,
+      'Google Analytics': BarChart3,
+      'Google Tag Manager': Tag,
+      'Screaming Frog': Megaphone,
+      'Looker Studio': Eye,
+      'Ahrefs': BarChart3,
+      'Semrush': BarChart3,
+      'Google Sheets': FileSpreadsheet,
+      'ChatGPT': MessageSquare,
+      'Perplexity': Zap,
+      'Google Gemini': Bot,
+      'Claude': Brain,
+      'Lumar': Search,
+      'Sitebulb': Search,
+      'Jira': CheckSquare,
+      'Asana': Users,
+      'Trello': Trello,
+    };
+    return iconMap[toolName] || Search;
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
@@ -180,152 +208,141 @@ const ToolsProficiencyRadar = () => {
           </p>
         </div>
 
-        <div className={`${isMobile ? 'flex flex-col gap-8 items-center' : 'flex items-center gap-8'}`}>
-          {/* Radar Chart */}
-          <div className={`${isMobile ? 'w-full' : 'flex-1'} max-w-4xl`}>
-            <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
-              <CardContent className={`${isMobile ? 'p-4' : 'p-8'} relative`}>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
-                <svg 
-                  width={isMobile ? "400" : "600"} 
-                  height={isMobile ? "320" : "500"} 
-                  viewBox={isMobile ? "0 0 400 320" : "0 0 600 500"}
-                  className={`w-full h-auto transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-                >
-                  {/* Gradient Definitions */}
-                  <defs>
-                    <radialGradient 
-                      id="chartGradient" 
-                      cx={isMobile ? "200" : "300"} 
-                      cy={isMobile ? "180" : "250"} 
-                      r={isMobile ? "80" : "120"}
-                    >
-                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-                      <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
-                      <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-                    </radialGradient>
-                    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-                      <stop offset="33%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.3" />
-                      <stop offset="66%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="hsl(140, 80%, 35%)" stopOpacity="0.4" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {/* Background Glow */}
-                  <circle 
-                    cx={isMobile ? "200" : "300"} 
-                    cy={isMobile ? "180" : "250"} 
-                    r={isMobile ? "80" : "120"} 
-                    fill="url(#chartGradient)" 
-                  />
-                  
-                  {/* Background Grid */}
-                  {gridLines.map((grid, index) => (
-                    <polygon
-                      key={index}
-                      points={grid.points}
-                      fill="none"
-                      stroke="hsl(var(--primary))"
-                      strokeWidth="2"
-                      opacity={0.3 - (index * 0.05)}
-                      className="animate-pulse"
-                      style={{ animationDelay: `${index * 0.2}s` }}
-                    />
-                  ))}
-                  
-                  {/* Axis Lines */}
-                  {radarPoints.map((point, index) => (
-                    <line
-                      key={index}
-                      x1={isMobile ? "200" : "300"}
-                      y1={isMobile ? "180" : "250"}
-                      x2={point.labelX}
-                      y2={point.labelY}
-                      stroke="hsl(var(--primary))"
-                      strokeWidth={isMobile ? "1" : "2"}
-                      opacity="0.4"
-                      className="transition-all duration-300 hover:opacity-60"
-                    />
-                  ))}
-                  
-                  {/* Proficiency Area */}
-                  <polygon
-                    points={pathPoints}
-                    fill="url(#areaGradient)"
-                    stroke="hsl(var(--primary))"
-                    strokeWidth="3"
-                    className={`transition-all duration-1000 ${isVisible ? 'animate-scale-in' : ''}`}
-                    filter="drop-shadow(0 0 20px hsl(var(--primary) / 0.3))"
-                  />
-                  
-                  {/* Data Points */}
-                  {radarPoints.map((point, index) => (
-                    <g key={index}>
-                      {/* Outer Glow Ring */}
-                      <circle
-                        cx={point.x}
-                        cy={point.y}
-                        r={hoveredTool === point.tool.name ? "12" : "8"}
-                        fill={getCategoryColor(point.tool.category)}
-                        opacity="0.2"
-                        className="transition-all duration-300 animate-pulse"
-                        style={{ animationDelay: `${index * 0.1}s` }}
-                      />
-                      {/* Main Point */}
-                      <circle
-                        cx={point.x}
-                        cy={point.y}
-                        r={hoveredTool === point.tool.name ? "7" : "5"}
-                        fill={getCategoryColor(point.tool.category)}
-                        stroke="hsl(var(--background))"
-                        strokeWidth="3"
-                        className="transition-all duration-200 cursor-pointer hover-scale"
-                        style={{
-                          filter: hoveredTool === point.tool.name 
-                            ? `drop-shadow(0 0 15px ${getCategoryColor(point.tool.category)})` 
-                            : `drop-shadow(0 0 5px ${getCategoryColor(point.tool.category)})`
-                        }}
-                        onMouseEnter={() => setHoveredTool(point.tool.name)}
-                        onMouseLeave={() => setHoveredTool(null)}
-                      />
-                    </g>
-                  ))}
-                  
-                  {/* Tool Labels */}
-                  {radarPoints.map((point, index) => (
-                      <text
+        {/* Conditional Rendering: Radial Chart (Desktop) vs Grid Layout (Mobile) */}
+        {!isMobile ? (
+          // Desktop Radial Chart Layout
+          <div className="flex items-center gap-8">
+            {/* Radar Chart */}
+            <div className="flex-1 max-w-4xl">
+              <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
+                <CardContent className="p-8 relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
+                  <svg 
+                    width="600" 
+                    height="500" 
+                    viewBox="0 0 600 500"
+                    className={`w-full h-auto transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                  >
+                    {/* Gradient Definitions */}
+                    <defs>
+                      <radialGradient id="chartGradient" cx="300" cy="250" r="120">
+                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+                        <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+                        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                      </radialGradient>
+                      <linearGradient id="areaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
+                        <stop offset="33%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.3" />
+                        <stop offset="66%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="hsl(140, 80%, 35%)" stopOpacity="0.4" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Background Glow */}
+                    <circle cx="300" cy="250" r="120" fill="url(#chartGradient)" />
+                    
+                    {/* Background Grid */}
+                    {gridLines.map((grid, index) => (
+                      <polygon
                         key={index}
-                        x={point.labelX}
-                        y={point.labelY}
-                        textAnchor={point.labelX > (isMobile ? 200 : 300) ? "start" : point.labelX < (isMobile ? 200 : 300) ? "end" : "middle"}
-                        dominantBaseline={point.labelY > (isMobile ? 140 : 200) ? "hanging" : point.labelY < (isMobile ? 140 : 200) ? "text-bottom" : "central"}
-                        fill="hsl(var(--foreground))"
-                        fontSize={isMobile ? "10" : "13"}
-                        fontWeight={hoveredTool === point.tool.name ? "700" : "500"}
-                        className={`transition-all duration-200 cursor-pointer story-link ${
-                          hoveredTool === point.tool.name ? 'text-primary' : ''
-                        }`}
-                        style={{
-                          filter: hoveredTool === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
-                          textShadow: hoveredTool === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
-                        }}
-                        onMouseEnter={() => setHoveredTool(point.tool.name)}
-                        onMouseLeave={() => setHoveredTool(null)}
-                      >
-                        {isMobile && point.tool.name.length > 15 ? 
-                          point.tool.name.substring(0, 12) + '...' : 
-                          point.tool.name
-                        }
-                      </text>
-                  ))}
-                </svg>
-              </CardContent>
-            </Card>
-          </div>
+                        points={grid.points}
+                        fill="none"
+                        stroke="hsl(var(--primary))"
+                        strokeWidth="2"
+                        opacity={0.3 - (index * 0.05)}
+                        className="animate-pulse"
+                        style={{ animationDelay: `${index * 0.2}s` }}
+                      />
+                    ))}
+                    
+                    {/* Axis Lines */}
+                    {radarPoints.map((point, index) => (
+                      <line
+                        key={index}
+                        x1="300"
+                        y1="250"
+                        x2={point.labelX}
+                        y2={point.labelY}
+                        stroke="hsl(var(--primary))"
+                        strokeWidth="2"
+                        opacity="0.4"
+                        className="transition-all duration-300 hover:opacity-60"
+                      />
+                    ))}
+                    
+                    {/* Proficiency Area */}
+                    <polygon
+                      points={pathPoints}
+                      fill="url(#areaGradient)"
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="3"
+                      className={`transition-all duration-1000 ${isVisible ? 'animate-scale-in' : ''}`}
+                      filter="drop-shadow(0 0 20px hsl(var(--primary) / 0.3))"
+                    />
+                    
+                    {/* Data Points */}
+                    {radarPoints.map((point, index) => (
+                      <g key={index}>
+                        {/* Outer Glow Ring */}
+                        <circle
+                          cx={point.x}
+                          cy={point.y}
+                          r={hoveredTool === point.tool.name ? "12" : "8"}
+                          fill={getCategoryColor(point.tool.category)}
+                          opacity="0.2"
+                          className="transition-all duration-300 animate-pulse"
+                          style={{ animationDelay: `${index * 0.1}s` }}
+                        />
+                        {/* Main Point */}
+                        <circle
+                          cx={point.x}
+                          cy={point.y}
+                          r={hoveredTool === point.tool.name ? "7" : "5"}
+                          fill={getCategoryColor(point.tool.category)}
+                          stroke="hsl(var(--background))"
+                          strokeWidth="3"
+                          className="transition-all duration-200 cursor-pointer hover-scale"
+                          style={{
+                            filter: hoveredTool === point.tool.name 
+                              ? `drop-shadow(0 0 15px ${getCategoryColor(point.tool.category)})` 
+                              : `drop-shadow(0 0 5px ${getCategoryColor(point.tool.category)})`
+                          }}
+                          onMouseEnter={() => setHoveredTool(point.tool.name)}
+                          onMouseLeave={() => setHoveredTool(null)}
+                        />
+                      </g>
+                    ))}
+                    
+                    {/* Tool Labels */}
+                    {radarPoints.map((point, index) => (
+                        <text
+                          key={index}
+                          x={point.labelX}
+                          y={point.labelY}
+                          textAnchor={point.labelX > 300 ? "start" : point.labelX < 300 ? "end" : "middle"}
+                          dominantBaseline={point.labelY > 200 ? "hanging" : point.labelY < 200 ? "text-bottom" : "central"}
+                          fill="hsl(var(--foreground))"
+                          fontSize="13"
+                          fontWeight={hoveredTool === point.tool.name ? "700" : "500"}
+                          className={`transition-all duration-200 cursor-pointer story-link ${
+                            hoveredTool === point.tool.name ? 'text-primary' : ''
+                          }`}
+                          style={{
+                            filter: hoveredTool === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
+                            textShadow: hoveredTool === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
+                          }}
+                          onMouseEnter={() => setHoveredTool(point.tool.name)}
+                          onMouseLeave={() => setHoveredTool(null)}
+                        >
+                          {point.tool.name}
+                        </text>
+                    ))}
+                  </svg>
+                </CardContent>
+              </Card>
+            </div>
 
-          {/* Tool Details - Right side and center aligned */}
-          {!isMobile && (
+            {/* Desktop Tool Details - Right side */}
             <div className="w-80 flex items-center justify-center h-full">
               {hoveredTool ? (
                 <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in w-full">
@@ -362,12 +379,93 @@ const ToolsProficiencyRadar = () => {
                 </div>
               )}
             </div>
-          )}
+          </div>
+        ) : (
+          // Mobile Grid Layout
+          <div className="w-full">
+            <div className="grid grid-cols-2 gap-4">
+              {tools.map((tool, index) => {
+                const IconComponent = getToolIcon(tool.name);
+                return (
+                  <div
+                    key={index}
+                    className={`group relative p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer min-h-[88px] ${
+                      hoveredTool === tool.name
+                        ? 'bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-primary shadow-lg shadow-primary/20 scale-105'
+                        : 'bg-card/50 backdrop-blur-sm border-border/50 hover:bg-gradient-to-br hover:from-primary/5 hover:via-purple-500/5 hover:to-cyan-500/5 hover:border-primary/30 hover:scale-102 hover:shadow-primary/10'
+                    }`}
+                    onClick={() => setHoveredTool(hoveredTool === tool.name ? null : tool.name)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setHoveredTool(hoveredTool === tool.name ? null : tool.name);
+                      }
+                    }}
+                    aria-label={`View details for ${tool.name}`}
+                  >
+                    {/* Gradient overlay for hover effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl" />
+                    
+                    {/* Animated border glow */}
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 pointer-events-none" />
+                    
+                    <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+                      {/* Tool Icon */}
+                      <div 
+                        className={`p-3 rounded-lg transition-all duration-300 ${
+                          hoveredTool === tool.name 
+                            ? 'shadow-lg shadow-primary/50' 
+                            : 'group-hover:shadow-md group-hover:shadow-primary/30'
+                        }`}
+                        style={{ 
+                          backgroundColor: `${getCategoryColor(tool.category)}15`,
+                          border: `2px solid ${getCategoryColor(tool.category)}30`
+                        }}
+                      >
+                        <IconComponent 
+                          className="w-6 h-6 transition-colors duration-300"
+                          style={{ 
+                            color: hoveredTool === tool.name 
+                              ? getCategoryColor(tool.category) 
+                              : getCategoryColor(tool.category)
+                          }}
+                        />
+                      </div>
+                      
+                      {/* Tool Name */}
+                      <h3 
+                        className={`text-sm font-semibold transition-all duration-300 leading-tight ${
+                          hoveredTool === tool.name 
+                            ? 'text-primary' 
+                            : 'text-foreground group-hover:text-primary'
+                        }`}
+                      >
+                        {tool.name}
+                      </h3>
+                      
+                      {/* Category Badge */}
+                      <Badge 
+                        variant="outline" 
+                        className="text-xs px-2 py-0.5 capitalize"
+                        style={{ 
+                          borderColor: `${getCategoryColor(tool.category)}50`, 
+                          color: getCategoryColor(tool.category),
+                          backgroundColor: `${getCategoryColor(tool.category)}10`
+                        }}
+                      >
+                        {tool.category.replace('-', ' ')}
+                      </Badge>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
-          {/* Mobile Tool Details - Below chart */}
-          {isMobile && (
-            <div className="w-full max-w-md mx-auto">
-              {hoveredTool && (
+            {/* Mobile Tool Details - Below grid */}
+            {hoveredTool && (
+              <div className="mt-6 w-full">
                 <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in">
                   <CardHeader>
                     <CardTitle className="text-lg text-primary">
@@ -394,10 +492,10 @@ const ToolsProficiencyRadar = () => {
                     })()}
                   </CardContent>
                 </Card>
-              )}
-            </div>
-          )}
-        </div>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );
