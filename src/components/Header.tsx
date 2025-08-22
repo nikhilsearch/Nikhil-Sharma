@@ -15,7 +15,6 @@ const Header = () => {
     { name: "Skills", href: "#skills", id: "skills" },
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Success Stories", href: "#case-studies", id: "case-studies" },
-    { name: "Blog", href: "/blog", id: "blog", isRoute: true },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
 
@@ -70,21 +69,9 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navigationItems.map((item) => {
-              const isActive = item.isRoute ? location.pathname.startsWith(item.href) : activeSection === item.id;
+              const isActive = activeSection === item.id;
               
-              return item.isRoute ? (
-                <Link
-                  key={item.id}
-                  to={item.href}
-                  className={`transition-all duration-300 hover:text-primary font-medium ${
-                    isActive
-                      ? "text-primary border-b-2 border-primary"
-                      : "text-foreground hover:text-primary"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ) : (
+              return (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.href)}
@@ -133,22 +120,9 @@ const Header = () => {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border/40">
               {navigationItems.map((item) => {
-                const isActive = item.isRoute ? location.pathname.startsWith(item.href) : activeSection === item.id;
+                const isActive = activeSection === item.id;
                 
-                return item.isRoute ? (
-                  <Link
-                    key={item.id}
-                    to={item.href}
-                    className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
-                      isActive
-                        ? "text-primary bg-primary/10"
-                        : "text-foreground hover:text-primary hover:bg-muted"
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ) : (
+                return (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.href)}
