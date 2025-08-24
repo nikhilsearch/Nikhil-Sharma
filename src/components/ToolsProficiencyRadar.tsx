@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { 
   Search, BarChart3, Tag, Megaphone, Eye, FileSpreadsheet, 
-  MessageSquare, Zap, Bot, Brain, CheckSquare, Trello, Users 
+  MessageSquare, Zap, Bot, Brain, CheckSquare, Trello, Users, X 
 } from 'lucide-react';
 
 interface Tool {
@@ -13,8 +15,9 @@ interface Tool {
 }
 
 const ToolsProficiencyRadar = () => {
-  const [hoveredTool, setHoveredTool] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [openPopover, setOpenPopover] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const tools: Tool[] = [
     { 
@@ -128,21 +131,95 @@ const ToolsProficiencyRadar = () => {
     return iconMap[toolName] || Search;
   };
 
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case 'seo': return 'hsl(var(--primary))';
+      case 'ai': return 'hsl(280, 100%, 70%)';
+      case 'analytics': return 'hsl(200, 100%, 70%)';
+      case 'project-management': return 'hsl(140, 80%, 35%)';
+      default: return 'hsl(var(--primary))';
+    }
+  };
+
+  // Handle popover open/close with single popover management
+  const handleOpenChange = (toolName: string, open: boolean) => {
+    if (open) {
+      setOpenPopover(toolName);
+    } else {
+      setOpenPopover(null);
+    }
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
   }, []);
 
-  const generateRadarPoints = (isMobile = false) => {
-    const centerX = isMobile ? 200 : 300;
-    const centerY = isMobile ? 180 : 250;
-    const maxRadius = isMobile ? 80 : 120;
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Tool Detail Component with Close Button
+  const ToolDetailContent = ({ tool }: { tool: Tool }) => (
+    <div className="space-y-4 w-80 max-w-sm">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div 
+            className="p-2 rounded-lg" 
+            style={{ 
+              backgroundColor: `${getCategoryColor(tool.category)}15`,
+              border: `1px solid ${getCategoryColor(tool.category)}30`
+            }}
+          >
+            {(() => {
+              const IconComponent = getToolIcon(tool.name);
+              return <IconComponent className="w-4 h-4" style={{ color: getCategoryColor(tool.category) }} />;
+            })()}
+          </div>
+          <h3 className="font-semibold text-primary text-lg">{tool.name}</h3>
+        </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => setOpenPopover(null)}
+          className="h-6 w-6 p-0 hover:bg-muted rounded-full"
+        >
+          <X className="h-3 w-3" />
+        </Button>
+      </div>
+      
+      <Badge 
+        variant="outline" 
+        className="capitalize text-xs"
+        style={{ 
+          borderColor: getCategoryColor(tool.category), 
+          color: getCategoryColor(tool.category),
+          backgroundColor: `${getCategoryColor(tool.category)}10`
+        }}
+      >
+        {tool.category.replace('-', ' ')} Tool
+      </Badge>
+      
+      <p className="text-sm text-muted-foreground leading-relaxed">
+        {tool.description}
+      </p>
+    </div>
+  );
+
+  // Desktop radar chart functions
+  const generateRadarPoints = () => {
+    const centerX = 300;
+    const centerY = 250;
+    const maxRadius = 120;
     
     return tools.map((tool, index) => {
       const angle = (index * 2 * Math.PI) / tools.length - Math.PI / 2;
-      const radius = maxRadius; // All tools at max radius since no proficiency
+      const radius = maxRadius;
       
-      const labelDistance = isMobile ? maxRadius + 40 : maxRadius + 80;
+      const labelDistance = maxRadius + 80;
       return {
         x: centerX + radius * Math.cos(angle),
         y: centerY + radius * Math.sin(angle),
@@ -154,10 +231,10 @@ const ToolsProficiencyRadar = () => {
     });
   };
 
-  const generateGridLines = (isMobile = false) => {
-    const centerX = isMobile ? 200 : 300;
-    const centerY = isMobile ? 180 : 250;
-    const maxRadius = isMobile ? 80 : 120;
+  const generateGridLines = () => {
+    const centerX = 300;
+    const centerY = 250;
+    const maxRadius = 120;
     const levels = [0.2, 0.4, 0.6, 0.8, 1.0];
     
     return levels.map(level => {
@@ -171,29 +248,9 @@ const ToolsProficiencyRadar = () => {
     });
   };
 
-  // Check if we're on mobile
-  const [isMobile, setIsMobile] = useState(false);
-  
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const radarPoints = generateRadarPoints(isMobile);
-  const gridLines = generateGridLines(isMobile);
+  const radarPoints = generateRadarPoints();
+  const gridLines = generateGridLines();
   const pathPoints = radarPoints.map(point => `${point.x},${point.y}`).join(' ');
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'seo': return 'hsl(var(--primary))';
-      case 'ai': return 'hsl(280, 100%, 70%)';
-      case 'analytics': return 'hsl(200, 100%, 70%)';
-      case 'project-management': return 'hsl(140, 80%, 35%)';
-      default: return 'hsl(var(--primary))';
-    }
-  };
 
   return (
     <section className="py-20 px-4 bg-gradient-to-br from-background via-muted/10 to-primary/5">
@@ -208,292 +265,240 @@ const ToolsProficiencyRadar = () => {
           </p>
         </div>
 
-        {/* Conditional Rendering: Radial Chart (Desktop) vs Grid Layout (Mobile) */}
         {!isMobile ? (
-          // Desktop Radial Chart Layout
-          <div className="flex items-center gap-8">
-            {/* Radar Chart */}
-            <div className="flex-1 max-w-4xl">
-              <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
-                <CardContent className="p-8 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
-                  <svg 
-                    width="600" 
-                    height="500" 
-                    viewBox="0 0 600 500"
-                    className={`w-full h-auto transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-                  >
-                    {/* Gradient Definitions */}
-                    <defs>
-                      <radialGradient id="chartGradient" cx="300" cy="250" r="120">
-                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-                        <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
-                        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-                      </radialGradient>
-                      <linearGradient id="areaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-                        <stop offset="33%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.3" />
-                        <stop offset="66%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="hsl(140, 80%, 35%)" stopOpacity="0.4" />
-                      </linearGradient>
-                    </defs>
-                    
-                    {/* Background Glow */}
-                    <circle cx="300" cy="250" r="120" fill="url(#chartGradient)" />
-                    
-                    {/* Background Grid */}
-                    {gridLines.map((grid, index) => (
-                      <polygon
-                        key={index}
-                        points={grid.points}
-                        fill="none"
-                        stroke="hsl(var(--primary))"
-                        strokeWidth="2"
-                        opacity={0.3 - (index * 0.05)}
-                        className="animate-pulse"
-                        style={{ animationDelay: `${index * 0.2}s` }}
-                      />
-                    ))}
-                    
-                    {/* Axis Lines */}
-                    {radarPoints.map((point, index) => (
-                      <line
-                        key={index}
-                        x1="300"
-                        y1="250"
-                        x2={point.labelX}
-                        y2={point.labelY}
-                        stroke="hsl(var(--primary))"
-                        strokeWidth="2"
-                        opacity="0.4"
-                        className="transition-all duration-300 hover:opacity-60"
-                      />
-                    ))}
-                    
-                    {/* Proficiency Area */}
+          // Desktop Radial Chart with Popovers
+          <div className="flex justify-center">
+            <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
+              <CardContent className="p-8 relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
+                <svg 
+                  width="600" 
+                  height="500" 
+                  viewBox="0 0 600 500"
+                  className={`w-full h-auto transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+                >
+                  {/* Gradient Definitions */}
+                  <defs>
+                    <radialGradient id="chartGradient" cx="300" cy="250" r="120">
+                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+                      <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.05" />
+                      <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+                    </radialGradient>
+                    <linearGradient id="areaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
+                      <stop offset="33%" stopColor="hsl(280, 100%, 70%)" stopOpacity="0.3" />
+                      <stop offset="66%" stopColor="hsl(200, 100%, 70%)" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="hsl(140, 80%, 35%)" stopOpacity="0.4" />
+                    </linearGradient>
+                  </defs>
+                  
+                  {/* Background Glow */}
+                  <circle cx="300" cy="250" r="120" fill="url(#chartGradient)" />
+                  
+                  {/* Background Grid */}
+                  {gridLines.map((grid, index) => (
                     <polygon
-                      points={pathPoints}
-                      fill="url(#areaGradient)"
+                      key={index}
+                      points={grid.points}
+                      fill="none"
                       stroke="hsl(var(--primary))"
-                      strokeWidth="3"
-                      className={`transition-all duration-1000 ${isVisible ? 'animate-scale-in' : ''}`}
-                      filter="drop-shadow(0 0 20px hsl(var(--primary) / 0.3))"
+                      strokeWidth="2"
+                      opacity={0.3 - (index * 0.05)}
+                      className="animate-pulse"
+                      style={{ animationDelay: `${index * 0.2}s` }}
                     />
-                    
-                    {/* Data Points */}
-                    {radarPoints.map((point, index) => (
-                      <g key={index}>
-                        {/* Outer Glow Ring */}
-                        <circle
-                          cx={point.x}
-                          cy={point.y}
-                          r={hoveredTool === point.tool.name ? "12" : "8"}
-                          fill={getCategoryColor(point.tool.category)}
-                          opacity="0.2"
-                          className="transition-all duration-300 animate-pulse"
-                          style={{ animationDelay: `${index * 0.1}s` }}
-                        />
-                        {/* Main Point */}
-                        <circle
-                          cx={point.x}
-                          cy={point.y}
-                          r={hoveredTool === point.tool.name ? "7" : "5"}
-                          fill={getCategoryColor(point.tool.category)}
-                          stroke="hsl(var(--background))"
-                          strokeWidth="3"
-                          className="transition-all duration-200 cursor-pointer hover-scale"
-                          style={{
-                            filter: hoveredTool === point.tool.name 
-                              ? `drop-shadow(0 0 15px ${getCategoryColor(point.tool.category)})` 
-                              : `drop-shadow(0 0 5px ${getCategoryColor(point.tool.category)})`
-                          }}
-                          onMouseEnter={() => setHoveredTool(point.tool.name)}
-                          onMouseLeave={() => setHoveredTool(null)}
-                        />
-                      </g>
-                    ))}
-                    
-                    {/* Tool Labels */}
-                    {radarPoints.map((point, index) => (
-                        <text
-                          key={index}
-                          x={point.labelX}
-                          y={point.labelY}
-                          textAnchor={point.labelX > 300 ? "start" : point.labelX < 300 ? "end" : "middle"}
-                          dominantBaseline={point.labelY > 200 ? "hanging" : point.labelY < 200 ? "text-bottom" : "central"}
-                          fill="hsl(var(--foreground))"
-                          fontSize="13"
-                          fontWeight={hoveredTool === point.tool.name ? "700" : "500"}
-                          className={`transition-all duration-200 cursor-pointer story-link ${
-                            hoveredTool === point.tool.name ? 'text-primary' : ''
-                          }`}
-                          style={{
-                            filter: hoveredTool === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
-                            textShadow: hoveredTool === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
-                          }}
-                          onMouseEnter={() => setHoveredTool(point.tool.name)}
-                          onMouseLeave={() => setHoveredTool(null)}
+                  ))}
+                  
+                  {/* Axis Lines */}
+                  {radarPoints.map((point, index) => (
+                    <line
+                      key={index}
+                      x1="300"
+                      y1="250"
+                      x2={point.labelX}
+                      y2={point.labelY}
+                      stroke="hsl(var(--primary))"
+                      strokeWidth="2"
+                      opacity="0.4"
+                      className="transition-all duration-300 hover:opacity-60"
+                    />
+                  ))}
+                  
+                  {/* Proficiency Area */}
+                  <polygon
+                    points={pathPoints}
+                    fill="url(#areaGradient)"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth="3"
+                    className={`transition-all duration-1000 ${isVisible ? 'animate-scale-in' : ''}`}
+                    filter="drop-shadow(0 0 20px hsl(var(--primary) / 0.3))"
+                  />
+                  
+                  {/* Data Points with Popovers */}
+                  {radarPoints.map((point, index) => (
+                    <g key={index}>
+                      <Popover 
+                        open={openPopover === point.tool.name}
+                        onOpenChange={(open) => handleOpenChange(point.tool.name, open)}
+                      >
+                        <PopoverTrigger asChild>
+                          <g className="cursor-pointer">
+                            {/* Outer Glow Ring */}
+                            <circle
+                              cx={point.x}
+                              cy={point.y}
+                              r={openPopover === point.tool.name ? "12" : "8"}
+                              fill={getCategoryColor(point.tool.category)}
+                              opacity="0.2"
+                              className="transition-all duration-300 animate-pulse"
+                              style={{ animationDelay: `${index * 0.1}s` }}
+                            />
+                            {/* Main Point */}
+                            <circle
+                              cx={point.x}
+                              cy={point.y}
+                              r={openPopover === point.tool.name ? "7" : "5"}
+                              fill={getCategoryColor(point.tool.category)}
+                              stroke="hsl(var(--background))"
+                              strokeWidth="3"
+                              className="transition-all duration-200 hover-scale"
+                              style={{
+                                filter: openPopover === point.tool.name 
+                                  ? `drop-shadow(0 0 15px ${getCategoryColor(point.tool.category)})` 
+                                  : `drop-shadow(0 0 5px ${getCategoryColor(point.tool.category)})`
+                              }}
+                            />
+                          </g>
+                        </PopoverTrigger>
+                        <PopoverContent 
+                          className="p-4 bg-card/95 backdrop-blur-md border border-primary/20 shadow-xl"
+                          sideOffset={10}
+                          align="center"
                         >
-                          {point.tool.name}
-                        </text>
-                    ))}
-                  </svg>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Desktop Tool Details - Right side */}
-            <div className="w-80 flex items-center justify-center h-full">
-              {hoveredTool ? (
-                <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in w-full">
-                  <CardHeader>
-                    <CardTitle className="text-lg text-primary">
-                      {hoveredTool}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {(() => {
-                      const tool = tools.find(t => t.name === hoveredTool);
-                      return tool ? (
-                        <div className="space-y-4">
-                          <Badge 
-                            variant="outline" 
-                            className="capitalize"
-                            style={{ borderColor: getCategoryColor(tool.category), color: getCategoryColor(tool.category) }}
-                          >
-                            {tool.category.replace('-', ' ')} Tool
-                          </Badge>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {tool.description}
-                          </p>
-                        </div>
-                      ) : null;
-                    })()}
-                  </CardContent>
-                </Card>
-              ) : (
-                <div className="w-full h-32 flex items-center justify-center">
-                  <p className="text-muted-foreground text-sm text-center">
-                    Hover over a tool to see details
-                  </p>
-                </div>
-              )}
-            </div>
+                          <ToolDetailContent tool={point.tool} />
+                        </PopoverContent>
+                      </Popover>
+                    </g>
+                  ))}
+                  
+                  {/* Tool Labels */}
+                  {radarPoints.map((point, index) => (
+                    <text
+                      key={index}
+                      x={point.labelX}
+                      y={point.labelY}
+                      textAnchor={point.labelX > 300 ? "start" : point.labelX < 300 ? "end" : "middle"}
+                      dominantBaseline={point.labelY > 200 ? "hanging" : point.labelY < 200 ? "text-bottom" : "central"}
+                      fill="hsl(var(--foreground))"
+                      fontSize="13"
+                      fontWeight={openPopover === point.tool.name ? "700" : "500"}
+                      className={`transition-all duration-200 cursor-pointer story-link ${
+                        openPopover === point.tool.name ? 'text-primary' : ''
+                      }`}
+                      style={{
+                        filter: openPopover === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
+                        textShadow: openPopover === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
+                      }}
+                      onClick={() => handleOpenChange(point.tool.name, openPopover !== point.tool.name)}
+                    >
+                      {point.tool.name}
+                    </text>
+                  ))}
+                </svg>
+              </CardContent>
+            </Card>
           </div>
         ) : (
-          // Mobile Grid Layout
-          <div className="w-full">
-            <div className="grid grid-cols-2 gap-4">
-              {tools.map((tool, index) => {
-                const IconComponent = getToolIcon(tool.name);
-                return (
-                  <div
-                    key={index}
-                    className={`group relative p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer min-h-[88px] ${
-                      hoveredTool === tool.name
-                        ? 'bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-primary shadow-lg shadow-primary/20 scale-105'
-                        : 'bg-card/50 backdrop-blur-sm border-border/50 hover:bg-gradient-to-br hover:from-primary/5 hover:via-purple-500/5 hover:to-cyan-500/5 hover:border-primary/30 hover:scale-102 hover:shadow-primary/10'
-                    }`}
-                    onClick={() => setHoveredTool(hoveredTool === tool.name ? null : tool.name)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        setHoveredTool(hoveredTool === tool.name ? null : tool.name);
-                      }
-                    }}
-                    aria-label={`View details for ${tool.name}`}
-                  >
-                    {/* Gradient overlay for hover effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl" />
-                    
-                    {/* Animated border glow */}
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 pointer-events-none" />
-                    
-                    <div className="relative z-10 flex flex-col items-center text-center space-y-3">
-                      {/* Tool Icon */}
-                      <div 
-                        className={`p-3 rounded-lg transition-all duration-300 ${
-                          hoveredTool === tool.name 
-                            ? 'shadow-lg shadow-primary/50' 
-                            : 'group-hover:shadow-md group-hover:shadow-primary/30'
-                        }`}
-                        style={{ 
-                          backgroundColor: `${getCategoryColor(tool.category)}15`,
-                          border: `2px solid ${getCategoryColor(tool.category)}30`
-                        }}
-                      >
-                        <IconComponent 
-                          className="w-6 h-6 transition-colors duration-300"
+          // Mobile Grid Layout with Popovers
+          <div className="grid grid-cols-2 gap-4">
+            {tools.map((tool, index) => {
+              const IconComponent = getToolIcon(tool.name);
+              return (
+                <Popover 
+                  key={index}
+                  open={openPopover === tool.name}
+                  onOpenChange={(open) => handleOpenChange(tool.name, open)}
+                >
+                  <PopoverTrigger asChild>
+                    <div
+                      className={`group relative p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer min-h-[120px] ${
+                        openPopover === tool.name
+                          ? 'bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-primary shadow-lg shadow-primary/20 scale-105'
+                          : 'bg-card/50 backdrop-blur-sm border-border/50 hover:bg-gradient-to-br hover:from-primary/5 hover:via-purple-500/5 hover:to-cyan-500/5 hover:border-primary/30 hover:scale-102 hover:shadow-primary/10'
+                      }`}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleOpenChange(tool.name, openPopover !== tool.name);
+                        }
+                      }}
+                      aria-label={`View details for ${tool.name}`}
+                    >
+                      {/* Gradient overlay for hover effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl" />
+                      
+                      {/* Animated border glow */}
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 pointer-events-none" />
+                      
+                      <div className="relative z-10 flex flex-col items-center text-center space-y-3">
+                        {/* Tool Icon */}
+                        <div 
+                          className={`p-3 rounded-lg transition-all duration-300 ${
+                            openPopover === tool.name 
+                              ? 'shadow-lg shadow-primary/50' 
+                              : 'group-hover:shadow-md group-hover:shadow-primary/30'
+                          }`}
                           style={{ 
-                            color: hoveredTool === tool.name 
-                              ? getCategoryColor(tool.category) 
-                              : getCategoryColor(tool.category)
+                            backgroundColor: `${getCategoryColor(tool.category)}15`,
+                            border: `2px solid ${getCategoryColor(tool.category)}30`
                           }}
-                        />
-                      </div>
-                      
-                      {/* Tool Name */}
-                      <h3 
-                        className={`text-sm font-semibold transition-all duration-300 leading-tight ${
-                          hoveredTool === tool.name 
-                            ? 'text-primary' 
-                            : 'text-foreground group-hover:text-primary'
-                        }`}
-                      >
-                        {tool.name}
-                      </h3>
-                      
-                      {/* Category Badge */}
-                      <Badge 
-                        variant="outline" 
-                        className="text-xs px-2 py-0.5 capitalize"
-                        style={{ 
-                          borderColor: `${getCategoryColor(tool.category)}50`, 
-                          color: getCategoryColor(tool.category),
-                          backgroundColor: `${getCategoryColor(tool.category)}10`
-                        }}
-                      >
-                        {tool.category.replace('-', ' ')}
-                      </Badge>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Mobile Tool Details - Below grid */}
-            {hoveredTool && (
-              <div className="mt-6 w-full">
-                <Card className="bg-card/50 backdrop-blur-md border border-primary/20 animate-fade-in">
-                  <CardHeader>
-                    <CardTitle className="text-lg text-primary">
-                      {hoveredTool}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {(() => {
-                      const tool = tools.find(t => t.name === hoveredTool);
-                      return tool ? (
-                        <div className="space-y-4">
-                          <Badge 
-                            variant="outline" 
-                            className="capitalize"
-                            style={{ borderColor: getCategoryColor(tool.category), color: getCategoryColor(tool.category) }}
-                          >
-                            {tool.category.replace('-', ' ')} Tool
-                          </Badge>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {tool.description}
-                          </p>
+                        >
+                          <IconComponent 
+                            className="w-6 h-6 transition-colors duration-300"
+                            style={{ 
+                              color: getCategoryColor(tool.category)
+                            }}
+                          />
                         </div>
-                      ) : null;
-                    })()}
-                  </CardContent>
-                </Card>
-              </div>
-            )}
+                        
+                        {/* Tool Name */}
+                        <h3 
+                          className={`text-sm font-semibold transition-all duration-300 leading-tight ${
+                            openPopover === tool.name 
+                              ? 'text-primary' 
+                              : 'text-foreground group-hover:text-primary'
+                          }`}
+                        >
+                          {tool.name}
+                        </h3>
+                        
+                        {/* Category Badge */}
+                        <Badge 
+                          variant="outline" 
+                          className="text-xs px-2 py-0.5 capitalize"
+                          style={{ 
+                            borderColor: `${getCategoryColor(tool.category)}50`, 
+                            color: getCategoryColor(tool.category),
+                            backgroundColor: `${getCategoryColor(tool.category)}10`
+                          }}
+                        >
+                          {tool.category.replace('-', ' ')}
+                        </Badge>
+                      </div>
+                    </div>
+                  </PopoverTrigger>
+                  <PopoverContent 
+                    className="p-4 bg-card/95 backdrop-blur-md border border-primary/20 shadow-xl"
+                    sideOffset={10}
+                    align="start"
+                  >
+                    <ToolDetailContent tool={tool} />
+                  </PopoverContent>
+                </Popover>
+              );
+            })}
           </div>
         )}
       </div>
