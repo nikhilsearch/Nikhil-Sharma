@@ -414,7 +414,7 @@ const ToolsProficiencyRadar = () => {
           </div>
         ) : (
           // Mobile Grid Layout with Popovers
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-6">
             {tools.map((tool, index) => {
               const IconComponent = getToolIcon(tool.name);
               return (
@@ -425,10 +425,10 @@ const ToolsProficiencyRadar = () => {
                 >
                   <PopoverTrigger asChild>
                     <div
-                      className={`group relative p-4 rounded-xl border-2 transition-all duration-300 cursor-pointer min-h-[120px] ${
+                      className={`group relative p-6 rounded-2xl border-2 transition-all duration-500 cursor-pointer min-h-[140px] transform-gpu ${
                         openPopover === tool.name
-                          ? 'bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-primary shadow-lg shadow-primary/20 scale-105'
-                          : 'bg-card/50 backdrop-blur-sm border-border/50 hover:bg-gradient-to-br hover:from-primary/5 hover:via-purple-500/5 hover:to-cyan-500/5 hover:border-primary/30 hover:scale-102 hover:shadow-primary/10'
+                          ? 'bg-gradient-to-br from-primary/30 via-primary/20 to-purple-500/20 border-primary shadow-2xl shadow-primary/30 scale-110 rotate-1'
+                          : 'bg-gradient-to-br from-card/80 via-card/60 to-primary/5 backdrop-blur-sm border-border/30 hover:border-primary/60 hover:scale-105 hover:shadow-xl hover:shadow-primary/20 active:scale-95'
                       }`}
                       role="button"
                       tabIndex={0}
@@ -440,52 +440,62 @@ const ToolsProficiencyRadar = () => {
                       }}
                       aria-label={`View details for ${tool.name}`}
                     >
-                      {/* Gradient overlay for hover effect */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-xl" />
+                      {/* Multi-layer gradient overlays for better visibility */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-purple-500/15 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-2xl" />
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
                       
-                      {/* Animated border glow */}
-                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 pointer-events-none" />
+                      {/* Enhanced animated border glow */}
+                      <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-primary via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-40 blur-sm transition-all duration-700 pointer-events-none animate-pulse" />
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 group-hover:from-primary/15 group-hover:to-purple-500/15 transition-all duration-500 pointer-events-none" />
                       
-                      <div className="relative z-10 flex flex-col items-center text-center space-y-3">
-                        {/* Tool Icon */}
+                      <div className="relative z-10 flex flex-col items-center text-center space-y-4 h-full justify-center">
+                        {/* Enhanced Tool Icon */}
                         <div 
-                          className={`p-3 rounded-lg transition-all duration-300 ${
+                          className={`p-4 rounded-xl transition-all duration-500 transform ${
                             openPopover === tool.name 
-                              ? 'shadow-lg shadow-primary/50' 
-                              : 'group-hover:shadow-md group-hover:shadow-primary/30'
+                              ? 'shadow-2xl shadow-primary/60 scale-110 rotate-3' 
+                              : 'group-hover:shadow-xl group-hover:shadow-primary/40 group-hover:scale-105 group-hover:-rotate-1'
                           }`}
                           style={{ 
-                            backgroundColor: `${getCategoryColor(tool.category)}15`,
-                            border: `2px solid ${getCategoryColor(tool.category)}30`
+                            backgroundColor: `${getCategoryColor(tool.category)}20`,
+                            border: `2px solid ${getCategoryColor(tool.category)}40`,
+                            boxShadow: `0 0 20px ${getCategoryColor(tool.category)}30`
                           }}
                         >
                           <IconComponent 
-                            className="w-6 h-6 transition-colors duration-300"
+                            className="w-7 h-7 transition-all duration-500 group-hover:scale-110"
                             style={{ 
-                              color: getCategoryColor(tool.category)
+                              color: getCategoryColor(tool.category),
+                              filter: `drop-shadow(0 2px 4px ${getCategoryColor(tool.category)}40)`
                             }}
                           />
                         </div>
                         
-                        {/* Tool Name */}
+                        {/* Enhanced Tool Name */}
                         <h3 
-                          className={`text-sm font-semibold transition-all duration-300 leading-tight ${
+                          className={`text-base font-bold transition-all duration-500 leading-tight px-2 ${
                             openPopover === tool.name 
-                              ? 'text-primary' 
-                              : 'text-foreground group-hover:text-primary'
+                              ? 'text-primary scale-105' 
+                              : 'text-foreground group-hover:text-primary group-hover:scale-102'
                           }`}
+                          style={{
+                            textShadow: openPopover === tool.name ? '0 2px 8px hsl(var(--primary) / 0.3)' : 'none'
+                          }}
                         >
                           {tool.name}
                         </h3>
                         
-                        {/* Category Badge */}
+                        {/* Enhanced Category Badge */}
                         <Badge 
                           variant="outline" 
-                          className="text-xs px-2 py-0.5 capitalize"
+                          className={`text-xs px-3 py-1 capitalize font-medium transition-all duration-300 ${
+                            openPopover === tool.name ? 'scale-105' : 'group-hover:scale-102'
+                          }`}
                           style={{ 
-                            borderColor: `${getCategoryColor(tool.category)}50`, 
+                            borderColor: `${getCategoryColor(tool.category)}60`, 
                             color: getCategoryColor(tool.category),
-                            backgroundColor: `${getCategoryColor(tool.category)}10`
+                            backgroundColor: `${getCategoryColor(tool.category)}15`,
+                            boxShadow: `0 2px 8px ${getCategoryColor(tool.category)}20`
                           }}
                         >
                           {tool.category.replace('-', ' ')}
