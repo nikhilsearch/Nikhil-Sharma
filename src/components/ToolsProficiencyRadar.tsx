@@ -163,12 +163,12 @@ const ToolsProficiencyRadar = () => {
   }, []);
 
   // Tool Detail Component with Close Button
-  const ToolDetailContent = ({ tool }: { tool: Tool }) => (
-    <div className="space-y-4 w-full max-w-[280px] sm:w-80 sm:max-w-sm">
+  const ToolDetailContent = ({ tool, isDesktop = false }: { tool: Tool; isDesktop?: boolean }) => (
+    <div className={`space-y-3 w-full ${isDesktop ? 'max-w-[240px]' : 'max-w-[280px] sm:w-80 sm:max-w-sm'}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div 
-            className="p-2 rounded-lg" 
+            className={`${isDesktop ? 'p-1.5' : 'p-2'} rounded-lg`} 
             style={{ 
               backgroundColor: `${getCategoryColor(tool.category)}15`,
               border: `1px solid ${getCategoryColor(tool.category)}30`
@@ -176,10 +176,10 @@ const ToolsProficiencyRadar = () => {
           >
             {(() => {
               const IconComponent = getToolIcon(tool.name);
-              return <IconComponent className="w-4 h-4" style={{ color: getCategoryColor(tool.category) }} />;
+              return <IconComponent className={`${isDesktop ? 'w-3 h-3' : 'w-4 h-4'}`} style={{ color: getCategoryColor(tool.category) }} />;
             })()}
           </div>
-          <h3 className="font-semibold text-primary text-lg">{tool.name}</h3>
+          <h3 className={`font-semibold text-primary ${isDesktop ? 'text-sm' : 'text-lg'}`}>{tool.name}</h3>
         </div>
         <Button
           variant="ghost"
@@ -193,7 +193,7 @@ const ToolsProficiencyRadar = () => {
       
       <Badge 
         variant="outline" 
-        className="capitalize text-xs"
+        className={`capitalize ${isDesktop ? 'text-xs' : 'text-xs'}`}
         style={{ 
           borderColor: getCategoryColor(tool.category), 
           color: getCategoryColor(tool.category),
@@ -203,7 +203,7 @@ const ToolsProficiencyRadar = () => {
         {tool.category.replace('-', ' ')} Tool
       </Badge>
       
-      <p className="text-sm text-muted-foreground leading-relaxed">
+      <p className={`${isDesktop ? 'text-xs' : 'text-sm'} text-muted-foreground leading-relaxed`}>
         {tool.description}
       </p>
     </div>
@@ -267,7 +267,15 @@ const ToolsProficiencyRadar = () => {
 
         {!isMobile ? (
           // Desktop Radial Chart with Popovers
-          <div className="flex justify-center">
+          <div className="flex flex-col items-center">
+            {/* Helper message for desktop - only show when no popover is open */}
+            {!openPopover && (
+              <div className="mb-6 text-center">
+                <p className="text-sm text-muted-foreground italic animate-fade-in">
+                  💡 Hover on the tools to see the details
+                </p>
+              </div>
+            )}
             <Card className="bg-gradient-to-br from-card/80 via-card/60 to-card/40 backdrop-blur-xl border border-primary/20 shadow-2xl shadow-primary/10 overflow-hidden hover:shadow-3xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
               <CardContent className="p-8 relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-purple-500/5 pointer-events-none" />
@@ -371,15 +379,15 @@ const ToolsProficiencyRadar = () => {
                           </g>
                         </PopoverTrigger>
                         <PopoverContent 
-                          className="p-4 bg-card/95 backdrop-blur-md border border-primary/20 shadow-xl"
-                          sideOffset={10}
-                          align="center"
-                          alignOffset={0}
+                          className="p-3 bg-card/95 backdrop-blur-md border border-primary/20 shadow-xl"
+                          sideOffset={8}
+                          align="end"
+                          alignOffset={-10}
                           avoidCollisions={true}
                           collisionBoundary={document.querySelector('.max-w-6xl')}
                           sticky="always"
                         >
-                          <ToolDetailContent tool={point.tool} />
+                          <ToolDetailContent tool={point.tool} isDesktop={true} />
                         </PopoverContent>
                       </Popover>
                     </g>
