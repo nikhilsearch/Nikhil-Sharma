@@ -164,7 +164,7 @@ const ToolsProficiencyRadar = () => {
 
   // Tool Detail Component with Close Button
   const ToolDetailContent = ({ tool }: { tool: Tool }) => (
-    <div className="space-y-4 w-full max-w-[280px] sm:w-80 sm:max-w-sm">
+    <div className="space-y-4 w-80 max-w-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div 
@@ -374,10 +374,6 @@ const ToolsProficiencyRadar = () => {
                           className="p-4 bg-card/95 backdrop-blur-md border border-primary/20 shadow-xl"
                           sideOffset={10}
                           align="center"
-                          alignOffset={0}
-                          avoidCollisions={true}
-                          collisionBoundary={document.querySelector('.max-w-6xl')}
-                          sticky="always"
                         >
                           <ToolDetailContent tool={point.tool} />
                         </PopoverContent>
@@ -494,14 +490,9 @@ const ToolsProficiencyRadar = () => {
                     </div>
                   </PopoverTrigger>
                   <PopoverContent 
-                    className="p-4 bg-card/95 backdrop-blur-md border border-primary/20 shadow-xl max-w-[280px]"
-                    sideOffset={8}
-                    align="center"
-                    alignOffset={0}
-                    avoidCollisions={true}
-                    collisionBoundary={document.querySelector('.grid')}
-                    side="top"
-                    sticky="always"
+                    className="p-4 bg-card/95 backdrop-blur-md border border-primary/20 shadow-xl"
+                    sideOffset={10}
+                    align="start"
                   >
                     <ToolDetailContent tool={tool} />
                   </PopoverContent>
