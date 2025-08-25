@@ -150,6 +150,19 @@ const ToolsProficiencyRadar = () => {
     }
   };
 
+  // Handle hover for desktop
+  const handleMouseEnter = (toolName: string) => {
+    if (!isMobile) {
+      setOpenPopover(toolName);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      setOpenPopover(null);
+    }
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
@@ -350,7 +363,11 @@ const ToolsProficiencyRadar = () => {
                         onOpenChange={(open) => handleOpenChange(point.tool.name, open)}
                       >
                         <PopoverTrigger asChild>
-                          <g className="cursor-pointer">
+                          <g 
+                            className="cursor-pointer"
+                            onMouseEnter={() => handleMouseEnter(point.tool.name)}
+                            onMouseLeave={handleMouseLeave}
+                          >
                             {/* Outer Glow Ring */}
                             <circle
                               cx={point.x}
@@ -411,7 +428,8 @@ const ToolsProficiencyRadar = () => {
                         filter: openPopover === point.tool.name ? 'drop-shadow(0 2px 4px hsl(var(--primary) / 0.3))' : 'none',
                         textShadow: openPopover === point.tool.name ? '0 0 10px hsl(var(--primary) / 0.5)' : 'none'
                       }}
-                      onClick={() => handleOpenChange(point.tool.name, openPopover !== point.tool.name)}
+                      onMouseEnter={() => handleMouseEnter(point.tool.name)}
+                      onMouseLeave={handleMouseLeave}
                     >
                       {point.tool.name}
                     </text>
