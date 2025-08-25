@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,8 @@ const ToolsProficiencyRadar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [openPopover, setOpenPopover] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const leaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const tools: Tool[] = [
     { 
@@ -150,18 +152,58 @@ const ToolsProficiencyRadar = () => {
     }
   };
 
-  // Handle hover for desktop
+  // Handle hover for desktop with debouncing
   const handleMouseEnter = (toolName: string) => {
     if (!isMobile) {
-      setOpenPopover(toolName);
+      // Clear any existing leave timeout
+      if (leaveTimeoutRef.current) {
+        clearTimeout(leaveTimeoutRef.current);
+        leaveTimeoutRef.current = null;
+      }
+      
+      // Clear any existing hover timeout
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+      
+      // Set a small delay before opening to prevent flickering
+      hoverTimeoutRef.current = setTimeout(() => {
+        setOpenPopover(toolName);
+      }, 100);
     }
   };
 
   const handleMouseLeave = () => {
     if (!isMobile) {
-      setOpenPopover(null);
+      // Clear any existing hover timeout
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+        hoverTimeoutRef.current = null;
+      }
+      
+      // Clear any existing leave timeout
+      if (leaveTimeoutRef.current) {
+        clearTimeout(leaveTimeoutRef.current);
+      }
+      
+      // Add a delay before closing to allow mouse movement to popover
+      leaveTimeoutRef.current = setTimeout(() => {
+        setOpenPopover(null);
+      }, 200);
     }
   };
+
+  // Cleanup timeouts on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+      if (leaveTimeoutRef.current) {
+        clearTimeout(leaveTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 300);
