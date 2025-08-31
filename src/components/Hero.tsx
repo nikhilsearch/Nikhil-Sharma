@@ -118,24 +118,23 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right Column - Enhanced Image */}
+        {/* Right Column - Natural Image */}
         <div className={`flex justify-center lg:justify-end transition-all duration-1000 delay-300 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
           <div className="relative group">
-            {/* Multiple glow layers for enhanced effect */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-primary via-purple-400 to-blue-400 rounded-3xl blur-2xl opacity-30 group-hover:opacity-60 transition duration-1000 animate-pulse"></div>
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-400 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+            {/* Subtle glow effect */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-purple-400/20 to-blue-400/20 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition duration-1000"></div>
             
-            {/* Main image container */}
-            <div className="relative bg-gradient-to-br from-card via-card to-muted rounded-3xl p-1 shadow-2xl">
+            {/* Image with natural appearance */}
+            <div className="relative">
               <img
                 src="/lovable-uploads/e6ae7ed7-6710-4268-ad7b-1e8896e9ce47.png"
                 alt="Nikhil Sharma - Dynamic SEO Lead and Expert"
-                className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[420px] lg:h-[420px] object-cover object-center rounded-3xl shadow-xl group-hover:scale-105 transition-transform duration-500"
+                className="relative max-w-sm sm:max-w-md lg:max-w-lg w-full h-auto object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
               />
               
               {/* Floating badge */}
-              <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-primary to-purple-400 text-white px-6 py-3 rounded-2xl shadow-xl animate-bounce">
-                <span className="font-bold text-sm">SEO Expert</span>
+              <div className="absolute -bottom-2 -right-2 bg-gradient-to-r from-primary to-purple-400 text-white px-4 py-2 rounded-xl shadow-xl animate-bounce">
+                <span className="font-bold text-xs sm:text-sm">SEO Expert</span>
               </div>
             </div>
           </div>
