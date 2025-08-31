@@ -128,9 +128,9 @@ const Hero = () => {
             {/* Main image container */}
             <div className="relative bg-gradient-to-br from-card via-card to-muted rounded-3xl p-1 shadow-2xl">
               <img
-                src="/lovable-uploads/d24e95b6-b5a1-48ec-ad3c-aae268e2ba83.png"
+                src="/lovable-uploads/e6ae7ed7-6710-4268-ad7b-1e8896e9ce47.png"
                 alt="Nikhil Sharma - Dynamic SEO Lead and Expert"
-                className="relative w-96 h-96 object-cover rounded-3xl shadow-xl group-hover:scale-105 transition-transform duration-500"
+                className="relative w-80 h-80 sm:w-96 sm:h-96 lg:w-[420px] lg:h-[420px] object-cover object-center rounded-3xl shadow-xl group-hover:scale-105 transition-transform duration-500"
               />
               
               {/* Floating badge */}
