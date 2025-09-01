@@ -91,16 +91,16 @@ const Experience = () => {
                   key={index}
                   className={`group cursor-pointer transition-all duration-500 hover:shadow-2xl relative overflow-hidden ${
                     activeExperience === index
-                      ? "bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-primary shadow-xl scale-105 shadow-primary/20"
-                      : "bg-card/50 backdrop-blur-sm border-border/50 hover:bg-gradient-to-br hover:from-primary/5 hover:via-purple-500/5 hover:to-cyan-500/5 hover:border-primary/30 hover:scale-102 hover:shadow-primary/10"
+                      ? "bg-primary/10 border-primary shadow-xl scale-105 shadow-primary/20"
+                      : "bg-card/50 backdrop-blur-sm border-border/50 hover:bg-primary/5 hover:border-primary/30 hover:scale-102 hover:shadow-primary/10"
                   }`}
                   onClick={() => setActiveExperience(index)}
                 >
-                  {/* Gradient overlay for hover effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  {/* Simple overlay for hover effect */}
+                  <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   
-                  {/* Animated border glow */}
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-20 blur-sm transition-all duration-500 pointer-events-none" />
+                  {/* Simple border highlight */}
+                  <div className="absolute inset-0 rounded-lg border-2 border-primary opacity-0 group-hover:opacity-30 transition-all duration-500 pointer-events-none" />
                   
                   <CardContent className="p-4 relative z-10">
                     <div className="flex items-start space-x-3">
