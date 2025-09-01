@@ -225,7 +225,7 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-primary/20 dark:hover:shadow-primary/30 hover:border-primary/60 dark:hover:border-primary/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-primary/5 before:to-purple-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[160px] md:min-h-[200px]">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-green-500/20 dark:hover:shadow-green-500/30 hover:border-green-500/60 dark:hover:border-green-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-green-500/5 before:to-emerald-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 min-h-[160px] md:min-h-[200px]">
                     <div className="mb-3 md:mb-4 relative z-10">
                       <h4 className="text-lg md:text-xl font-bold text-foreground mb-2">
                         {area.title}
