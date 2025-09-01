@@ -124,12 +124,12 @@ const Hero = () => {
             {/* Subtle glow effect */}
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-purple-400/20 to-blue-400/20 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition duration-1000"></div>
             
-            {/* Image with natural appearance */}
+            {/* Image with interactive border styling */}
             <div className="relative">
               <img
-                src="/lovable-uploads/e6ae7ed7-6710-4268-ad7b-1e8896e9ce47.png"
+                src="/lovable-uploads/64c76f68-b3b6-476a-8396-c8c9d33795de.png"
                 alt="Nikhil Sharma - Dynamic SEO Lead and Expert"
-                className="relative max-w-sm sm:max-w-md lg:max-w-lg w-full h-auto object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-500"
+                className="relative max-w-sm sm:max-w-md lg:max-w-lg w-full h-auto object-contain border-4 border-primary/30 rounded-2xl shadow-2xl hover:border-primary/60 hover:shadow-3xl group-hover:scale-105 transition-all duration-500 hover:rotate-1 cursor-pointer"
               />
               
               {/* Floating badge */}
