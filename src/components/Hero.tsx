@@ -129,7 +129,7 @@ const Hero = () => {
               <img
                 src="/lovable-uploads/4861508d-15d9-48f2-9924-0a4de11cfee3.png"
                 alt="Nikhil Sharma - Dynamic SEO Lead and Expert"
-                className="relative max-w-sm sm:max-w-md lg:max-w-lg w-full h-auto object-contain border-4 border-primary/30 rounded-2xl shadow-2xl hover:border-primary/60 hover:shadow-3xl group-hover:scale-105 transition-all duration-500 hover:rotate-1 cursor-pointer"
+                className="relative max-w-sm sm:max-w-md lg:max-w-lg w-full h-auto object-contain rounded-2xl shadow-2xl hover:shadow-3xl group-hover:scale-105 transition-all duration-500 hover:rotate-1 cursor-pointer"
               />
               
               {/* Floating badge */}
