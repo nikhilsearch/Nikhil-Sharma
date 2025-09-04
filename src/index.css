@@ -8,61 +8,88 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
+    /* Enhanced Dark Theme - Modern Immersive Design */
+    --background: 220 13% 8%;
+    --background-secondary: 220 15% 12%;
+    --foreground: 210 20% 98%;
 
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 220 13% 10%;
+    --card-foreground: 210 20% 98%;
 
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 220 15% 9%;
+    --popover-foreground: 210 20% 98%;
 
-    --primary: 263 70% 50%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 268 83% 58%;
+    --primary-glow: 268 90% 70%;
+    --primary-foreground: 220 13% 8%;
 
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 210 20% 98%;
 
-    --muted: 240 5.9% 10%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 220 15% 15%;
+    --muted-foreground: 220 10% 70%;
 
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --accent: 268 40% 20%;
+    --accent-foreground: 268 83% 85%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 98%;
 
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 263 70% 50%;
+    --border: 220 13% 20%;
+    --input: 220 13% 16%;
+    --ring: 268 83% 58%;
 
     --radius: 0.75rem;
 
-    /* Custom design tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(263 70% 50%), hsl(280 100% 70%));
-    --gradient-secondary: linear-gradient(135deg, hsl(240 10% 3.9%), hsl(240 5.9% 10%));
-    --shadow-glow: 0 0 40px hsl(263 70% 50% / 0.3);
-    --shadow-card: 0 8px 32px hsl(240 3.7% 15.9% / 0.5);
+    /* Enhanced Gradient System */
+    --gradient-background: linear-gradient(135deg, 
+      hsl(220 13% 8%) 0%,
+      hsl(225 15% 10%) 25%,
+      hsl(230 18% 12%) 50%,
+      hsl(235 20% 10%) 75%,
+      hsl(240 15% 8%) 100%);
+    
+    --gradient-primary: linear-gradient(135deg, 
+      hsl(268 83% 58%) 0%, 
+      hsl(280 90% 70%) 50%,
+      hsl(290 85% 65%) 100%);
+    
+    --gradient-secondary: linear-gradient(135deg, 
+      hsl(220 20% 18%) 0%,
+      hsl(225 25% 22%) 100%);
+      
+    --gradient-accent: linear-gradient(135deg,
+      hsl(268 40% 20%) 0%,
+      hsl(275 45% 25%) 100%);
+      
+    --gradient-glass: linear-gradient(135deg,
+      hsla(220 20% 18% / 0.8) 0%,
+      hsla(225 25% 22% / 0.6) 100%);
+
+    /* Advanced Shadow System */
+    --shadow-glow: 0 0 60px hsl(268 83% 58% / 0.4);
+    --shadow-glow-intense: 0 0 80px hsl(268 83% 58% / 0.6);
+    --shadow-card: 0 8px 32px hsl(220 13% 4% / 0.8);
+    --shadow-card-hover: 0 12px 48px hsl(220 13% 4% / 0.9);
+    --shadow-primary: 0 8px 32px hsl(268 83% 58% / 0.3);
+    
+    /* Enhanced Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-glass: backdrop-filter 0.3s ease;
     
     /* Animation keyframes */
     --animation-scroll: scroll 30s linear infinite;
+    --animation-glow: glow 2s ease-in-out infinite alternate;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 220 15% 12%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 268 83% 58%;
+    --sidebar-primary-foreground: 220 13% 8%;
+    --sidebar-accent: 220 20% 18%;
+    --sidebar-accent-foreground: 210 20% 95%;
+    --sidebar-border: 220 13% 20%;
+    --sidebar-ring: 268 83% 58%;
   }
 
   .light {
@@ -119,10 +146,29 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    background-attachment: fixed;
+    position: relative;
+  }
+  
+  /* Subtle animated background overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, hsl(268 83% 58% / 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, hsl(290 85% 65% / 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, hsl(275 80% 60% / 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: subtle-glow 8s ease-in-out infinite alternate;
   }
 }
 
-/* Custom animations for hero section */
+/* Enhanced animations */
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -143,6 +189,51 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes subtle-glow {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 20px hsl(268 83% 58% / 0.2);
+  }
+  100% {
+    box-shadow: 0 0 40px hsl(268 83% 58% / 0.4), 0 0 80px hsl(268 83% 58% / 0.1);
+  }
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+/* Glass morphism utility classes */
+.glass {
+  background: var(--gradient-glass);
+  backdrop-filter: blur(16px);
+  border: 1px solid hsl(var(--border));
+  box-shadow: var(--shadow-card);
+}
+
+.glass-hover {
+  transition: var(--transition-smooth);
+}
+
+.glass-hover:hover {
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: hsl(var(--primary) / 0.3);
+}
+
 .animate-fade-in {
   animation: fade-in 1s ease-out forwards;
 }
@@ -150,6 +241,14 @@ All colors MUST be HSL.
 .animate-gradient {
   background-size: 200% 200%;
   animation: gradient 3s ease infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.animate-subtle-glow {
+  animation: subtle-glow 8s ease-in-out infinite alternate;
 }
 
 .delay-300 {
@@ -168,12 +267,4 @@ All colors MUST be HSL.
   animation-delay: 1s;
 }
 
-/* Featured On section scroll animation */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.333%);
-  }
-}
+/* Featured On section scroll animation - moved to keyframes section above */
