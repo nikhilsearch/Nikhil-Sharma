@@ -11,7 +11,7 @@ import BlogEditor from "./pages/Admin/BlogEditor";
 import BlogDashboard from "./pages/Admin/BlogDashboard";
 import SSRPreview from "./pages/SSRPreview";
 import NotFound from "./pages/NotFound";
-import SSRPreviewButton from "./components/SSRPreviewButton";
+
 
 const queryClient = new QueryClient();
 
@@ -33,7 +33,6 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <SSRPreviewButton />
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
