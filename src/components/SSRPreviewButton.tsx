@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { Code2, ExternalLink } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SSRPreviewButton = ({ className = "" }: { className?: string }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   
   const handlePreviewClick = () => {
     const currentUrl = `${window.location.origin}${location.pathname}${location.search}`;
     const previewUrl = `/ssr-preview?url=${encodeURIComponent(currentUrl)}`;
-    window.open(previewUrl, '_blank');
+    navigate(previewUrl);
   };
 
   return (
