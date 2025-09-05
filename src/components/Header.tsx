@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Mail } from "lucide-react";
+import { Menu, X, Mail, Github, Linkedin, Twitter, Instagram, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useLocation } from "react-router-dom";
 
@@ -16,6 +16,37 @@ const Header = () => {
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Success Stories", href: "#case-studies", id: "case-studies" },
     { name: "Contact", href: "#contact", id: "contact" },
+  ];
+
+  const socialLinks = [
+    {
+      name: "GitHub",
+      icon: Github,
+      href: "https://github.com/nikhilsharma",
+      color: "hover:text-purple-400",
+      bgGlow: "hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      href: "https://linkedin.com/in/nikhilsharma",
+      color: "hover:text-blue-400",
+      bgGlow: "hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+    },
+    {
+      name: "Twitter",
+      icon: Twitter,
+      href: "https://twitter.com/nikhilsharma",
+      color: "hover:text-sky-400",
+      bgGlow: "hover:shadow-[0_0_20px_rgba(56,189,248,0.4)]"
+    },
+    {
+      name: "WhatsApp",
+      icon: MessageCircle,
+      href: "https://wa.me/your-number",
+      color: "hover:text-green-400",
+      bgGlow: "hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]"
+    }
   ];
 
   // Smooth scroll function
@@ -87,6 +118,28 @@ const Header = () => {
             })}
           </nav>
 
+          {/* Desktop Social Links */}
+          <div className="hidden lg:flex items-center space-x-4">
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`group relative p-2 rounded-full bg-muted/50 backdrop-blur-sm border border-border/50 
+                    transition-all duration-500 ease-out hover:scale-110 hover:rotate-6 hover:-translate-y-1
+                    ${social.color} ${social.bgGlow} hover:border-current/30 hover:bg-current/5`}
+                  aria-label={`Follow on ${social.name}`}
+                >
+                  <Icon className="w-5 h-5 transition-all duration-300 group-hover:scale-110" />
+                  <div className="absolute inset-0 rounded-full bg-current/0 group-hover:bg-current/10 transition-all duration-300" />
+                </a>
+              );
+            })}
+          </div>
+
           {/* CTA Button */}
           <div className="hidden md:flex">
             <Button
@@ -136,7 +189,34 @@ const Header = () => {
                   </button>
                 );
               })}
-              <div className="pt-4">
+              
+              {/* Mobile Social Links */}
+              <div className="pt-4 pb-2">
+                <p className="text-sm font-medium text-muted-foreground mb-3 px-3">Connect With Me</p>
+                <div className="flex justify-center space-x-6">
+                  {socialLinks.map((social) => {
+                    const Icon = social.icon;
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`group relative p-3 rounded-xl bg-muted/50 backdrop-blur-sm border border-border/50 
+                          transition-all duration-500 ease-out hover:scale-110 active:scale-95 hover:-translate-y-1
+                          ${social.color} ${social.bgGlow} hover:border-current/30 hover:bg-current/5`}
+                        aria-label={`Follow on ${social.name}`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <Icon className="w-6 h-6 transition-all duration-300 group-hover:scale-110" />
+                        <div className="absolute inset-0 rounded-xl bg-current/0 group-hover:bg-current/10 transition-all duration-300" />
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+              
+              <div className="pt-2">
                 <Button
                   onClick={handleGetInTouch}
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 justify-center"
