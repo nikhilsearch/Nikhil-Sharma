@@ -38,7 +38,7 @@ const Header = () => {
     {
       name: "Twitter",
       icon: Twitter,
-      href: "https://twitter.com/nikhilsharma", 
+      href: "https://x.com/imnikhill10", 
       color: "hover:text-sky-400",
       bgGlow: "hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]",
       bgColor: "hover:bg-sky-500/10"
