@@ -22,7 +22,7 @@ const Header = () => {
     {
       name: "GitHub",
       icon: Github,
-      href: "https://github.com/nikhilsharma",
+      href: "https://github.com/nikhilsearch",
       color: "hover:text-purple-400",
       bgGlow: "hover:shadow-[0_0_25px_rgba(168,85,247,0.6)]",
       bgColor: "hover:bg-purple-500/10"
@@ -30,7 +30,7 @@ const Header = () => {
     {
       name: "LinkedIn", 
       icon: Linkedin,
-      href: "https://linkedin.com/in/nikhilsharma",
+      href: "https://www.linkedin.com/in/nikhil-sharma10/",
       color: "hover:text-blue-400",
       bgGlow: "hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]",
       bgColor: "hover:bg-blue-500/10"
@@ -46,7 +46,7 @@ const Header = () => {
     {
       name: "WhatsApp",
       icon: MessageCircle,
-      href: "https://wa.me/your-number",
+      href: "https://wa.me/919680514780",
       color: "hover:text-green-400",
       bgGlow: "hover:shadow-[0_0_25px_rgba(34,197,94,0.6)]",
       bgColor: "hover:bg-green-500/10"
