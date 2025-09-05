@@ -24,28 +24,40 @@ const Header = () => {
       icon: Github,
       href: "https://github.com/nikhilsharma",
       color: "hover:text-purple-400",
-      bgGlow: "hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+      bgGlow: "hover:shadow-[0_0_25px_rgba(168,85,247,0.6)]",
+      bgColor: "hover:bg-purple-500/10"
     },
     {
-      name: "LinkedIn",
+      name: "LinkedIn", 
       icon: Linkedin,
       href: "https://linkedin.com/in/nikhilsharma",
       color: "hover:text-blue-400",
-      bgGlow: "hover:shadow-[0_0_20px_rgba(59,130,246,0.4)]"
+      bgGlow: "hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]",
+      bgColor: "hover:bg-blue-500/10"
     },
     {
       name: "Twitter",
       icon: Twitter,
-      href: "https://twitter.com/nikhilsharma",
+      href: "https://twitter.com/nikhilsharma", 
       color: "hover:text-sky-400",
-      bgGlow: "hover:shadow-[0_0_20px_rgba(56,189,248,0.4)]"
+      bgGlow: "hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]",
+      bgColor: "hover:bg-sky-500/10"
     },
     {
       name: "WhatsApp",
       icon: MessageCircle,
       href: "https://wa.me/your-number",
       color: "hover:text-green-400",
-      bgGlow: "hover:shadow-[0_0_20px_rgba(34,197,94,0.4)]"
+      bgGlow: "hover:shadow-[0_0_25px_rgba(34,197,94,0.6)]",
+      bgColor: "hover:bg-green-500/10"
+    },
+    {
+      name: "Email",
+      icon: Mail,
+      href: "mailto:imnikhil10@outlook.com?subject=Let's discuss your project&body=Hi Nikhil,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0ABest regards",
+      color: "hover:text-orange-400",
+      bgGlow: "hover:shadow-[0_0_25px_rgba(251,146,60,0.6)]",
+      bgColor: "hover:bg-orange-500/10"
     }
   ];
 
@@ -119,7 +131,7 @@ const Header = () => {
           </nav>
 
           {/* Desktop Social Links */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             {socialLinks.map((social) => {
               const Icon = social.icon;
               return (
@@ -128,27 +140,22 @@ const Header = () => {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`group relative p-2 rounded-full bg-muted/50 backdrop-blur-sm border border-border/50 
-                    transition-all duration-500 ease-out hover:scale-110 hover:rotate-6 hover:-translate-y-1
-                    ${social.color} ${social.bgGlow} hover:border-current/30 hover:bg-current/5`}
-                  aria-label={`Follow on ${social.name}`}
+                  className={`group relative p-3 rounded-2xl bg-gradient-to-br from-muted/40 to-muted/60 backdrop-blur-lg 
+                    border border-border/30 transition-all duration-700 ease-out hover:scale-125 hover:rotate-12 
+                    hover:-translate-y-2 active:scale-110 ${social.color} ${social.bgGlow} ${social.bgColor}
+                    hover:border-current/50 hover:shadow-2xl transform-gpu will-change-transform`}
+                  aria-label={`Connect on ${social.name}`}
                 >
-                  <Icon className="w-5 h-5 transition-all duration-300 group-hover:scale-110" />
-                  <div className="absolute inset-0 rounded-full bg-current/0 group-hover:bg-current/10 transition-all duration-300" />
+                  <Icon className="w-5 h-5 transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 transform-gpu" />
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-current/0 to-current/0 
+                    group-hover:from-current/5 group-hover:to-current/15 transition-all duration-500" />
+                  
+                  {/* Animated border gradient */}
+                  <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-transparent via-current/20 to-transparent 
+                    opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
                 </a>
               );
             })}
-          </div>
-
-          {/* CTA Button */}
-          <div className="hidden md:flex">
-            <Button
-              onClick={handleGetInTouch}
-              className="bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2"
-            >
-              <Mail className="w-4 h-4" />
-              Get in Touch
-            </Button>
           </div>
 
           {/* Mobile menu button */}
@@ -191,9 +198,9 @@ const Header = () => {
               })}
               
               {/* Mobile Social Links */}
-              <div className="pt-4 pb-2">
-                <p className="text-sm font-medium text-muted-foreground mb-3 px-3">Connect With Me</p>
-                <div className="flex justify-center space-x-6">
+              <div className="pt-4 pb-4">
+                <p className="text-sm font-medium text-muted-foreground mb-4 px-3 text-center">Connect With Me</p>
+                <div className="flex justify-center space-x-4">
                   {socialLinks.map((social) => {
                     const Icon = social.icon;
                     return (
@@ -202,28 +209,24 @@ const Header = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`group relative p-3 rounded-xl bg-muted/50 backdrop-blur-sm border border-border/50 
-                          transition-all duration-500 ease-out hover:scale-110 active:scale-95 hover:-translate-y-1
-                          ${social.color} ${social.bgGlow} hover:border-current/30 hover:bg-current/5`}
-                        aria-label={`Follow on ${social.name}`}
+                        className={`group relative p-4 rounded-2xl bg-gradient-to-br from-muted/40 to-muted/60 
+                          backdrop-blur-lg border border-border/30 transition-all duration-700 ease-out 
+                          hover:scale-110 active:scale-95 hover:-translate-y-2 ${social.color} ${social.bgGlow} 
+                          ${social.bgColor} hover:border-current/50 hover:shadow-xl transform-gpu will-change-transform`}
+                        aria-label={`Connect on ${social.name}`}
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <Icon className="w-6 h-6 transition-all duration-300 group-hover:scale-110" />
-                        <div className="absolute inset-0 rounded-xl bg-current/0 group-hover:bg-current/10 transition-all duration-300" />
+                        <Icon className="w-7 h-7 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 transform-gpu" />
+                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-current/0 to-current/0 
+                          group-hover:from-current/10 group-hover:to-current/20 transition-all duration-500" />
+                        
+                        {/* Animated pulse effect */}
+                        <div className="absolute -inset-1 rounded-2xl bg-current/20 opacity-0 group-hover:opacity-50 
+                          transition-all duration-700 animate-pulse blur-sm" />
                       </a>
                     );
                   })}
                 </div>
-              </div>
-              
-              <div className="pt-2">
-                <Button
-                  onClick={handleGetInTouch}
-                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center gap-2 justify-center"
-                >
-                  <Mail className="w-4 h-4" />
-                  Get in Touch
-                </Button>
               </div>
             </div>
           </div>
