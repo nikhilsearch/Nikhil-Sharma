@@ -20,44 +20,31 @@ const Header = () => {
 
   const socialLinks = [
     {
-      name: "GitHub",
-      icon: Github,
-      href: "https://github.com/nikhilsearch",
-      color: "hover:text-purple-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(168,85,247,0.6)]",
-      bgColor: "hover:bg-purple-500/10"
-    },
-    {
-      name: "LinkedIn", 
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/nikhil-sharma10/",
-      color: "hover:text-blue-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]",
-      bgColor: "hover:bg-blue-500/10"
-    },
-    {
-      name: "Twitter",
-      icon: Twitter,
-      href: "https://x.com/imnikhill10", 
-      color: "hover:text-sky-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]",
-      bgColor: "hover:bg-sky-500/10"
+      name: "Email",
+      icon: Mail,
+      href: "mailto:imnikhil10@outlook.com?subject=Let's discuss your project&body=Hi Nikhil,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0ABest regards",
+      color: "hover:text-[#EA4335]",
+      bgGlow: "hover:shadow-[0_0_25px_rgba(234,67,53,0.6)]",
+      bgColor: "hover:bg-[#EA4335]/10",
+      brandColor: "#EA4335"
     },
     {
       name: "WhatsApp",
       icon: MessageCircle,
       href: "https://wa.me/919680514780",
-      color: "hover:text-green-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(34,197,94,0.6)]",
-      bgColor: "hover:bg-green-500/10"
+      color: "hover:text-[#25D366]",
+      bgGlow: "hover:shadow-[0_0_25px_rgba(37,211,102,0.6)]",
+      bgColor: "hover:bg-[#25D366]/10",
+      brandColor: "#25D366"
     },
     {
-      name: "Email",
-      icon: Mail,
-      href: "mailto:imnikhil10@outlook.com?subject=Let's discuss your project&body=Hi Nikhil,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0ABest regards",
-      color: "hover:text-orange-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(251,146,60,0.6)]",
-      bgColor: "hover:bg-orange-500/10"
+      name: "GitHub",
+      icon: Github,
+      href: "https://github.com/nikhilsearch",
+      color: "hover:text-[#333333] dark:hover:text-[#f0f6fe]",
+      bgGlow: "hover:shadow-[0_0_25px_rgba(51,51,51,0.6)] dark:hover:shadow-[0_0_25px_rgba(240,246,254,0.6)]",
+      bgColor: "hover:bg-[#333333]/10 dark:hover:bg-[#f0f6fe]/10",
+      brandColor: "#333333"
     }
   ];
 
