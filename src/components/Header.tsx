@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Mail, Github, Linkedin, Twitter, Instagram, MessageCircle } from "lucide-react";
+import { Menu, X, Mail, Github, Linkedin, Twitter, Instagram, MessageCircle, ChevronDown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("about");
   const { toast } = useToast();
   const location = useLocation();
@@ -16,6 +17,13 @@ const Header = () => {
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Success Stories", href: "#case-studies", id: "case-studies" },
     { name: "Contact", href: "#contact", id: "contact" },
+  ];
+
+  const serviceItems = [
+    { name: "Technical SEO", href: "/services/technical-seo", description: "Website optimization and technical improvements" },
+    { name: "AI/SEO Optimization", href: "/services/ai-seo-optimization", description: "Advanced AI-powered SEO strategies" },
+    { name: "Semantic SEO", href: "/services/semantic-seo", description: "Content optimization for search intent" },
+    { name: "Local SEO", href: "/services/local-seo", description: "Local business search optimization" },
   ];
 
   const socialLinks = [
@@ -97,7 +105,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex items-center space-x-8">
             {navigationItems.map((item) => {
               const isActive = activeSection === item.id;
               
@@ -115,6 +123,42 @@ const Header = () => {
                 </button>
               );
             })}
+            
+            {/* Services Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setServicesDropdownOpen(true)}
+              onMouseLeave={() => setServicesDropdownOpen(false)}
+            >
+              <button className="flex items-center space-x-1 font-medium text-foreground hover:text-primary transition-all duration-300">
+                <span>Services</span>
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${servicesDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {/* Dropdown Menu */}
+              {servicesDropdownOpen && (
+                <div className="absolute top-full left-0 mt-2 w-80 bg-background/95 backdrop-blur-lg rounded-lg shadow-2xl border border-border/40 z-50 animate-fade-in">
+                  <ul className="p-2">
+                    {serviceItems.map((service, index) => (
+                      <li key={service.name}>
+                        <Link
+                          to={service.href}
+                          className="block p-4 rounded-md hover:bg-accent/50 transition-colors duration-200 group"
+                          onClick={() => setServicesDropdownOpen(false)}
+                        >
+                          <div className="font-medium text-foreground group-hover:text-primary transition-colors duration-200">
+                            {service.name}
+                          </div>
+                          <div className="text-sm text-muted-foreground mt-1">
+                            {service.description}
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Desktop Social Links */}
@@ -203,6 +247,29 @@ const Header = () => {
                     </button>
                   );
                 })}
+                
+                {/* Mobile Services Section */}
+                <div className="pt-2">
+                  <div className="text-sm font-medium text-muted-foreground/80 px-4 py-2 uppercase tracking-wider">
+                    Services
+                  </div>
+                  <ul className="space-y-1">
+                    {serviceItems.map((service, index) => (
+                      <li key={service.name}>
+                        <Link
+                          to={service.href}
+                          className="block px-4 py-3 rounded-xl text-base font-medium text-foreground 
+                            hover:text-primary hover:bg-muted/60 border border-transparent 
+                            hover:border-border/30 transition-all duration-300 animate-fade-in"
+                          onClick={() => setIsMenuOpen(false)}
+                          style={{ animationDelay: `${(navigationItems.length + index + 1) * 80}ms` }}
+                        >
+                          <span className="ml-2">{service.name}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
               
               {/* Divider */}
