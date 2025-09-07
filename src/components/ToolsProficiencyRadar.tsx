@@ -172,8 +172,8 @@ const ToolsProficiencyRadar = () => {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
-            <span className="text-foreground">Professional</span>{" "}
-            <span className="bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">Tools</span>
+            <span className="text-foreground">My Go-To Toolkit for</span>{" "}
+            <span className="bg-gradient-to-r from-primary via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">Driving Growth</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Interactive visualization of professional tools across SEO, AI, Analytics, and Project Management
