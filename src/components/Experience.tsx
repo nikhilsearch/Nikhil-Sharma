@@ -11,7 +11,7 @@ const Experience = () => {
       company: "Wavel AI",
       location: "Singapore (Remote)",
       position: "SEO Team Lead",
-      duration: "11/2022 - Present",
+      duration: "11/2022 - 08/2025",
       type: "Full-time",
       description: "Led a team of 5 SEO specialists to establish organic search as the primary acquisition channel across US, APAC, and European markets for AI-powered SaaS platform.",
       achievements: [
