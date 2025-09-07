@@ -197,30 +197,6 @@ const Header = () => {
                 </a>
               );
             })}
-            
-            {/* Theme Toggle */}
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="group relative p-3 rounded-2xl bg-gradient-to-br from-muted/40 to-muted/60 backdrop-blur-lg 
-                  border border-border/30 transition-all duration-700 ease-out hover:scale-125 hover:rotate-12 
-                  hover:-translate-y-2 active:scale-110 hover:text-primary hover:shadow-[0_0_25px_rgba(147,51,234,0.6)]
-                  hover:bg-primary/10 hover:border-primary/50 hover:shadow-2xl transform-gpu will-change-transform"
-                aria-label="Toggle theme"
-              >
-                {theme === "dark" ? (
-                  <Sun className="w-5 h-5 text-yellow-500 transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 transform-gpu" />
-                ) : (
-                  <Moon className="w-5 h-5 text-blue-600 transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 transform-gpu" />
-                )}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/0 
-                  group-hover:from-primary/5 group-hover:to-primary/15 transition-all duration-500" />
-                
-                {/* Animated border gradient */}
-                <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-transparent via-primary/20 to-transparent 
-                  opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
-              </button>
-            )}
           </div>
 
           {/* Mobile menu button */}

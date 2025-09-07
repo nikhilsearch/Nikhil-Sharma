@@ -2,12 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle, Clock, Users, TrendingUp, Zap, Search, Settings, BarChart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FloatingThemeToggle from "@/components/FloatingThemeToggle";
 import { useEffect } from "react";
 
 const TechnicalSEO = () => {
+  // Redirect to home in production
+  if (import.meta.env.PROD) {
+    return <Navigate to="/" replace />;
+  }
+
   useEffect(() => {
     // Set canonical URL for SEO
     const link = document.querySelector("link[rel='canonical']") || document.createElement("link");
@@ -264,6 +270,7 @@ const TechnicalSEO = () => {
       </main>
 
       <Footer />
+      <FloatingThemeToggle />
     </div>
   );
 };

@@ -3,10 +3,17 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Zap, Brain, Target, TrendingUp, Users } from "lucide-react";
+import { Navigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FloatingThemeToggle from "@/components/FloatingThemeToggle";
 
 export default function AISEOOptimization() {
+  // Redirect to home in production
+  if (import.meta.env.PROD) {
+    return <Navigate to="/" replace />;
+  }
+
   useEffect(() => {
     // Set canonical URL for SEO
     const link = document.querySelector("link[rel='canonical']") || document.createElement("link");
@@ -350,6 +357,7 @@ export default function AISEOOptimization() {
       </section>
       
       <Footer />
+      <FloatingThemeToggle />
     </div>
   );
 }
