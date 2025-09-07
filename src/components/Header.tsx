@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Mail, Github, Linkedin, Twitter, Instagram, MessageCircle, ChevronDown } from "lucide-react";
+import { Menu, X, Mail, Github, Linkedin, Twitter, Instagram, MessageCircle, ChevronDown, Moon, Sun } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Link, useLocation } from "react-router-dom";
+import { useTheme } from "next-themes";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,6 +11,12 @@ const Header = () => {
   const [activeSection, setActiveSection] = useState("about");
   const { toast } = useToast();
   const location = useLocation();
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const navigationItems = [
     { name: "About Me", href: "#about", id: "about" },
@@ -187,6 +194,30 @@ const Header = () => {
                 </a>
               );
             })}
+            
+            {/* Theme Toggle */}
+            {mounted && (
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="group relative p-3 rounded-2xl bg-gradient-to-br from-muted/40 to-muted/60 backdrop-blur-lg 
+                  border border-border/30 transition-all duration-700 ease-out hover:scale-125 hover:rotate-12 
+                  hover:-translate-y-2 active:scale-110 hover:text-primary hover:shadow-[0_0_25px_rgba(147,51,234,0.6)]
+                  hover:bg-primary/10 hover:border-primary/50 hover:shadow-2xl transform-gpu will-change-transform"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? (
+                  <Sun className="w-5 h-5 text-yellow-500 transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 transform-gpu" />
+                ) : (
+                  <Moon className="w-5 h-5 text-blue-600 transition-all duration-500 group-hover:scale-125 group-hover:rotate-6 transform-gpu" />
+                )}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/0 to-primary/0 
+                  group-hover:from-primary/5 group-hover:to-primary/15 transition-all duration-500" />
+                
+                {/* Animated border gradient */}
+                <div className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-transparent via-primary/20 to-transparent 
+                  opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-sm" />
+              </button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -310,6 +341,33 @@ const Header = () => {
                       </a>
                     );
                   })}
+                  
+                  {/* Mobile Theme Toggle */}
+                  {mounted && (
+                    <button
+                      onClick={() => {
+                        setTheme(theme === "dark" ? "light" : "dark");
+                        setIsMenuOpen(false);
+                      }}
+                      className="group relative p-3 rounded-full bg-gradient-to-br from-muted/40 to-muted/20 
+                        backdrop-blur-sm border border-border/20 transition-all duration-500 ease-out 
+                        hover:scale-110 active:scale-95 hover:-translate-y-1 hover:rotate-3
+                        hover:text-primary hover:border-primary/20 hover:shadow-lg transform-gpu will-change-transform 
+                        animate-scale-in"
+                      aria-label="Toggle theme"
+                      style={{ animationDelay: `${600 + socialLinks.length * 60}ms` }}
+                    >
+                      {theme === "dark" ? (
+                        <Sun className="w-5 h-5 text-yellow-500 transition-all duration-300 group-hover:scale-110 transform-gpu" />
+                      ) : (
+                        <Moon className="w-5 h-5 text-blue-600 transition-all duration-300 group-hover:scale-110 transform-gpu" />
+                      )}
+                      
+                      {/* Subtle glow effect */}
+                      <div className="absolute inset-0 rounded-full bg-primary/0 group-hover:bg-primary/8 
+                        transition-all duration-300" />
+                    </button>
+                  )}
                 </div>
               </div>
               

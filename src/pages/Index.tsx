@@ -8,7 +8,6 @@ import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
 import FeaturedOn from "@/components/FeaturedOn";
 import Footer from "@/components/Footer";
-import ThemeToggle from "@/components/ThemeToggle";
 import BotSnapshot from "@/components/SEO/BotSnapshot";
 import StaticSnapshot from "@/components/SEO/StaticSnapshot";
 import StructuredData from "@/components/SEO/StructuredData";
@@ -73,7 +72,6 @@ const Index = () => {
         <section id="contact">
           <Footer />
         </section>
-        <ThemeToggle />
       </div>
     </BotSnapshot>
   );
