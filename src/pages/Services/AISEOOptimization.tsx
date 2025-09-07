@@ -1,365 +1,342 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
-import anime from "animejs";
+import React from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { CheckCircle, Zap, Brain, Target, TrendingUp, Users } from "lucide-react";
 
-/**
- * GradientSolutionsApp
- * ------------------------------------------------------------
- * A React port of your gradient-themed page with Tailwind CSS,
- * dark/light mode toggle (class strategy), and Anime.js hover effects.
- *
- * Drop-in usage:
- * - Tailwind set with darkMode: 'class'
- * - Ensure your index.html includes <html class="scroll-smooth"> (Tailwind resets ok)
- * - Tailwind build available globally
- * - Anime.js installed: `npm i animejs`
- *
- * If using Vite:
- *   - Save as src/App.tsx (or App.jsx) and render normally.
- *
- * Notes:
- * - We apply the dark class on <html> to utilize Tailwind's class strategy.
- * - Hover animations are handled via React event handlers that call Anime.js.
- */
-
-export default function GradientSolutionsApp() {
-  // -------------------------------
-  // THEME: manage <html> dark class
-  // -------------------------------
-  const getInitialTheme = useCallback((): "dark" | "light" => {
-    const stored = localStorage.getItem("theme");
-    if (stored === "dark" || stored === "light") return stored;
-    // Fallback to system preference if no stored value
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    return prefersDark ? "dark" : "light";
-  }, []);
-
-  const themeRef = useRef<"dark" | "light">("light");
-
-  useEffect(() => {
-    const initial = getInitialTheme();
-    themeRef.current = initial;
-    document.documentElement.classList.toggle("dark", initial === "dark");
-  }, [getInitialTheme]);
-
-  const toggleTheme = useCallback(() => {
-    const next = themeRef.current === "dark" ? "light" : "dark";
-    themeRef.current = next;
-    document.documentElement.classList.toggle("dark", next === "dark");
-    localStorage.setItem("theme", next);
-  }, []);
-
-  // -----------------------------------
-  // ANIMATION HELPERS (Anime.js)
-  // -----------------------------------
-  const animateButtonEnter = useCallback((el: HTMLElement) => {
-    const isPrimary = el.dataset.variant === "primary";
-    anime({
-      targets: el,
-      scale: [1, 1.05],
-      backgroundColor: isPrimary ? ["#9333ea", "#8b5cf6"] : ["#a855f7", "#d946ef"],
-      color: [getComputedStyle(el).color || "#ffffff", "#ffffff"],
-      easing: "easeInOutQuad",
-      duration: 300,
-    });
-  }, []);
-
-  const animateButtonLeave = useCallback((el: HTMLElement) => {
-    const isPrimary = el.dataset.variant === "primary";
-    anime({
-      targets: el,
-      scale: [1.05, 1],
-      backgroundColor: isPrimary ? ["#8b5cf6", "#7c3aed"] : ["#a855f7", "rgba(255,255,255,0)"],
-      color: ["#ffffff", isPrimary ? "#ffffff" : "#a78bfa"],
-      easing: "easeInOutQuad",
-      duration: 300,
-    });
-  }, []);
-
-  const animateCardEnter = useCallback((card: HTMLElement) => {
-    const iconWrapper = card.querySelector<HTMLElement>("[data-icon-wrapper]");
-    const heading = card.querySelector<HTMLElement>("h3");
-    const paragraph = card.querySelector<HTMLElement>("p");
-
-    const shadowBlur = 12;
-    anime({
-      targets: card,
-      scale: 1.05,
-      boxShadow: `0 0 ${shadowBlur}px rgba(126,58,238,0.5)`,
-      easing: "easeInOutQuad",
-      duration: 400,
-    });
-
-    if (iconWrapper) {
-      anime({
-        targets: iconWrapper,
-        rotate: { value: 360, duration: 800, easing: "easeInCubic" },
-        scale: [1, 1.1],
-        backgroundColor: ["#9333ea", "#ec4899"],
-        easing: "easeInOutQuad",
-        duration: 400,
-      });
-    }
-    if (heading) {
-      anime({
-        targets: heading,
-        color: "#d870f6",
-        easing: "easeInOutQuad",
-        duration: 400,
-      });
-    }
-    if (paragraph) {
-      anime({
-        targets: paragraph,
-        color: "#e0e0e0",
-        easing: "easeInOutQuad",
-        duration: 400,
-      });
-    }
-  }, []);
-
-  const animateCardLeave = useCallback((card: HTMLElement) => {
-    const iconWrapper = card.querySelector<HTMLElement>("[data-icon-wrapper]");
-    const heading = card.querySelector<HTMLElement>("h3");
-    const paragraph = card.querySelector<HTMLElement>("p");
-
-    anime({
-      targets: card,
-      scale: 1,
-      boxShadow: (card as any).dataset.originalShadow || getComputedStyle(card).boxShadow,
-      easing: "easeInOutQuad",
-      duration: 400,
-    });
-
-    if (iconWrapper) {
-      anime({
-        targets: iconWrapper,
-        rotate: 0,
-        scale: 1,
-        backgroundColor: ["#a855f7", "#d946ef"],
-        easing: "easeInOutQuad",
-        duration: 400,
-      });
-    }
-    if (heading) {
-      anime({
-        targets: heading,
-        color: "#a78bfa",
-        easing: "easeInOutQuad",
-        duration: 400,
-      });
-    }
-    if (paragraph) {
-      anime({
-        targets: paragraph,
-        color: "#d1d5db",
-        easing: "easeInOutQuad",
-        duration: 400,
-      });
-    }
-  }, []);
-
-  // cache original shadows for cards on mount
-  const cardsContainerRef = useRef<HTMLDivElement | null>(null);
-  useEffect(() => {
-    if (!cardsContainerRef.current) return;
-    const cards = Array.from(cardsContainerRef.current.querySelectorAll<HTMLElement>("[data-card]"));
-    cards.forEach((card) => {
-      (card as any).dataset.originalShadow = getComputedStyle(card).boxShadow;
-    });
-  }, []);
-
-  // data for features
-  const features = useMemo(
-    () => [
-      {
-        title: "Innovation",
-        description: "Driving forward with cutting-edge solutions and creative thinking.",
-        icon: (
-          <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-          </svg>
-        ),
-      },
-      {
-        title: "Reliability",
-        description: "Dependable solutions that you can count on, always.",
-        icon: (
-          <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.615-1.172a9 9 0 11-11.23 0 9 9 0 0111.23 0zm-5.615 1.172c.438.438.66.977.66 1.549v.004a1.63 1.63 0 01-1.63 1.63H8.81a1.63 1.63 0 01-1.63-1.63v-.004c0-.572.222-1.11.66-1.549m3.826-1.727a2.773 2.773 0 00-2.35-.857c-.816 0-1.52.485-1.837.958" />
-          </svg>
-        ),
-      },
-      {
-        title: "Agility",
-        description: "Adapting quickly to market changes and your evolving needs.",
-        icon: (
-          <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        ),
-      },
-    ],
-    []
-  );
-
+export default function AISEOOptimization() {
   return (
-    <div className="font-sans bg-gradient-to-br from-purple-800 to-indigo-900 dark:bg-gradient-to-br dark:from-gray-900 dark:to-black text-white dark:text-gray-200 min-h-screen transition-colors duration-500">
-      {/* Header */}
-      <header className="container mx-auto px-6 py-8">
-        <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-purple-300 dark:text-purple-400">Gradient Solutions</div>
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="p-2 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-gray-500 hover:bg-purple-700 dark:hover:bg-gray-700 transition-colors duration-300"
-          >
-            <svg className="w-6 h-6 text-purple-300 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 18v1M4.21 4.21l1.42 1.42m12.59 12.59l1.42 1.42M21 12h-1M4 12H3m18.36-2.79l-1.42-1.42M4.21 19.79l1.42-1.42M12 17.83V18M12 5.17V6M7.25 7.25L8.67 8.67M15.33 15.33l1.42 1.42" />
-            </svg>
-          </button>
-        </div>
-      </header>
+    <div className="min-h-screen bg-background">
+      {/* SEO Meta Tags */}
+      <head>
+        <title>AI & GEO Optimization Services | Advanced SEO Solutions</title>
+        <meta name="description" content="Transform your organic search performance with AI-powered SEO optimization and GEO targeting strategies. Get data-driven insights and automated optimizations." />
+        <meta name="keywords" content="AI SEO, GEO optimization, artificial intelligence SEO, automated SEO, machine learning SEO, geographic SEO" />
+        <link rel="canonical" href="/services/ai-geo-optimization" />
+      </head>
 
-      {/* Hero */}
-      <section className="container mx-auto px-6 py-16 text-center">
-        <h1 className="text-5xl md:text-7xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-purple-400 to-pink-600 dark:from-purple-300 dark:to-cyan-400">
-          Unlock Your Potential
-        </h1>
-        <p className="text-xl md:text-2xl text-purple-200 dark:text-gray-300 mb-8">
-          We provide innovative solutions tailored to your unique needs.
-        </p>
-        <div className="flex justify-center gap-4">
-          <button
-            data-variant="primary"
-            className="px-8 py-3 bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800 text-white font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-600 transition-colors duration-300"
-            onMouseEnter={(e) => animateButtonEnter(e.currentTarget)}
-            onMouseLeave={(e) => animateButtonLeave(e.currentTarget)}
-          >
-            Get Started
-          </button>
-          <button
-            data-variant="ghost"
-            className="px-8 py-3 bg-transparent border-2 border-purple-400 hover:bg-purple-600 dark:border-purple-500 dark:hover:bg-purple-700 text-purple-300 dark:text-purple-300 hover:text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-600 transition-colors duration-300"
-            onMouseEnter={(e) => animateButtonEnter(e.currentTarget)}
-            onMouseLeave={(e) => animateButtonLeave(e.currentTarget)}
-          >
-            Learn More
-          </button>
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-primary/10 to-secondary/10 py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="mb-4" variant="secondary">
+              <Brain className="w-4 h-4 mr-2" />
+              AI-Powered SEO
+            </Badge>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+              AI & GEO Optimization: The Future of Search Excellence
+            </h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
+              Harness the power of artificial intelligence and geographic targeting to dominate search results, predict algorithm changes, and deliver personalized user experiences that convert.
+            </p>
+            <Button size="lg" className="mr-4">
+              <Target className="w-5 h-5 mr-2" />
+              Start AI Analysis
+            </Button>
+            <Button size="lg" variant="outline">
+              View AI Demo
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="container mx-auto px-6 py-16">
-        <h2 className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-br from-purple-400 to-pink-600 dark:from-purple-300 dark:to-cyan-400">
-          Our Core Strengths
-        </h2>
-        <div ref={cardsContainerRef} className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {features.map((f, idx) => (
-            <article
-              key={idx}
-              data-card
-              role="article"
-              className="bg-white/10 dark:bg-gray-800/50 p-6 rounded-lg shadow-xl flex flex-col items-center text-center transform transition-transform duration-300 hover:shadow-2xl"
-              onMouseEnter={(e) => animateCardEnter(e.currentTarget)}
-              onMouseLeave={(e) => animateCardLeave(e.currentTarget)}
-            >
-              <div
-                data-icon-wrapper
-                className="mb-4 p-3 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 dark:from-purple-400 dark:to-cyan-400"
-                aria-hidden
-              >
-                {f.icon}
-              </div>
-              <h3 className="text-2xl font-semibold mb-3 text-purple-300 dark:text-purple-400">{f.title}</h3>
-              <p className="text-gray-200 dark:text-gray-300">{f.description}</p>
-            </article>
-          ))}
+      {/* Problem/Solution Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Is Traditional SEO Limiting Your Growth Potential?
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <Card className="border-destructive/20">
+                <CardHeader>
+                  <CardTitle className="text-destructive">Common Challenges</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    <li>• Manual keyword research taking weeks</li>
+                    <li>• Inability to predict algorithm changes</li>
+                    <li>• Generic content that doesn't convert</li>
+                    <li>• Missing local and geographic opportunities</li>
+                    <li>• Reactive rather than proactive SEO strategies</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <CardTitle className="text-primary">Our AI Solution</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-primary mr-2 mt-0.5" />
+                      Automated keyword discovery and optimization
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-primary mr-2 mt-0.5" />
+                      Predictive algorithm change analysis
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-primary mr-2 mt-0.5" />
+                      AI-generated, personalized content
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-primary mr-2 mt-0.5" />
+                      Geographic targeting with local insights
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-primary mr-2 mt-0.5" />
+                      Proactive optimization recommendations
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Contact */}
-      <section className="container mx-auto px-6 py-16">
-        <div className="max-w-lg mx-auto bg-white/5 dark:bg-gray-800/50 p-8 rounded-lg shadow-xl">
-          <h2 className="text-3xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-br from-purple-400 to-pink-600 dark:from-purple-300 dark:to-cyan-400">
-            Let\'s Connect
-          </h2>
-          <form onSubmit={(e) => { e.preventDefault(); alert("Thanks! We'll get back to you."); }}>
-            <div className="mb-5 text-left">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-purple-300 dark:text-gray-400">
-                Your Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                required
-                placeholder="John Doe"
-                className="bg-gray-700/30 dark:bg-gray-800/70 border border-gray-600 dark:border-gray-700 text-white text-sm rounded-lg focus:ring-purple-500 dark:focus:ring-gray-700 focus:border-purple-500 dark:focus:border-gray-700 block w-full p-2.5 placeholder-gray-400"
-              />
+      {/* Features & Benefits Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-4">
+              What Our AI & GEO Optimization Service Includes
+            </h2>
+            <p className="text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+              Comprehensive AI-driven strategies that combine machine learning insights with geographic targeting for maximum impact.
+            </p>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <Brain className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>AI Content Optimization</CardTitle>
+                  <CardDescription>
+                    Machine learning algorithms analyze user intent and create content that perfectly matches search queries and user needs.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Benefit:</strong> Higher engagement rates and improved rankings through content that truly resonates with your audience.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <Target className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>Geographic Targeting</CardTitle>
+                  <CardDescription>
+                    Advanced GEO optimization targeting specific locations, languages, and cultural nuances for maximum local relevance.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Benefit:</strong> Dominate local search results and connect with customers in their preferred language and context.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <Zap className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>Predictive Analytics</CardTitle>
+                  <CardDescription>
+                    AI models predict search trends, algorithm changes, and competitor moves before they happen.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Benefit:</strong> Stay ahead of the competition with proactive strategies that anticipate market changes.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <TrendingUp className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>Automated Optimization</CardTitle>
+                  <CardDescription>
+                    Real-time adjustments to meta tags, content structure, and internal linking based on performance data.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Benefit:</strong> Continuous improvement without manual intervention, maximizing your ROI 24/7.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <Users className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>User Experience AI</CardTitle>
+                  <CardDescription>
+                    Machine learning optimization of page layout, loading times, and user journey based on behavior patterns.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Benefit:</strong> Higher conversion rates through AI-optimized user experiences that adapt to visitor preferences.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="h-full">
+                <CardHeader>
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <CheckCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>Multi-Language SEO</CardTitle>
+                  <CardDescription>
+                    AI-powered translation and localization ensuring cultural accuracy and search relevance across markets.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">
+                    <strong>Benefit:</strong> Global reach with locally relevant content that performs in international search results.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
-            <div className="mb-5 text-left">
-              <label htmlFor="email" className="block mb-2 text-sm font-medium text-purple-300 dark:text-gray-400">
-                Your Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                placeholder="name@example.com"
-                className="bg-gray-700/30 dark:bg-gray-800/70 border border-gray-600 dark:border-gray-700 text-white text-sm rounded-lg focus:ring-purple-500 dark:focus:ring-gray-700 focus:border-purple-700 dark:focus:border-gray-700 block w-full p-2.5 placeholder-gray-400"
-              />
-            </div>
-            <div className="mb-6 text-left">
-              <label htmlFor="message" className="block mb-2 text-sm font-medium text-purple-300 dark:text-gray-400">
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={4}
-                placeholder="Your message here..."
-                className="bg-gray-700/30 dark:bg-gray-800/70 border border-gray-600 dark:border-gray-700 text-white text-sm rounded-lg focus:ring-purple-500 dark:focus:ring-gray-700 focus:border-purple-500 dark:focus:border-gray-700 block w-full p-2.5 placeholder-gray-400"
-              />
-            </div>
-            <button
-              type="submit"
-              data-variant="primary"
-              className="w-full px-5 py-3 bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-800 text-white font-semibold rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-600 transition-colors duration-300"
-              onMouseEnter={(e) => animateButtonEnter(e.currentTarget)}
-              onMouseLeave={(e) => animateButtonLeave(e.currentTarget)}
-            >
-              Send Message
-            </button>
-          </form>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="container mx-auto px-6 py-8 text-center text-purple-200 dark:text-gray-400 text-sm">
-        <p>© {new Date().getFullYear()} Gradient Solutions. All rights reserved.</p>
-      </footer>
+      {/* AI & LLM Approach Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-6">
+              Why Our AI & LLM-Powered Approach Delivers Superior Results
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              While traditional agencies rely on outdated manual processes, we leverage cutting-edge Large Language Models and machine learning to analyze millions of data points, understand search intent at a granular level, and predict future trends with unprecedented accuracy.
+            </p>
+            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-lg">
+              <p className="text-base text-muted-foreground">
+                Our proprietary AI system processes real-time search data, competitor analysis, and user behavior patterns to continuously optimize your content, technical SEO, and geographic targeting. This means you're not just keeping up with algorithm changes—you're staying ahead of them.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-12">
+              Proven AI-Driven Results That Speak for Themselves
+            </h2>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-primary">E-commerce Platform</CardTitle>
+                  <CardDescription>Multi-national online retailer</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm mb-4"><strong>Challenge:</strong> Poor international SEO performance across 15 markets</p>
+                  <p className="text-sm mb-4"><strong>Solution:</strong> AI-powered geographic optimization and multi-language content generation</p>
+                  <p className="text-sm"><strong>Results:</strong> <span className="text-primary font-bold">+285%</span> international organic traffic, <span className="text-primary font-bold">+150%</span> conversion rate improvement</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-primary">SaaS Company</CardTitle>
+                  <CardDescription>B2B software provider</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm mb-4"><strong>Challenge:</strong> High competition for technical keywords</p>
+                  <p className="text-sm mb-4"><strong>Solution:</strong> AI content optimization and predictive keyword targeting</p>
+                  <p className="text-sm"><strong>Results:</strong> <span className="text-primary font-bold">+340%</span> qualified leads, <span className="text-primary font-bold">+200%</span> keyword rankings in top 3</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-primary">Local Service Business</CardTitle>
+                  <CardDescription>Multi-location service provider</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm mb-4"><strong>Challenge:</strong> Inconsistent local search visibility</p>
+                  <p className="text-sm mb-4"><strong>Solution:</strong> AI-driven local SEO and geographic targeting</p>
+                  <p className="text-sm"><strong>Results:</strong> <span className="text-primary font-bold">+250%</span> local search visibility, <span className="text-primary font-bold">+180%</span> phone inquiries</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center">
+              <blockquote className="text-lg italic text-muted-foreground mb-4 max-w-3xl mx-auto">
+                "The AI optimization completely transformed our SEO strategy. We went from reactive to predictive, and our organic traffic growth has been consistent and sustainable. The geographic targeting helped us expand into new markets effortlessly."
+              </blockquote>
+              <p className="text-sm text-muted-foreground">— Sarah Chen, Head of Digital Marketing, TechCorp Solutions</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-6">
+              Ready to Experience the Future of SEO?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Let our AI analyze your website and create a personalized optimization strategy. Get a comprehensive audit that identifies opportunities traditional methods miss.
+            </p>
+            
+            <Card className="max-w-2xl mx-auto">
+              <CardHeader>
+                <CardTitle>Get Your Free AI SEO Analysis</CardTitle>
+                <CardDescription>Complete analysis with actionable recommendations in 48 hours</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <input 
+                    type="text" 
+                    placeholder="Your Name" 
+                    className="px-4 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <input 
+                    type="email" 
+                    placeholder="Email Address" 
+                    className="px-4 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+                <input 
+                  type="url" 
+                  placeholder="Website URL" 
+                  className="w-full px-4 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <textarea 
+                  placeholder="What are your main SEO challenges?" 
+                  rows={3}
+                  className="w-full px-4 py-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+                <Button size="lg" className="w-full">
+                  <Brain className="w-5 h-5 mr-2" />
+                  Start AI Analysis
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
-
-/* -------------------------------------
-   QUICK WIRING NOTES (Tailwind + Vite)
-   -------------------------------------
-1) Install deps:
-   npm i -D tailwindcss postcss autoprefixer
-   npx tailwindcss init -p
-
-2) tailwind.config.js (class strategy):
-   module.exports = {
-     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
-     darkMode: 'class',
-     theme: { extend: {} },
-     plugins: [],
-   }
-
-3) src/index.css:
-   @tailwind base;
-   @tailwind components;
-   @tailwind utilities;
-
-4) Ensure <html> can receive the 'dark' class.
-   The component toggles document.documentElement.classList.
-*/
