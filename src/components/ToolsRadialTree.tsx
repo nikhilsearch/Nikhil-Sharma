@@ -169,7 +169,7 @@ const ToolsRadialTree = () => {
         <header className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-6 text-foreground">
             <span className="bg-gradient-to-r from-primary via-purple-400 to-accent bg-clip-text text-transparent">
-              Professional Tools
+              My Go-To Toolkit for Driving Growth
             </span>{" "}
             Network
           </h2>
