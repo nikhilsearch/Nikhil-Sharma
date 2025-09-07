@@ -135,7 +135,10 @@ const Header = () => {
             <div 
               className="relative"
               onMouseEnter={() => setServicesDropdownOpen(true)}
-              onMouseLeave={() => setServicesDropdownOpen(false)}
+              onMouseLeave={() => {
+                // Add a small delay before closing to improve UX
+                setTimeout(() => setServicesDropdownOpen(false), 300);
+              }}
             >
               <button className="flex items-center space-x-1 font-medium text-foreground hover:text-primary transition-all duration-300">
                 <span>Services</span>

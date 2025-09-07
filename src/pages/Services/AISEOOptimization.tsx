@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Zap, Brain, Target, TrendingUp, Users } from "lucide-react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function AISEOOptimization() {
+  useEffect(() => {
+    // Set canonical URL for SEO
+    const link = document.querySelector("link[rel='canonical']") || document.createElement("link");
+    link.setAttribute("rel", "canonical");
+    link.setAttribute("href", window.location.href);
+    document.head.appendChild(link);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
+      <Header />
       {/* SEO Meta Tags */}
       <head>
         <title>AI & GEO Optimization Services | Advanced SEO Solutions</title>
@@ -337,6 +348,8 @@ export default function AISEOOptimization() {
           </div>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 }
