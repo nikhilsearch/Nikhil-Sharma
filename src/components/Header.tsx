@@ -20,44 +20,31 @@ const Header = () => {
 
   const socialLinks = [
     {
-      name: "GitHub",
-      icon: Github,
-      href: "https://github.com/nikhilsharma",
-      color: "hover:text-purple-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(168,85,247,0.6)]",
-      bgColor: "hover:bg-purple-500/10"
-    },
-    {
-      name: "LinkedIn", 
-      icon: Linkedin,
-      href: "https://linkedin.com/in/nikhilsharma",
-      color: "hover:text-blue-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(59,130,246,0.6)]",
-      bgColor: "hover:bg-blue-500/10"
-    },
-    {
-      name: "Twitter",
-      icon: Twitter,
-      href: "https://twitter.com/nikhilsharma", 
-      color: "hover:text-sky-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(56,189,248,0.6)]",
-      bgColor: "hover:bg-sky-500/10"
+      name: "Email",
+      icon: Mail,
+      href: "mailto:imnikhil10@outlook.com?subject=Let's discuss your project&body=Hi Nikhil,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0ABest regards",
+      color: "hover:text-[#EA4335]",
+      bgGlow: "hover:shadow-[0_0_25px_rgba(234,67,53,0.6)]",
+      bgColor: "hover:bg-[#EA4335]/10",
+      brandColor: "#EA4335"
     },
     {
       name: "WhatsApp",
       icon: MessageCircle,
-      href: "https://wa.me/your-number",
-      color: "hover:text-green-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(34,197,94,0.6)]",
-      bgColor: "hover:bg-green-500/10"
+      href: "https://wa.me/919680514780",
+      color: "hover:text-[#25D366]",
+      bgGlow: "hover:shadow-[0_0_25px_rgba(37,211,102,0.6)]",
+      bgColor: "hover:bg-[#25D366]/10",
+      brandColor: "#25D366"
     },
     {
-      name: "Email",
-      icon: Mail,
-      href: "mailto:imnikhil10@outlook.com?subject=Let's discuss your project&body=Hi Nikhil,%0D%0A%0D%0AI'm interested in discussing a project with you.%0D%0A%0D%0ABest regards",
-      color: "hover:text-orange-400",
-      bgGlow: "hover:shadow-[0_0_25px_rgba(251,146,60,0.6)]",
-      bgColor: "hover:bg-orange-500/10"
+      name: "GitHub",
+      icon: Github,
+      href: "https://github.com/nikhilsearch",
+      color: "hover:text-[#333333] dark:hover:text-[#f0f6fe]",
+      bgGlow: "hover:shadow-[0_0_25px_rgba(51,51,51,0.6)] dark:hover:shadow-[0_0_25px_rgba(240,246,254,0.6)]",
+      bgColor: "hover:bg-[#333333]/10 dark:hover:bg-[#f0f6fe]/10",
+      brandColor: "#333333"
     }
   ];
 
@@ -100,8 +87,8 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pr-6 sm:pr-8 lg:pr-12">
+        <div className="flex justify-between items-center h-18">
           {/* Logo/Brand */}
           <div className="flex-shrink-0">
             <Link to="/" className="text-xl font-bold bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
@@ -178,30 +165,60 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-t border-border/40">
-              {navigationItems.map((item) => {
-                const isActive = activeSection === item.id;
-                
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.href)}
-                    className={`block w-full text-left px-3 py-2 rounded-md text-base font-medium transition-colors duration-300 ${
-                      isActive
-                        ? "text-primary bg-primary/10"
-                        : "text-foreground hover:text-primary hover:bg-muted"
-                    }`}
-                  >
-                    {item.name}
-                  </button>
-                );
-              })}
+            <div className="relative px-3 pt-3 pb-5 space-y-2 bg-gradient-to-br from-background/98 to-background/95 
+              backdrop-blur-2xl border-t border-border/20 animate-fade-in">
               
-              {/* Mobile Social Links */}
-              <div className="pt-4 pb-4">
-                <p className="text-sm font-medium text-muted-foreground mb-4 px-3 text-center">Connect With Me</p>
-                <div className="flex justify-center space-x-4">
-                  {socialLinks.map((social) => {
+              {/* Subtle background pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/2 via-transparent to-purple-500/2 opacity-50" />
+              
+              {/* Navigation Items */}
+              <div className="relative space-y-1.5">
+                {navigationItems.map((item, index) => {
+                  const isActive = activeSection === item.id;
+                  
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.href)}
+                      className={`group relative block w-full text-left px-4 py-3.5 rounded-xl text-base font-medium 
+                        transition-all duration-300 ease-out hover:scale-[1.01] active:scale-[0.99]
+                        transform-gpu will-change-transform animate-fade-in
+                        ${isActive
+                          ? "text-primary bg-gradient-to-r from-primary/8 to-primary/4 border border-primary/20 shadow-sm"
+                          : "text-foreground hover:text-primary hover:bg-muted/60 border border-transparent hover:border-border/30"
+                        }`}
+                      style={{ animationDelay: `${index * 80}ms` }}
+                    >
+                      {/* Active indicator line */}
+                      {isActive && (
+                        <div className="absolute left-1 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-gradient-to-b 
+                          from-primary to-primary/60 rounded-full animate-scale-in" />
+                      )}
+                      
+                      <span className="relative z-10 ml-2">{item.name}</span>
+                      
+                      {/* Subtle hover gradient */}
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/0 to-primary/0 
+                        group-hover:from-primary/5 group-hover:to-primary/2 transition-all duration-300" />
+                    </button>
+                  );
+                })}
+              </div>
+              
+              {/* Divider */}
+              <div className="py-2">
+                <div className="h-px bg-gradient-to-r from-transparent via-border/40 to-transparent" />
+              </div>
+              
+              {/* Enhanced Mobile Social Links */}
+              <div className="pt-3 pb-1">
+                <h3 className="text-xs font-medium text-muted-foreground/80 mb-4 px-2 text-center uppercase tracking-wider
+                  animate-fade-in" style={{ animationDelay: '400ms' }}>
+                  Connect With Me
+                </h3>
+                
+                <div className="flex justify-center space-x-3 animate-fade-in" style={{ animationDelay: '500ms' }}>
+                  {socialLinks.map((social, index) => {
                     const Icon = social.icon;
                     return (
                       <a
@@ -209,25 +226,29 @@ const Header = () => {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`group relative p-4 rounded-2xl bg-gradient-to-br from-muted/40 to-muted/60 
-                          backdrop-blur-lg border border-border/30 transition-all duration-700 ease-out 
-                          hover:scale-110 active:scale-95 hover:-translate-y-2 ${social.color} ${social.bgGlow} 
-                          ${social.bgColor} hover:border-current/50 hover:shadow-xl transform-gpu will-change-transform`}
+                        className={`group relative p-3 rounded-full bg-gradient-to-br from-muted/40 to-muted/20 
+                          backdrop-blur-sm border border-border/20 transition-all duration-500 ease-out 
+                          hover:scale-110 active:scale-95 hover:-translate-y-1 hover:rotate-3
+                          ${social.color} hover:border-current/20 hover:shadow-lg transform-gpu will-change-transform 
+                          animate-scale-in`}
                         aria-label={`Connect on ${social.name}`}
                         onClick={() => setIsMenuOpen(false)}
+                        style={{ animationDelay: `${600 + index * 60}ms` }}
                       >
-                        <Icon className="w-7 h-7 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 transform-gpu" />
-                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-current/0 to-current/0 
-                          group-hover:from-current/10 group-hover:to-current/20 transition-all duration-500" />
+                        <Icon className="w-5 h-5 transition-all duration-300 group-hover:scale-110 transform-gpu" />
                         
-                        {/* Animated pulse effect */}
-                        <div className="absolute -inset-1 rounded-2xl bg-current/20 opacity-0 group-hover:opacity-50 
-                          transition-all duration-700 animate-pulse blur-sm" />
+                        {/* Subtle glow effect */}
+                        <div className="absolute inset-0 rounded-full bg-current/0 group-hover:bg-current/8 
+                          transition-all duration-300" />
                       </a>
                     );
                   })}
                 </div>
               </div>
+              
+              {/* Bottom accent */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-gradient-to-r 
+                from-primary/30 via-primary to-primary/30 rounded-t-full" />
             </div>
           </div>
         )}
