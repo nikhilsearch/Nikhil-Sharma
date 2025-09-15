@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, User, ArrowRight, Edit, ExternalLink } from "lucide-react";
 import StructuredData from "@/components/SEO/StructuredData"; // Fixed import
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 interface BlogPost {
   id: string;
@@ -67,8 +69,10 @@ const Blog = () => {
         }}
       />
       
+      <Header />
+      
       <div className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-16 pt-32">
           <header className="text-center mb-16">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               <span className="text-foreground">Latest</span>{" "}
@@ -243,6 +247,8 @@ const Blog = () => {
           )}
         </div>
       </div>
+      
+      <Footer />
     </>
   );
 };
