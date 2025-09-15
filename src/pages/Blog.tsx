@@ -147,7 +147,10 @@ const Blog = () => {
               ))}
               
               {/* Internal Blog Posts */}
-              {posts?.filter(post => post.status === 'published').map((post) => (
+              {posts?.filter(post => 
+                post.status === 'published' && 
+                post.id !== 'c0d258e3-9a79-40e4-a8cf-711236a40bdb' // Filter out GEO post
+              ).map((post) => (
                 <div key={post.id} className="relative">
                   <Link to={`/blog/${post.slug}`}>
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-border/50">
