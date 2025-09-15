@@ -41,7 +41,7 @@ const Blog = () => {
       title: "AI SEO: How AI Search Deconstructs Traditional SEO",
       excerpt: "Explore how AI-powered search engines are revolutionizing SEO strategies and what it means for digital marketing professionals.",
       url: "https://imnikhil10.substack.com/p/ai-seo-how-ai-search-deconstructs",
-      published_at: "2024-01-15",
+      published_at: "2025-08-27",
       author_name: "Nikhil Sharma",
       isExternal: true
     },
@@ -50,7 +50,7 @@ const Blog = () => {
       title: "Organization Schema for AI Search",
       excerpt: "Learn how to implement organization schema markup to improve your visibility in AI-powered search results.",
       url: "https://imnikhil10.substack.com/p/organization-schema-for-ai-search",
-      published_at: "2024-01-10",
+      published_at: "2025-08-25",
       author_name: "Nikhil Sharma",
       isExternal: true
     }
