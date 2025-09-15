@@ -11,6 +11,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeToggle from "@/components/ThemeToggle";
 import aiSeoImage from "@/assets/ai-seo-featured.png";
+import organizationSchemaImage from "@/assets/organization-schema-featured.png";
 
 interface BlogPost {
   id: string;
@@ -57,7 +58,8 @@ const Blog = () => {
       url: "https://imnikhil10.substack.com/p/organization-schema-for-ai-search",
       published_at: "2025-08-25",
       author_name: "Nikhil Sharma",
-      isExternal: true
+      isExternal: true,
+      featuredImage: organizationSchemaImage
     }
   ];
 
