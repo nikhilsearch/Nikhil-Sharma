@@ -9,6 +9,7 @@ import { Calendar, User, ArrowRight, Edit, ExternalLink } from "lucide-react";
 import StructuredData from "@/components/SEO/StructuredData"; // Fixed import
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface BlogPost {
   id: string;
@@ -249,6 +250,7 @@ const Blog = () => {
       </div>
       
       <Footer />
+      <ThemeToggle />
     </>
   );
 };
