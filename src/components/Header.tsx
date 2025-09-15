@@ -15,7 +15,7 @@ const Header = () => {
     { name: "Skills", href: "#skills", id: "skills" },
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Success Stories", href: "#case-studies", id: "case-studies" },
-    { name: "Blog", href: "/blog", id: "blog", isRoute: true },
+    { name: "Blog", href: "/blog", id: "blog", isRoute: true, openInNewTab: true },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
 
@@ -50,8 +50,11 @@ const Header = () => {
   ];
 
   // Smooth scroll function
-  const scrollToSection = (href: string, isRoute?: boolean) => {
-    if (isRoute) {
+  const scrollToSection = (href: string, isRoute?: boolean, openInNewTab?: boolean) => {
+    if (openInNewTab) {
+      // Open in new tab
+      window.open(href, '_blank');
+    } else if (isRoute) {
       // Navigate to route
       window.location.href = href;
     } else {
@@ -111,7 +114,7 @@ const Header = () => {
               return (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.href, item.isRoute)}
+                  onClick={() => scrollToSection(item.href, item.isRoute, item.openInNewTab)}
                   className={`transition-all duration-300 hover:text-primary font-medium ${
                     isActive
                       ? "text-primary border-b-2 border-primary"
@@ -186,7 +189,7 @@ const Header = () => {
                   return (
                     <button
                       key={item.id}
-                      onClick={() => scrollToSection(item.href, item.isRoute)}
+                      onClick={() => scrollToSection(item.href, item.isRoute, item.openInNewTab)}
                       className={`group relative block w-full text-left px-4 py-3.5 rounded-xl text-base font-medium 
                         transition-all duration-300 ease-out hover:scale-[1.01] active:scale-[0.99]
                         transform-gpu will-change-transform animate-fade-in
