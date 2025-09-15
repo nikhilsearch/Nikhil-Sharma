@@ -10,6 +10,7 @@ import StructuredData from "@/components/SEO/StructuredData"; // Fixed import
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeToggle from "@/components/ThemeToggle";
+import aiSeoImage from "@/assets/ai-seo-featured.png";
 
 interface BlogPost {
   id: string;
@@ -46,7 +47,8 @@ const Blog = () => {
       url: "https://imnikhil10.substack.com/p/ai-seo-how-ai-search-deconstructs",
       published_at: "2025-08-27",
       author_name: "Nikhil Sharma",
-      isExternal: true
+      isExternal: true,
+      featuredImage: aiSeoImage
     },
     {
       id: "external-2", 
@@ -116,9 +118,20 @@ const Blog = () => {
                 <div key={post.id} className="relative h-full">
                   <a href={post.url} target="_blank" rel="noopener noreferrer">
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-border/50 bg-gradient-to-br from-primary/5 to-purple-500/5 h-full flex flex-col">
-                      <div className="aspect-video bg-gradient-to-br from-primary/10 to-purple-500/10 rounded-t-lg flex items-center justify-center">
-                        <ExternalLink className="w-12 h-12 text-primary/40" />
-                      </div>
+                      {post.featuredImage ? (
+                        <div className="aspect-video overflow-hidden rounded-t-lg">
+                          <img
+                            src={post.featuredImage}
+                            alt={post.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : (
+                        <div className="aspect-video bg-gradient-to-br from-primary/10 to-purple-500/10 rounded-t-lg flex items-center justify-center">
+                          <ExternalLink className="w-12 h-12 text-primary/40" />
+                        </div>
+                      )}
                       <CardHeader className="flex-shrink-0">
                         <div className="flex items-center justify-between mb-3">
                           <div className="flex items-center gap-4 text-sm text-muted-foreground">
