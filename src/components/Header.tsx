@@ -111,10 +111,29 @@ const Header = () => {
             {navigationItems.map((item) => {
               const isActive = activeSection === item.id;
               
+              // Use anchor tag for blog link for SEO crawlability
+              if (item.id === 'blog') {
+                return (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`transition-all duration-300 hover:text-primary font-medium ${
+                      isActive
+                        ? "text-primary border-b-2 border-primary"
+                        : "text-foreground hover:text-primary"
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                );
+              }
+              
               return (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.href, item.isRoute, item.openInNewTab)}
+                  onClick={() => scrollToSection(item.href, item.isRoute)}
                   className={`transition-all duration-300 hover:text-primary font-medium ${
                     isActive
                       ? "text-primary border-b-2 border-primary"
@@ -186,10 +205,43 @@ const Header = () => {
                 {navigationItems.map((item, index) => {
                   const isActive = activeSection === item.id;
                   
+                  // Use anchor tag for blog link for SEO crawlability
+                  if (item.id === 'blog') {
+                    return (
+                      <a
+                        key={item.id}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`group relative block w-full text-left px-4 py-3.5 rounded-xl text-base font-medium 
+                          transition-all duration-300 ease-out hover:scale-[1.01] active:scale-[0.99]
+                          transform-gpu will-change-transform animate-fade-in
+                          ${isActive
+                            ? "text-primary bg-gradient-to-r from-primary/8 to-primary/4 border border-primary/20 shadow-sm"
+                            : "text-foreground hover:text-primary hover:bg-muted/60 border border-transparent hover:border-border/30"
+                          }`}
+                        style={{ animationDelay: `${index * 80}ms` }}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {/* Active indicator line */}
+                        {isActive && (
+                          <div className="absolute left-1 top-1/2 -translate-y-1/2 w-0.5 h-6 bg-gradient-to-b 
+                            from-primary to-primary/60 rounded-full animate-scale-in" />
+                        )}
+                        
+                        <span className="relative z-10 ml-2">{item.name}</span>
+                        
+                        {/* Subtle hover gradient */}
+                        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/0 to-primary/0 
+                          group-hover:from-primary/5 group-hover:to-primary/2 transition-all duration-300" />
+                      </a>
+                    );
+                  }
+                  
                   return (
                     <button
                       key={item.id}
-                      onClick={() => scrollToSection(item.href, item.isRoute, item.openInNewTab)}
+                      onClick={() => scrollToSection(item.href, item.isRoute)}
                       className={`group relative block w-full text-left px-4 py-3.5 rounded-xl text-base font-medium 
                         transition-all duration-300 ease-out hover:scale-[1.01] active:scale-[0.99]
                         transform-gpu will-change-transform animate-fade-in
