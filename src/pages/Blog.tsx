@@ -5,7 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, User, ArrowRight, Edit } from "lucide-react";
+import { Calendar, User, ArrowRight, Edit, ExternalLink } from "lucide-react";
 import StructuredData from "@/components/SEO/StructuredData"; // Fixed import
 
 interface BlogPost {
@@ -33,6 +33,28 @@ const Blog = () => {
       return data as BlogPost[];
     },
   });
+
+  // External blog posts from Substack
+  const externalPosts = [
+    {
+      id: "external-1",
+      title: "AI SEO: How AI Search Deconstructs Traditional SEO",
+      excerpt: "Explore how AI-powered search engines are revolutionizing SEO strategies and what it means for digital marketing professionals.",
+      url: "https://imnikhil10.substack.com/p/ai-seo-how-ai-search-deconstructs",
+      published_at: "2024-01-15",
+      author_name: "Nikhil Sharma",
+      isExternal: true
+    },
+    {
+      id: "external-2", 
+      title: "Organization Schema for AI Search",
+      excerpt: "Learn how to implement organization schema markup to improve your visibility in AI-powered search results.",
+      url: "https://imnikhil10.substack.com/p/organization-schema-for-ai-search",
+      published_at: "2024-01-10",
+      author_name: "Nikhil Sharma",
+      isExternal: true
+    }
+  ];
 
   return (
     <>
@@ -84,6 +106,47 @@ const Blog = () => {
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* External Featured Posts */}
+              {externalPosts.map((post) => (
+                <div key={post.id} className="relative">
+                  <a href={post.url} target="_blank" rel="noopener noreferrer">
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02] border-border/50 bg-gradient-to-br from-primary/5 to-purple-500/5">
+                      <CardHeader>
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="w-4 h-4" />
+                              {format(new Date(post.published_at), "MMM d, yyyy")}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <User className="w-4 h-4" />
+                              {post.author_name}
+                            </div>
+                          </div>
+                          <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
+                            <ExternalLink className="w-3 h-3 mr-1" />
+                            Featured
+                          </Badge>
+                        </div>
+                        <h2 className="text-xl font-semibold line-clamp-2 group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h2>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground line-clamp-3 mb-4">
+                          {post.excerpt}
+                        </p>
+                        <Button variant="ghost" className="p-0 h-auto font-semibold group-hover:text-primary">
+                          Read on Substack
+                          <ExternalLink className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </a>
+                </div>
+              ))}
+              
+              {/* Internal Blog Posts */}
               {posts?.filter(post => post.status === 'published').map((post) => (
                 <div key={post.id} className="relative">
                   <Link to={`/blog/${post.slug}`}>
