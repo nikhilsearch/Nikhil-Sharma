@@ -15,6 +15,7 @@ const Header = () => {
     { name: "Skills", href: "#skills", id: "skills" },
     { name: "Experience", href: "#experience", id: "experience" },
     { name: "Success Stories", href: "#case-studies", id: "case-studies" },
+    { name: "Blog", href: "/blog", id: "blog", isRoute: true },
     { name: "Contact", href: "#contact", id: "contact" },
   ];
 
@@ -49,13 +50,19 @@ const Header = () => {
   ];
 
   // Smooth scroll function
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+  const scrollToSection = (href: string, isRoute?: boolean) => {
+    if (isRoute) {
+      // Navigate to route
+      window.location.href = href;
+    } else {
+      // Scroll to section
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }
     setIsMenuOpen(false);
   };
@@ -104,7 +111,7 @@ const Header = () => {
               return (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.href)}
+                  onClick={() => scrollToSection(item.href, item.isRoute)}
                   className={`transition-all duration-300 hover:text-primary font-medium ${
                     isActive
                       ? "text-primary border-b-2 border-primary"
@@ -179,7 +186,7 @@ const Header = () => {
                   return (
                     <button
                       key={item.id}
-                      onClick={() => scrollToSection(item.href)}
+                      onClick={() => scrollToSection(item.href, item.isRoute)}
                       className={`group relative block w-full text-left px-4 py-3.5 rounded-xl text-base font-medium 
                         transition-all duration-300 ease-out hover:scale-[1.01] active:scale-[0.99]
                         transform-gpu will-change-transform animate-fade-in
