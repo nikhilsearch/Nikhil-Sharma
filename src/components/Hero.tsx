@@ -4,7 +4,7 @@ import { ArrowDown, Sparkles, TrendingUp, Users } from "lucide-react";
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [typedText, setTypedText] = useState("");
-  const fullText = "8+ Years of Turning Search Bars into Revenue Streams";
+  const fullText = "Strategic SEO Professional - 8+ Years Experience";
 
   useEffect(() => {
     setIsVisible(true);
