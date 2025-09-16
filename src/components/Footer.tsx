@@ -52,6 +52,9 @@ const Footer = () => {
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">Let's work together!</h3>
+                <p className="text-muted-foreground mb-3 leading-relaxed max-w-sm">
+                  Ready to climb the rankings and drive real business growth? If you're looking for an SEO strategist who speaks the language of both search engines and business goals, let's connect.
+                </p>
                 <div className="flex items-center gap-4">
                   <a 
                     href={`https://wa.me/919680514780`}
