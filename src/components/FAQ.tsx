@@ -176,20 +176,17 @@ const FAQ = () => {
                                   {introText && (
                                     <p className="leading-relaxed mb-3">{introText}</p>
                                   )}
-                                  <ol className="space-y-2 md:space-y-3 ml-2 md:ml-4">
+                                  <ul className="space-y-2 md:space-y-3 ml-2 md:ml-4">
                                     {numberedPoints.map((point, pointIndex) => {
-                                      const [number, ...textParts] = point.split(/^\d+\.\s/);
-                                      const text = textParts.join('').trim();
+                                      const text = point.replace(/^\d+\.\s/, '').trim();
                                       return (
                                         <li key={pointIndex} className="flex items-start gap-2 md:gap-3">
-                                          <span className="w-5 h-5 bg-primary/20 text-primary rounded-full text-xs font-bold flex items-center justify-center mt-0.5 flex-shrink-0">
-                                            {pointIndex + 1}
-                                          </span>
+                                          <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
                                           <span className="flex-1">{text}</span>
                                         </li>
                                       );
                                     })}
-                                  </ol>
+                                  </ul>
                                 </div>
                               );
                             }
