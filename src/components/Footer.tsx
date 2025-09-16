@@ -39,23 +39,23 @@ const Footer = () => {
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-center">
             {/* Profile Section */}
-            <div className="flex items-center gap-6">
-              <div className="relative group">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 text-center sm:text-left lg:col-span-2">
+              <div className="relative group flex-shrink-0">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
                 <img
                   src="/lovable-uploads/209a2e34-b533-4448-a499-e64d4c9cdf98.png"
                   alt="Nikhil Sharma"
-                  className="relative w-20 h-20 object-cover rounded-full border-2 border-white/20"
+                  className="relative w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-full border-2 border-white/20"
                 />
               </div>
-              <div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">Let's work together!</h3>
-                <p className="text-muted-foreground mb-3 leading-relaxed max-w-sm">
+              <div className="flex-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Let's work together!</h3>
+                <p className="text-sm sm:text-base text-muted-foreground mb-3 leading-relaxed max-w-xs sm:max-w-sm lg:max-w-md mx-auto sm:mx-0">
                   Ready to climb the rankings and drive real business growth? If you're looking for an SEO strategist who speaks the language of both search engines and business goals, let's connect.
                 </p>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-center sm:justify-start gap-3 sm:gap-4">
                   <a 
                     href={`https://wa.me/919680514780`}
                     target="_blank"
@@ -63,32 +63,25 @@ const Footer = () => {
                     className="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors group"
                   >
                     <MessageCircle className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span className="text-sm">WhatsApp</span>
+                    <span className="text-xs sm:text-sm">WhatsApp</span>
                   </a>
                   <a 
                     href={`tel:${phoneNumber}`}
                     className="flex items-center gap-2 text-blue-500 hover:text-blue-400 transition-colors group"
                   >
                     <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                    <span className="text-sm">Call</span>
+                    <span className="text-xs sm:text-sm">Call</span>
                   </a>
                 </div>
               </div>
             </div>
 
-            {/* Center Decorative Element */}
-            <div className="flex justify-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-primary to-purple-400 rounded-full flex items-center justify-center">
-                <div className="w-8 h-8 bg-background rounded-full animate-pulse"></div>
-              </div>
-            </div>
-
             {/* CTA Button */}
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex justify-center lg:justify-end order-first lg:order-last">
               <Button
                 size="lg"
                 onClick={handleGetInTouch}
-                className="bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-purple-400/50 rounded-xl px-8 py-3 flex items-center gap-2"
+                className="bg-gradient-to-r from-purple-500 to-purple-600 text-white hover:from-purple-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl border border-purple-400/50 rounded-xl px-6 sm:px-8 py-3 flex items-center gap-2 text-sm sm:text-base w-full sm:w-auto max-w-xs"
               >
                 <Mail className="w-4 h-4" />
                 Get in touch
