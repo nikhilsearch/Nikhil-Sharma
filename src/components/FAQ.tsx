@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
+import { ChevronDown, ChevronUp, HelpCircle, Sparkles, Zap } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const FAQ = () => {
@@ -48,54 +48,114 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-12 md:py-20 px-4 bg-gradient-to-b from-muted/10 to-background">
-      <div className="max-w-4xl mx-auto">
-        <header className="text-center mb-12 md:mb-16">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <HelpCircle className="w-8 h-8 text-primary" />
-            <h2 className="text-2xl md:text-4xl font-bold">
-              <span className="text-foreground">Frequently Asked</span>{" "}
-              <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Questions</span>
-            </h2>
+    <section className="relative py-12 md:py-20 px-4 bg-gradient-to-b from-muted/10 via-background to-muted/5 overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-10 w-2 h-2 bg-primary/20 rounded-full animate-pulse"></div>
+        <div className="absolute top-40 right-20 w-1 h-1 bg-purple-400/30 rounded-full animate-pulse delay-1000"></div>
+        <div className="absolute bottom-32 left-1/4 w-3 h-3 bg-emerald-400/20 rounded-full animate-pulse delay-500"></div>
+        <div className="absolute bottom-20 right-1/3 w-1.5 h-1.5 bg-blue-400/25 rounded-full animate-pulse delay-700"></div>
+      </div>
+
+      <div className="max-w-4xl mx-auto relative">
+        <header className="text-center mb-12 md:mb-16 animate-fade-in">
+          <div className="relative inline-block mb-6">
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-purple-400/20 to-emerald-400/20 rounded-full blur-lg animate-pulse"></div>
+            <div className="relative flex items-center justify-center gap-4 p-4">
+              <div className="relative">
+                <HelpCircle className="w-8 h-8 text-primary animate-pulse" />
+                <Sparkles className="absolute -top-1 -right-1 w-4 h-4 text-purple-400 animate-pulse delay-300" />
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-foreground via-primary to-purple-400 bg-clip-text text-transparent hover:scale-105 transition-transform duration-300">
+                Frequently Asked Questions
+              </h2>
+              <div className="relative">
+                <Zap className="w-8 h-8 text-emerald-400 animate-pulse delay-150" />
+                <div className="absolute inset-0 bg-emerald-400/20 rounded-full blur-md animate-pulse delay-150"></div>
+              </div>
+            </div>
           </div>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Here's a list of frequently asked questions about modern SEO practices:
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed opacity-0 animate-[fade-in_0.8s_ease-out_0.3s_forwards]">
+            Get insights into modern SEO strategies and practices that drive real results
           </p>
+          <div className="mt-8 w-24 h-1 bg-gradient-to-r from-primary via-purple-400 to-emerald-400 mx-auto rounded-full opacity-0 animate-[fade-in_1s_ease-out_0.6s_forwards]"></div>
         </header>
 
-        <div className="space-y-4">
-          {faqs.map((faq) => (
+        <div className="space-y-6">
+          {faqs.map((faq, index) => (
             <Card 
               key={faq.id} 
-              className="group cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 border-border/50 hover:border-primary/30"
+              className={`group cursor-pointer relative overflow-hidden
+                         bg-gradient-to-br from-card/90 via-card to-card/80 
+                         backdrop-blur-sm border-2 border-border/30 
+                         hover:border-gradient-to-r hover:border-primary/50
+                         transition-all duration-500 ease-out
+                         hover:shadow-2xl hover:shadow-primary/15
+                         hover:-translate-y-2 hover:scale-[1.02]
+                         before:absolute before:inset-0 
+                         before:bg-gradient-to-r before:from-primary/5 before:via-purple-400/5 before:to-emerald-400/5
+                         before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500
+                         animate-[fade-in_0.6s_ease-out_${index * 0.1}s_both]`}
             >
+              {/* Floating Elements */}
+              <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-2 h-2 bg-primary/30 rounded-full animate-pulse"></div>
+              </div>
+              
               <CardHeader 
-                className="pb-3"
+                className="pb-4 relative z-10"
                 onClick={() => toggleQuestion(faq.id)}
               >
                 <CardTitle className="flex items-center justify-between gap-4 text-left">
-                  <span className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {faq.question}
-                  </span>
-                  <div className="flex-shrink-0">
-                    {openQuestion === faq.id ? (
-                      <ChevronUp className="w-5 h-5 text-primary transition-transform duration-300" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
-                    )}
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center
+                                   bg-gradient-to-r from-primary/20 to-purple-400/20
+                                   group-hover:from-primary/30 group-hover:to-purple-400/30
+                                   transition-all duration-300 ${openQuestion === faq.id ? 'ring-2 ring-primary/50' : ''}`}>
+                      <span className="text-sm font-bold text-primary">{faq.id}</span>
+                    </div>
+                    <span className={`text-lg font-semibold transition-all duration-300
+                                    ${openQuestion === faq.id 
+                                      ? 'text-primary' 
+                                      : 'text-foreground group-hover:text-primary'}`}>
+                      {faq.question}
+                    </span>
+                  </div>
+                  <div className="flex-shrink-0 relative">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center
+                                   transition-all duration-300 group-hover:bg-primary/10
+                                   ${openQuestion === faq.id ? 'bg-primary/20 rotate-180' : ''}`}>
+                      {openQuestion === faq.id ? (
+                        <ChevronUp className="w-5 h-5 text-primary transition-transform duration-300" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+                      )}
+                    </div>
                   </div>
                 </CardTitle>
               </CardHeader>
               
               {openQuestion === faq.id && (
-                <CardContent className="pt-0 pb-6 animate-in fade-in-50 slide-in-from-top-2 duration-300">
-                  <div className="border-t border-border/30 pt-4">
-                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">
-                      {faq.answer}
-                    </p>
+                <CardContent className="pt-0 pb-6 relative z-10 animate-[accordion-down_0.3s_ease-out]">
+                  <div className="border-t border-gradient-to-r from-primary/20 via-purple-400/20 to-emerald-400/20 pt-6 mx-4">
+                    <div className="relative">
+                      <div className="absolute -left-2 top-0 w-1 h-full bg-gradient-to-b from-primary via-purple-400 to-emerald-400 rounded-full opacity-50"></div>
+                      <div className="pl-6">
+                        <p className="text-muted-foreground leading-relaxed whitespace-pre-line
+                                     animate-[fade-in_0.4s_ease-out_0.1s_both]
+                                     text-base md:text-lg">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               )}
+              
+              {/* Subtle Gradient Overlay */}
+              <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-primary/2 to-transparent
+                             opacity-0 transition-opacity duration-500
+                             ${openQuestion === faq.id ? 'opacity-100' : 'group-hover:opacity-50'}`}></div>
             </Card>
           ))}
         </div>
