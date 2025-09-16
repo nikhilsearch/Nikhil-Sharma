@@ -144,39 +144,60 @@ const FAQ = () => {
                       <div className="pl-4 md:pl-6">
                         <div className="text-muted-foreground leading-relaxed animate-[fade-in_0.4s_ease-out_0.1s_both] text-sm md:text-base space-y-3 md:space-y-4">
                           {faq.answer.split('\n\n').map((paragraph, index) => {
-                            if (paragraph.startsWith('•')) {
-                              // Handle bullet points
-                              const bulletPoints = paragraph.split('\n').filter(line => line.trim());
+                            // Check if paragraph contains bullet points
+                            if (paragraph.includes('•')) {
+                              const bulletPoints = paragraph.split('\n').filter(line => line.trim() && line.includes('•'));
+                              const introText = paragraph.split('\n').find(line => !line.includes('•') && line.trim());
+                              
                               return (
-                                <ul key={index} className="space-y-2 md:space-y-3 ml-2 md:ml-4">
-                                  {bulletPoints.map((point, pointIndex) => (
-                                    <li key={pointIndex} className="flex items-start gap-2 md:gap-3">
-                                      <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                                      <span className="flex-1">{point.replace('• ', '').replace(/^\d+\.\s/, '')}</span>
-                                    </li>
-                                  ))}
-                                </ul>
+                                <div key={index} className="space-y-2 md:space-y-3">
+                                  {introText && (
+                                    <p className="leading-relaxed mb-3">{introText}</p>
+                                  )}
+                                  <ul className="space-y-2 md:space-y-3 ml-2 md:ml-4">
+                                    {bulletPoints.map((point, pointIndex) => (
+                                      <li key={pointIndex} className="flex items-start gap-2 md:gap-3">
+                                        <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                                        <span className="flex-1">{point.replace('• ', '').trim()}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
                               );
-                            } else if (/^\d+\./.test(paragraph)) {
-                              // Handle numbered lists
-                              const numberedPoints = paragraph.split('\n').filter(line => line.trim());
+                            }
+                            // Check if paragraph contains numbered points (1. 2. 3.)
+                            else if (paragraph.match(/^\d+\.\s/m) || paragraph.includes('1.') || paragraph.includes('2.') || paragraph.includes('3.')) {
+                              const lines = paragraph.split('\n');
+                              const introText = lines.find(line => !line.match(/^\d+\.\s/) && line.trim() && !line.includes(': '));
+                              const numberedPoints = lines.filter(line => line.match(/^\d+\.\s/));
+                              
                               return (
-                                <ol key={index} className="space-y-2 md:space-y-3 ml-2 md:ml-4">
-                                  {numberedPoints.map((point, pointIndex) => (
-                                    <li key={pointIndex} className="flex items-start gap-2 md:gap-3">
-                                      <span className="w-5 h-5 bg-primary/20 text-primary rounded-full text-xs font-bold flex items-center justify-center mt-0.5 flex-shrink-0">
-                                        {pointIndex + 1}
-                                      </span>
-                                      <span className="flex-1">{point.replace(/^\d+\.\s/, '')}</span>
-                                    </li>
-                                  ))}
-                                </ol>
+                                <div key={index} className="space-y-2 md:space-y-3">
+                                  {introText && (
+                                    <p className="leading-relaxed mb-3">{introText}</p>
+                                  )}
+                                  <ol className="space-y-2 md:space-y-3 ml-2 md:ml-4">
+                                    {numberedPoints.map((point, pointIndex) => {
+                                      const [number, ...textParts] = point.split(/^\d+\.\s/);
+                                      const text = textParts.join('').trim();
+                                      return (
+                                        <li key={pointIndex} className="flex items-start gap-2 md:gap-3">
+                                          <span className="w-5 h-5 bg-primary/20 text-primary rounded-full text-xs font-bold flex items-center justify-center mt-0.5 flex-shrink-0">
+                                            {pointIndex + 1}
+                                          </span>
+                                          <span className="flex-1">{text}</span>
+                                        </li>
+                                      );
+                                    })}
+                                  </ol>
+                                </div>
                               );
-                            } else {
-                              // Handle regular paragraphs
+                            }
+                            // Handle regular paragraphs
+                            else {
                               return (
                                 <p key={index} className="leading-relaxed">
-                                  {paragraph}
+                                  {paragraph.trim()}
                                 </p>
                               );
                             }
