@@ -4,6 +4,7 @@ import { ArrowDown, Sparkles, TrendingUp, Users } from "lucide-react";
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [typedText, setTypedText] = useState("");
+  const [showCursor, setShowCursor] = useState(true);
   const fullText = "Strategic SEO Professional - 8+ Years Experience";
 
   useEffect(() => {
@@ -16,6 +17,7 @@ const Hero = () => {
         setTypedText(fullText.slice(0, index + 1));
         index++;
       } else {
+        setShowCursor(false);
         clearInterval(timer);
       }
     }, 50);
@@ -51,7 +53,7 @@ const Hero = () => {
             <div className="relative">
               <h2 className="text-xl lg:text-2xl font-semibold text-primary min-h-[4rem] flex items-center justify-center lg:justify-start">
                 {typedText}
-                <span className="ml-1 w-0.5 h-6 bg-primary animate-pulse"></span>
+                {showCursor && <span className="ml-1 w-0.5 h-6 bg-primary animate-pulse"></span>}
               </h2>
             </div>
           </div>
