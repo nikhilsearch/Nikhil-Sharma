@@ -48,7 +48,7 @@ const Expertise = () => {
     {
       id: 1,
       title: "AI SEO",
-      description: "I optimize websites for the new era of AI-powered search engines and LLM models. This includes optimizing for Google's AI Overviews and other generative search experiences to ensure your content is cited and visible in AI-driven answers.",
+      description: "I optimize websites for AI-powered search engines like Google's AI Overviews. This ensures your content gets cited in generative AI answers and voice search results.",
       skills: ["AI Overviews", "LLM Optimization", "Generative Search", "Content Citation"],
       category: "advanced",
       bgGradient: "from-purple-600 to-indigo-700",
@@ -57,7 +57,7 @@ const Expertise = () => {
     {
       id: 2,
       title: "Technical SEO",
-      description: "I ensure search engines can crawl, index, and render your site flawlessly. This includes everything from site-wide audits and Core Web Vitals optimization to schema markup implementation and crawl budget management to improve crawlability and indexing.",
+      description: "I ensure search engines can crawl and index your site perfectly. This includes Core Web Vitals optimization, schema markup, and site architecture improvements.",
       skills: ["Core Web Vitals", "Schema Markup", "Site Architecture", "Crawl Budget Management"],
       category: "core",
       bgGradient: "from-blue-600 to-cyan-700",
@@ -66,7 +66,7 @@ const Expertise = () => {
     {
       id: 3,
       title: "Semantic SEO",
-      description: "I focus on understanding search intent and entity-based optimization. By building out knowledge graphs and leveraging topic modeling, I help search engines understand the contextual relevance of your content, leading to better rankings for a wider range of queries.",
+      description: "I build knowledge graphs and optimize for search intent using entity-based SEO. This helps search engines understand your content context for better rankings.",
       skills: ["Knowledge Graphs", "Entity Optimization", "Topic Modeling", "Contextual Relevance"],
       category: "advanced",
       bgGradient: "from-green-600 to-emerald-700",
@@ -75,7 +75,7 @@ const Expertise = () => {
     {
       id: 4,
       title: "Keyword Research",
-      description: "I move beyond simple search volume to conduct strategic keyword analysis and competitive research. This allows me to identify high-intent, persona-aligned keyword clusters that drive maximum organic visibility and conversions.",
+      description: "I identify high-intent keyword clusters through strategic analysis and competitive research. This drives maximum organic visibility and qualified traffic.",
       skills: ["High-Intent Keywords", "Competitor Research", "Keyword Clusters", "Search Volume Analysis"],
       category: "core",
       bgGradient: "from-orange-600 to-red-700",
@@ -84,7 +84,7 @@ const Expertise = () => {
     {
       id: 5,
       title: "Content Strategy",
-      description: "My approach is centered on creating SEO-optimized content that satisfies user intent. By developing topic clusters and leveraging the E-E-A-T (Experience, Expertise, Authoritativeness, and Trust) framework, I build content ecosystems that search engines and users trust.",
+      description: "I create SEO-optimized content using E-E-A-T framework and topic clusters. This builds content ecosystems that search engines and users trust.",
       skills: ["Topic Clusters", "E-E-A-T Framework", "User Intent", "Content Ecosystems"],
       category: "core",
       bgGradient: "from-pink-600 to-rose-700",
@@ -93,7 +93,7 @@ const Expertise = () => {
     {
       id: 6,
       title: "Analytics & Reporting",
-      description: "I translate data into actionable insights through comprehensive SEO performance tracking. Using tools like Google Analytics, Search Console, and Looker Studio, I monitor key metrics to demonstrate ROI and inform strategy.",
+      description: "I track SEO performance using Google Analytics, Search Console, and Looker Studio. This provides actionable insights and demonstrates clear ROI.",
       skills: ["Google Analytics", "Search Console", "Looker Studio", "ROI Tracking"],
       category: "core",
       bgGradient: "from-teal-600 to-cyan-700",
@@ -102,7 +102,7 @@ const Expertise = () => {
     {
       id: 7,
       title: "Local SEO",
-      description: "I enhance local search visibility through targeted business optimization. This includes managing Google My Business profiles, building local citations, and implementing review management strategies to dominate local keywords.",
+      description: "I optimize Google My Business profiles and build local citations for location-based visibility. This dominates local search results and drives foot traffic.",
       skills: ["Google My Business", "Local Citations", "Review Management", "Local Dominance"],
       category: "advanced",
       bgGradient: "from-violet-600 to-purple-700",
@@ -111,7 +111,7 @@ const Expertise = () => {
     {
       id: 8,
       title: "E-commerce SEO",
-      description: "I specialize in product optimization, category structuring, and conversion-focused SEO for online stores. From implementing product schema to conducting technical audits and optimizing category navigation, I drive qualified traffic that converts.",
+      description: "I optimize product pages and category structures for online stores. This includes product schema implementation and conversion-focused SEO strategies.",
       skills: ["Product Schema", "Category Navigation", "Technical Audits", "Conversion Optimization"],
       category: "advanced",
       bgGradient: "from-amber-600 to-orange-700",
