@@ -48,8 +48,8 @@ const Expertise = () => {
     {
       id: 1,
       title: "AI SEO",
-      description: "Optimizing websites for AI-powered search engines and LLM models.",
-      skills: ["ChatGPT Optimization", "Perplexity SEO", "AI Overview", "LLM Models"],
+      description: "I optimize websites for the new era of AI-powered search engines and LLM models. This includes optimizing for Google's AI Overviews and other generative search experiences to ensure your content is cited and visible in AI-driven answers.",
+      skills: ["AI Overviews", "LLM Optimization", "Generative Search", "Content Citation"],
       category: "advanced",
       bgGradient: "from-purple-600 to-indigo-700",
       image: "🤖"
@@ -57,8 +57,8 @@ const Expertise = () => {
     {
       id: 2,
       title: "Technical SEO",
-      description: "Site audits, page speed optimization, schema markup, and crawlability improvements.",
-      skills: ["Core Web Vitals", "Schema Markup", "Site Architecture", "Mobile SEO"],
+      description: "I ensure search engines can crawl, index, and render your site flawlessly. This includes everything from site-wide audits and Core Web Vitals optimization to schema markup implementation and crawl budget management to improve crawlability and indexing.",
+      skills: ["Core Web Vitals", "Schema Markup", "Site Architecture", "Crawl Budget Management"],
       category: "core",
       bgGradient: "from-blue-600 to-cyan-700",
       image: "⚙️"
@@ -66,8 +66,8 @@ const Expertise = () => {
     {
       id: 3,
       title: "Semantic SEO",
-      description: "Understanding search intent and entity-based optimization strategies.",
-      skills: ["Entity Optimization", "Knowledge Graphs", "Topic Modeling", "Intent Matching"],
+      description: "I focus on understanding search intent and entity-based optimization. By building out knowledge graphs and leveraging topic modeling, I help search engines understand the contextual relevance of your content, leading to better rankings for a wider range of queries.",
+      skills: ["Knowledge Graphs", "Entity Optimization", "Topic Modeling", "Contextual Relevance"],
       category: "advanced",
       bgGradient: "from-green-600 to-emerald-700",
       image: "🧠"
@@ -75,8 +75,8 @@ const Expertise = () => {
     {
       id: 4,
       title: "Keyword Research",
-      description: "Strategic keyword analysis and competitive research for maximum organic visibility.",
-      skills: ["SEMrush", "Ahrefs", "Keyword Planning", "Competitor Analysis"],
+      description: "I move beyond simple search volume to conduct strategic keyword analysis and competitive research. This allows me to identify high-intent, persona-aligned keyword clusters that drive maximum organic visibility and conversions.",
+      skills: ["High-Intent Keywords", "Competitor Research", "Keyword Clusters", "Search Volume Analysis"],
       category: "core",
       bgGradient: "from-orange-600 to-red-700",
       image: "🔍"
@@ -84,8 +84,8 @@ const Expertise = () => {
     {
       id: 5,
       title: "Content Strategy",
-      description: "SEO-optimized content planning and optimization for better search rankings.",
-      skills: ["Content Optimization", "Topic Clusters", "E-A-T", "User Intent"],
+      description: "My approach is centered on creating SEO-optimized content that satisfies user intent. By developing topic clusters and leveraging the E-E-A-T (Experience, Expertise, Authoritativeness, and Trust) framework, I build content ecosystems that search engines and users trust.",
+      skills: ["Topic Clusters", "E-E-A-T Framework", "User Intent", "Content Ecosystems"],
       category: "core",
       bgGradient: "from-pink-600 to-rose-700",
       image: "📝"
@@ -93,8 +93,8 @@ const Expertise = () => {
     {
       id: 6,
       title: "Analytics & Reporting",
-      description: "Data-driven insights and comprehensive SEO performance tracking.",
-      skills: ["Google Analytics", "Search Console", "Data Studio", "ROI Tracking"],
+      description: "I translate data into actionable insights through comprehensive SEO performance tracking. Using tools like Google Analytics, Search Console, and Looker Studio, I monitor key metrics to demonstrate ROI and inform strategy.",
+      skills: ["Google Analytics", "Search Console", "Looker Studio", "ROI Tracking"],
       category: "core",
       bgGradient: "from-teal-600 to-cyan-700",
       image: "📊"
@@ -102,17 +102,17 @@ const Expertise = () => {
     {
       id: 7,
       title: "Local SEO",
-      description: "Google My Business optimization and local search visibility enhancement.",
-      skills: ["Google My Business", "Local Citations", "Review Management", "Local Keywords"],
+      description: "I enhance local search visibility through targeted business optimization. This includes managing Google My Business profiles, building local citations, and implementing review management strategies to dominate local keywords.",
+      skills: ["Google My Business", "Local Citations", "Review Management", "Local Dominance"],
       category: "advanced",
       bgGradient: "from-violet-600 to-purple-700",
       image: "📍"
     },
     {
       id: 8,
-      title: "Ecommerce SEO",
-      description: "Product optimization, category structuring, and conversion-focused SEO.",
-      skills: ["Product Schema", "Category Optimization", "Technical Audits", "Conversion Tracking"],
+      title: "E-commerce SEO",
+      description: "I specialize in product optimization, category structuring, and conversion-focused SEO for online stores. From implementing product schema to conducting technical audits and optimizing category navigation, I drive qualified traffic that converts.",
+      skills: ["Product Schema", "Category Navigation", "Technical Audits", "Conversion Optimization"],
       category: "advanced",
       bgGradient: "from-amber-600 to-orange-700",
       image: "🛒"
@@ -128,7 +128,7 @@ const Expertise = () => {
             <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">Table</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Comprehensive SEO solutions that drive organic growth and deliver measurable results
+            A comprehensive SEO skills framework designed to deliver organic growth and measurable results.
           </p>
         </header>
         

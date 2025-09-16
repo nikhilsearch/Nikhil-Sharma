@@ -8,6 +8,7 @@ import CaseStudies from "@/components/CaseStudies";
 import Testimonials from "@/components/Testimonials";
 import FeaturedOn from "@/components/FeaturedOn";
 import Footer from "@/components/Footer";
+import FAQ from "@/components/FAQ";
 import ThemeToggle from "@/components/ThemeToggle";
 import BotSnapshot from "@/components/SEO/BotSnapshot";
 import StaticSnapshot from "@/components/SEO/StaticSnapshot";
@@ -69,6 +70,9 @@ const Index = () => {
         </section>
         <section id="testimonials">
           <Testimonials />
+        </section>
+        <section id="faq">
+          <FAQ />
         </section>
         <section id="contact">
           <Footer />

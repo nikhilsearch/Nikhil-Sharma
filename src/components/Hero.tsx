@@ -4,7 +4,7 @@ import { ArrowDown, Sparkles, TrendingUp, Users } from "lucide-react";
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [typedText, setTypedText] = useState("");
-  const fullText = "Dynamic SEO Lead";
+  const fullText = "8+ Years of Turning Search Bars into Revenue Streams";
 
   useEffect(() => {
     setIsVisible(true);
@@ -18,14 +18,14 @@ const Hero = () => {
       } else {
         clearInterval(timer);
       }
-    }, 100);
+    }, 50);
 
     return () => clearInterval(timer);
   }, []);
 
   const stats = [
-    { icon: TrendingUp, value: "250+", label: "SEO Projects" },
-    { icon: Users, value: "150+", label: "Happy Clients" },
+    { icon: TrendingUp, value: "8+", label: "Years Experience" },
+    { icon: Users, value: "250+", label: "Projects Completed" },
   ];
 
   return (
@@ -49,9 +49,9 @@ const Hero = () => {
             
             {/* Typing animation for subtitle */}
             <div className="relative">
-              <h2 className="text-3xl lg:text-4xl font-semibold text-foreground min-h-[3rem] flex items-center justify-center lg:justify-start">
+              <h2 className="text-xl lg:text-2xl font-semibold text-primary min-h-[4rem] flex items-center justify-center lg:justify-start">
                 {typedText}
-                <span className="ml-1 w-0.5 h-8 bg-primary animate-pulse"></span>
+                <span className="ml-1 w-0.5 h-6 bg-primary animate-pulse"></span>
               </h2>
             </div>
           </div>
@@ -60,17 +60,18 @@ const Hero = () => {
           <div className="flex items-center justify-center lg:justify-start gap-3 animate-fade-in delay-500">
             <Sparkles className="w-6 h-6 text-primary animate-pulse" />
             <span className="text-xl font-medium text-primary tracking-wide">
-              SEO Expert | 7+ Years Experience
+              Dynamic SEO Lead
             </span>
           </div>
 
           {/* Enhanced description */}
           <div className="space-y-6 animate-fade-in delay-700">
             <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-              <span className="font-semibold text-foreground">Driving organic growth</span> for global brands across 
-              competitive industries. I execute <span className="text-primary font-medium">data-driven SEO strategies</span> that 
-              boost visibility, lead generation, and revenue with a proven track record of leading cross-functional 
-              teams and consistently <span className="font-semibold text-foreground">surpassing KPIs</span>.
+              I don't just chase algorithms; I build <span className="text-primary font-medium">data-driven SEO strategies</span> that 
+              drive sustainable organic growth. For over eight years, I've partnered with global brands to boost visibility, 
+              generate high-quality leads, and consistently <span className="font-semibold text-foreground">surpass KPIs</span>. 
+              I specialize in transforming raw data into actionable insights and measurable business outcomes. 
+              <span className="font-semibold text-foreground"> In short, I help great companies get found by the right people.</span>
             </p>
             
             {/* Mini stats */}
