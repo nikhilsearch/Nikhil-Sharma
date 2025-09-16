@@ -89,19 +89,6 @@ const FAQ = () => {
             </Card>
           ))}
         </div>
-
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground">
-            Have more questions? Feel free to{" "}
-            <a 
-              href="mailto:imnikhil10@outlook.com" 
-              className="text-primary hover:text-primary/80 transition-colors font-medium"
-            >
-              get in touch
-            </a>
-            {" "}with me directly.
-          </p>
-        </div>
       </div>
     </section>
   );
