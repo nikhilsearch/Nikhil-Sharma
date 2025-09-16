@@ -141,12 +141,47 @@ const FAQ = () => {
                   <div className="border-t border-gradient-to-r from-primary/20 via-purple-400/20 to-emerald-400/20 pt-4 md:pt-6 mx-2 md:mx-4">
                     <div className="relative">
                       <div className="absolute -left-1 md:-left-2 top-0 w-0.5 md:w-1 h-full bg-gradient-to-b from-primary via-purple-400 to-emerald-400 rounded-full opacity-50"></div>
-                      <div className="pl-3 md:pl-6">
-                        <p className="text-muted-foreground leading-relaxed whitespace-pre-line
-                                     animate-[fade-in_0.4s_ease-out_0.1s_both]
-                                     text-sm md:text-lg">
-                          {faq.answer}
-                        </p>
+                      <div className="pl-4 md:pl-6">
+                        <div className="text-muted-foreground leading-relaxed animate-[fade-in_0.4s_ease-out_0.1s_both] text-sm md:text-base space-y-3 md:space-y-4">
+                          {faq.answer.split('\n\n').map((paragraph, index) => {
+                            if (paragraph.startsWith('•')) {
+                              // Handle bullet points
+                              const bulletPoints = paragraph.split('\n').filter(line => line.trim());
+                              return (
+                                <ul key={index} className="space-y-2 md:space-y-3 ml-2 md:ml-4">
+                                  {bulletPoints.map((point, pointIndex) => (
+                                    <li key={pointIndex} className="flex items-start gap-2 md:gap-3">
+                                      <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                                      <span className="flex-1">{point.replace('• ', '').replace(/^\d+\.\s/, '')}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              );
+                            } else if (/^\d+\./.test(paragraph)) {
+                              // Handle numbered lists
+                              const numberedPoints = paragraph.split('\n').filter(line => line.trim());
+                              return (
+                                <ol key={index} className="space-y-2 md:space-y-3 ml-2 md:ml-4">
+                                  {numberedPoints.map((point, pointIndex) => (
+                                    <li key={pointIndex} className="flex items-start gap-2 md:gap-3">
+                                      <span className="w-5 h-5 bg-primary/20 text-primary rounded-full text-xs font-bold flex items-center justify-center mt-0.5 flex-shrink-0">
+                                        {pointIndex + 1}
+                                      </span>
+                                      <span className="flex-1">{point.replace(/^\d+\.\s/, '')}</span>
+                                    </li>
+                                  ))}
+                                </ol>
+                              );
+                            } else {
+                              // Handle regular paragraphs
+                              return (
+                                <p key={index} className="leading-relaxed">
+                                  {paragraph}
+                                </p>
+                              );
+                            }
+                          })}
+                        </div>
                       </div>
                     </div>
                   </div>
