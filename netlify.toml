@@ -1,52 +1,119 @@
-# Netlify configuration for dynamic rendering with Rendertron
-# Based on Google's guidelines: https://developers.google.com/search/blog/2019/01/dynamic-rendering-with-rendertron
+# Enhanced Netlify configuration for SSR with dynamic rendering
+# Optimized for performance, SEO, and bot detection
 
 [build]
   publish = "dist"
   command = "npm run build"
 
-# Edge function for bot detection and dynamic rendering
+[build.environment]
+  NODE_VERSION = "18"
+  RENDERTRON_URL = "https://render-tron.appspot.com/render"
+
+# Enhanced Edge function for comprehensive bot detection and SSR
 [[edge_functions]]
   path = "/*"
   function = "dynamic-render"
 
-# Bot user agents that should get prerendered content
-[context.production.environment]
-  RENDERTRON_URL = "https://render-tron.appspot.com/render"
-  
-# Redirect rules for dynamic rendering
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/dynamic-render"
-  status = 200
-  conditions = {User-Agent = "googlebot,bingbot,slurp,duckduckbot,baiduspider,yandexbot,sogou,exabot,facebookexternalhit,twitterbot,whatsapp,skypeuripreview,linkedinbot,embedly,quora link preview,showyoubot,outbrain,pinterest,developers.google.com/+/web/snippet,tumblr,bitlybot,nuzzel,discordbot,google page speed,qwantify,pinterestbot,applebot,flipboard,lighthouse"}
-  force = true
-
-# Headers for better SEO and caching
+# Performance and security headers
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# Static asset caching
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    Vary = "Accept-Encoding"
+
+[[headers]]
+  for = "*.png"
+  [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML files get shorter cache for dynamic content
+[[headers]]
   for = "/*.html"
   [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
+    Cache-Control = "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400"
+    Vary = "User-Agent, Accept-Encoding"
 
+# Service worker needs to be fresh
 [[headers]]
   for = "/sw.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
 
-# Prerender configuration
-[plugins]
-  [[plugins]]
-    package = "@netlify/plugin-prerender"
-    [plugins.inputs]
-      rendererUrl = "https://render-tron.appspot.com/render"
-      crawl = true
-      routes = ["/"]
+# SEO-friendly redirects
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+# API routes (if needed in future)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Build processing optimizations
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.images]
+  compress = true
+
+# Enhanced prerendering plugin configuration
+[[plugins]]
+  package = "@netlify/plugin-prerender"
+  [plugins.inputs]
+    rendererUrl = "https://render-tron.appspot.com/render"
+    crawl = true
+    routes = ["/", "/blog", "/case-studies", "/services", "/contact"]
+    concurrency = 4
+    waitUntil = "networkidle0"
+    cache = true
