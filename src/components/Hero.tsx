@@ -58,14 +58,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Professional tagline with icon */}
-          <div className="flex items-center justify-center lg:justify-start gap-3 animate-fade-in delay-500">
-            <Sparkles className="w-6 h-6 text-primary animate-pulse" />
-            <span className="text-xl font-medium text-primary tracking-wide">
-              Dynamic SEO Lead
-            </span>
-          </div>
-
           {/* Enhanced description */}
           <div className="space-y-6 animate-fade-in delay-700">
             <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
