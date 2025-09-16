@@ -225,12 +225,12 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-green-500/20 dark:hover:shadow-green-500/30 hover:border-green-500/60 dark:hover:border-green-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-green-500/5 before:to-emerald-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 h-[240px] md:h-[280px] flex flex-col">
-                     <div className="mb-3 md:mb-4 relative z-10 flex-grow">
-                       <h4 className="text-lg md:text-xl font-bold text-foreground mb-2">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-3 md:p-6 shadow-lg hover:shadow-2xl hover:shadow-green-500/20 dark:hover:shadow-green-500/30 hover:border-green-500/60 dark:hover:border-green-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-green-500/5 before:to-emerald-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 h-[200px] md:h-[220px] flex flex-col">
+                     <div className="mb-2 md:mb-3 relative z-10 flex-grow">
+                       <h4 className="text-lg md:text-xl font-bold text-foreground mb-1 md:mb-2">
                          {area.title}
                        </h4>
-                       <p className="text-muted-foreground text-sm leading-relaxed">
+                       <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                          {area.description}
                        </p>
                      </div>
@@ -283,12 +283,12 @@ const Expertise = () => {
                   onMouseEnter={() => setHoveredCard(area.id)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-4 md:p-8 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/30 hover:border-blue-500/60 dark:hover:border-blue-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-blue-500/5 before:to-cyan-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 h-[240px] md:h-[280px] flex flex-col">
-                     <div className="mb-3 md:mb-4 relative z-10 flex-grow">
-                       <h4 className="text-lg md:text-xl font-bold text-foreground mb-2">
+                  <div className="relative bg-card/80 backdrop-blur-md border-2 border-border/40 dark:border-white/20 rounded-xl md:rounded-2xl p-3 md:p-6 shadow-lg hover:shadow-2xl hover:shadow-blue-500/20 dark:hover:shadow-blue-500/30 hover:border-blue-500/60 dark:hover:border-blue-500/50 hover:bg-card/90 dark:hover:bg-card/60 hover:backdrop-blur-lg transition-all duration-500 ease-out hover:-translate-y-2 hover:scale-[1.02] before:absolute before:inset-0 before:rounded-xl md:before:rounded-2xl before:bg-gradient-to-r before:from-blue-500/5 before:to-cyan-500/5 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 h-[200px] md:h-[220px] flex flex-col">
+                     <div className="mb-2 md:mb-3 relative z-10 flex-grow">
+                       <h4 className="text-lg md:text-xl font-bold text-foreground mb-1 md:mb-2">
                          {area.title}
                        </h4>
-                       <p className="text-muted-foreground text-sm leading-relaxed">
+                       <p className="text-muted-foreground text-xs md:text-sm leading-relaxed">
                          {area.description}
                        </p>
                      </div>
