@@ -120,21 +120,21 @@ const Hero = () => {
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-purple-400/20 to-blue-400/20 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition duration-1000"></div>
             
             {/* Immediate Joiner Floating CTA */}
-            <div className="absolute -top-6 -left-4 sm:-left-8 z-20 animate-fade-in delay-1000">
+            <div className="absolute -top-4 -right-4 sm:-right-6 z-20 animate-fade-in delay-1000">
               <div className="relative group/cta cursor-pointer">
                 {/* Pulsing glow effect */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 rounded-2xl blur-xl opacity-75 group-hover/cta:opacity-100 animate-pulse"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 rounded-xl blur-lg opacity-75 group-hover/cta:opacity-100 animate-pulse"></div>
                 
                 {/* Main CTA Badge */}
-                <div className="relative bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white px-6 py-3 rounded-2xl shadow-2xl transform group-hover/cta:scale-110 transition-all duration-300 border-2 border-white/30">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-5 h-5 animate-pulse" />
+                <div className="relative bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white px-3 py-2 rounded-xl shadow-2xl transform group-hover/cta:scale-110 transition-all duration-300 border-2 border-white/30">
+                  <div className="flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 animate-pulse" />
                     <div className="flex flex-col">
-                      <span className="font-bold text-sm sm:text-base leading-tight">Immediate Joiner</span>
-                      <span className="text-xs opacity-90 leading-tight">Available Now</span>
+                      <span className="font-bold text-xs leading-tight">Immediate Joiner</span>
+                      <span className="text-[10px] opacity-90 leading-tight">Available Now</span>
                     </div>
-                    <div className="w-2 h-2 bg-white rounded-full animate-ping absolute -top-1 -right-1"></div>
-                    <div className="w-2 h-2 bg-white rounded-full absolute -top-1 -right-1"></div>
+                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-ping absolute -top-0.5 -right-0.5"></div>
+                    <div className="w-1.5 h-1.5 bg-white rounded-full absolute -top-0.5 -right-0.5"></div>
                   </div>
                 </div>
               </div>
