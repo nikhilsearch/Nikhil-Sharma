@@ -79,13 +79,15 @@ const Header = () => {
   // Track active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navigationItems.map(item => document.querySelector(item.href));
+      // Filter out route items, only track hash sections
+      const sectionItems = navigationItems.filter(item => !item.isRoute && item.href.startsWith('#'));
+      const sections = sectionItems.map(item => document.querySelector(item.href));
       const scrollY = window.scrollY + 100;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i] as HTMLElement;
         if (section && section.offsetTop <= scrollY) {
-          setActiveSection(navigationItems[i].id);
+          setActiveSection(sectionItems[i].id);
           break;
         }
       }
