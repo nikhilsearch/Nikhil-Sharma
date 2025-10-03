@@ -15,10 +15,10 @@ const BlinkingEye = () => {
   }, []);
 
   return (
-    <div className="relative w-16 h-16 mx-auto mb-6">
-      <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-300 rounded-full flex items-center justify-center border-2 border-gray-400 shadow-lg">
-        <div className={`w-8 h-8 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center transition-all duration-150 ${isBlinking ? 'scale-y-0' : 'scale-y-100'}`}>
-          <div className="w-2 h-2 bg-black rounded-full"></div>
+    <div className="relative w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-3 sm:mb-4">
+      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-gray-100 to-gray-300 rounded-full flex items-center justify-center border-2 border-gray-400 shadow-lg">
+        <div className={`w-6 h-6 sm:w-7 sm:h-7 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center transition-all duration-150 ${isBlinking ? 'scale-y-0' : 'scale-y-100'}`}>
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-black rounded-full"></div>
         </div>
       </div>
     </div>
@@ -54,22 +54,22 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-background to-muted/20" id="recommendations">
+    <section className="py-12 sm:py-16 px-4 bg-gradient-to-b from-background to-muted/20" id="recommendations">
       <div className="max-w-7xl mx-auto">
         {/* SEO Optimized Header */}
-        <header className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+        <header className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
             <span className="bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent">
               Recommendations
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed px-2">
             Trusted by industry leaders and professionals who have experienced exceptional results working with our SEO expertise.
           </p>
         </header>
 
         {/* Grid Layout for Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <article 
               key={index} 
@@ -78,13 +78,13 @@ const Testimonials = () => {
               itemType="https://schema.org/Review"
             >
               <Card className="h-full bg-card/50 backdrop-blur-sm border border-muted/20 hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 transform hover:-translate-y-1">
-                <CardContent className="p-8 h-full flex flex-col">
+                <CardContent className="p-4 sm:p-6 h-full flex flex-col">
                   {/* Blinking Eye Icon */}
                   <BlinkingEye />
                   
                   {/* Testimonial Content */}
                   <blockquote 
-                    className="text-muted-foreground leading-relaxed mb-8 flex-grow text-center italic"
+                    className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4 sm:mb-6 flex-grow text-center italic"
                     itemProp="reviewBody"
                   >
                     "{testimonial.text}"
@@ -92,25 +92,25 @@ const Testimonials = () => {
 
                   {/* Author Information */}
                   <div 
-                    className="text-center border-t border-muted/20 pt-6"
+                    className="text-center border-t border-muted/20 pt-3 sm:pt-4"
                     itemScope 
                     itemType="https://schema.org/Person"
                   >
                     <h3 
-                      className="font-bold text-foreground text-lg mb-1"
+                      className="font-bold text-foreground text-base sm:text-lg mb-0.5 sm:mb-1"
                       itemProp="name"
                     >
                       {testimonial.name}
                     </h3>
                     <p 
-                      className="text-sm text-muted-foreground mb-1"
+                      className="text-xs sm:text-sm text-muted-foreground mb-0.5 sm:mb-1"
                       itemProp="jobTitle"
                     >
                       {testimonial.role}
                     </p>
                     {testimonial.company && (
                       <p 
-                        className="text-sm text-primary font-medium"
+                        className="text-xs sm:text-sm text-primary font-medium"
                         itemProp="worksFor"
                       >
                         {testimonial.company}
