@@ -121,20 +121,27 @@ const Hero = () => {
             
             {/* Immediate Joiner Floating CTA */}
             <div className="absolute -top-4 -right-4 sm:-right-6 z-20 animate-fade-in delay-1000">
-              <div className="relative group/cta cursor-pointer">
-                {/* Pulsing glow effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary/40 via-purple-400/40 to-blue-400/40 rounded-xl blur-lg opacity-75 group-hover/cta:opacity-100 animate-pulse"></div>
+              <div className="relative group/cta cursor-pointer animate-bounce">
+                {/* Multi-layer glow effect for depth */}
+                <div className="absolute -inset-2 bg-gradient-to-r from-primary/50 via-purple-400/50 to-blue-400/50 rounded-2xl blur-xl opacity-75 group-hover/cta:opacity-100 animate-pulse"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-purple-400 to-blue-400 rounded-2xl blur-md opacity-60 animate-pulse"></div>
                 
-                {/* Main CTA Badge */}
-                <div className="relative bg-gradient-to-r from-primary via-purple-400 to-blue-400 text-white px-3 py-2 rounded-xl shadow-2xl transform group-hover/cta:scale-110 transition-all duration-300 border-2 border-white/30">
-                  <div className="flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 animate-pulse" />
+                {/* Main CTA Badge with cartoon style */}
+                <div className="relative bg-gradient-to-br from-primary via-purple-400 to-blue-400 text-white px-4 py-2.5 rounded-2xl shadow-2xl transform group-hover/cta:scale-110 group-hover/cta:rotate-3 transition-all duration-300 border-3 border-white/40">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 animate-spin" style={{ animationDuration: '3s' }} />
                     <div className="flex flex-col">
-                      <span className="font-bold text-xs leading-tight">Immediate Joiner</span>
-                      <span className="text-[10px] opacity-90 leading-tight">Available Now</span>
+                      <span className="font-black text-xs leading-tight tracking-wide" style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif' }}>
+                        Immediate Joiner
+                      </span>
+                      <span className="text-[10px] opacity-95 leading-tight font-bold" style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif' }}>
+                        ⚡ Available Now!
+                      </span>
                     </div>
-                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-ping absolute -top-0.5 -right-0.5"></div>
-                    <div className="w-1.5 h-1.5 bg-white rounded-full absolute -top-0.5 -right-0.5"></div>
+                    {/* Animated ping dots */}
+                    <div className="w-2 h-2 bg-white rounded-full animate-ping absolute -top-1 -right-1"></div>
+                    <div className="w-2 h-2 bg-white rounded-full absolute -top-1 -right-1"></div>
+                    <div className="w-1.5 h-1.5 bg-yellow-300 rounded-full animate-ping absolute -bottom-1 -left-1" style={{ animationDelay: '0.5s' }}></div>
                   </div>
                 </div>
               </div>
