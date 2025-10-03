@@ -120,28 +120,28 @@ const Hero = () => {
             <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-purple-400/20 to-blue-400/20 rounded-full blur-3xl opacity-50 group-hover:opacity-70 transition duration-1000"></div>
             
             {/* Immediate Joiner Floating CTA */}
-            <div className="absolute -top-4 -right-4 sm:-right-6 z-20 animate-fade-in delay-1000">
+            <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-6 z-20 animate-fade-in delay-1000">
               <div className="relative group/cta cursor-pointer animate-bounce">
                 {/* Multi-layer glow effect for depth */}
-                <div className="absolute -inset-2 bg-gradient-to-r from-primary/50 via-purple-400/50 to-blue-400/50 rounded-2xl blur-xl opacity-75 group-hover/cta:opacity-100 animate-pulse"></div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary via-purple-400 to-blue-400 rounded-2xl blur-md opacity-60 animate-pulse"></div>
+                <div className="absolute -inset-1 sm:-inset-2 bg-gradient-to-r from-primary/50 via-purple-400/50 to-blue-400/50 rounded-xl sm:rounded-2xl blur-lg sm:blur-xl opacity-75 group-hover/cta:opacity-100 animate-pulse"></div>
+                <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-primary via-purple-400 to-blue-400 rounded-xl sm:rounded-2xl blur-sm sm:blur-md opacity-60 animate-pulse"></div>
                 
                 {/* Main CTA Badge with cartoon style */}
-                <div className="relative bg-gradient-to-br from-primary via-purple-400 to-blue-400 text-white px-4 py-2.5 rounded-2xl shadow-2xl transform group-hover/cta:scale-110 group-hover/cta:rotate-3 transition-all duration-300 border-3 border-white/40">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 animate-spin" style={{ animationDuration: '3s' }} />
-                    <div className="flex flex-col">
-                      <span className="font-black text-xs leading-tight tracking-wide" style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif' }}>
+                <div className="relative bg-gradient-to-br from-primary via-purple-400 to-blue-400 text-white px-2 py-1.5 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl shadow-2xl transform group-hover/cta:scale-110 group-hover/cta:rotate-3 transition-all duration-300 border-2 sm:border-3 border-white/40">
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 animate-spin flex-shrink-0" style={{ animationDuration: '3s' }} />
+                    <div className="flex flex-col min-w-0">
+                      <span className="font-black text-[10px] sm:text-xs leading-tight tracking-wide truncate" style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif' }}>
                         Immediate Joiner
                       </span>
-                      <span className="text-[10px] opacity-95 leading-tight font-bold" style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif' }}>
+                      <span className="text-[8px] sm:text-[10px] opacity-95 leading-tight font-bold whitespace-nowrap" style={{ fontFamily: 'Comic Sans MS, cursive, sans-serif' }}>
                         ⚡ Available Now!
                       </span>
                     </div>
                     {/* Animated ping dots */}
-                    <div className="w-2 h-2 bg-white rounded-full animate-ping absolute -top-1 -right-1"></div>
-                    <div className="w-2 h-2 bg-white rounded-full absolute -top-1 -right-1"></div>
-                    <div className="w-1.5 h-1.5 bg-yellow-300 rounded-full animate-ping absolute -bottom-1 -left-1" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-ping absolute -top-0.5 sm:-top-1 -right-0.5 sm:-right-1"></div>
+                    <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full absolute -top-0.5 sm:-top-1 -right-0.5 sm:-right-1"></div>
+                    <div className="w-1 h-1 sm:w-1.5 sm:h-1.5 bg-yellow-300 rounded-full animate-ping absolute -bottom-0.5 sm:-bottom-1 -left-0.5 sm:-left-1" style={{ animationDelay: '0.5s' }}></div>
                   </div>
                 </div>
               </div>
